@@ -16,13 +16,18 @@ program PepitaGame {
 	keyboard.a().onPressDo({ pepita.moverseIzquierda(1) })
 	keyboard.w().onPressDo({ pepita.moverseArriba(1) })
 	keyboard.s().onPressDo({ pepita.moverseAbajo(1) })
-	game.onTick(7000, "generar nuevo Enemigo", {generadorDeEnemigos.generarEnemigo(1)
-	generadorDeEnemigos.sumarEnemigo()})
-	game.onTick(7000, "mover enemigo", {generadorDeEnemigos.moverEnemigos()})
+	game.onTick(7000, "generar nuevo Enemigo", {generadorDeEnemigos.sumarEnemigo()
+	generadorDeEnemigos.generarEnemigo(1)})/*suma 1 a nombreEnemigo para poder crear el siguiente, y genera un enemigo,
+		se hace en este orden ya que si se crea el primer enemigo, luego un segundo, y antes de que que se genere el
+		tercero el jugador elimina el primero, habra dos enemigos con el nombre "2" */
+	
+	game.onTick(7000, "mover enemigo", {generadorDeEnemigos.moverEnemigos()})/*cada cierto tiempo hace que se muevan
+																			los enemigos*/
 
  	game.whenCollideDo(pepita,  { elemento =>
     elemento.estado("frenado")
-  	})
+  	})/*cuando chocan con pepita, frenan, a futuro seria que cuando un zombie choca con una planta, frena y empieza a 
+	atacar*/
 	
 	
 
