@@ -1,6 +1,6 @@
 object pepita {
   var energy = 100
-  const position = new MutablePosition(x=0, y=0)
+  const position = new MutablePosition(x=2, y=2)
 
   method image() = "golondrina.png"
   method position() = position

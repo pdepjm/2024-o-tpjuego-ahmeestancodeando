@@ -4,13 +4,15 @@ import pepita.*
 
 program PepitaGame {
 	game.title("Pepita")
-	game.height(10)
-	game.width(10)
-	game.cellSize(100)
+	game.height(18)
+	game.width(25)
+	game.cellSize(50)
 
 	game.addVisual(pepita)
 
 	keyboard.w().onPressDo({ pepita.fly(1) })
+
+	
 
 	game.start()
 }
