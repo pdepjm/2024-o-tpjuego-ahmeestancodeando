@@ -1,16 +1,30 @@
 import wollok.game.*
 
 import pepita.*
-
+import zombie.*
+import fantasma.*
+import generadorDeEnemigos.*
 program PepitaGame {
 	game.title("Pepita")
-	game.height(10)
-	game.width(10)
+	game.height(5)
+	game.width(15)
 	game.cellSize(100)
-
+	/*game.addVisual(Fantasmas)*/
 	game.addVisual(pepita)
+	
+	keyboard.d().onPressDo({ pepita.moverseDerecha(1) })
+	keyboard.a().onPressDo({ pepita.moverseIzquierda(1) })
+	keyboard.w().onPressDo({ pepita.moverseArriba(1) })
+	keyboard.s().onPressDo({ pepita.moverseAbajo(1) })
+	game.onTick(7000, "generar nuevo Enemigo", {generadorDeEnemigos.generarEnemigo(1)
+	generadorDeEnemigos.sumarEnemigo()})
+	game.onTick(7000, "mover enemigo", {generadorDeEnemigos.moverEnemigos()})
 
-	keyboard.w().onPressDo({ pepita.fly(1) })
+ 	game.whenCollideDo(pepita,  { elemento =>
+    elemento.estado("frenado")
+  	})
+	
+	
 
 	game.start()
 }
