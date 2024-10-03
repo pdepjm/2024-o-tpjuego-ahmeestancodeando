@@ -1,18 +1,46 @@
 import wollok.game.*
 
 import pepita.*
-
+import zombie.*
+import fantasma.*
+import generadorDeEnemigos.*
 program PepitaGame {
 	game.title("Pepita")
-	game.height(18)
-	game.width(25)
-	game.cellSize(50)
-
+	game.height(5)
+	game.width(15)
+	game.cellSize(100)
+	/*game.addVisual(Fantasmas)*/
 	game.addVisual(pepita)
+	
+	keyboard.d().onPressDo({ pepita.moverseDerecha(1) })
+	keyboard.a().onPressDo({ pepita.moverseIzquierda(1) })
+	keyboard.w().onPressDo({ pepita.moverseArriba(1) })
+	keyboard.s().onPressDo({ pepita.moverseAbajo(1) })
+	game.onTick(3000, "generar nuevo Enemigo", {generadorDeEnemigos.sumarEnemigo()
+	generadorDeEnemigos.generarEnemigo(1)})/*suma 1 a nombreEnemigo para poder crear el siguiente, y genera un enemigo,
+		se hace en este orden ya que si se crea el primer enemigo, luego un segundo, y antes de que que se genere el
+		tercero el jugador elimina el primero, habra dos enemigos con el nombre "2" */
+	
+	game.onTick(3000, "mover enemigo", {generadorDeEnemigos.moverEnemigos()})/*cada cierto tiempo hace que se muevan
+																			los enemigos*/
 
-	keyboard.w().onPressDo({ pepita.fly(1) })
-
+ 	game.whenCollideDo(pepita,  { elemento =>
+    elemento.moverse(false)
+  	})/*cuando chocan con pepita, frenan, a futuro seria que cuando un zombie choca con una planta, frena y empieza a 
+	atacar*/
+	
 	
 
-	game.start()
+  game.start()
+
+  game.onCollideDo(pepita, {elemento => game.say(elemento, "Duro de Cojones")})
+  game.onCollideDo(pepita, {elemento => pepita.perderVida(elemento.danio())})
+	
+  game.onTick(3000, "matar pepita", {if (pepita.noEstaViva()){pepita.morir()}})
+
+  const musica = game.sound("musica.mp3")
+  musica.shouldLoop(true)
+  game.schedule(100,{musica.play()})
+  musica.volume(0.4)
 }
+
