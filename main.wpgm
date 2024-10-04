@@ -1,21 +1,21 @@
 import wollok.game.*
 
-import pepita.*
+import cursor.*
 import zombie.*
 import fantasma.*
+import menu.*
 import generadorDeEnemigos.*
-program PepitaGame {
-	game.title("Pepita")
-	game.height(5)
+program cursorGame {
+	game.title("cursor")
+	game.height(6)
 	game.width(15)
 	game.cellSize(100)
 	/*game.addVisual(Fantasmas)*/
-	game.addVisual(pepita)
-	
-	keyboard.d().onPressDo({ pepita.moverseDerecha(1) })
-	keyboard.a().onPressDo({ pepita.moverseIzquierda(1) })
-	keyboard.w().onPressDo({ pepita.moverseArriba(1) })
-	keyboard.s().onPressDo({ pepita.moverseAbajo(1) })
+	game.addVisual(cursor)
+	game.addVisual(menu)
+	menu.accion()
+	cursor.accion()
+	menu.iniciarTienda()
 	game.onTick(3000, "generar nuevo Enemigo", {generadorDeEnemigos.sumarEnemigo()
 	generadorDeEnemigos.generarEnemigo(1)})/*suma 1 a nombreEnemigo para poder crear el siguiente, y genera un enemigo,
 		se hace en este orden ya que si se crea el primer enemigo, luego un segundo, y antes de que que se genere el
@@ -24,19 +24,19 @@ program PepitaGame {
 	game.onTick(3000, "mover enemigo", {generadorDeEnemigos.moverEnemigos()})/*cada cierto tiempo hace que se muevan
 																			los enemigos*/
 
- 	game.whenCollideDo(pepita,  { elemento =>
+ 	game.whenCollideDo(cursor,  { elemento =>
     elemento.moverse(false)
-  	})/*cuando chocan con pepita, frenan, a futuro seria que cuando un zombie choca con una planta, frena y empieza a 
+  	})/*cuando chocan con cursor, frenan, a futuro seria que cuando un zombie choca con una planta, frena y empieza a 
 	atacar*/
 	
 	
 
   game.start()
 
-  game.onCollideDo(pepita, {elemento => game.say(elemento, "Duro de Cojones")})
-  game.onCollideDo(pepita, {elemento => pepita.perderVida(elemento.danio())})
+  game.onCollideDo(cursor, {elemento => game.say(elemento, "Duro de Cojones")})
+  game.onCollideDo(cursor, {elemento => cursor.perderVida(elemento.danio())})
 	
-  game.onTick(3000, "matar pepita", {if (pepita.noEstaViva()){pepita.morir()}})
+  game.onTick(3000, "matar cursor", {if (cursor.noEstaViva()){cursor.morir()}})
 
   const musica = game.sound("musica.mp3")
   musica.shouldLoop(true)

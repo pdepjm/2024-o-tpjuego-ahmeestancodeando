@@ -1,9 +1,9 @@
 
 class ZombiesNormales {
-	const position = new MutablePosition(x=10, y=0.randomUpTo(5).truncate(0))
+	const position 
   var property moverse = true /*va  a servir para hacer que deje de avanzar*/
   method position() = position
-  var property imagen = "slime_base.png"
+  var property imagen = "slime base.png"
   method image() = imagen
 
   method movete() {
@@ -19,4 +19,3 @@ class ZombiesNormales {
 
 }
 
-const pepe = new ZombiesNormales()

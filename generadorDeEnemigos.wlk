@@ -14,7 +14,7 @@ object generadorDeEnemigos {
         if (numero==1) {/*generara un zombie normal*/
             var nombreParaEnemigo = self.nombre() /* esto esta hecho porque sino wollok se enoja, 
                                                     para poder crear un enemigo*/
-            nombreParaEnemigo = new ZombiesNormales()
+            nombreParaEnemigo = new ZombiesNormales(position= new MutablePosition(x=10, y=0.randomUpTo(5).truncate(0)))
             enemigo.add(nombreParaEnemigo)/*se añade a la lista de enemigos activos*/
             return game.addVisual(nombreParaEnemigo)/*muestra al enemigo en el juego*/
         }
