@@ -20,12 +20,12 @@ class ZombiesNormales {
     const fantasma = new Fantasmas(position=posicionFantasma)
     game.addVisual(fantasma)
     if (fantasma.colision()){
-      game.say(self,"verdadero")
+      
       self.moverse(false)
       game.removeVisual(fantasma)
     }
     else {game.removeVisual(fantasma) 
-    game.say(self,"falso")}
+    }
   }
   var property danio = 1
 
