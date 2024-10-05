@@ -6,7 +6,7 @@ object cursor {
   method queSoy() = "cursor"
   method perderVida(danio) { vida -= danio}
 
-  method image() = "marcoRojo.png"
+  method image() = "marcosRojo.png"
   
   method accion(){
     keyboard.right().onPressDo({ self.moverseDerecha() })

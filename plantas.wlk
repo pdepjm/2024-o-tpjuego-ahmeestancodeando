@@ -18,7 +18,7 @@ class Guisante{
     const  property tipo = "guisante"
     var property vida=100
     method position() = position
-    var property imagen = "zombie.png"
+    var property imagen = "mago1.png"
     method image() = imagen
 
     method recibeDanio(danio) {

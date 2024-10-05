@@ -6,7 +6,7 @@ object menu {
     const position = new MutablePosition(x=0, y=5)
     method position() = position  
 
-    var property imagen = "marcoRojo.png"
+    var property imagen = "marcosRojo.png"
     method image() = imagen
   
     method accion(){
