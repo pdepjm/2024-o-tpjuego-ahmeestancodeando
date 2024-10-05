@@ -1,5 +1,6 @@
 class Papa{
     const position 
+    
     const  property tipo = "papa"
     var property vida=100
     method position() = position
@@ -9,6 +10,7 @@ class Papa{
     method recibeDanio(danio) {
         self.vida(self.vida() - danio)
         }
+    method queSoy()="planta"    
 }
 
 class Guisante{
@@ -22,5 +24,6 @@ class Guisante{
     method recibeDanio(danio) {
         self.vida(self.vida() - danio)
         }
+    method queSoy()="planta"  
 }
 const pepe = new Guisante (position=game.at(0,0))

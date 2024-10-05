@@ -23,19 +23,19 @@ program cursorGame {
 	
 	game.onTick(3000, "mover enemigo", {generadorDeEnemigos.moverEnemigos()})/*cada cierto tiempo hace que se muevan
 																			los enemigos*/
-
+	/*
  	game.whenCollideDo(cursor,  { elemento =>
     elemento.moverse(false)
-  	})/*cuando chocan con cursor, frenan, a futuro seria que cuando un zombie choca con una planta, frena y empieza a 
+  	})cuando chocan con cursor, frenan, a futuro seria que cuando un zombie choca con una planta, frena y empieza a 
 	atacar*/
 	
 	
 
   game.start()
-
+	/*
   game.onCollideDo(cursor, {elemento => game.say(elemento, "Duro de Cojones")})
   game.onCollideDo(cursor, {elemento => cursor.perderVida(elemento.danio())})
-	
+	*/
   game.onTick(3000, "matar cursor", {if (cursor.noEstaViva()){cursor.morir()}})
 
   const musica = game.sound("musica.mp3")

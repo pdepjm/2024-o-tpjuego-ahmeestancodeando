@@ -1,16 +1,17 @@
 class Fantasmas {
-  const position = new MutablePosition()
+  const position 
   var property estado= "movil"
-  var property zombie = "zombie"
-
+  method queSoy() = "fantasma"
   method position() = position
-
-  method movete() {
-    if(self.estado()=="movil")
-      position.goLeft(1)
-    else zombie.moveteDerecha()
-  }
   method moveteDerecha() {
     position.goRight(1)
   }
+  method colision(){
+    const objetoEnfrente = game.colliders(self)
+    if (!objetoEnfrente.isEmpty()){
+    const objeto = objetoEnfrente.first().queSoy()
+    return objeto=="planta"
+    }
+    else return false
+}
 }

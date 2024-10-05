@@ -3,7 +3,7 @@ import wollok.game.*
 object cursor {
   var property position = new MutablePosition(x=7, y=3)
   var property vida = 3  // Le doy una propiedad vida para que reciba daño cuando choca con un zombie
-
+  method queSoy() = "cursor"
   method perderVida(danio) { vida -= danio}
 
   method image() = "marcoRojo.png"

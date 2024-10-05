@@ -17,6 +17,5 @@ object generadorDePlantas {
             nombreParaPlanta = new Guisante(position= posicion)
         plantas.add(nombreParaPlanta)/*se añade a la lista de enemigos activos*/
         return game.addVisual(nombreParaPlanta)/*muestra al enemigo en el juego*/
-
     }
 }
