@@ -28,6 +28,12 @@ object menu {
         game.addVisual(papaTienda)
         const guisanteTienda = new Guisante(position = game.at(1,5))
         game.addVisual(guisanteTienda)
+        const girasolTIenda = new Girasol(position = game.at(2,5))
+        game.addVisual(girasolTIenda)
+        const cactusTienda = new Cactus(position = game.at(3,5))
+        game.addVisual(cactusTienda)
+        const zapalloTienda = new ZapalloEnojado(position = game.at(4,5))
+        game.addVisual(zapalloTienda)
     }
 }
 

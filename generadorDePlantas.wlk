@@ -15,6 +15,14 @@ object generadorDePlantas {
             nombreParaPlanta = new Papa(position= posicion)
         else if (planta=="guisante")
             nombreParaPlanta = new Guisante(position= posicion)
+        else if (planta=="cactus")
+            nombreParaPlanta = new Cactus(position= posicion)
+        else if (planta=="girasol")
+            nombreParaPlanta = new Girasol(position= posicion)
+        else if (planta=="zapallo enojado")
+            nombreParaPlanta = new ZapalloEnojado(position= posicion)
+        
+
         plantas.add(nombreParaPlanta)/*se añade a la lista de enemigos activos*/
         return game.addVisual(nombreParaPlanta)/*muestra al enemigo en el juego*/
     }
