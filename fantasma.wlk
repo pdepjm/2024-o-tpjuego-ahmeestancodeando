@@ -9,9 +9,12 @@ class Fantasmas {
   method colision(){
     const objetoEnfrente = game.colliders(self)
     if (!objetoEnfrente.isEmpty()){
-    const objeto = objetoEnfrente.first().queSoy()
-    return objeto=="planta"
+    const objeto = objetoEnfrente.first()
+    return objeto
     }
-    else return false
+    return null
+
+    //Hice que devuelva el objeto en vez del tipo para que el enemigo sepa que hacer
+
 }
 }

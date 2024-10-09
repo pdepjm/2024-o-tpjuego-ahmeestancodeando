@@ -22,5 +22,7 @@ method quitarGirasol(){
 
 method text() = puntos.toString() + "$"
 method textColor() = "#FA0770"
-method textSize() = "18px"
+
+// Faltaria ver si se puede agrandar el tamaño de letra
+
 }

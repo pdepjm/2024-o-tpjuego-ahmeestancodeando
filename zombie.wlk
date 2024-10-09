@@ -15,19 +15,21 @@ class ZombiesNormales {
   method moveteDerecha() {
     return position.goRight(1)
   }
+
   method meFreno(){
     const posicionFantasma = game.at(self.position().x()-1, self.position().y())
     const fantasma = new Fantasmas(position=posicionFantasma)
     game.addVisual(fantasma)
-    if (fantasma.colision()){
-      
+    if (fantasma.colision() != null){
       self.moverse(false)
       game.removeVisual(fantasma)
     }
-    else {game.removeVisual(fantasma) 
-    }
+    else {game.removeVisual(fantasma)}
   }
   var property danio = 1
 
 }
 
+const jose = new ZombiesNormales(position= new MutablePosition(x=10, y=0.randomUpTo(5).truncate(0)))
+
+const otroZombie = new ZombiesNormales(position= new MutablePosition(x=3, y=3))
