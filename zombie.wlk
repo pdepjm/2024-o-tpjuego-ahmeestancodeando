@@ -1,3 +1,4 @@
+
 import fantasma.Fantasmas
 class ZombiesNormales {
 	const position 
@@ -20,7 +21,7 @@ class ZombiesNormales {
     const posicionFantasma = game.at(self.position().x()-1, self.position().y())
     const fantasma = new Fantasmas(position=posicionFantasma)
     game.addVisual(fantasma)
-    if (fantasma.colision() != null){
+    if (fantasma.colision().queSoy() == "planta" || fantasma.colision().queSoy() == "zombie"){ // solo frena cuando se choca contra un enemigo o una planta
       self.moverse(false)
       game.removeVisual(fantasma)
     }

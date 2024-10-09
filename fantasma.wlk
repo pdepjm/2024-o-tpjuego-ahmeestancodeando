@@ -12,7 +12,8 @@ class Fantasmas {
     const objeto = objetoEnfrente.first()
     return objeto
     }
-    return null
+    const objeto = object {method queSoy() = "nada"}
+    return objeto
 
     //Hice que devuelva el objeto en vez del tipo para que el enemigo sepa que hacer
 
