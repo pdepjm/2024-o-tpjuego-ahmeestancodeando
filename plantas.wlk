@@ -96,5 +96,16 @@ class ZapalloEnojado{
         //OH NO ES EL LANZACOHETES DAVE! HAGAN ALGO CON ESE SUJETO!!! Tranquilos... yo me encargo. Soy el Zapallo Enojado >:)
 }
 
+object papaTienda {
+    const position = game.at(0,5) 
+    method position() = position
+    var property imagen = "magoPiedra.png"
+    method image() = imagen
+
+    method generarPlanta(posicionPlanta){
+        return (new Papa(position = posicionPlanta))
+    }
+}
+
 
 const pepe = new Guisante (position=game.at(0,0))

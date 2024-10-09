@@ -12,19 +12,27 @@ object menu {
     method accion(){
         keyboard.d().onPressDo({self.moverseDerecha()})
         keyboard.a().onPressDo({self.moverseIzquierda()})
-        keyboard.enter().onPressDo({self.generarPlanta()})
+        keyboard.enter().onPressDo({self.generarPlanta2()})
     }
     method moverseDerecha() = if (self.position().x()<6) position.goRight(1)
     method moverseIzquierda() = if (self.position().x()>0) position.goLeft(1)
     method generarPlanta(){
-        const plantaAgenerar = game.colliders(self) // no usamos uniqueColliders porque tira error si no hay ninguna
-        const plantaSeleccionada = plantaAgenerar.first().tipo()
+        const plantaAGenerar = game.colliders(self) // no usamos uniqueColliders porque tira error si no hay ninguna
+        const plantaSeleccionada = plantaAGenerar.first().tipo()
         const posicion = game.at(cursor.position().x(),cursor.position().y())
         generadorDePlantas.generarPlanta(plantaSeleccionada,posicion)
     }
 
+        method generarPlanta2(){
+        const plantaAGenerar = game.colliders(self) // no usamos uniqueColliders porque tira error si no hay ninguna
+        const plantaSeleccionada = plantaAGenerar.first()
+        const posicion = game.at(cursor.position().x(),cursor.position().y())
+        generadorDePlantas.generarPlanta2(plantaSeleccionada,posicion)
+        
+    }
+
     method iniciarTienda(){
-        const papaTienda = new Papa(position = game.at(0,5))
+        //const papaTienda = new Papa(position = game.at(0,5))
         game.addVisual(papaTienda)
         const guisanteTienda = new Guisante(position = game.at(1,5))
         game.addVisual(guisanteTienda)
