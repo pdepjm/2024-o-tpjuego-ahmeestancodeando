@@ -14,7 +14,7 @@ object generadorDePlantas {
 
 
     method nombre() = nombrePlanta /*para poder consultar el ultimo nombre usado*/
-    method sumarPlanta() { /*suma 1 a nombre enemigo para asi crear enemigos nuevos, luego hay que hacer la funcion               para que reste 1 cuando maten a un enemigo*/
+    method sumarPlanta() { /*suma 1 a nombre planta para asi crear plantas nuevos, luego hay que hacer la funcion para que reste 1 cuando maten a un enemigo*/
         nombrePlanta+=1
         }
     method generarPlanta(planta, posicion){/*segun el numero ingresado, se generara un tipo de enemigo distinto*/
@@ -37,12 +37,11 @@ object generadorDePlantas {
 
         return game.addVisual(nombreParaPlanta)/*muestra al enemigo en el juego*/
     }
-    const property posicionPlanta = game.at(3,3)
 
-    method generarPlanta2(plantaSeleccionada,posicion){
-        self.plantaAGenerar(plantaSeleccionada) 
+    method generarPlanta2(plantaSeleccionada,posicion){ // metodo para no usar los if anidados
+        self.plantaAGenerar(plantaSeleccionada) //esto para cambiar la planta segun lo que se elija
         var nombreParaPlanta = self.nombre() 
-        nombreParaPlanta = self.plantaAGenerar().generarPlanta(posicion)
+        nombreParaPlanta = self.plantaAGenerar().generarPlanta(posicion) //lama al objeto de la tienda para saber como generar una planta
         plantas.add(nombreParaPlanta)
         self.sumarPlanta()
         return game.addVisual(nombreParaPlanta)
