@@ -14,6 +14,10 @@ class Papa {
   method recibeDanio(danio) {
     self.vida(self.vida() - danio)
   }
+
+    method sigueViva(){
+    if (vida <= 0) game.removeVisual(self)
+  }
   
   method queSoy() = "planta"
 }
@@ -32,6 +36,10 @@ class Guisante {
     self.vida(self.vida() - danio)
   }
   
+  method sigueViva(){
+    if (vida <= 0) game.removeVisual(self)
+  }
+
   method queSoy() = "planta"
 }
 
@@ -47,6 +55,10 @@ class Patapum {
   
   method recibeDanio(danio) {
     self.vida(self.vida() - danio)
+  }
+
+    method sigueViva(){
+    if (vida <= 0) game.removeVisual(self)
   }
   
   method queSoy() = "planta"
@@ -65,6 +77,10 @@ class Cactus {
   method recibeDanio(danio) {
     self.vida(self.vida() - danio)
   }
+
+    method sigueViva(){
+    if (vida <= 0) game.removeVisual(self)
+  }
   
   method queSoy() = "planta"
 }
@@ -72,7 +88,7 @@ class Cactus {
 class Girasol {
   const position
   const property tipo = "girasol"
-  var property vida = 100
+  var property vida = 50
   var property imagen = "magoHealer.png"
   
   method position() = position
@@ -82,6 +98,10 @@ class Girasol {
   method recibeDanio(danio) {
     self.vida(self.vida() - danio)
   }
+
+    method sigueViva(){
+    if (vida <= 0) game.removeVisual(self)
+  }
   
   method queSoy() = "planta"
 }
@@ -89,7 +109,7 @@ class Girasol {
 class ZapalloEnojado {
   const position
   const property tipo = "zapallo enojado"
-  var property vida = 1
+  var property vida = 125
   var property imagen = "magoEnojado.png"
   
   method position() = position
@@ -98,6 +118,10 @@ class ZapalloEnojado {
   
   method recibeDanio(danio) {
     self.vida(self.vida() - danio)
+  }
+
+    method sigueViva(){
+    if (vida <= 0) game.removeVisual(self)
   }
   
   method queSoy() = "planta"

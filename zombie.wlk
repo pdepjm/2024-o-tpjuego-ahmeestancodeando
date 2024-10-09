@@ -24,10 +24,14 @@ class ZombiesNormales {
     if (fantasma.colision().queSoy() == "planta" || fantasma.colision().queSoy() == "zombie"){ // solo frena cuando se choca contra un enemigo o una planta
       self.moverse(false)
       game.removeVisual(fantasma)
+      if (fantasma.colision().queSoy() == "planta") fantasma.colision().recibeDanio(danio)
     }
-    else {game.removeVisual(fantasma)}
+    else {
+      game.removeVisual(fantasma)
+      self.moverse(true) //Agregue el self.moverse(true) para que cuando maten la planta se sigan moviendo
+      }
   }
-  var property danio = 1
+  var property danio = 50
 
 }
 

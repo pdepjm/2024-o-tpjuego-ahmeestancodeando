@@ -48,4 +48,8 @@ object generadorDePlantas {
         self.sumarPlanta()
         return game.addVisual(nombreParaPlanta)
     }
+
+    method siguenVivas(){
+        plantas.forEach({planta => planta.sigueViva()})
+    }
 }

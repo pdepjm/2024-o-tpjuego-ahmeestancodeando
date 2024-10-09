@@ -1,3 +1,4 @@
+import generadorDePlantas.*
 import wollok.game.*
 
 import cursor.*
@@ -19,6 +20,8 @@ program cursorGame {
 	menu.accion()
 	cursor.accion()
 	menu.iniciarTienda()
+
+	// metodos generador de enemigos
 	game.onTick(3000, "generar nuevo Enemigo", {generadorDeEnemigos.sumarEnemigo()
 	generadorDeEnemigos.generarEnemigo(1)})/*suma 1 a nombreEnemigo para poder crear el siguiente, y genera un enemigo,
 		se hace en este orden ya que si se crea el primer enemigo, luego un segundo, y antes de que que se genere el
@@ -32,6 +35,8 @@ program cursorGame {
   	})cuando chocan con cursor, frenan, a futuro seria que cuando un zombie choca con una planta, frena y empieza a 
 	atacar*/
 	
+	//metodos generador de plantas
+	game.onTick(500, "sigue viva la planta", {generadorDePlantas.siguenVivas()})
 	
 
   game.start()
