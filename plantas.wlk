@@ -1,3 +1,5 @@
+import puntaje.*
+
 class Papa {
   //nota de nico: es una nuez >:(
   const position
@@ -110,6 +112,8 @@ object papaTienda {
   method image() = imagen
   
   method generarPlanta(posicionPlanta) = new Papa(position = posicionPlanta)
+
+method efectoDeInvocacion(){}
 }
 
 object guisanteTienda {
@@ -121,6 +125,8 @@ object guisanteTienda {
   method image() = imagen
   
   method generarPlanta(posicionPlanta) = new Guisante(position = posicionPlanta)
+
+method efectoDeInvocacion(){}
 }
 
 object girasolTienda {
@@ -132,6 +138,11 @@ object girasolTienda {
   method image() = imagen
   
   method generarPlanta(posicionPlanta) = new Girasol(position = posicionPlanta)
+
+  method efectoDeInvocacion(){
+    puntaje.sumarGirasol()
+  }
+
 }
 
 object cactusTienda {
@@ -143,6 +154,8 @@ object cactusTienda {
   method image() = imagen
   
   method generarPlanta(posicionPlanta) = new Cactus(position = posicionPlanta)
+
+method efectoDeInvocacion(){}
 }
 
 object zapalloEnojadoTienda {
@@ -153,9 +166,9 @@ object zapalloEnojadoTienda {
   
   method image() = imagen
   
-  method generarPlanta(posicionPlanta) = new ZapalloEnojado(
-    position = posicionPlanta
-  )
+  method generarPlanta(posicionPlanta) = new ZapalloEnojado(position = posicionPlanta)
+
+  method efectoDeInvocacion(){}
 }
 
 const pepe = new Guisante(position = game.at(0, 0))

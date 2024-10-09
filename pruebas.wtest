@@ -1,4 +1,4 @@
-import pepita.*
+/*import pepita.*
 
 describe "group of tests for pepita" {
 
@@ -6,4 +6,4 @@ describe "group of tests for pepita" {
     assert.equals(2, pepita.vida())
   }
 
-}
+} */

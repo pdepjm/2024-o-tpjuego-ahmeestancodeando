@@ -5,6 +5,8 @@ import zombie.*
 import fantasma.*
 import menu.*
 import generadorDeEnemigos.*
+import puntaje.*
+
 program cursorGame {
 	game.title("cursor")
 	game.height(6)
@@ -13,6 +15,7 @@ program cursorGame {
 	/*game.addVisual(Fantasmas)*/
 	game.addVisual(cursor)
 	game.addVisual(menu)
+	game.addVisual(puntaje)
 	menu.accion()
 	cursor.accion()
 	menu.iniciarTienda()
@@ -37,6 +40,8 @@ program cursorGame {
   game.onCollideDo(cursor, {elemento => cursor.perderVida(elemento.danio())})
 	*/
   game.onTick(3000, "matar cursor", {if (cursor.noEstaViva()){cursor.morir()}})
+
+  game.onTick(1000, "aumentar dinerro", {puntaje.sumarPuntos()})
 
   const musica = game.sound("musica.mp3")
   musica.shouldLoop(true)

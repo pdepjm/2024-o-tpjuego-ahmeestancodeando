@@ -17,6 +17,7 @@ object generadorDePlantas {
     method sumarPlanta() { /*suma 1 a nombre planta para asi crear plantas nuevos, luego hay que hacer la funcion para que reste 1 cuando maten a un enemigo*/
         nombrePlanta+=1
         }
+        
     method generarPlanta(planta, posicion){/*segun el numero ingresado, se generara un tipo de enemigo distinto*/
         var nombreParaPlanta = self.nombre() /* esto esta hecho porque sino wollok se enoja,para poder crear un enemigo*/
         if (planta=="papa")
@@ -43,6 +44,7 @@ object generadorDePlantas {
         var nombreParaPlanta = self.nombre() 
         nombreParaPlanta = self.plantaAGenerar().generarPlanta(posicion) //lama al objeto de la tienda para saber como generar una planta
         plantas.add(nombreParaPlanta)
+        plantaSeleccionada.efectoDeInvocacion()
         self.sumarPlanta()
         return game.addVisual(nombreParaPlanta)
     }
