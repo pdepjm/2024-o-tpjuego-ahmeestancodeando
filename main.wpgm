@@ -1,4 +1,3 @@
-import proyectil.*
 import generadorDeMagos.*
 import wollok.game.*
 
@@ -8,8 +7,6 @@ import fantasma.*
 import menu.*
 import generadorDeEnemigos.*
 import puntaje.*
-import adminProyectiles.*
-
 
 program cursorGame {
 	game.title("cursor")
@@ -32,16 +29,14 @@ program cursorGame {
 	
 	game.onTick(3000, "mover enemigo", {generadorDeEnemigos.moverEnemigos()})/*cada cierto tiempo hace que se muevan
 																			los enemigos*/
-	game.onTick(1500, "generar proyectiles", {generadorDeMagos.disparar()})
- 
-	game.onTick(1000, "mover proyectiles", {administradorDeProyectiles.moverProyectil()})
-	
 	/*
  	game.whenCollideDo(cursor,  { elemento =>
     elemento.moverse(false)
   	})cuando chocan con cursor, frenan, a futuro seria que cuando un zombie choca con una planta, frena y empieza a 
 	atacar*/
 	
+	game.onTick(2000, "disparar", {generadorDeMagos.disparar()})
+
 	//metodos generador de plantas
 	game.onTick(500, "sigue viva la planta", {generadorDeMagos.siguenVivas()})
 	
