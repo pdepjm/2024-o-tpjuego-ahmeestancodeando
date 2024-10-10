@@ -35,6 +35,6 @@ class ZombiesNormales {
 
 }
 
-const jose = new ZombiesNormales(position= new MutablePosition(x=10, y=0.randomUpTo(5).truncate(0)))
+//const jose = new ZombiesNormales(position= new MutablePosition(x=10, y=0.randomUpTo(5).truncate(0)))
 
-const otroZombie = new ZombiesNormales(position= new MutablePosition(x=3, y=3))
+//const otroZombie = new ZombiesNormales(position= new MutablePosition(x=3, y=3))

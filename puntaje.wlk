@@ -5,22 +5,23 @@ method position() = game.at(7, 5)
 
 var property puntos = 50
 
-var property cantidadDeGirasoles = 0
+var property cantidadDeMagosHealer = 0
 
 method sumarPuntos(){
-    self.puntos(puntos + 10 * (1 + cantidadDeGirasoles))
+    self.puntos(puntos + 10 * (1 + cantidadDeMagosHealer))
 }
 
 method restarPuntos(costo){
     self.puntos(puntos - costo)
 }
 
-method sumarGirasol(){
-    self.cantidadDeGirasoles(cantidadDeGirasoles + 1)
+method sumarMagoHealer(){
+    cantidadDeMagosHealer += 1
 }
 
-method quitarGirasol(){
-    self.cantidadDeGirasoles(cantidadDeGirasoles - 1)
+method quitarMagoHealer(){
+    cantidadDeMagosHealer -= 1
+    if (cantidadDeMagosHealer <=0) cantidadDeMagosHealer = 0
 }
 
 

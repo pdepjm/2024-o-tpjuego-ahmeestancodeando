@@ -44,7 +44,6 @@ program cursorGame {
   game.onCollideDo(cursor, {elemento => game.say(elemento, "Duro de Cojones")})
   game.onCollideDo(cursor, {elemento => cursor.perderVida(elemento.danio())})
 	*/
-  game.onTick(3000, "matar cursor", {if (cursor.noEstaViva()){cursor.morir()}})
 
   game.onTick(1000, "aumentar dinerro", {puntaje.sumarPuntos()})
 /*

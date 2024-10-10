@@ -1,39 +1,18 @@
 import puntaje.*
 
-class MagoPiedra {
-  //nota de nico: es una nuez >:(
-  const position
-  const property tipo = "piedra"
-  var property vida = 300
-  var property imagen = "magoPiedra.png"
-  
-  method position() = position
-  
-  method image() = imagen
-  
-  method recibeDanio(danio) {
-    self.vida(self.vida() - danio)
-  }
-
-    method sigueViva(){
-    if (vida <= 0) game.removeVisual(self)
-  }
-  
-  method queSoy() = "mago"
-}
-
 class MagoFuego {
   const position
   const property tipo = "fuego"
   var property vida = 100
+  var property danio = 40
   var property imagen = "magoFuego.png"
   
   method position() = position
   
   method image() = imagen
   
-  method recibeDanio(danio) {
-    self.vida(self.vida() - danio)
+  method recibeDanio(_danio) {
+    self.vida(self.vida() - _danio)
   }
   
   method sigueViva(){
@@ -43,22 +22,28 @@ class MagoFuego {
   method queSoy() = "mago"
 }
 
-class Patapum {
+class MagoHealer {
   const position
-  const property tipo = "patapum"
-  var property vida = 1
-  var property imagen = "magoEnojado.png" //hacer mago musulman
+  const property tipo = "girasol"
+  var property vida = 100
+  var property imagen = "magoHealer.png"
   
   method position() = position
+
+  method danio() = 0
   
   method image() = imagen
   
-  method recibeDanio(danio) {
-    self.vida(self.vida() - danio)
+  method recibeDanio(_danio) {
+    self.vida(self.vida() - _danio)
   }
 
-    method sigueViva(){
-    if (vida <= 0) game.removeVisual(self)
+  method sigueViva(){
+
+    if (vida <= 0 && game.hasVisual(self)){ // agregue el game.has visual porque sino restaba girasoles hasta que lo elimine el garbage collector
+      game.removeVisual(self)
+      puntaje.quitarMagoHealer()
+    }
   }
   
   method queSoy() = "mago"
@@ -74,6 +59,30 @@ class MagoHielo {
   
   method image() = imagen
   
+  method recibeDanio(_danio) {
+    self.vida(self.vida() - _danio)
+  }
+
+    method sigueViva(){
+    if (vida <= 0) game.removeVisual(self)
+  }
+  
+  method queSoy() = "mago"
+}
+
+class MagoPiedra {
+  //nota de nico: es una nuez >:(
+  const position
+  const property tipo = "piedra"
+  var property vida = 300
+  var property imagen = "magoPiedra.png"
+
+  method danio() = 0
+  
+  method position() = position
+  
+  method image() = imagen
+  
   method recibeDanio(danio) {
     self.vida(self.vida() - danio)
   }
@@ -85,18 +94,18 @@ class MagoHielo {
   method queSoy() = "mago"
 }
 
-class MagoHealer {
+class Patapum {
   const position
-  const property tipo = "girasol"
-  var property vida = 50
-  var property imagen = "magoHealer.png"
+  const property tipo = "patapum"
+  var property vida = 1
+  var property imagen = "magoEnojado.png" //hacer mago musulman
   
   method position() = position
   
   method image() = imagen
   
-  method recibeDanio(danio) {
-    self.vida(self.vida() - danio)
+  method recibeDanio(_danio) {
+    self.vida(self.vida() - _danio)
   }
 
     method sigueViva(){
@@ -116,8 +125,8 @@ class MagoEnojado {
   
   method image() = imagen
   
-  method recibeDanio(danio) {
-    self.vida(self.vida() - danio)
+  method recibeDanio(_danio) {
+    self.vida(self.vida() - _danio)
   }
 
     method sigueViva(){
@@ -188,7 +197,7 @@ object magoHealerTienda {
    }
 
   method efectoDeInvocacion(){
-    puntaje.sumarGirasol()
+    puntaje.sumarMagoHealer()
   }
 
 }
@@ -235,4 +244,4 @@ object magoEnojadoTienda {
   method efectoDeInvocacion(){}
 }
 
-const pepe = new MagoFuego(position = game.at(0, 0))
+// const pepe = new MagoFuego(position = game.at(0, 0))

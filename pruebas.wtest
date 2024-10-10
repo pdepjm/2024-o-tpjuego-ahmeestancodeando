@@ -1,9 +1,35 @@
-/*import pepita.*
+import magos.*
+import game.*
+describe "group of tests for magos" {
 
-describe "group of tests for pepita" {
-
-  test "pepita has initial energy" {
-    assert.equals(2, pepita.vida())
+  test "Mago Fuego tiene vida" {
+    const mago = new MagoFuego(position = game.at(0,0))
+    assert.equals(100, mago.vida())
   }
 
-} */
+    test "Mago Fuego tiene daño" {
+    const mago = new MagoFuego(position = game.at(0,0))
+    assert.equals(40, mago.danio())
+  }
+
+    test "Mago Healer tiene vida" {
+    const mago = new MagoHealer(position = game.at(0,0))
+    assert.equals(100, mago.vida())
+  }
+
+    test "Mago Healer no tiene daño" {
+    const mago = new MagoHealer(position = game.at(0,0))
+    assert.equals(0, mago.danio())
+  }
+    test "Mago Piedra tiene vida" {
+    const mago = new MagoPiedra(position = game.at(0,0))
+    assert.equals(300, mago.vida())
+  }
+
+    test "Mago Piedra no tiene daño" {
+    const mago = new MagoPiedra(position = game.at(0,0))
+    assert.equals(0, mago.danio())
+  }
+
+
+} 

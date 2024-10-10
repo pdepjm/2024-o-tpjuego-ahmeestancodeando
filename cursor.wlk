@@ -20,9 +20,4 @@ object cursor {
   method moverseArriba() = if (self.position().y()<4) position.goUp(1)
   method moverseAbajo() = if (self.position().y()>0) position.goDown(1)
 
-  method noEstaViva() = vida < 0
-
-  method morir(){
-    if (self.noEstaViva()){ game.say(self, "Durisimo Helmano")} // Delego la resonsabilidad de morir a pepita
-  }
 }
