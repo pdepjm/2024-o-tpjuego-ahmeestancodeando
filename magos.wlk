@@ -1,9 +1,9 @@
 import puntaje.*
 
-class Papa {
+class MagoPiedra {
   //nota de nico: es una nuez >:(
   const position
-  const property tipo = "papa"
+  const property tipo = "piedra"
   var property vida = 300
   var property imagen = "magoPiedra.png"
   
@@ -19,12 +19,12 @@ class Papa {
     if (vida <= 0) game.removeVisual(self)
   }
   
-  method queSoy() = "planta"
+  method queSoy() = "mago"
 }
 
-class Guisante {
+class MagoFuego {
   const position
-  const property tipo = "guisante"
+  const property tipo = "fuego"
   var property vida = 100
   var property imagen = "magoFuego.png"
   
@@ -40,7 +40,7 @@ class Guisante {
     if (vida <= 0) game.removeVisual(self)
   }
 
-  method queSoy() = "planta"
+  method queSoy() = "mago"
 }
 
 class Patapum {
@@ -61,10 +61,10 @@ class Patapum {
     if (vida <= 0) game.removeVisual(self)
   }
   
-  method queSoy() = "planta"
+  method queSoy() = "mago"
 }
 
-class Cactus {
+class MagoHielo {
   const position
   const property tipo = "cactus"
   var property vida = 100
@@ -82,10 +82,10 @@ class Cactus {
     if (vida <= 0) game.removeVisual(self)
   }
   
-  method queSoy() = "planta"
+  method queSoy() = "mago"
 }
 
-class Girasol {
+class MagoHealer {
   const position
   const property tipo = "girasol"
   var property vida = 50
@@ -103,10 +103,10 @@ class Girasol {
     if (vida <= 0) game.removeVisual(self)
   }
   
-  method queSoy() = "planta"
+  method queSoy() = "mago"
 }
 
-class ZapalloEnojado {
+class MagoEnojado {
   const position
   const property tipo = "zapallo enojado"
   var property vida = 125
@@ -124,10 +124,10 @@ class ZapalloEnojado {
     if (vida <= 0) game.removeVisual(self)
   }
   
-  method queSoy() = "planta"
+  method queSoy() = "mago"
 }
 
-object papaTienda {
+object magoPiedraTienda {
   const position = game.at(0, 5)
   var property imagen = "magoPiedra.png"
   
@@ -137,18 +137,18 @@ object papaTienda {
   
   method image() = imagen
   
-  method generarPlanta(posicionPlanta){
+  method generarMago(posicionMago){
      if(puntaje.puntos() < costo){
-     throw new DomainException(message="No hay suficiente dinero para comprar esta planta")
+     throw new DomainException(message="No hay suficiente dinero para comprar esta Mago")
     }
     puntaje.restarPuntos(costo)
-    return new Papa(position = posicionPlanta)
+    return new MagoPiedra(position = posicionMago)
   }
 
 method efectoDeInvocacion(){}
 }
 
-object guisanteTienda {
+object magoFuegoTienda {
   const position = game.at(1, 5)
   var property imagen = "magoFuego.png"
   
@@ -158,18 +158,18 @@ object guisanteTienda {
   
   method image() = imagen
   
-  method generarPlanta(posicionPlanta){
+  method generarMago(posicionMago){
      if(puntaje.puntos() < costo){
-     throw new DomainException(message="No hay suficiente dinero para comprar esta planta")
+     throw new DomainException(message="No hay suficiente dinero para comprar esta Mago")
     }
     puntaje.restarPuntos(costo)
-    return new Guisante(position = posicionPlanta)
+    return new MagoFuego(position = posicionMago)
   }
 
 method efectoDeInvocacion(){}
 }
 
-object girasolTienda {
+object magoHealerTienda {
   const position = game.at(2, 5)
   var property imagen = "magoHealer.png"
 
@@ -179,12 +179,12 @@ object girasolTienda {
   
   method image() = imagen
   
-  method generarPlanta(posicionPlanta) {
+  method generarMago(posicionMago) {
     if(puntaje.puntos() < costo){
-     throw new DomainException(message="No hay suficiente dinero para comprar esta planta")
+     throw new DomainException(message="No hay suficiente dinero para comprar esta Mago")
     }
     puntaje.restarPuntos(costo)
-    return new Girasol(position = posicionPlanta)
+    return new MagoHealer(position = posicionMago)
    }
 
   method efectoDeInvocacion(){
@@ -193,7 +193,7 @@ object girasolTienda {
 
 }
 
-object cactusTienda {
+object magoHieloTienda {
   const position = game.at(3, 5)
   var property imagen = "magoHielo.png"
   
@@ -203,18 +203,18 @@ object cactusTienda {
   
   method image() = imagen
   
-  method generarPlanta(posicionPlanta){
+  method generarMago(posicionMago){
      if(puntaje.puntos() < costo){
-     throw new DomainException(message="No hay suficiente dinero para comprar esta planta")
+     throw new DomainException(message="No hay suficiente dinero para comprar esta Mago")
     }
     puntaje.restarPuntos(costo)
-    return new Cactus(position = posicionPlanta)
+    return new MagoHielo(position = posicionMago)
   }
 
 method efectoDeInvocacion(){}
 }
 
-object zapalloEnojadoTienda {
+object magoEnojadoTienda {
   const position = game.at(4, 5)
   var property imagen = "magoEnojado.png"
   
@@ -224,15 +224,15 @@ object zapalloEnojadoTienda {
   
   method image() = imagen
   
-  method generarPlanta(posicionPlanta){
+  method generarMago(posicionMago){
      if(puntaje.puntos() < costo){
-     throw new DomainException(message="No hay suficiente dinero para comprar esta planta")
+     throw new DomainException(message="No hay suficiente dinero para comprar esta Mago")
     }
     puntaje.restarPuntos(costo)
-    return new ZapalloEnojado(position = posicionPlanta)
+    return new MagoEnojado(position = posicionMago)
   }
 
   method efectoDeInvocacion(){}
 }
 
-const pepe = new Guisante(position = game.at(0, 0))
+const pepe = new MagoFuego(position = game.at(0, 0))

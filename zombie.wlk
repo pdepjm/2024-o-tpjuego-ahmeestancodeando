@@ -21,10 +21,10 @@ class ZombiesNormales {
     const posicionFantasma = game.at(self.position().x()-1, self.position().y())
     const fantasma = new Fantasmas(position=posicionFantasma)
     game.addVisual(fantasma)
-    if (fantasma.colision().queSoy() == "planta" || fantasma.colision().queSoy() == "zombie"){ // solo frena cuando se choca contra un enemigo o una planta
+    if (fantasma.colision().queSoy() == "mago" || fantasma.colision().queSoy() == "zombie"){ // solo frena cuando se choca contra un enemigo o una planta
       self.moverse(false)
       game.removeVisual(fantasma)
-      if (fantasma.colision().queSoy() == "planta") fantasma.colision().recibeDanio(danio)
+      if (fantasma.colision().queSoy() == "mago") fantasma.colision().recibeDanio(danio)
     }
     else {
       game.removeVisual(fantasma)

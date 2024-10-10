@@ -1,4 +1,4 @@
-import generadorDePlantas.*
+import generadorDeMagos.*
 import wollok.game.*
 
 import cursor.*
@@ -36,7 +36,7 @@ program cursorGame {
 	atacar*/
 	
 	//metodos generador de plantas
-	game.onTick(500, "sigue viva la planta", {generadorDePlantas.siguenVivas()})
+	game.onTick(500, "sigue viva la planta", {generadorDeMagos.siguenVivas()})
 	
 
   game.start()
