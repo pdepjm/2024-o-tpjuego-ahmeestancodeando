@@ -30,11 +30,13 @@ object menu {
   }
   
   method generarPlanta2() {
-    const plantaAGenerar = game.colliders(self)
-    // no usamos uniqueColliders porque tira error si no hay ninguna
+    const plantaAGenerar = game.colliders(self) // no usamos uniqueColliders porque tira error si no hay ninguna
+    if (!plantaAGenerar.isEmpty()){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
     const plantaSeleccionada = plantaAGenerar.first()
     const posicion = game.at(cursor.position().x(), cursor.position().y())
     generadorDePlantas.generarPlanta2(plantaSeleccionada, posicion)
+    }
+   
   }
   
   // Borre las instanciaciones porque las hice objetos en Plantas.wlk
