@@ -131,11 +131,19 @@ object papaTienda {
   const position = game.at(0, 5)
   var property imagen = "magoPiedra.png"
   
+  const costo = 200
+
   method position() = position
   
   method image() = imagen
   
-  method generarPlanta(posicionPlanta) = new Papa(position = posicionPlanta)
+  method generarPlanta(posicionPlanta){
+     if(puntaje.puntos() < costo){
+     throw new DomainException(message="No hay suficiente dinero para comprar esta planta")
+    }
+    puntaje.restarPuntos(costo)
+    return new Papa(position = posicionPlanta)
+  }
 
 method efectoDeInvocacion(){}
 }
@@ -144,11 +152,19 @@ object guisanteTienda {
   const position = game.at(1, 5)
   var property imagen = "magoFuego.png"
   
+  const costo = 200
+
   method position() = position
   
   method image() = imagen
   
-  method generarPlanta(posicionPlanta) = new Guisante(position = posicionPlanta)
+  method generarPlanta(posicionPlanta){
+     if(puntaje.puntos() < costo){
+     throw new DomainException(message="No hay suficiente dinero para comprar esta planta")
+    }
+    puntaje.restarPuntos(costo)
+    return new Guisante(position = posicionPlanta)
+  }
 
 method efectoDeInvocacion(){}
 }
@@ -156,12 +172,20 @@ method efectoDeInvocacion(){}
 object girasolTienda {
   const position = game.at(2, 5)
   var property imagen = "magoHealer.png"
-  
+
+  const costo = 200
+
   method position() = position
   
   method image() = imagen
   
-  method generarPlanta(posicionPlanta) = new Girasol(position = posicionPlanta)
+  method generarPlanta(posicionPlanta) {
+    if(puntaje.puntos() < costo){
+     throw new DomainException(message="No hay suficiente dinero para comprar esta planta")
+    }
+    puntaje.restarPuntos(costo)
+    return new Girasol(position = posicionPlanta)
+   }
 
   method efectoDeInvocacion(){
     puntaje.sumarGirasol()
@@ -173,11 +197,19 @@ object cactusTienda {
   const position = game.at(3, 5)
   var property imagen = "magoHielo.png"
   
+  const costo = 200
+
   method position() = position
   
   method image() = imagen
   
-  method generarPlanta(posicionPlanta) = new Cactus(position = posicionPlanta)
+  method generarPlanta(posicionPlanta){
+     if(puntaje.puntos() < costo){
+     throw new DomainException(message="No hay suficiente dinero para comprar esta planta")
+    }
+    puntaje.restarPuntos(costo)
+    return new Cactus(position = posicionPlanta)
+  }
 
 method efectoDeInvocacion(){}
 }
@@ -186,11 +218,19 @@ object zapalloEnojadoTienda {
   const position = game.at(4, 5)
   var property imagen = "magoEnojado.png"
   
+  const costo = 200
+
   method position() = position
   
   method image() = imagen
   
-  method generarPlanta(posicionPlanta) = new ZapalloEnojado(position = posicionPlanta)
+  method generarPlanta(posicionPlanta){
+     if(puntaje.puntos() < costo){
+     throw new DomainException(message="No hay suficiente dinero para comprar esta planta")
+    }
+    puntaje.restarPuntos(costo)
+    return new ZapalloEnojado(position = posicionPlanta)
+  }
 
   method efectoDeInvocacion(){}
 }

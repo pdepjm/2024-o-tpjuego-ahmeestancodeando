@@ -11,6 +11,10 @@ method sumarPuntos(){
     self.puntos(puntos + 10 * (1 + cantidadDeGirasoles))
 }
 
+method restarPuntos(costo){
+    self.puntos(puntos - costo)
+}
+
 method sumarGirasol(){
     self.cantidadDeGirasoles(cantidadDeGirasoles + 1)
 }
