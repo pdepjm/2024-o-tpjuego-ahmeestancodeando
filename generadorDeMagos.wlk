@@ -51,4 +51,8 @@ object generadorDeMagos {
     method siguenVivas(){
         magos.forEach({mago => mago.sigueViva()})
     }
+
+    method disparar(){
+        magos.forEach({mago => mago.disparar()})
+    }
 }

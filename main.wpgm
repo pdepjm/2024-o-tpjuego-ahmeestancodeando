@@ -1,3 +1,4 @@
+import proyectil.*
 import generadorDeMagos.*
 import wollok.game.*
 
@@ -7,6 +8,8 @@ import fantasma.*
 import menu.*
 import generadorDeEnemigos.*
 import puntaje.*
+import adminProyectiles.*
+
 
 program cursorGame {
 	game.title("cursor")
@@ -29,6 +32,10 @@ program cursorGame {
 	
 	game.onTick(3000, "mover enemigo", {generadorDeEnemigos.moverEnemigos()})/*cada cierto tiempo hace que se muevan
 																			los enemigos*/
+	game.onTick(1500, "generar proyectiles", {generadorDeMagos.disparar()})
+ 
+	game.onTick(1000, "mover proyectiles", {administradorDeProyectiles.moverProyectil()})
+	
 	/*
  	game.whenCollideDo(cursor,  { elemento =>
     elemento.moverse(false)

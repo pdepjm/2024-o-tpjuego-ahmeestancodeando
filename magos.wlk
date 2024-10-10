@@ -1,10 +1,11 @@
+import adminProyectiles.*
 import puntaje.*
+import proyectil.*
 
 class MagoFuego {
   const position
   const property tipo = "fuego"
   var property vida = 100
-  var property danio = 40
   var property imagen = "magoFuego.png"
   
   method position() = position
@@ -13,6 +14,13 @@ class MagoFuego {
   
   method recibeDanio(_danio) {
     self.vida(self.vida() - _danio)
+  }
+
+   method disparar(){
+    var nombreproyectil = administradorDeProyectiles.nombreproyectil() 
+    nombreproyectil = new Proyectil(position = game.at(self.position().x()+1, self.position().y()), tipo = proyectilNormal)
+    administradorDeProyectiles.proyectiles.add(nombreproyectil)
+    administradorDeProyectiles.sumarProyectil()
   }
   
   method sigueViva(){
@@ -29,7 +37,8 @@ class MagoHealer {
   var property imagen = "magoHealer.png"
   
   method position() = position
-
+ 
+  method disparar()= {}
   method danio() = 0
   
   method image() = imagen
@@ -63,6 +72,13 @@ class MagoHielo {
     self.vida(self.vida() - _danio)
   }
 
+  method disparar(){
+    var nombreproyectil = administradorDeProyectiles.nombreproyectil() 
+    nombreproyectil = new Proyectil(position = game.at(self.position().x()+1, self.position().y()), tipo = proyectilPenetrante)
+    administradorDeProyectiles.proyectiles.add(nombreproyectil)
+    administradorDeProyectiles.sumarProyectil()
+  }
+
     method sigueViva(){
     if (vida <= 0) game.removeVisual(self)
   }
@@ -79,6 +95,7 @@ class MagoPiedra {
 
   method danio() = 0
   
+  method disparar()= {}
   method position() = position
   
   method image() = imagen
@@ -124,7 +141,7 @@ class MagoEnojado {
   method position() = position
   
   method image() = imagen
-  
+  method disparar() = {}
   method recibeDanio(_danio) {
     self.vida(self.vida() - _danio)
   }

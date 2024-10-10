@@ -4,6 +4,7 @@ class ZombiesNormales {
 	const position 
   var property moverse = true /*va  a servir para hacer que deje de avanzar*/
   method position() = position
+  var property vida = 100 
   var property imagen = "slime base.png"
   method image() = imagen
   method queSoy() = "zombie"
@@ -15,6 +16,10 @@ class ZombiesNormales {
   }
   method moveteDerecha() {
     return position.goRight(1)
+  }
+
+  method recibeDanio(_danio) {
+    self.vida(self.vida() - _danio)
   }
 
   method meFreno(){
