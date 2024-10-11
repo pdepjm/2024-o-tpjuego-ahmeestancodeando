@@ -6,8 +6,8 @@ class Proyectil {
     const position = new MutablePosition()
     method position() = position
     const danio = tipo.danio()
-    //const imagen = tipo.imagen()
-    method image() = "golondrina.png"
+    const imagen = tipo.imagen()
+    method image() = "bolaDeFuego.png"
     method mover(){
       position.goRight(1)
         if (position.x() >= 12){
@@ -17,15 +17,14 @@ class Proyectil {
     }
     method queSoy() = "proyectil"
     method colisionar(){
-    const posicionEnFrente = game.at(position.x() +1 ,position.y())
-    const objetoEnfrente = game.getObjectsIn(posicionEnFrente).filter({ objeto => objeto.queSoy() == "zombie" })
-    if (!objetoEnfrente.isEmpty()) {
-      if (objetoEnfrente.first().queSoy() == "cursor") objetoEnfrente.remove(objetoEnfrente.first())
-    }
-    if (!objetoEnfrente.isEmpty()) {
-      const objetivo = objetoEnfrente.first()
+    const posicionEnFrente = game.at(position.x() + 1 ,position.y())
+    const objetosEnMiCelda = game.getObjectsIn(game.at(position.x(),position.y())).filter({objeto => objeto.queSoy() == "zombie"}) // para que impacte en los enemigos cuando el disparo aparece
+    const objetosEnfrente = game.getObjectsIn(posicionEnFrente).filter({objeto => objeto.queSoy() == "zombie"}) // si no aplico el filter en ambas colecciones tira error diciendo que proyectil no entiende recibir danio
+    objetosEnfrente.addAll(objetosEnMiCelda)
+    if (!objetosEnfrente.isEmpty()) {
+      const objetivo = objetosEnfrente.first()
       objetivo.recibeDanio(danio)
-      console.println("el objetivo: " + objetivo + " recibe daño: " + danio)
+      // console.println("el objetivo: " + objetivo + " recibe daño: " + danio)
       self.destruirse()
     }
     }
@@ -40,8 +39,8 @@ class Proyectil {
 }
 
 object proyectilNormal{
-var property imagen = "bolaDeFuego.png"
-method imagen() = imagen
+const imagen = "bolaDeFuego.png"
+method imagen() {return imagen} 
 const danio = 50
 method danio() = danio
 
@@ -49,8 +48,8 @@ method destruirse() = true
 }
 
 object proyectilPenetrante{
-var property imagen = "proyecticDeMetal.png"
-method imagen() = imagen
+const imagen = "fedeValverde.png"
+method imagen() {return imagen} 
 
 const danio = 30
 method danio() = danio

@@ -31,29 +31,20 @@ program cursorGame {
 	game.onTick(1500, "mover enemigo", {generadorDeEnemigos.moverEnemigos()})/*cada cierto tiempo hace que se muevan
 																			los enemigos*/
 	game.onTick(1000, "matar enemigos", {generadorDeEnemigos.siguenVivos()})
-	/*
 	
- 	game.whenCollideDo(cursor,  { elemento =>
-    elemento.moverse(false)
-  	})cuando chocan con cursor, frenan, a futuro seria que cuando un zombie choca con una planta, frena y empieza a 
-	atacar*/
 	
 	//metodos generador de plantas
 	game.onTick(1000, "sigue viva la planta", {generadorDeMagos.siguenVivas()})
 	
 
-  game.start()
-	/*
-  game.onCollideDo(cursor, {elemento => game.say(elemento, "Duro de Cojones")})
-  game.onCollideDo(cursor, {elemento => cursor.perderVida(elemento.danio())})
-	*/
+	game.start()
 
-  game.onTick(1000, "aumentar dinerro", {puntaje.sumarPuntos()})
-  //game.onTick(1500, "disparar", {generadorDeMagos.disparar()})
-  game.onTick(1000, "moverDisparos", {administradorDeProyectiles.moverProyectiles()})
-  game.onTick(200, "impactarDisparos", {administradorDeProyectiles.impactarProyectiles()})
+	game.onTick(1000, "aumentar dinerro", {puntaje.sumarPuntos()})
+	game.onTick(3000, "disparar", {generadorDeMagos.disparar()})
+	game.onTick(1500, "moverDisparos", {administradorDeProyectiles.moverProyectiles()})
+	game.onTick(250, "impactarDisparos", {administradorDeProyectiles.impactarProyectiles()})
 
-	game.schedule(6000,{generadorDeMagos.disparar()})
+//game.schedule(6000,{generadorDeMagos.disparar()}) esto estaba para probar los tiros perforantes
 /*
   const musica = game.sound("musica.mp3")
   musica.shouldLoop(true)

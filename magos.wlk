@@ -6,7 +6,6 @@ class MagoFuego {
   const position
   const property tipo = "fuego"
   var property vida = 100
-  var property danio = 40
   var property imagen = "magoFuego.png"
   
   method position() = position
@@ -40,8 +39,6 @@ class MagoHealer {
   
   method position() = position
 
-  method danio() = 0
-  
   method image() = imagen
   
   method disparar(){}
@@ -97,8 +94,6 @@ class MagoPiedra {
   var property vida = 300
   var property imagen = "magoPiedra.png"
 
-  method danio() = 0
-  
   method position() = position
   
   method image() = imagen
@@ -185,7 +180,7 @@ object magoFuegoTienda {
   const position = game.at(1, 5)
   var property imagen = "magoFuego.png"
   
-  const costo = 0
+  const costo = 100
 
   method position() = position
   
@@ -206,7 +201,7 @@ object magoHealerTienda {
   const position = game.at(2, 5)
   var property imagen = "magoHealer.png"
 
-  const costo = 200
+  const costo = 75
 
   method position() = position
   
@@ -230,7 +225,7 @@ object magoHieloTienda {
   const position = game.at(3, 5)
   var property imagen = "magoHielo.png"
   
-  const costo = 0
+  const costo = 125
 
   method position() = position
   

@@ -10,7 +10,7 @@ object administradorDeProyectiles {
 
     method nombre() = nombreProyectil /*para poder consultar el ultimo nombre usado*/
     method sumarProyectil() { /*suma 1 a nombre mago para asi crear magos nuevos, luego hay que hacer la funcion para que reste 1 cuando maten a un enemigo*/
-        nombreProyectil+=1
+        nombreProyectil += 1
         }
 
     method generarProyectil(posicion, tipoProyectil){ // metodo para no usar los if anidados

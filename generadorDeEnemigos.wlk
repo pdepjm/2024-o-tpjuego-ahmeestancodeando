@@ -2,7 +2,7 @@ import game.*
 import zombie.*
 
 object generadorDeEnemigos {
-    var nombreEnemigo = 0 /*asigno el nombre  a los enemigos que voy creando segun numeros, asi puedo crear nombres nuevos
+    var nombreEnemigo = 2000 /*asigno el nombre  a los enemigos que voy creando segun numeros, asi puedo crear nombres nuevos
                             automaticamente*/
     
     const enemigos = #{}/*contiene cada enemigo que fue creando*/
@@ -13,7 +13,7 @@ object generadorDeEnemigos {
         nombreEnemigo+=1
         }
     method generarEnemigo(numero){/*segun el numero ingresado, se generara un tipo de enemigo distinto*/
-        if (numero==1) {/*generara un zombie normal*/
+        if (numero == 1) {/*generara un zombie normal*/
 
         const posicionTemporal = new MutablePosition(x=12, y=0.randomUpTo(5).truncate(0))
             var nombreParaEnemigo = self.nombre() /* esto esta hecho porque sino wollok se enoja, para poder crear un enemigo*/
