@@ -7,7 +7,7 @@ class Proyectil {
     method position() = position
     const danio = tipo.danio()
     const imagen = tipo.imagen()
-    method image() = "bolaDeFuego.png"
+    method image() = "bolaDeFuego2.png"
     method mover(){
       position.goRight(1)
         if (position.x() >= 12){
@@ -39,7 +39,7 @@ class Proyectil {
 }
 
 object proyectilNormal{
-const imagen = "bolaDeFuego.png"
+const imagen = "bolaDeFuego2.png"
 method imagen() {return imagen} 
 const danio = 50
 method danio() = danio

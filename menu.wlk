@@ -31,7 +31,8 @@ object menu {
   
   method generarMago2() {
     const magoAGenerar = game.colliders(self) // no usamos uniqueColliders porque tira error si no hay ninguna
-    if (!magoAGenerar.isEmpty()){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
+    const hayMago = game.colliders(cursor).filter{objeto => objeto.queSoy() == "mago"}
+    if (!magoAGenerar.isEmpty() && hayMago.isEmpty()){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
     const magoSeleccionado = magoAGenerar.first()
     const posicion = game.at(cursor.position().x(), cursor.position().y())
     generadorDeMagos.generarMago2(magoSeleccionado, posicion)

@@ -39,7 +39,7 @@ program cursorGame {
 
 	game.start()
 
-	game.onTick(1000, "aumentar dinerro", {puntaje.sumarPuntos()})
+	game.onTick(500, "aumentar dinerro", {puntaje.sumarPuntos()})
 	game.onTick(3000, "disparar", {generadorDeMagos.disparar()})
 	game.onTick(1500, "moverDisparos", {administradorDeProyectiles.moverProyectiles()})
 	game.onTick(250, "impactarDisparos", {administradorDeProyectiles.impactarProyectiles()})
@@ -47,7 +47,7 @@ program cursorGame {
 //game.schedule(6000,{generadorDeMagos.disparar()}) esto estaba para probar los tiros perforantes
 /*
   const musica = game.sound("musica.mp3")
-  musica.shouldLoop(true)
+  musica.shouldLoop(trued)
   game.schedule(100,{musica.play()})
   musica.volume(0.4) */
 }
