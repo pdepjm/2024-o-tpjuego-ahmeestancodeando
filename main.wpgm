@@ -23,14 +23,16 @@ program cursorGame {
 	menu.iniciarTienda()
 
 	// metodos generador de enemigos
-	game.onTick(3000, "generar nuevo Enemigo", {generadorDeEnemigos.sumarEnemigo()
-	generadorDeEnemigos.generarEnemigo(1)})/*suma 1 a nombreEnemigo para poder crear el siguiente, y genera un enemigo,
+	game.onTick(3000, "generar nuevo Enemigo", {
+		generadorDeEnemigos.sumarEnemigo()
+		generadorDeEnemigos.generarEnemigo(1)
+	})/*suma 1 a nombreEnemigo para poder crear el siguiente, y genera un enemigo,
 		se hace en este orden ya que si se crea el primer enemigo, luego un segundo, y antes de que que se genere el
 		tercero el jugador elimina el primero, habra dos enemigos con el nombre "2" */
 	
 	game.onTick(1500, "mover enemigo", {generadorDeEnemigos.moverEnemigos()})/*cada cierto tiempo hace que se muevan
 																			los enemigos*/
-	game.onTick(1000, "matar enemigos", {generadorDeEnemigos.siguenVivos()})
+	game.onTick(250, "matar enemigos", {generadorDeEnemigos.siguenVivos()})
 	
 	
 	//metodos generador de plantas
