@@ -1,8 +1,11 @@
+import generadorDeEnemigos.*
+import adminProyectiles.*
 
 import fantasma.Fantasmas
 class ZombiesNormales {
 	const position 
   var property moverse = true /*va  a servir para hacer que deje de avanzar*/
+  var property vida = 100
   method position() = position
   var property imagen = "slime base.png"
   method image() = imagen
@@ -12,9 +15,6 @@ class ZombiesNormales {
     if(self.moverse())
       return position.goLeft(1)
     else self.moverse(false)
-  }
-  method moveteDerecha() {
-    return position.goRight(1)
   }
 
   method meFreno(){
@@ -31,7 +31,21 @@ class ZombiesNormales {
       self.moverse(true) //Agregue el self.moverse(true) para que cuando maten la planta se sigan moviendo
       }
   }
+
   var property danio = 50
+
+  method recibeDanio(_danio) {
+    self.vida(self.vida() - _danio)
+  }
+  
+  method sigueVivo(){
+    if (vida <= 0 || position.x() <= 0){
+      game.removeVisual(self)
+      generadorDeEnemigos.eliminarEnemigo(self)
+      }
+
+
+  }
 
 }
 

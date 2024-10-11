@@ -1,5 +1,7 @@
+import generadorDeMagos.*
 import puntaje.*
-
+import proyectil.*
+import adminProyectiles.*
 class MagoFuego {
   const position
   const property tipo = "fuego"
@@ -10,13 +12,21 @@ class MagoFuego {
   method position() = position
   
   method image() = imagen
+
+  method disparar(){
+    const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
+    administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilNormal)
+  }
   
   method recibeDanio(_danio) {
     self.vida(self.vida() - _danio)
   }
   
   method sigueViva(){
-    if (vida <= 0) game.removeVisual(self)
+    if (vida <= 0) {
+      game.removeVisual(self)
+      generadorDeMagos.eliminarMago(self)
+    }
   }
 
   method queSoy() = "mago"
@@ -34,6 +44,8 @@ class MagoHealer {
   
   method image() = imagen
   
+  method disparar(){}
+
   method recibeDanio(_danio) {
     self.vida(self.vida() - _danio)
   }
@@ -59,14 +71,22 @@ class MagoHielo {
   
   method image() = imagen
   
+  method disparar(){
+    const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
+    administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilPenetrante)
+  }
+
   method recibeDanio(_danio) {
     self.vida(self.vida() - _danio)
   }
 
-    method sigueViva(){
-    if (vida <= 0) game.removeVisual(self)
+  method sigueViva(){
+    if (vida <= 0) {
+      game.removeVisual(self)
+      generadorDeMagos.eliminarMago(self)
+    }
   }
-  
+
   method queSoy() = "mago"
 }
 
@@ -83,6 +103,8 @@ class MagoPiedra {
   
   method image() = imagen
   
+  method disparar(){}
+
   method recibeDanio(danio) {
     self.vida(self.vida() - danio)
   }
@@ -125,6 +147,8 @@ class MagoEnojado {
   
   method image() = imagen
   
+  method disparar(){}
+
   method recibeDanio(_danio) {
     self.vida(self.vida() - _danio)
   }
@@ -161,7 +185,7 @@ object magoFuegoTienda {
   const position = game.at(1, 5)
   var property imagen = "magoFuego.png"
   
-  const costo = 200
+  const costo = 0
 
   method position() = position
   
@@ -206,7 +230,7 @@ object magoHieloTienda {
   const position = game.at(3, 5)
   var property imagen = "magoHielo.png"
   
-  const costo = 200
+  const costo = 0
 
   method position() = position
   

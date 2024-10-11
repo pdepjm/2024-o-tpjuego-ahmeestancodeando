@@ -1,3 +1,4 @@
+import adminProyectiles.*
 import generadorDeMagos.*
 import wollok.game.*
 
@@ -27,16 +28,18 @@ program cursorGame {
 		se hace en este orden ya que si se crea el primer enemigo, luego un segundo, y antes de que que se genere el
 		tercero el jugador elimina el primero, habra dos enemigos con el nombre "2" */
 	
-	game.onTick(3000, "mover enemigo", {generadorDeEnemigos.moverEnemigos()})/*cada cierto tiempo hace que se muevan
+	game.onTick(1500, "mover enemigo", {generadorDeEnemigos.moverEnemigos()})/*cada cierto tiempo hace que se muevan
 																			los enemigos*/
+	game.onTick(1000, "matar enemigos", {generadorDeEnemigos.siguenVivos()})
 	/*
+	
  	game.whenCollideDo(cursor,  { elemento =>
     elemento.moverse(false)
   	})cuando chocan con cursor, frenan, a futuro seria que cuando un zombie choca con una planta, frena y empieza a 
 	atacar*/
 	
 	//metodos generador de plantas
-	game.onTick(500, "sigue viva la planta", {generadorDeMagos.siguenVivas()})
+	game.onTick(1000, "sigue viva la planta", {generadorDeMagos.siguenVivas()})
 	
 
   game.start()
@@ -46,6 +49,11 @@ program cursorGame {
 	*/
 
   game.onTick(1000, "aumentar dinerro", {puntaje.sumarPuntos()})
+  //game.onTick(1500, "disparar", {generadorDeMagos.disparar()})
+  game.onTick(1000, "moverDisparos", {administradorDeProyectiles.moverProyectiles()})
+  game.onTick(200, "impactarDisparos", {administradorDeProyectiles.impactarProyectiles()})
+
+	game.schedule(6000,{generadorDeMagos.disparar()})
 /*
   const musica = game.sound("musica.mp3")
   musica.shouldLoop(true)

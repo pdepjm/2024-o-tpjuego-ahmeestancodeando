@@ -5,7 +5,7 @@ object generadorDeEnemigos {
     var nombreEnemigo = 0 /*asigno el nombre  a los enemigos que voy creando segun numeros, asi puedo crear nombres nuevos
                             automaticamente*/
     
-    const enemigo = #{}/*contiene cada enemigo que fue creando*/
+    const enemigos = #{}/*contiene cada enemigo que fue creando*/
    
     method nombre() = nombreEnemigo /*para poder consultar el ultimo nombre usado*/
     method sumarEnemigo() { /*suma 1 a nombre enemigo para asi crear enemigos nuevos, luego hay que hacer la funcion
@@ -20,14 +20,22 @@ object generadorDeEnemigos {
 
             if (game.getObjectsIn(posicionTemporal).isEmpty()){ // el if es para que no genere enemigos sobre otros
             nombreParaEnemigo = new ZombiesNormales(position = posicionTemporal )
-            enemigo.add(nombreParaEnemigo)/*se añade a la lista de enemigos activos*/
+            enemigos.add(nombreParaEnemigo)/*se añade a la lista de enemigos activos*/
             self.sumarEnemigo()
             return game.addVisual(nombreParaEnemigo)/*muestra al enemigo en el juego*/
             } else return
         }
         return 0
     }
-    method moverEnemigos() {
-        enemigo.forEach({zombie => zombie.movete()})/*aplica la funcion movete a cada enemigo de la coleccion*/
+    method siguenVivos(){
+        enemigos.forEach({enemigo => enemigo.sigueVivo()})
     }
+
+    method moverEnemigos() {
+        enemigos.forEach({zombie => zombie.movete()})/*aplica la funcion movete a cada enemigo de la coleccion*/
+    }
+    method eliminarEnemigo(enemigo) {
+      enemigos.remove(enemigo)
+    }
+
 }

@@ -26,7 +26,7 @@ object menu {
     // no usamos uniqueColliders porque tira error si no hay ninguna
     const magoSeleccionado = magoAGenerar.first().tipo()
     const posicion = game.at(cursor.position().x(), cursor.position().y())
-    generadorDeMagos.generarMago(magoSeleccionado, posicion)
+    generadorDeMagos.generarMago2(magoSeleccionado, posicion)
   }
   
   method generarMago2() {

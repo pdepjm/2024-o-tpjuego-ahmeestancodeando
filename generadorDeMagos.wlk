@@ -18,26 +18,6 @@ object generadorDeMagos {
         nombreMago+=1
         }
         
-    method generarMago(mago, posicion){/*segun el numero ingresado, se generara un tipo de enemigo distinto*/
-        var nombreParaMago = self.nombre() /* esto esta hecho porque sino wollok se enoja,para poder crear un enemigo*/
-        if (mago=="papa")
-            nombreParaMago = new MagoEnojado(position= posicion)
-        else if (mago=="guisante")
-            nombreParaMago = new MagoEnojado(position= posicion)
-        else if (mago=="cactus")
-            nombreParaMago = new MagoEnojado(position= posicion)
-        else if (mago=="girasol")
-            nombreParaMago = new MagoEnojado(position= posicion)
-        else if (mago=="zapallo enojado")
-            nombreParaMago = new MagoEnojado(position= posicion)
-        
-        magos.add(nombreParaMago)/*se añade a la lista de magos activos*/
-
-        self.sumarMago()
-
-        return game.addVisual(nombreParaMago)/*muestra al enemigo en el juego*/
-    }
-
     method generarMago2(magoSeleccionado,posicion){ // metodo para no usar los if anidados
         self.magoAGenerar(magoSeleccionado) //esto para cambiar la mago segun lo que se elija
         var nombreParaMago = self.nombre() 
@@ -51,4 +31,13 @@ object generadorDeMagos {
     method siguenVivas(){
         magos.forEach({mago => mago.sigueViva()})
     }
+
+    method disparar() {
+      magos.forEach({mago => mago.disparar()})
+    }
+
+    method eliminarMago(mago){
+      magos.remove(mago)
+    }
+
 }
