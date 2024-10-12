@@ -45,6 +45,7 @@ object menu {
   method iniciarTienda() {
     // const papaTienda = new Papa(position = game.at(0,5))
     game.addVisual(magoPiedraTienda)
+    
     // const guisanteTienda = new Guisante(position = game.at(1,5))
     
     game.addVisual(magoFuegoTienda)

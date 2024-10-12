@@ -6,8 +6,8 @@ class Proyectil {
     const position = new MutablePosition()
     method position() = position
     const danio = tipo.danio()
-    const imagen = tipo.imagen()
-    method image() = "bolaDeFuego2.png"
+    var imagen = tipo.imagen()
+    
     method mover(){
       position.goRight(1)
         if (position.x() >= 12){
@@ -22,25 +22,31 @@ class Proyectil {
     const objetosEnfrente = game.getObjectsIn(posicionEnFrente).filter({objeto => objeto.queSoy() == "zombie"}) // si no aplico el filter en ambas colecciones tira error diciendo que proyectil no entiende recibir danio
     objetosEnfrente.addAll(objetosEnMiCelda)
     if (!objetosEnfrente.isEmpty()) {
+      imagen = tipo.imagenDestruido()
       const objetivo = objetosEnfrente.first()
       objetivo.recibeDanio(danio)
       // console.println("el objetivo: " + objetivo + " recibe daño: " + danio)
       self.destruirse()
+
     }
     }
 
     method destruirse(){
      if (tipo.destruirse()){
-        game.removeVisual(self)
-        administradorDeProyectiles.destruirProyectil(self)
+        
+        game.removeTickEvent("destruirBoladefuego")
+        game.onTick(200, "destruirBoladefuego",{game.removeVisual(self)  administradorDeProyectiles.destruirProyectil(self)  })
         }
     }
 
+    method image() = imagen
 }
 
 object proyectilNormal{
 const imagen = "bolaDeFuego2.png"
+const imagenDestruido = "bolaDeFuegoDestruida.gif"
 method imagen() {return imagen} 
+method imagenDestruido() {return imagenDestruido} 
 const danio = 50
 method danio() = danio
 

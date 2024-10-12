@@ -173,6 +173,10 @@ object magoPiedraTienda {
     return new MagoPiedra(position = posicionMago)
   }
 
+  method text() = costo.toString() + "$"
+  method textColor() = "ffec00ff"
+
+
 method efectoDeInvocacion(){}
 }
 
@@ -194,6 +198,9 @@ object magoFuegoTienda {
     return new MagoFuego(position = posicionMago)
   }
 
+  method text() = costo.toString() + "$"
+  method textColor() = "ffec00ff"
+
 method efectoDeInvocacion(){}
 }
 
@@ -214,6 +221,9 @@ object magoHealerTienda {
     puntaje.restarPuntos(costo)
     return new MagoHealer(position = posicionMago)
    }
+
+  method text() = costo.toString() + "$"
+  method textColor() = "ffec00ff"
 
   method efectoDeInvocacion(){
     puntaje.sumarMagoHealer()
@@ -239,6 +249,9 @@ object magoHieloTienda {
     return new MagoHielo(position = posicionMago)
   }
 
+  method text() = costo.toString() + "$"
+  method textColor() = "ffec00ff"
+
 method efectoDeInvocacion(){}
 }
 
@@ -259,6 +272,9 @@ object magoEnojadoTienda {
     puntaje.restarPuntos(costo)
     return new MagoEnojado(position = posicionMago)
   }
+ 
+  method text() = costo.toString() + "$"
+  method textColor() = "ffec00ff"
 
   method efectoDeInvocacion(){}
 }
