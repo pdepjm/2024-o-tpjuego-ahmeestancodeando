@@ -1,6 +1,6 @@
 import magos.*
 import game.*
-describe "group of tests for magos" {
+describe "Test de magos" {
 
   test "Mago Fuego tiene vida" {
     const mago = new MagoFuego(position = game.at(0,0))
@@ -31,5 +31,24 @@ describe "group of tests for magos" {
     assert.equals(0, mago.danio())
   }
 
+    test "Mago Fuego Recibe Daño" {
+      const mago = new MagoFuego(position = game.at(2,1))
+      const magovida = mago.vida()
+      mago.recibeDanio(100)
+      assert.that(magovida>mago.vida())
+    }
 
+    test "Mago Fuego muere" {
+      const mago = new MagoFuego(position = game.at(2,1))
+      mago.recibeDanio(1000)
+      assert.that(mago.estaMuerto())
+    }
 } 
+
+describe "group of tests for Slimes" {
+
+
+}
+describe "group of tests for Tienda" {
+  
+}

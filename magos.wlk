@@ -21,11 +21,12 @@ class MagoFuego {
     self.vida(self.vida() - _danio)
   }
   
-  method sigueViva(){
-    if (vida <= 0) {
+  method estaMuerto(){
+    if (vida <= 0 && game.hasVisual(self)) {
       game.removeVisual(self)
       generadorDeMagos.eliminarMago(self)
     }
+    return vida <= 0
   }
 
   method queSoy() = "mago"
@@ -47,12 +48,14 @@ class MagoHealer {
     self.vida(self.vida() - _danio)
   }
 
-  method sigueViva(){
+  method estaMuerto(){
 
     if (vida <= 0 && game.hasVisual(self)){ // agregue el game.has visual porque sino restaba girasoles hasta que lo elimine el garbage collector
       game.removeVisual(self)
       puntaje.quitarMagoHealer()
+      generadorDeMagos.eliminarMago(self)
     }
+    return vida <= 0
   }
   
   method queSoy() = "mago"
@@ -77,11 +80,12 @@ class MagoHielo {
     self.vida(self.vida() - _danio)
   }
 
-  method sigueViva(){
-    if (vida <= 0) {
+  method estaMuerto(){
+    if (vida <= 0 && game.hasVisual(self)) {
       game.removeVisual(self)
       generadorDeMagos.eliminarMago(self)
     }
+    return vida <= 0
   }
 
   method queSoy() = "mago"
@@ -104,8 +108,12 @@ class MagoPiedra {
     self.vida(self.vida() - danio)
   }
 
-    method sigueViva(){
-    if (vida <= 0) game.removeVisual(self)
+  method estaMuerto(){
+    if (vida <= 0 && game.hasVisual(self)) {
+      game.removeVisual(self)
+      generadorDeMagos.eliminarMago(self)
+    }
+    return vida <= 0
   }
   
   method queSoy() = "mago"
@@ -125,8 +133,12 @@ class Patapum {
     self.vida(self.vida() - _danio)
   }
 
-    method sigueViva(){
-    if (vida <= 0) game.removeVisual(self)
+  method estaMuerto(){
+    if (vida <= 0 && game.hasVisual(self)) {
+      game.removeVisual(self)
+      generadorDeMagos.eliminarMago(self)
+    }
+    return vida <= 0
   }
   
   method queSoy() = "mago"
@@ -148,8 +160,12 @@ class MagoEnojado {
     self.vida(self.vida() - _danio)
   }
 
-    method sigueViva(){
-    if (vida <= 0) game.removeVisual(self)
+  method estaMuerto(){
+    if (vida <= 0 && game.hasVisual(self)) {
+      game.removeVisual(self)
+      generadorDeMagos.eliminarMago(self)
+    }
+    return vida <= 0
   }
   
   method queSoy() = "mago"

@@ -29,7 +29,7 @@ object generadorDeMagos {
     }
 
     method siguenVivas(){
-        magos.forEach({mago => mago.sigueViva()})
+        magos.forEach({mago => mago.estaMuerto()})
     }
 
     method disparar() {
