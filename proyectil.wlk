@@ -1,7 +1,8 @@
 import adminProyectiles.*
 import game.*
+import colisionExtra.*
 
-class Proyectil {
+class Proyectil inherits Colision{
     const tipo
     const position = new MutablePosition()
     method position() = position
@@ -16,26 +17,28 @@ class Proyectil {
       }
     }
     method queSoy() = "proyectil"
+   
     method colisionar(){
-    const posicionEnFrente = game.at(position.x() + 1 ,position.y())
-    const objetosEnMiCelda = game.getObjectsIn(game.at(position.x(),position.y())).filter({objeto => objeto.queSoy() == "zombie"}) // para que impacte en los enemigos cuando el disparo aparece
-    const objetosEnfrente = game.getObjectsIn(posicionEnFrente).filter({objeto => objeto.queSoy() == "zombie"}) // si no aplico el filter en ambas colecciones tira error diciendo que proyectil no entiende recibir danio
-    objetosEnfrente.addAll(objetosEnMiCelda)
-    if (!objetosEnfrente.isEmpty()) {
+      const objetoEnMiCelda = self.colisionEnFrente(self.position(),"zombie")
+      const posicionEnFrente = game.at(position.x() + 1 ,position.y())
+      const objetoEnFrente = self.colisionEnFrente(posicionEnFrente, "zombie")
+      if (objetoEnMiCelda.queSoy() == "zombie") {
       imagen = tipo.imagenDestruido()
-      const objetivo = objetosEnfrente.first()
-      objetivo.recibeDanio(danio)
-      // console.println("el objetivo: " + objetivo + " recibe daño: " + danio)
+      objetoEnMiCelda.recibeDanio(danio)
       self.destruirse()
+    } else if (objetoEnFrente.queSoy() == "zombie"){
+      imagen = tipo.imagenDestruido()
+      objetoEnFrente.recibeDanio(danio)
+      self.destruirse()
+    }
+    }
 
-    }
-    }
 
     method destruirse(){
      if (tipo.destruirse()){
         
-        game.removeTickEvent("destruirBoladefuego")
-        game.onTick(200, "destruirBoladefuego",{game.removeVisual(self)  administradorDeProyectiles.destruirProyectil(self)  })
+        //game.removeTickEvent("destruirBoladefuego")
+        game.schedule(180,{game.removeVisual(self)  administradorDeProyectiles.destruirProyectil(self)  })
         }
     }
 
@@ -47,7 +50,7 @@ const imagen = "bolaDeFuego2.png"
 const imagenDestruido = "bolaDeFuegoDestruida.gif"
 method imagen() {return imagen} 
 method imagenDestruido() {return imagenDestruido} 
-const danio = 50
+const danio = 75
 method danio() = danio
 
 method destruirse() = true
@@ -55,8 +58,9 @@ method destruirse() = true
 
 object proyectilPenetrante{
 const imagen = "fedeValverde.png"
+const imagenDestruido = "fedeValverde.png"
 method imagen() {return imagen} 
-
+method imagenDestruido(){return imagenDestruido} 
 const danio = 30
 method danio() = danio
 

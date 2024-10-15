@@ -1,11 +1,11 @@
 import generadorDeEnemigos.*
 import adminProyectiles.*
+import colisionExtra.*
 
-import fantasma.Fantasmas
-class ZombiesNormales {
+class ZombiesNormales inherits Colision{
 	const position 
   var property moverse = true /*va  a servir para hacer que deje de avanzar*/
-  var property vida = 100
+  var property vida = 200
   method position() = position
   var property imagen = "slime base.png"
   method image() = imagen
@@ -18,18 +18,13 @@ class ZombiesNormales {
   }
 
   method meFreno(){
-    const posicionFantasma = game.at(self.position().x()-1, self.position().y())
-    const fantasma = new Fantasmas(position=posicionFantasma)
-    game.addVisual(fantasma)
-    if (fantasma.colision().queSoy() == "mago" || fantasma.colision().queSoy() == "zombie"){ // solo frena cuando se choca contra un enemigo o una planta
+    const posicionEnFrente = game.at(self.position().x()-1, self.position().y())
+    const objeto = self.colisionEnFrente(posicionEnFrente, "mago", "zombie")
+    if (objeto.queSoy() != "nada"){ // solo frena cuando se choca contra un enemigo o una planta
       self.moverse(false)
-      game.removeVisual(fantasma)
-      if (fantasma.colision().queSoy() == "mago") fantasma.colision().recibeDanio(danio)
+      if (objeto.queSoy() == "mago") objeto.recibeDanio(danio)
     }
-    else {
-      game.removeVisual(fantasma)
-      self.moverse(true) //Agregue el self.moverse(true) para que cuando maten la planta se sigan moviendo
-      }
+    else{self.moverse(true)} //Agregue el self.moverse(true) para que cuando maten la planta se sigan moviendo
   }
 
   var property danio = 50
