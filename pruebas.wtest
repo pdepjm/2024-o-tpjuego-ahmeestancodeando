@@ -132,7 +132,7 @@ describe "group of tests for Puntaje" {
   }
 
 test "Resta Puntos"{
-    var cantPuntos = puntaje.puntos()
+    const cantPuntos = puntaje.puntos()
     puntaje.restarPuntos(400)
     assert.that(cantPuntos > puntaje.puntos())
   }
