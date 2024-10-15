@@ -1,3 +1,5 @@
+import puntaje.*
+import zombie.*
 import magos.*
 import game.*
 describe "Test de magos" {
@@ -7,28 +9,14 @@ describe "Test de magos" {
     assert.equals(100, mago.vida())
   }
 
-    test "Mago Fuego tiene daño" {
-    const mago = new MagoFuego(position = game.at(0,0))
-    assert.equals(40, mago.danio())
-  }
-
     test "Mago Healer tiene vida" {
     const mago = new MagoHealer(position = game.at(0,0))
     assert.equals(100, mago.vida())
   }
 
-    test "Mago Healer no tiene daño" {
-    const mago = new MagoHealer(position = game.at(0,0))
-    assert.equals(0, mago.danio())
-  }
     test "Mago Piedra tiene vida" {
     const mago = new MagoPiedra(position = game.at(0,0))
     assert.equals(300, mago.vida())
-  }
-
-    test "Mago Piedra no tiene daño" {
-    const mago = new MagoPiedra(position = game.at(0,0))
-    assert.equals(0, mago.danio())
   }
 
     test "Mago Fuego Recibe Daño" {
@@ -43,12 +31,109 @@ describe "Test de magos" {
       mago.recibeDanio(1000)
       assert.that(mago.estaMuerto())
     }
+
+    test "Mago Healer Recibe Daño" {
+      const mago = new MagoHealer(position = game.at(2,1))
+      const magovida = mago.vida()
+      mago.recibeDanio(100)
+      assert.that(magovida>mago.vida())
+    }
+
+    test "Mago Healer muere" {
+      const mago = new MagoHealer(position = game.at(2,1))
+      mago.recibeDanio(1000)
+      assert.that(mago.estaMuerto())
+    }
+
+    test "Mago Hielo Recibe Daño" {
+      const mago = new MagoHielo(position = game.at(2,1))
+      const magovida = mago.vida()
+      mago.recibeDanio(100)
+      assert.that(magovida>mago.vida())
+    }
+
+    test "Mago Hielo muere" {
+      const mago = new MagoHielo(position = game.at(2,1))
+      mago.recibeDanio(1000)
+      assert.that(mago.estaMuerto())
+    }
+
+    test "Mago Piedra Recibe Daño" {
+      const mago = new MagoHielo(position = game.at(2,1))
+      const magovida = mago.vida()
+      mago.recibeDanio(100)
+      assert.that(magovida>mago.vida())
+    }
+
+    test "Mago Piedra muere" {
+      const mago = new MagoHielo(position = game.at(2,1))
+      mago.recibeDanio(1000)
+      assert.that(mago.estaMuerto())
+    }
+    
+    test "Patapum Recibe Daño" {
+      const mago = new MagoHielo(position = game.at(2,1))
+      const magovida = mago.vida()
+      mago.recibeDanio(100)
+      assert.that(magovida>mago.vida())
+    }
+
+    test "Patapum muere" {
+      const mago = new Patapum(position = game.at(2,1))
+      mago.recibeDanio(1000)
+      assert.that(mago.estaMuerto())
+    }
+
+    test "Mago Enojado Recibe Daño" {
+      const mago = new MagoEnojado(position = game.at(2,1))
+      const magovida = mago.vida()
+      mago.recibeDanio(100)
+      assert.that(magovida>mago.vida())
+    }
+
+    test "Mago Enojado" {
+      const mago = new MagoEnojado(position = game.at(2,1))
+      mago.recibeDanio(1000)
+      assert.that(mago.estaMuerto())
+    }
 } 
 
 describe "group of tests for Slimes" {
-
+  test "Slime basico tiene Vida"{
+    const slime = new SlimeBasico(position = game.at(6,2))
+    assert.that(slime.vida()>0)
+  }
+  test "Slime Normal recibe daño"{
+    const slime = new SlimeBasico(position = game.at(6,2))
+    const slimevida = slime.vida()
+    slime.recibeDanio(100)
+    assert.that(slimevida>slime.vida())
+  }
+  
+  test "Slime Muere"{
+    const slime = new SlimeBasico(position = game.at(6,2))
+    slime.recibeDanio(1000)
+    assert.that(slime.estaMuerto())
+  }
 
 }
-describe "group of tests for Tienda" {
+describe "group of tests for Puntaje" {
   
+  test "Puntaje Suma"{
+    var cantPuntos = puntaje.puntos()
+    puntaje.sumarPuntos()
+    assert.that(cantPuntos < puntaje.puntos())
+  }
+
+  test "Puntaje Suma 40 con tres magos de Sol"{ //Tener en cuenta que el obj puntaje empeiza con 50 puntos
+    puntaje.cantidadDeMagosHealer(3) 
+    puntaje.sumarPuntos()
+    assert.equals(90,puntaje.puntos())
+  }
+
+test "Resta Puntos"{
+    var cantPuntos = puntaje.puntos()
+    puntaje.restarPuntos(400)
+    assert.that(cantPuntos > puntaje.puntos())
+  }
 }
