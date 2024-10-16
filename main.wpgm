@@ -4,7 +4,6 @@ import wollok.game.*
 
 import cursor.*
 import zombie.*
-import fantasma.*
 import menu.*
 import generadorDeEnemigos.*
 import puntaje.*

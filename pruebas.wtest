@@ -1,3 +1,4 @@
+import adminProyectiles.*
 import magos.*
 import game.*
 describe "group of tests for magos" {
@@ -9,7 +10,9 @@ describe "group of tests for magos" {
 
     test "Mago Fuego tiene daño" {
     const mago = new MagoFuego(position = game.at(0,0))
-    assert.equals(40, mago.danio())
+    mago.disparar()
+    const proyectil = administradorDeProyectiles.proyectiles().asList().first()
+    assert.equals(75, proyectil.danio())
   }
 
     test "Mago Healer tiene vida" {

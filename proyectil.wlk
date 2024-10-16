@@ -6,7 +6,7 @@ class Proyectil inherits Colision{
     const tipo
     const position = new MutablePosition()
     method position() = position
-    const danio = tipo.danio()
+    const property danio = tipo.danio()
     var imagen = tipo.imagen()
     
     method mover(){
