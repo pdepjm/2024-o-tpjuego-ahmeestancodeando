@@ -24,16 +24,7 @@ program cursorGame {
 	cursor.accion()
 	menu.iniciarTienda()
 
-	game.addVisual(hitbox1)
-	game.addVisual(hitbox2)
-	game.addVisual(hitbox3)
-	game.addVisual(hitbox4)
-	game.addVisual(hitbox5)
-	game.onCollideDo(hitbox1, {elemento => elemento.daniarCasa()})
-	game.onCollideDo(hitbox2, {elemento => elemento.daniarCasa()}) 
-	game.onCollideDo(hitbox3, {elemento => elemento.daniarCasa()}) 
-	game.onCollideDo(hitbox4, {elemento => elemento.daniarCasa()})
-	game.onCollideDo(hitbox5, {elemento => elemento.daniarCasa()})  
+
 
 	// metodos generador de enemigos
 	game.onTick(3000, "generar nuevo Enemigo", {generadorDeEnemigos.sumarEnemigo()

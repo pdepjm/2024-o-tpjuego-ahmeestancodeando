@@ -35,16 +35,14 @@ class SlimeBasico inherits Colision{
 
   method estaMuerto(){
     if (vida <= 0 || position.x() < 0){
+      casa.recibirDanio()
+      casa.terminarJuego()
+  
       game.removeVisual(self)
       generadorDeEnemigos.eliminarEnemigo(self)
       }
     return vida <= 0 || position.x() <= 0
 
-  }
-
-  method daniarCasa(){
-    casa.recibirDanio()
-    casa.terminarJuego()
   }
 }
 
