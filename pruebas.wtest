@@ -120,7 +120,7 @@ describe "group of tests for Slimes" {
 describe "group of tests for Puntaje" {
   
   test "Puntaje Suma"{
-    var cantPuntos = puntaje.puntos()
+    const cantPuntos = puntaje.puntos()
     puntaje.sumarPuntos()
     assert.that(cantPuntos < puntaje.puntos())
   }

@@ -4,7 +4,7 @@ import wollok.game.*
 
 import cursor.*
 import zombie.*
-import fantasma.*
+import casa.*
 import menu.*
 import generadorDeEnemigos.*
 import puntaje.*
@@ -23,6 +23,17 @@ program cursorGame {
 	menu.accion()
 	cursor.accion()
 	menu.iniciarTienda()
+
+	game.addVisual(hitbox1)
+	game.addVisual(hitbox2)
+	game.addVisual(hitbox3)
+	game.addVisual(hitbox4)
+	game.addVisual(hitbox5)
+	game.onCollideDo(hitbox1, {elemento => elemento.daniarCasa()})
+	game.onCollideDo(hitbox2, {elemento => elemento.daniarCasa()}) 
+	game.onCollideDo(hitbox3, {elemento => elemento.daniarCasa()}) 
+	game.onCollideDo(hitbox4, {elemento => elemento.daniarCasa()})
+	game.onCollideDo(hitbox5, {elemento => elemento.daniarCasa()})  
 
 	// metodos generador de enemigos
 	game.onTick(3000, "generar nuevo Enemigo", {generadorDeEnemigos.sumarEnemigo()
@@ -45,6 +56,8 @@ program cursorGame {
 	game.onTick(3000, "disparar", {generadorDeMagos.disparar()})
 	game.onTick(1000, "moverDisparos", {administradorDeProyectiles.moverProyectiles()})
 	game.onTick(250, "impactarDisparos", {administradorDeProyectiles.impactarProyectiles()})
+
+
 
 //game.schedule(6000,{generadorDeMagos.disparar()}) esto estaba para probar los tiros perforantes
 /*

@@ -1,6 +1,6 @@
 import generadorDeEnemigos.*
 import adminProyectiles.*
-
+import casa.*
 import colisionExtra.Colision
 class SlimeBasico inherits Colision{
 	const position 
@@ -34,7 +34,7 @@ class SlimeBasico inherits Colision{
   }
 
   method estaMuerto(){
-    if (vida <= 0 || position.x() <= 0){
+    if (vida <= 0 || position.x() < 0){
       game.removeVisual(self)
       generadorDeEnemigos.eliminarEnemigo(self)
       }
@@ -42,6 +42,10 @@ class SlimeBasico inherits Colision{
 
   }
 
+  method daniarCasa(){
+    casa.recibirDanio()
+    casa.terminarJuego()
+  }
 }
 
 //const jose = new SlimeBasico(position= new MutablePosition(x=10, y=0.randomUpTo(5).truncate(0)))
