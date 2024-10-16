@@ -2,10 +2,11 @@ import generadorDeEnemigos.*
 import adminProyectiles.*
 import casa.*
 import colisionExtra.Colision
+import puntaje.cantidadDeBajas
 class SlimeBasico inherits Colision{
 	const position 
   var property moverse = true /*va  a servir para hacer que deje de avanzar*/
-  var property vida = 200
+  var property vida = 100
   method position() = position
   var property imagen = "slime base.png"
   method image() = imagen
@@ -34,17 +35,22 @@ class SlimeBasico inherits Colision{
   }
 
   method estaMuerto(){
-    if (vida <= 0 || position.x() < 0){
+    if (self.position().x() < 0){
       casa.recibirDanio()
       casa.terminarJuego()
-  
       game.removeVisual(self)
       generadorDeEnemigos.eliminarEnemigo(self)
-      }
+    }
+    else if (self.vida()<=0){
+      cantidadDeBajas.agregarBaja()
+      game.removeVisual(self)
+      generadorDeEnemigos.eliminarEnemigo(self)
+      } 
     return vida <= 0 || position.x() <= 0
-
   }
 }
+
+
 
 //const jose = new SlimeBasico(position= new MutablePosition(x=10, y=0.randomUpTo(5).truncate(0)))
 

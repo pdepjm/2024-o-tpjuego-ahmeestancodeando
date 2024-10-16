@@ -31,3 +31,13 @@ method textColor() = "#FA0770"
 // Faltaria ver si se puede agrandar el tamaño de letra
 
 }
+
+object cantidadDeBajas {
+    var property bajas = 0
+    method position()= game.at(12,5) 
+    method agregarBaja() {
+        self.bajas(self.bajas()+1)
+        }
+    method text() = bajas.toString() + " slimes asesinados"
+    method textColor() = "#FA0770"
+}
