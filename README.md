@@ -21,7 +21,7 @@ liveshare: https://prod.liveshare.vsengsaas.visualstudio.com/join?CE16CF3EFD9938
 
 ![mago fuego](assets/magoFuego.png)
 
-![slimeBasico](assets/slime base.png)
+![slimeBasico](Cosas_Juego/slime_base.png)
 
 ## Reglas de Juego / Instrucciones
 
