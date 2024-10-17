@@ -1,6 +1,8 @@
 #  Magos Vs. Slime
-
 UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
+
+![portada](Cosas_juego/portada/PropuestaApha.jpg)
+
 
 liveshare: https://prod.liveshare.vsengsaas.visualstudio.com/join?CE16CF3EFD993880D845E814408D13B910ED
 
