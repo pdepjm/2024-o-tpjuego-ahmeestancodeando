@@ -1,30 +1,30 @@
 import generadorDeEnemigos.*
-import adminProyectiles.*
-import colisionExtra.*
-
-class ZombiesNormales inherits Colision{
+import casa.*
+import colisionExtra.Colision
+import puntaje.cantidadDeBajas
+class SlimeBasico inherits Colision{
 	const position 
-  var property moverse = true /*va  a servir para hacer que deje de avanzar*/
-  var property vida = 200
+  var property puedeMoverse = true /*va  a servir para hacer que deje de avanzar*/
+  var property vida = 100
   method position() = position
   var property imagen = "slime base.png"
   method image() = imagen
   method queSoy() = "zombie"
   method movete() {
     self.meFreno()
-    if(self.moverse())
+    if(self.puedeMoverse())
       return position.goLeft(1)
-    else self.moverse(false)
+    else self.puedeMoverse(false)
   }
 
   method meFreno(){
     const posicionEnFrente = game.at(self.position().x()-1, self.position().y())
     const objeto = self.colisionEnFrente(posicionEnFrente, "mago", "zombie")
     if (objeto.queSoy() != "nada"){ // solo frena cuando se choca contra un enemigo o una planta
-      self.moverse(false)
+      self.puedeMoverse(false)
       if (objeto.queSoy() == "mago") objeto.recibeDanio(danio)
     }
-    else{self.moverse(true)} //Agregue el self.moverse(true) para que cuando maten la planta se sigan moviendo
+    else{self.puedeMoverse(true)} //Agregue el self.moverse(true) para que cuando maten la planta se sigan moviendo
   }
 
   var property danio = 50
@@ -32,18 +32,25 @@ class ZombiesNormales inherits Colision{
   method recibeDanio(_danio) {
     self.vida(self.vida() - _danio)
   }
-  
-  method sigueVivo(){
-    if (vida <= 0 || position.x() <= 0){
+
+  method estaMuerto(){
+    if (self.position().x() < 0){
+      casa.recibirDanio()
+      casa.terminarJuego()
       game.removeVisual(self)
       generadorDeEnemigos.eliminarEnemigo(self)
-      }
-
-
+    }
+    else if (self.vida()<=0){
+      cantidadDeBajas.agregarBaja()
+      game.removeVisual(self)
+      generadorDeEnemigos.eliminarEnemigo(self)
+      } 
+    return vida <= 0 || position.x() <= 0
   }
-
 }
 
-//const jose = new ZombiesNormales(position= new MutablePosition(x=10, y=0.randomUpTo(5).truncate(0)))
 
-//const otroZombie = new ZombiesNormales(position= new MutablePosition(x=3, y=3))
+
+//const jose = new SlimeBasico(position= new MutablePosition(x=10, y=0.randomUpTo(5).truncate(0)))
+
+//const otroZombie = new SlimeBasico(position= new MutablePosition(x=3, y=3))

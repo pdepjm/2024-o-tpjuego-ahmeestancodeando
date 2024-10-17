@@ -19,7 +19,7 @@ object generadorDeEnemigos {
             var nombreParaEnemigo = self.nombre() /* esto esta hecho porque sino wollok se enoja, para poder crear un enemigo*/
 
             if (game.getObjectsIn(posicionTemporal).isEmpty()){ // el if es para que no genere enemigos sobre otros
-            nombreParaEnemigo = new ZombiesNormales(position = posicionTemporal )
+            nombreParaEnemigo = new SlimeBasico(position = posicionTemporal )
             enemigos.add(nombreParaEnemigo)/*se añade a la lista de enemigos activos*/
             self.sumarEnemigo()
             return game.addVisual(nombreParaEnemigo)/*muestra al enemigo en el juego*/
@@ -27,8 +27,8 @@ object generadorDeEnemigos {
         }
         return 0
     }
-    method siguenVivos(){
-        enemigos.forEach({enemigo => enemigo.sigueVivo()})
+    method estanMuertos(){
+        enemigos.forEach({enemigo => enemigo.estaMuerto()})
     }
 
     method moverEnemigos() {

@@ -60,7 +60,7 @@ object proyectilPenetrante{
 const imagen = "fedeValverde.png"
 const imagenDestruido = "fedeValverde.png"
 method imagen() {return imagen} 
-method imagenDestruido(){return imagenDestruido} 
+method imagenDestruido() {return imagenDestruido} 
 const danio = 30
 method danio() = danio
 

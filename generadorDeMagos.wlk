@@ -28,8 +28,8 @@ object generadorDeMagos {
         return game.addVisual(nombreParaMago)
     }
 
-    method siguenVivas(){
-        magos.forEach({mago => mago.sigueViva()})
+    method estanMuertos(){
+        magos.forEach({mago => mago.estaMuerto()})
     }
 
     method disparar() {
