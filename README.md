@@ -17,7 +17,11 @@ liveshare: https://prod.liveshare.vsengsaas.visualstudio.com/join?CE16CF3EFD9938
 
 ## Capturas 
 
-![pepita](assets/golondrina.png)
+![captura](Cosas_juego/capturaAlpha.png)
+
+![mago fuego](assets/magoFuego.png)
+
+![slimeBasico](assets/slime base.png)
 
 ## Reglas de Juego / Instrucciones
 
@@ -25,5 +29,10 @@ liveshare: https://prod.liveshare.vsengsaas.visualstudio.com/join?CE16CF3EFD9938
 
 ## Controles:
 
-- `W` para...
-
+- `A` para ir a la izquierda en la tienda
+- `D` para ir a la derecha en la tienda
+- `ARROW_UP` para mover arriba cursor
+- `ARROW_LEFT` para mover izquierda cursor
+- `ARROW_RIGHT` para mover derecha cursor
+- `ARROW_DOWN` para mover abajo cursor
+- `ENTER` para poner planta
