@@ -1,4 +1,4 @@
-#  (reemplazar nombre de juego acá) 
+#  Magos Vs. Slime
 
 UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 
@@ -6,8 +6,11 @@ liveshare: https://prod.liveshare.vsengsaas.visualstudio.com/join?CE16CF3EFD9938
 
 ## Equipo de desarrollo: 
 
-- completar...
-- completar...
+- Echeverría, Manuel
+- Marek, Nahuel
+- Marzocca, Damián
+- Schkurko, Nicolas
+- Vallone, Matías
  
 
 ## Capturas 
