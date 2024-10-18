@@ -10,7 +10,7 @@ Magos: Encargadas de defender la base, su vida, daño y atributos varían según
     -Mago Healer: Aumenta la generación de dinero, $10 por mago. 100 puntos de vida, no realiza daño a enemigos.
     -Mago de Hielo: Lanza proyectiles penetrantes con 30 puntos de daño que continúa dañando enemigos hasta alcanzar el final del mapa.
     -Mago Piedra: Unida con 300 puntos de vida, no realiza daño a enemigos.
-    -Mago Patapum: Al entrar en contacto con un slime, lo destruye y al mismo.
+    -Mago Patapum: Al entrar en contacto con un slime, explota.
 
 Puntos: Utilizado para comprar magos, su generación es automática y la cantidad dependerá de la cantidad de magos Healer que haya en el campo. La producción base es de $10/s.
 
