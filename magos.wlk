@@ -38,13 +38,13 @@ class MagoFuego inherits Mago(vida=100,imagen="magoFuego.png"){
   
 }
 
-class MagoHealer inherits Mago(vida=100, imagen="magoHealer.png") {
+class MagoIrlandes inherits Mago(vida=100, imagen="magoHealer.png") {
  
   override method estaMuerto(){
 
     if (vida <= 0 && game.hasVisual(self)){ // agregue el game.has visual porque sino restaba girasoles hasta que lo elimine el garbage collector
       game.removeVisual(self)
-      puntaje.quitarMagoHealer()
+      puntaje.quitarMagoIrlandes()
       generadorDeMagos.eliminarMago(self)
     }
     return vida <= 0
@@ -131,14 +131,14 @@ override method generarMago(posicionMago){
 
 }
 
-object magoHealerTienda inherits MagoTienda(position = game.at(2,5), imagen="magoHealer.png", costo = 75) {
+object magoIrlandesTienda inherits MagoTienda(position = game.at(2,5), imagen="magoHealer.png", costo = 75) {
 
 override method generarMago(posicionMago) {
     if(puntaje.puntos() < costo){
      throw new DomainException(message="No hay suficiente dinero para comprar esta Mago")
     }
     puntaje.restarPuntos(costo)
-    return new MagoHealer(position = posicionMago)
+    return new MagoIrlandes(position = posicionMago)
    }
 
 }

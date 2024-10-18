@@ -13,7 +13,7 @@ object menu {
   method accion() {
     keyboard.d().onPressDo({ self.moverseDerecha() })
     keyboard.a().onPressDo({ self.moverseIzquierda() })
-    keyboard.enter().onPressDo({ self.generarMago2() })
+    keyboard.enter().onPressDo({ self.generarMago() })
     // cambiar aca para cambiar forma de generar enemigos
   }
   
@@ -22,20 +22,12 @@ object menu {
   method moverseIzquierda() = if (self.position().x() > 0) position.goLeft(1)
   
   method generarMago() {
-    const magoAGenerar = game.colliders(self)
-    // no usamos uniqueColliders porque tira error si no hay ninguna
-    const magoSeleccionado = magoAGenerar.first().tipo()
-    const posicion = game.at(cursor.position().x(), cursor.position().y())
-    generadorDeMagos.generarMago2(magoSeleccionado, posicion)
-  }
-  
-  method generarMago2() {
     const magoAGenerar = game.colliders(self) // no usamos uniqueColliders porque tira error si no hay ninguna
     const hayMago = game.colliders(cursor).filter{objeto => objeto.queSoy() == "mago"}
     if (!magoAGenerar.isEmpty() && hayMago.isEmpty()){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
     const magoSeleccionado = magoAGenerar.first()
     const posicion = game.at(cursor.position().x(), cursor.position().y())
-    generadorDeMagos.generarMago2(magoSeleccionado, posicion)
+    generadorDeMagos.generarMago(magoSeleccionado, posicion)
     }
    
   }
@@ -51,7 +43,7 @@ object menu {
     game.addVisual(magoFuegoTienda)
     //const girasolTIenda = new Girasol(position = game.at(2,5))
     
-    game.addVisual(magoHealerTienda)
+    game.addVisual(magoIrlandesTienda)
     // const cactusTienda = new Cactus(position = game.at(3,5))
     
     game.addVisual(magoHieloTienda)

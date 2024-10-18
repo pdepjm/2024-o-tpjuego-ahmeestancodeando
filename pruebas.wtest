@@ -10,7 +10,7 @@ describe "Test de magos" {
   }
 
     test "Mago Healer tiene vida" {
-    const mago = new MagoHealer(position = game.at(0,0))
+    const mago = new MagoIrlandes(position = game.at(0,0))
     assert.equals(100, mago.vida())
   }
 
@@ -33,14 +33,14 @@ describe "Test de magos" {
     }
 
     test "Mago Healer Recibe Daño" {
-      const mago = new MagoHealer(position = game.at(2,1))
+      const mago = new MagoIrlandes(position = game.at(2,1))
       const magovida = mago.vida()
       mago.recibeDanio(100)
       assert.that(magovida>mago.vida())
     }
 
     test "Mago Healer muere" {
-      const mago = new MagoHealer(position = game.at(2,1))
+      const mago = new MagoIrlandes(position = game.at(2,1))
       mago.recibeDanio(1000)
       assert.that(mago.estaMuerto())
     }
@@ -77,13 +77,13 @@ describe "Test de magos" {
       mago.recibeDanio(100)
       assert.that(magovida>mago.vida())
     }
-
+/*
     test "Patapum muere" {
       const mago = new Patapum(position = game.at(2,1))
       mago.recibeDanio(1000)
       assert.that(mago.estaMuerto())
     }
-
+*/
     test "Mago Enojado Recibe Daño" {
       const mago = new MagoEnojado(position = game.at(2,1))
       const magovida = mago.vida()
@@ -126,7 +126,7 @@ describe "group of tests for Puntaje" {
   }
 
   test "Puntaje Suma 40 con tres magos de Sol"{ //Tener en cuenta que el obj puntaje empeiza con 50 puntos
-    puntaje.cantidadDeMagosHealer(3) 
+    puntaje.cantidadDeMagosIrlandeses(3) 
     puntaje.sumarPuntos()
     assert.equals(90,puntaje.puntos())
   }

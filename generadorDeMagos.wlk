@@ -18,7 +18,7 @@ object generadorDeMagos {
         nombreMago+=1
         }
         
-    method generarMago2(magoSeleccionado,posicion){ // metodo para no usar los if anidados
+    method generarMago(magoSeleccionado,posicion){ // metodo para no usar los if anidados
         self.magoAGenerar(magoSeleccionado) //esto para cambiar la mago segun lo que se elija
         var nombreParaMago = self.nombre() 
         nombreParaMago = self.magoAGenerar().generarMago(posicion) //lama al objeto de la tienda para saber como generar una mago
