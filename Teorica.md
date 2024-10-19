@@ -22,3 +22,7 @@ Otro ejemplo es el método disparar() que utilizan los magos. Todos los magos ti
 Además, se utiliza ampliamente la comunicación entre los distintos objetos, como es por ejemplo el caso del menú, el cual en base a los inputs que realice el jugador, enviará al objeto generadorDeEnemigos que clase de enemigo deberá generar y en qué posición.
 
 Se utilizan clases para, por ejemplo, instanciar slimes, ya que tendremos varios objetos slime (identicos) que serán generados en el transcurso del juego, por lo que generadorDeEnemigos instanciará los slimes para crearlos cada cierto tiempo
+
+Diagrama de clases provisional
+![DiagramaConPatatum](https://github.com/user-attachments/assets/28ff4d1c-c1ca-4efe-9f86-ad486d8cb432)
+
