@@ -77,22 +77,15 @@ describe "Test de magos" {
       mago.recibeDanio(100)
       assert.that(magovida>mago.vida())
     }
-/*
-    test "Patapum muere" {
-      const mago = new Patapum(position = game.at(2,1))
-      mago.recibeDanio(1000)
-      assert.that(mago.estaMuerto())
-    }
-*/
-    test "Mago Enojado Recibe Daño" {
-      const mago = new MagoEnojado(position = game.at(2,1))
+    test "Mago Explosivo Recibe Daño" {
+      const mago = new MagoExplosivo(position = game.at(2,1))
       const magovida = mago.vida()
       mago.recibeDanio(100)
       assert.that(magovida>mago.vida())
     }
 
-    test "Mago Enojado" {
-      const mago = new MagoEnojado(position = game.at(2,1))
+    test "Mago Explosivo" {
+      const mago = new MagoExplosivo(position = game.at(2,1))
       mago.recibeDanio(1000)
       assert.that(mago.estaMuerto())
     }

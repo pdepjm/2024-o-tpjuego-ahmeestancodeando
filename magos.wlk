@@ -2,8 +2,9 @@ import generadorDeMagos.*
 import puntaje.*
 import proyectil.*
 import adminProyectiles.*
+import colisionExtra.*
 
-class Mago{
+class Mago inherits Colision{
   const position
   var property vida
   var property imagen
@@ -24,7 +25,9 @@ class Mago{
       game.removeVisual(self)
       generadorDeMagos.eliminarMago(self)
     }
+
     return vida <= 0
+   // return vida <= 0
   }
 
 }
@@ -42,12 +45,14 @@ class MagoIrlandes inherits Mago(vida=100, imagen="magoHealer.png") {
  
   override method estaMuerto(){
 
-    if (vida <= 0 && game.hasVisual(self)){ // agregue el game.has visual porque sino restaba girasoles hasta que lo elimine el garbage collector
+  if (vida <= 0 && game.hasVisual(self)){ // agregue el game.has visual porque sino restaba girasoles hasta que lo elimine el garbage collector
       game.removeVisual(self)
       puntaje.quitarMagoIrlandes()
       generadorDeMagos.eliminarMago(self)
     }
-    return vida <= 0
+
+     return vida <= 0
+    //return vida <= 0
   }
   
 }
@@ -65,34 +70,24 @@ class MagoPiedra inherits Mago(vida=300,imagen="magoPiedra.png") {
   //nota de nico: es una nuez >:(
 }
 
-/*
-class Patapum {
-  const position
-  const property tipo = "patapum"
-  var property vida = 1
-  var property imagen = "magoEnojado.png" //hacer mago musulman
-  
-  method position() = position
-  
-  method image() = imagen
-  
-  method recibeDanio(_danio) {
-    self.vida(self.vida() - _danio)
-  }
+class MagoExplosivo inherits Mago(vida=30, imagen="magoExplosivo.png") {
 
-  method estaMuerto(){
-    if (vida <= 0 && game.hasVisual(self)) {
-      game.removeVisual(self)
-      generadorDeMagos.eliminarMago(self)
-    }
-    return vida <= 0
-  }
-  
-  method queSoy() = "mago"
+override method estaMuerto(){
+
+    if (vida <= 0 && game.hasVisual(self)){ // agregue el game.has visual porque sino restaba girasoles hasta que lo elimine el garbage collector
+      const posicionEnFrente = game.at(position.x() + 1 ,position.y())
+      const enemigoEnFrente = self.colisionEnFrente(posicionEnFrente, "zombie")
+      self.imagen("sss.gif")
+      game.schedule(200, {
+        game.removeVisual(self)
+        enemigoEnFrente.recibeDanio(1000)
+        generadorDeMagos.eliminarMago(self)
+        })
+    } 
+
+     return vida <= 0
 }
-*/
-
-class MagoEnojado inherits Mago(vida=125, imagen="magoEnojado") {}
+}
 
 
 class MagoTienda{
@@ -155,7 +150,7 @@ override method generarMago(posicionMago){
 
 }
 
-object magoEnojadoTienda inherits MagoTienda(position = game.at(4,5), imagen="magoEnojado.png", costo = 200){
+object magoExplosivoTienda inherits MagoTienda(position = game.at(4,5), imagen="magoExplosivo.png", costo = 200){
 
   
 override method generarMago(posicionMago){
@@ -163,7 +158,7 @@ override method generarMago(posicionMago){
      throw new DomainException(message="No hay suficiente dinero para comprar esta Mago")
     }
     puntaje.restarPuntos(costo)
-    return new MagoEnojado(position = posicionMago)
+    return new MagoExplosivo(position = posicionMago)
   }
  
 }

@@ -6,9 +6,8 @@ class Proyectil inherits Colision{
     const tipo
     const position = new MutablePosition()
     method position() = position
-    const property danio = tipo.danio()
-    var imagen = tipo.imagen()
-    
+    const imagen = tipo.imagen()
+    method image() = imagen
     method mover(){
       position.goRight(1)
         if (position.x() >= 12){
@@ -19,30 +18,30 @@ class Proyectil inherits Colision{
     method queSoy() = "proyectil"
    
     method colisionar(){
+      var danio = tipo.danio()
       const objetoEnMiCelda = self.colisionEnFrente(self.position(),"zombie")
       const posicionEnFrente = game.at(position.x() + 1 ,position.y())
       const objetoEnFrente = self.colisionEnFrente(posicionEnFrente, "zombie")
       if (objetoEnMiCelda.queSoy() == "zombie") {
-      imagen = tipo.imagenDestruido()
       objetoEnMiCelda.recibeDanio(danio)
       self.destruirse()
+      
     } else if (objetoEnFrente.queSoy() == "zombie"){
-      imagen = tipo.imagenDestruido()
       objetoEnFrente.recibeDanio(danio)
       self.destruirse()
     }
+    danio = 0
     }
 
 
     method destruirse(){
      if (tipo.destruirse()){
-        
-        //game.removeTickEvent("destruirBoladefuego")
-        game.schedule(180,{game.removeVisual(self)  administradorDeProyectiles.destruirProyectil(self)  })
+        game.removeVisual(self)
+        administradorDeProyectiles.destruirProyectil(self)
         }
     }
 
-    method image() = imagen
+
 }
 
 object proyectilNormal{
@@ -50,7 +49,7 @@ const imagen = "bolaDeFuego2.png"
 const imagenDestruido = "bolaDeFuegoDestruida.gif"
 method imagen() {return imagen} 
 method imagenDestruido() {return imagenDestruido} 
-const danio = 75
+const danio = 50
 method danio() = danio
 
 method destruirse() = true
@@ -61,7 +60,7 @@ const imagen = "fedeValverde.png"
 const imagenDestruido = "fedeValverde.png"
 method imagen() {return imagen} 
 method imagenDestruido() {return imagenDestruido} 
-const danio = 30
+const danio = 25
 method danio() = danio
 
 method destruirse() = false

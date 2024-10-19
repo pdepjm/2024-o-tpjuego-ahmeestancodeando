@@ -46,7 +46,7 @@ program cursorGame {
 	game.onTick(500, "aumentar dinerro", {puntaje.sumarPuntos()})
 	game.onTick(3000, "disparar", {generadorDeMagos.disparar()})
 	game.onTick(1000, "moverDisparos", {administradorDeProyectiles.moverProyectiles()})
-	game.onTick(250, "impactarDisparos", {administradorDeProyectiles.impactarProyectiles()})
+	game.onTick(1000, "impactarDisparos", {administradorDeProyectiles.impactarProyectiles()})
 
 
 

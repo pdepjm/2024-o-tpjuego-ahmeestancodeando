@@ -49,6 +49,6 @@ object menu {
     game.addVisual(magoHieloTienda)
     //const zapalloTienda = new ZapalloEnojado(position = game.at(4,5))
     
-    game.addVisual(magoEnojadoTienda)
+    game.addVisual(magoExplosivoTienda)
   }
 }
