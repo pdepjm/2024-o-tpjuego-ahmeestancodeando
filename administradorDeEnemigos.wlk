@@ -1,7 +1,7 @@
 import game.*
 import zombie.*
 
-object generadorDeEnemigos {
+object administradorDeEnemigos {
     var nombreEnemigo = 2000 /*asigno el nombre  a los enemigos que voy creando segun numeros, asi puedo crear nombres nuevos
                             automaticamente*/
     

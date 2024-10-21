@@ -1,4 +1,4 @@
-import generadorDeMagos.*
+import administradorDeMagos.*
 import puntaje.*
 import proyectil.*
 import adminProyectiles.*
@@ -23,7 +23,7 @@ class Mago inherits Colision{
   method estaMuerto(){
     if (vida <= 0 && game.hasVisual(self)) {
       game.removeVisual(self)
-      generadorDeMagos.eliminarMago(self)
+      administradorDeMagos.eliminarMago(self)
     }
 
     return vida <= 0
@@ -48,7 +48,7 @@ class MagoIrlandes inherits Mago(vida=100, imagen="magoHealer.png") {
   if (vida <= 0 && game.hasVisual(self)){ // agregue el game.has visual porque sino restaba girasoles hasta que lo elimine el garbage collector
       game.removeVisual(self)
       puntaje.quitarMagoIrlandes()
-      generadorDeMagos.eliminarMago(self)
+      administradorDeMagos.eliminarMago(self)
     }
 
      return vida <= 0
@@ -81,7 +81,7 @@ override method estaMuerto(){
       game.schedule(200, {
         game.removeVisual(self)
         enemigoEnFrente.recibeDanio(1000)
-        generadorDeMagos.eliminarMago(self)
+        administradorDeMagos.eliminarMago(self)
         })
     } 
 

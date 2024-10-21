@@ -1,4 +1,4 @@
-#  Magos Vs. Slime
+#  Magos Vs. Slimes
 UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 
 ![portada](Cosas_juego/portada/PropuestaApha.jpg)
