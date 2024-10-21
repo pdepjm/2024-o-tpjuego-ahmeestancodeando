@@ -1,4 +1,4 @@
-import generadorDeEnemigos.*
+import administradorDeEnemigos.*
 import casa.*
 import colisionExtra.Colision
 import puntaje.cantidadDeBajas
@@ -38,12 +38,12 @@ class SlimeBasico inherits Colision{
       casa.recibirDanio()
       casa.terminarJuego()
       game.removeVisual(self)
-      generadorDeEnemigos.eliminarEnemigo(self)
+      administradorDeEnemigos.eliminarEnemigo(self)
     }
     else if (self.vida()<=0){
       cantidadDeBajas.agregarBaja()
       game.removeVisual(self)
-      generadorDeEnemigos.eliminarEnemigo(self)
+      administradorDeEnemigos.eliminarEnemigo(self)
       } 
     return vida <= 0 || position.x() <= 0
   }

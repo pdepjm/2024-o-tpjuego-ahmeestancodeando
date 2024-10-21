@@ -1,12 +1,12 @@
 import adminProyectiles.*
-import generadorDeMagos.*
+import administradorDeMagos.*
 import wollok.game.*
 
 import cursor.*
 import zombie.*
 import casa.*
 import menu.*
-import generadorDeEnemigos.*
+import administradorDeEnemigos.*
 import puntaje.*
 
 program cursorGame {
@@ -27,30 +27,30 @@ program cursorGame {
 
 
 	// metodos generador de enemigos
-	game.onTick(3000, "generar nuevo Enemigo", {generadorDeEnemigos.sumarEnemigo()
-	generadorDeEnemigos.generarEnemigo(1)})/*suma 1 a nombreEnemigo para poder crear el siguiente, y genera un enemigo,
+	game.onTick(3000, "generar nuevo Enemigo", {administradorDeEnemigos.sumarEnemigo()
+	administradorDeEnemigos.generarEnemigo(1)})/*suma 1 a nombreEnemigo para poder crear el siguiente, y genera un enemigo,
 		se hace en este orden ya que si se crea el primer enemigo, luego un segundo, y antes de que que se genere el
 		tercero el jugador elimina el primero, habra dos enemigos con el nombre "2" */
 	
-	game.onTick(1500, "mover enemigo", {generadorDeEnemigos.moverEnemigos()})/*cada cierto tiempo hace que se muevan
+	game.onTick(1500, "mover enemigo", {administradorDeEnemigos.moverEnemigos()})/*cada cierto tiempo hace que se muevan
 																			los enemigos*/
-	game.onTick(1000, "matar enemigos", {generadorDeEnemigos.estanMuertos()})
+	game.onTick(1000, "matar enemigos", {administradorDeEnemigos.estanMuertos()})
 	
 	
 	//metodos generador de plantas
-	game.onTick(1000, "matar plantas", {generadorDeMagos.estanMuertos()})
+	game.onTick(1000, "matar plantas", {administradorDeMagos.estanMuertos()})
 	
 
 	game.start()
 
 	game.onTick(500, "aumentar dinerro", {puntaje.sumarPuntos()})
-	game.onTick(3000, "disparar", {generadorDeMagos.disparar()})
+	game.onTick(3000, "disparar", {administradorDeMagos.disparar()})
 	game.onTick(1000, "moverDisparos", {administradorDeProyectiles.moverProyectiles()})
 	game.onTick(1000, "impactarDisparos", {administradorDeProyectiles.impactarProyectiles()})
 
 
 
-//game.schedule(6000,{generadorDeMagos.disparar()}) esto estaba para probar los tiros perforantes
+//game.schedule(6000,{administradorDeMagos.disparar()}) esto estaba para probar los tiros perforantes
 /*
   const musica = game.sound("musica.mp3")
   musica.shouldLoop(trued)
