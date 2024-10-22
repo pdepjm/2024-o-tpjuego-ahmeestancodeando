@@ -2,7 +2,6 @@ import wollok.game.*
 
 object cursor {
   var property position = new MutablePosition(x=7, y=3)
-  method queSoy() = "cursor"
 
   method image() = "marcosRojo.png"
   
@@ -17,5 +16,10 @@ object cursor {
   method moverseIzquierda() = if (self.position().x()>1) position.goLeft(1)
   method moverseArriba() = if (self.position().y()<4) position.goUp(1)
   method moverseAbajo() = if (self.position().y()>0) position.goDown(1)
+
+  method frenarEnemigo() = false
+  method recibeDanioEnemigo(_danio){return false}
+  method recibeDanioProyectil(_danio){return false}
+  method recibeDanioMago(_danio){return false}
 
 }

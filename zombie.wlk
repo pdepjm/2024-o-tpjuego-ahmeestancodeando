@@ -1,15 +1,14 @@
 import administradorDeEnemigos.*
 import casa.*
-import colisionExtra.Colision
 import puntaje.cantidadDeBajas
-class SlimeBasico inherits Colision{
+class SlimeBasico{
 	const position 
   var property puedeMoverse = true /*va  a servir para hacer que deje de avanzar*/
   var property vida = 100
+  method frenarEnemigo() = true
   method position() = position
   var property imagen = "slime base.png"
   method image() = imagen
-  method queSoy() = "zombie"
   method movete() {
     self.meFreno()
     if(self.puedeMoverse())
@@ -19,18 +18,21 @@ class SlimeBasico inherits Colision{
 
   method meFreno(){
     const posicionEnFrente = game.at(self.position().x()-1, self.position().y())
-    const objeto = self.colisionEnFrente(posicionEnFrente, "mago", "zombie")
-    if (objeto.queSoy() != "nada"){ // solo frena cuando se choca contra un enemigo o una planta
+    const objetoEnCeldaEnFrente = game.getObjectsIn(posicionEnFrente)
+    if (objetoEnCeldaEnFrente.any({objeto => objeto.frenarEnemigo()})){ // solo frena cuando se choca contra un enemigo o una planta
       self.puedeMoverse(false)
-      if (objeto.queSoy() == "mago") objeto.recibeDanio(danio)
+      objetoEnCeldaEnFrente.map({objeto => objeto.recibeDanioMago(danio)})
     }
     else{self.puedeMoverse(true)} //Agregue el self.moverse(true) para que cuando maten la planta se sigan moviendo
   }
 
   var property danio = 50
 
-  method recibeDanio(_danio) {
+  method recibeDanioMago(_danio){return false}
+  method recibeDanioProyectil(_danio){return false}
+  method recibeDanioEnemigo(_danio){
     self.vida(self.vida() - _danio)
+    return true
   }
 
   method estaMuerto(){
@@ -54,3 +56,5 @@ class SlimeBasico inherits Colision{
 //const jose = new SlimeBasico(position= new MutablePosition(x=10, y=0.randomUpTo(5).truncate(0)))
 
 //const otroZombie = new SlimeBasico(position= new MutablePosition(x=3, y=3))
+
+//const grupo = [jose,otroZombie]

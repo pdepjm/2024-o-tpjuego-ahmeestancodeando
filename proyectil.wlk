@@ -1,13 +1,18 @@
 import adminProyectiles.*
 import game.*
-import colisionExtra.*
 
-class Proyectil inherits Colision{
+class Proyectil{
     const tipo
     const position = new MutablePosition()
-    method position() = position
+    const danio = tipo.danio()
     const imagen = tipo.imagen()
+    
+    method position() = position
+
     method image() = imagen
+
+    method frenarEnemigo() = false
+
     method mover(){
       position.goRight(1)
         if (position.x() >= 12){
@@ -15,24 +20,23 @@ class Proyectil inherits Colision{
         administradorDeProyectiles.destruirProyectil(self)
       }
     }
-    method queSoy() = "proyectil"
    
     method colisionar(){
-      var danio = tipo.danio()
-      const objetoEnMiCelda = self.colisionEnFrente(self.position(),"zombie")
+      const objetoEnMiCelda = game.getObjectsIn(position)
       const posicionEnFrente = game.at(position.x() + 1 ,position.y())
-      const objetoEnFrente = self.colisionEnFrente(posicionEnFrente, "zombie")
-      if (objetoEnMiCelda.queSoy() == "zombie") {
-      objetoEnMiCelda.recibeDanio(danio)
+      const objetoEnFrente = game.getObjectsIn(posicionEnFrente)
+
+    const choco1 = objetoEnFrente.map({objeto => objeto.recibeDanioEnemigo(danio)})
+    const choco2 = objetoEnMiCelda.map({objeto => objeto.recibeDanioEnemigo(danio)})
+
+    if ((!choco1.isEmpty() && choco1.contains(true)) || (!choco2.isEmpty() && choco2.contains(true))){
       self.destruirse()
-      
-    } else if (objetoEnFrente.queSoy() == "zombie"){
-      objetoEnFrente.recibeDanio(danio)
-      self.destruirse()
-    }
-    danio = 0
+    }  
     }
 
+  method recibeDanioEnemigo(_danio){return false}
+  method recibeDanioProyectil(_danio){return false}
+  method recibeDanioMago(_danio){return false}
 
     method destruirse(){
      if (tipo.destruirse()){

@@ -1,13 +1,5 @@
-import adminProyectiles.*
-import administradorDeMagos.*
 import wollok.game.*
-
-import cursor.*
-import zombie.*
-import casa.*
-import menu.*
-import administradorDeEnemigos.*
-import puntaje.*
+import iniciarJuego.configuracion
 
 program cursorGame {
 	game.boardGround("fondo_beta.png")
@@ -16,45 +8,10 @@ program cursorGame {
 	game.width(15)
 	game.cellSize(100)
 	
-	/*game.addVisual(Fantasmas)*/
-	game.addVisual(cursor)
-	game.addVisual(menu)
-	game.addVisual(puntaje)
-	menu.accion()
-	cursor.accion()
-	menu.iniciarTienda()
-	game.addVisual(cantidadDeBajas)
-
-
-	// metodos generador de enemigos
-	game.onTick(3000, "generar nuevo Enemigo", {administradorDeEnemigos.sumarEnemigo()
-	administradorDeEnemigos.generarEnemigo(1)})/*suma 1 a nombreEnemigo para poder crear el siguiente, y genera un enemigo,
-		se hace en este orden ya que si se crea el primer enemigo, luego un segundo, y antes de que que se genere el
-		tercero el jugador elimina el primero, habra dos enemigos con el nombre "2" */
-	
-	game.onTick(1500, "mover enemigo", {administradorDeEnemigos.moverEnemigos()})/*cada cierto tiempo hace que se muevan
-																			los enemigos*/
-	game.onTick(1000, "matar enemigos", {administradorDeEnemigos.estanMuertos()})
-	
-	
-	//metodos generador de plantas
-	game.onTick(1000, "matar plantas", {administradorDeMagos.estanMuertos()})
-	
-
 	game.start()
 
-	game.onTick(500, "aumentar dinerro", {puntaje.sumarPuntos()})
-	game.onTick(3000, "disparar", {administradorDeMagos.disparar()})
-	game.onTick(1000, "moverDisparos", {administradorDeProyectiles.moverProyectiles()})
-	game.onTick(1000, "impactarDisparos", {administradorDeProyectiles.impactarProyectiles()})
-
-
-
-//game.schedule(6000,{administradorDeMagos.disparar()}) esto estaba para probar los tiros perforantes
-/*
-  const musica = game.sound("musica.mp3")
-  musica.shouldLoop(trued)
-  game.schedule(100,{musica.play()})
-  musica.volume(0.4) */
+	configuracion.agregarVisuals()
+	configuracion.crearTicks()
+	configuracion.iniciarMusica()
 }
 

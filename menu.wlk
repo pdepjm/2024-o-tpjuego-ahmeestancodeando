@@ -23,7 +23,7 @@ object menu {
   
   method generarMago() {
     const magoAGenerar = game.colliders(self) // no usamos uniqueColliders porque tira error si no hay ninguna
-    const hayMago = game.colliders(cursor).filter{objeto => objeto.queSoy() == "mago"}
+    const hayMago = game.colliders(cursor)
     if (!magoAGenerar.isEmpty() && hayMago.isEmpty()){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
     const magoSeleccionado = magoAGenerar.first()
     const posicion = game.at(cursor.position().x(), cursor.position().y())
