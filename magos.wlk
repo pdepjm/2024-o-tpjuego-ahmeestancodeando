@@ -3,7 +3,7 @@ import puntaje.*
 import proyectil.*
 import adminProyectiles.*
 import colisionExtra.*
-
+import zombie.*
 class Mago inherits Colision{
   const position
   var property vida
@@ -67,7 +67,7 @@ class MagoHielo inherits Mago(vida=100,imagen="magoHielo.png") {
 }
 
 class MagoPiedra inherits Mago(vida=300,imagen="magoPiedra.png") {
-  //nota de nico: es una nuez >:(
+  //nota de nico: es una nuez >:ddd(
 }
 
 class MagoExplosivo inherits Mago(vida=30, imagen="magoExplosivo.png") {
@@ -76,7 +76,9 @@ override method estaMuerto(){
 
     if (vida <= 0 && game.hasVisual(self)){ // agregue el game.has visual porque sino restaba girasoles hasta que lo elimine el garbage collector
       const posicionEnFrente = game.at(position.x() + 1 ,position.y())
-      const enemigoEnFrente = self.colisionEnFrente(posicionEnFrente, "zombie")
+      const enemigoEnFrente = game.getObjectsIn(posicionEnFrente).filter({objeto => objeto.className() == "SlimeBasico"})
+      
+  
       self.imagen("sss.gif")
       game.schedule(200, {
         game.removeVisual(self)
