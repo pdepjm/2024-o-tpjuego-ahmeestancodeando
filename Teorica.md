@@ -24,5 +24,6 @@ Además, se utiliza ampliamente la comunicación entre los distintos objetos, co
 Se utilizan clases para, por ejemplo, instanciar slimes, ya que tendremos varios objetos slime (identicos) que serán generados en el transcurso del juego, por lo que generadorDeEnemigos instanciará los slimes para crearlos cada cierto tiempo
 
 Diagrama de clases provisional
-![DiagramaConPatatum](https://github.com/user-attachments/assets/28ff4d1c-c1ca-4efe-9f86-ad486d8cb432)
+![diagramaDeClases](https://github.com/user-attachments/assets/b5a81f7f-94bf-4761-b53e-73db9ceab964)
+
 
