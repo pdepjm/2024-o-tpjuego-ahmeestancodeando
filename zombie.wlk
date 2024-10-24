@@ -29,7 +29,6 @@ class SlimeBasico{
   var property danio = 50
 
   method recibeDanioMago(_danio){return false}
-  method recibeDanioProyectil(_danio){return false}
   method recibeDanioEnemigo(_danio){
     self.vida(self.vida() - _danio)
     return true

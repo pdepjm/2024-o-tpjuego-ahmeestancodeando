@@ -34,9 +34,8 @@ class Proyectil{
     }  
     }
 
-  method recibeDanioEnemigo(_danio){return false}
-  method recibeDanioProyectil(_danio){return false}
-  method recibeDanioMago(_danio){return false}
+    method recibeDanioEnemigo(_danio){return false}
+    method recibeDanioMago(_danio){return false}
 
     method destruirse(){
      if (tipo.destruirse()){

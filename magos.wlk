@@ -18,7 +18,6 @@ class Mago {
   method disparar(){}
   
   method recibeDanioEnemigo(_danio){return false}
-  method recibeDanioProyectil(_danio){return false}
   method recibeDanioMago(_danio) {
     self.vida(self.vida() - _danio)
     return false
