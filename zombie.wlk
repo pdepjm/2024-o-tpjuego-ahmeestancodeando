@@ -7,8 +7,10 @@ class SlimeBasico{
   var property vida = 100
   method frenarEnemigo() = true
   method position() = position
-  var property imagen = "slime base.png"
+  var property imagen = "s.slimeBase.png"
   method image() = imagen
+  var property danio = 50
+
   method movete() {
     self.meFreno()
     if(self.puedeMoverse())
@@ -26,7 +28,7 @@ class SlimeBasico{
     else{self.puedeMoverse(true)} //Agregue el self.moverse(true) para que cuando maten la planta se sigan moviendo
   }
 
-  var property danio = 50
+ 
 
   method recibeDanioMago(_danio){return false}
   method recibeDanioEnemigo(_danio){
@@ -50,7 +52,11 @@ class SlimeBasico{
   }
 }
 
+class SlimeFuerte inherits SlimeBasico(danio=100,vida=50,imagen="s.slimeBase.png"){}
 
+class SlimeDefensivo inherits SlimeBasico(danio=25,vida=150,imagen="s.slimeBase.png"){}
+
+class SlimeBlessed inherits SlimeBasico(danio=150,vida=250,imagen="s.slimeBase.png"){}
 
 //const jose = new SlimeBasico(position= new MutablePosition(x=10, y=0.randomUpTo(5).truncate(0)))
 

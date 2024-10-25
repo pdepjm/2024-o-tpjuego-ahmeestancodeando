@@ -48,8 +48,8 @@ class Proyectil{
 }
 
 object proyectilNormal{
-const imagen = "bolaDeFuego2.png"
-const imagenDestruido = "bolaDeFuegoDestruida.gif"
+const imagen = "p.bolaDeFuego.png"
+const imagenDestruido = "p.bolaDeFuegoDestruida.gif"
 method imagen() {return imagen} 
 method imagenDestruido() {return imagenDestruido} 
 const danio = 50
@@ -59,8 +59,8 @@ method destruirse() = true
 }
 
 object proyectilPenetrante{
-const imagen = "fedeValverde.png"
-const imagenDestruido = "fedeValverde.png"
+const imagen = "p.proyectilHielo.png"
+const imagenDestruido = "p.proyectilHieloDestuido.png"
 method imagen() {return imagen} 
 method imagenDestruido() {return imagenDestruido} 
 const danio = 25

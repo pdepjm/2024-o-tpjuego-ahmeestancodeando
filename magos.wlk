@@ -37,6 +37,9 @@ class Mago {
 class MagoFuego inherits Mago(vida=100,imagen="magoFuego.png"){
 
   override method disparar(){
+    const pop = game.sound("m.pop.mp3")
+    game.schedule(50,{pop.play()})
+    pop.volume(0.4) 
     const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
     administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilNormal)
   }
@@ -59,6 +62,9 @@ class MagoIrlandes inherits Mago(vida=100, imagen="magoHealer.png") {
 class MagoHielo inherits Mago(vida=100,imagen="magoHielo.png") {
 
   override method disparar(){
+    const hielo = game.sound("m.hielo.mp3")
+    game.schedule(50,{hielo.play()})
+    hielo.volume(0.4) 
     const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
     administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilPenetrante)
   }
@@ -73,9 +79,12 @@ override method estaMuerto(){
     if (vida <= 0 && game.hasVisual(self)){ // agregue el game.has visual porque sino restaba girasoles hasta que lo elimine el garbage collector
       const posicionEnFrente = game.at(position.x() + 1 ,position.y())
       const enemigoEnFrente = game.getObjectsIn(posicionEnFrente)
-      self.imagen("sss.gif")
+      self.imagen("p.allahu.gif")
+      const explosion = game.sound("m.explosion.mp3")
+      game.schedule(50,{explosion.play()})
+        explosion.volume(0.2) 
       enemigoEnFrente.map({objeto => objeto.recibeDanioEnemigo(1000)})
-      game.schedule(200, {
+      game.schedule(300, {
         game.removeVisual(self)
         administradorDeMagos.eliminarMago(self)
         })

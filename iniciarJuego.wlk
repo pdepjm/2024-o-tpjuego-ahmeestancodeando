@@ -9,7 +9,7 @@ import administradorDeEnemigos.*
 import puntaje.*
 
 object configuracion {
-var property sonido = "pvz8bit.mp3"
+var property sonido = "m.pvz8bit.mp3"
 const musica = game.sound(sonido) // el reproductor es constante, lo unico que cambiamos es la referencia al mp3
   method agregarVisuals() {
     game.addVisual(cursor)
