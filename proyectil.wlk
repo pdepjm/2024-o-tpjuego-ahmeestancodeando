@@ -13,6 +13,8 @@ class Proyectil{
 
     method frenarEnemigo() = false
 
+    method sePuedeSuperponer() = true
+
     method mover(){
       position.goRight(1)
         if (position.x() >= 12){

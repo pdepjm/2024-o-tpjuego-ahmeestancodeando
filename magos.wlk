@@ -22,6 +22,8 @@ class Mago {
     self.vida(self.vida() - _danio)
     return false
   }
+
+  method sePuedeSuperponer() = false
   
   method estaMuerto(){
     if (vida <= 0 && game.hasVisual(self)) {
