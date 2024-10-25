@@ -9,7 +9,7 @@ object oleada {
     var enemigosRestantes = 0
 
 method iniciarOleada(){
-    enemigosRestantes = cantidadEnemigos
+    
     //delay
     //ver como hacer que genere constantemente sin cortar
     game.onTick(
@@ -30,7 +30,7 @@ method siguienteOleada(){
     cantidadEnemigos +=10 //definir escalado de oleadas
     numeroOleada +=1
     tipoEnemigos.add(adminTipoOleada.agregarTipo(numeroOleada+2)) //Aca hay que pensar la relacion entre oleada y slimes utiles
-
+    enemigosRestantes = cantidadEnemigos
 }
 
 
