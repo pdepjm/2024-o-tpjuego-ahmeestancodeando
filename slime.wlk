@@ -1,15 +1,18 @@
 import administradorDeEnemigos.*
 import casa.*
 import puntaje.cantidadDeBajas
-class SlimeBasico{
+
+
+class Slime{
 	const position 
+  const tipo 
   var property puedeMoverse = true /*va  a servir para hacer que deje de avanzar*/
-  var property vida = 100
+  var property vida = tipo.vida()
   method frenarEnemigo() = true
   method position() = position
-  var property imagen = "s.slimeBase.png"
+  const imagen =  tipo.imagen()
   method image() = imagen
-  var property danio = 50
+  var property danio = tipo.danio()
 
   method movete() {
     self.meFreno()
@@ -27,8 +30,6 @@ class SlimeBasico{
     }
     else{self.puedeMoverse(true)} //Agregue el self.moverse(true) para que cuando maten la planta se sigan moviendo
   }
-
- 
 
   method recibeDanioMago(_danio){return false}
   method recibeDanioEnemigo(_danio){
@@ -52,14 +53,34 @@ class SlimeBasico{
   }
 }
 
-class SlimeFuerte inherits SlimeBasico(danio=100,vida=50,imagen="s.slimeBase.png"){}
+object slimeBasico { 
+  const property danio = 25
+  const property vida= 150
+  const  imagen="s.slimeBase.png"
+  method imagen() {return imagen} 
+  
+}
 
-class SlimeDefensivo inherits SlimeBasico(danio=25,vida=150,imagen="s.slimeBase.png"){}
+object slimeNinja { 
+  const property danio = 100
+  const property vida= 50
+  const imagen="s.slimeNinja.png"
+  method imagen() {return imagen} 
+}
 
-class SlimeBlessed inherits SlimeBasico(danio=150,vida=250,imagen="s.slimeBase.png"){}
+object slimeGuerrero { 
+  const property danio = 25
+  const property vida= 150
+  const imagen="s.slimeGuerrero.png"
+  method imagen() {return imagen} 
+}
 
-//const jose = new SlimeBasico(position= new MutablePosition(x=10, y=0.randomUpTo(5).truncate(0)))
+object slimeBlessed { 
+  const property danio = 150
+  const property vida= 250
+  const imagen="s.slimeBlessed.png"
+  method imagen() {return imagen} 
+}
 
-//const otroZombie = new SlimeBasico(position= new MutablePosition(x=3, y=3))
 
-//const grupo = [jose,otroZombie]
+

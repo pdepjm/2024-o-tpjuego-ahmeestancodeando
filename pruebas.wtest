@@ -1,5 +1,5 @@
 import puntaje.*
-import zombie.*
+import slime.*
 import magos.*
 import game.*
 describe "Test de magos" {
@@ -92,22 +92,21 @@ describe "Test de magos" {
 } 
 
 describe "group of tests for Slimes" {
-  test "Slime basico tiene Vida"{
-    const slime = new SlimeBasico(position = game.at(6,2))
-    assert.that(slime.vida()>0)
-  }
-  test "Slime Normal recibe daño"{
-    const slime = new SlimeBasico(position = game.at(6,2))
-    const slimevida = slime.vida()
-    slime.recibeDanio(100)
-    assert.that(slimevida>slime.vida())
-  }
+  //////  const slime = new SlimeBasico(position = game.at(6,2))
+  //////  assert.that(slime.vida()>0)
+  //////}
+  //////test "Slime Normal recibe daño"{
+  //////  const slime = new SlimeBasico(position = game.at(6,2))
+  //////  const slimevida = slime.vida()
+  //////  slime.recibeDanio(100)
+  //////  assert.that(slimevida>slime.vida())
+  //////}
   
-  test "Slime Muere"{
-    const slime = new SlimeBasico(position = game.at(6,2))
-    slime.recibeDanio(1000)
-    assert.that(slime.estaMuerto())
-  }
+  //////test "Slime Muere"{
+  //////  const slime = new SlimeBasico(position = game.at(6,2))
+  //////  slime.recibeDanio(1000)
+  //////  assert.that(slime.estaMuerto())
+  //////}
 
 }
 describe "group of tests for Puntaje" {

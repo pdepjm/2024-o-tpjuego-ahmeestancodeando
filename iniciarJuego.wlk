@@ -1,8 +1,9 @@
+import administradorDeOleadas.*
 import adminProyectiles.*
 import administradorDeMagos.*
 import wollok.game.*
 import cursor.*
-import zombie.*
+import slime.*
 import casa.*
 import menu.*
 import administradorDeEnemigos.*
@@ -22,14 +23,16 @@ const musica = game.sound(sonido) // el reproductor es constante, lo unico que c
   }
   
   method crearTicks() {
-    game.onTick(
+/*     game.onTick(
       3000,
       "generar nuevo Enemigo",
       { 
         administradorDeEnemigos.sumarEnemigo()
-        return administradorDeEnemigos.generarEnemigo(1)
+        return administradorDeEnemigos.generarEnemigo(slimeBasico)
       }
-    )
+    ) */
+    game.schedule(7000, administradorDeOleadas.iniciarOleada)
+
     game.onTick(
       1500,
       "mover enemigo",

@@ -2,7 +2,7 @@ import administradorDeMagos.*
 import puntaje.*
 import proyectil.*
 import adminProyectiles.*
-import zombie.*
+import slime.*
 
 class Mago {
   const position
