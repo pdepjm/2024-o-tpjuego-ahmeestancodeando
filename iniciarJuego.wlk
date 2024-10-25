@@ -31,7 +31,7 @@ const musica = game.sound(sonido) // el reproductor es constante, lo unico que c
         return administradorDeEnemigos.generarEnemigo(slimeBasico)
       }
     ) */
-    game.schedule(7000, administradorDeOleadas.iniciarOleada)
+    game.schedule(4000, {oleada.iniciarOleada()})//espera un tiempo e inicia la primer oleada
 
     game.onTick(
       1500,

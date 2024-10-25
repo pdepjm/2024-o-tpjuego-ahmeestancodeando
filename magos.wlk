@@ -134,6 +134,7 @@ object magoIrlandesTienda inherits MagoTienda(position = game.at(2,5), imagen="m
 override method generarMago(posicionMago) {
     self.puedeGenerarMago()
     puntaje.restarPuntos(costo)
+    puntaje.sumarMagoIrlandes()
     return new MagoIrlandes(position = posicionMago)
    }
 
