@@ -30,14 +30,9 @@ method siguienteOleada(){
     numeroOleada +=1
     enemigosRestantes = cantidadEnemigos
     if(numeroOleada>2){
-        tipoEnemigos.add(adminTipoOleada.agregarTipo(3)) //Aca hay que pensar la relacion entre oleada y slimes utiles
+        tipoEnemigos.add(adminTipoOleada.agregarTipo(3+numeroOleada)) //Aca hay que pensar la relacion entre oleada y slimes utiles
     }
 
-    //game.schedule(8000, {self.iniciarOleada()})
-   /* if(numeroOleada==10){ oleada final
-        tipoEnemigos.clear()
-        tipoEnemigos.add()
-    }*/
 }
 
 
@@ -45,7 +40,7 @@ method siguienteOleada(){
 }
 
 object adminTipoOleada { //Añade los tipos de slime a posibles slimes de oleada
-    const tipo = [slimeBasico,slimeGuerrero,slimeNinja,slimeBlessed]//[SlimeBasico, SlimeFuerte, SlimeDefensivo, SlimeBlessed]tipos de slimes
+    const tipo = [slimeBasico,slimeBasico,slimeGuerrero,slimeNinja,slimeGuerrero,slimeNinja,slimeBlessed,slimeBlessed,slimeBlessed,slimeBlessed,slimeBlessed,slimeBlessed,slimeBlessed]//[SlimeBasico, SlimeFuerte, SlimeDefensivo, SlimeBlessed]tipos de slimes
 
     method agregarTipo(numero){
         

@@ -15,7 +15,7 @@ object administradorDeEnemigos {
     method generarEnemigo(tipo){/*segun el tipo ingresado, se generara un tipo de enemigo distinto*/
       /*generara un slime normal*/
 
-        const posicionTemporal = new MutablePosition(x=12, y=0.randomUpTo(5).truncate(0))
+        const posicionTemporal = new MutablePosition(x=14, y=0.randomUpTo(5).truncate(0))
             var nombreParaEnemigo = self.nombre() /* esto esta hecho porque sino wollok se enoja, para poder crear un enemigo*/
 
             if (game.getObjectsIn(posicionTemporal).isEmpty()){ // el if es para que no genere enemigos sobre otros
