@@ -12,7 +12,7 @@ object cursor {
     keyboard.down().onPressDo({ self.moverseAbajo() })
   }
 
-  method moverseDerecha() = if (self.position().x()<14) position.goRight(1)
+  method moverseDerecha() = if (self.position().x()<12) position.goRight(1)
   method moverseIzquierda() = if (self.position().x()>1) position.goLeft(1)
   method moverseArriba() = if (self.position().y()<4) position.goUp(1)
   method moverseAbajo() = if (self.position().y()>0) position.goDown(1)
