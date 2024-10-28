@@ -16,6 +16,7 @@ const musica = game.sound(sonido) // el reproductor es constante, lo unico que c
     game.addVisual(cursor)
     game.addVisual(menu)
     game.addVisual(puntaje)
+    game.addVisual(oleada)
     menu.accion()
     cursor.accion()
     menu.iniciarTienda()

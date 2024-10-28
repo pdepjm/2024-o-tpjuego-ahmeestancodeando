@@ -1,5 +1,6 @@
 import game.*
 import slime.*
+import administradorDeOleadas.oleada
 
 object administradorDeEnemigos {
     var nombreEnemigo = 2000 /*asigno el nombre  a los enemigos que voy creando segun tipos, asi puedo crear nombres nuevos
