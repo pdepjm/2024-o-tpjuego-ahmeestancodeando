@@ -1,12 +1,13 @@
 import game.*
 import slime.*
-import administradorDeOleadas.oleada
 
 object administradorDeEnemigos {
     var nombreEnemigo = 2000 /*asigno el nombre  a los enemigos que voy creando segun tipos, asi puedo crear nombres nuevos
                             automaticamente*/
     
     const enemigos = #{}/*contiene cada enemigo que fue creando*/
+
+    method enemigos() = enemigos
    
     method nombre() = nombreEnemigo /*para poder consultar el ultimo nombre usado*/
     method sumarEnemigo() { /*suma 1 a nombre enemigo para asi crear enemigos nuevos, luego hay que hacer la funcion

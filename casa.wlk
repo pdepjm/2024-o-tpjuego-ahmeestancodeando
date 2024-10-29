@@ -1,8 +1,13 @@
 import iniciarJuego.*
+import administradorDeEnemigos.*
 object casa {
+  //method explosion() = game.sound("m.explosion.mp3") // efecto de explosion cuando llegan al fin de la pantlla
     var property vida = 3
-    method recibirDanio() {
+    method recibirDanio(fila) {
       self.vida(self.vida()-1)
+      administradorDeEnemigos.enemigos().filter({enemigo => enemigo.position().y() == fila}).map({enemigo => enemigo.recibeDanioEnemigo(10000)}) // elimina enemigos de la misma fila
+     // self.explosion().volume(0.4)
+     // self.explosion().play()
     }
     method terminarJuego() = if (self.vida()==0) {
         const musica2 = game.sound("m.deathScreen.mp3")

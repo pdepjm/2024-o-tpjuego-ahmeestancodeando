@@ -3,6 +3,8 @@ import magos.*
 import cursor.*
 
 object menu {
+  method pop() = game.sound("m.pop.mp3")
+  
   const position = new MutablePosition(x = 0, y = 5)
   var property imagen = "marcosRojo.png"
   
@@ -13,11 +15,11 @@ object menu {
   method accion() {
     keyboard.d().onPressDo({ self.moverseDerecha() })
     keyboard.a().onPressDo({ self.moverseIzquierda() })
-    keyboard.enter().onPressDo({ self.generarMago() })
+    keyboard.enter().onPressDo({self.generarMago()})
     // cambiar aca para cambiar forma de generar enemigos
   }
   
-  method moverseDerecha() = if (self.position().x() < 6) position.goRight(1)
+  method moverseDerecha() = if (self.position().x() < 4) position.goRight(1)
   
   method moverseIzquierda() = if (self.position().x() > 0) position.goLeft(1)
   
@@ -29,7 +31,8 @@ object menu {
     const posicion = game.at(cursor.position().x(), cursor.position().y())
     administradorDeMagos.generarMago(magoSeleccionado, posicion)
     }
-   
+   self.pop().volume(0.4)
+   self.pop().play()
   }
   
   // Borre las instanciaciones porque las hice objetos en magos.wlk

@@ -39,7 +39,7 @@ class Slime{
 
   method estaMuerto(){
     if (self.position().x() < 0){
-      casa.recibirDanio()
+      casa.recibirDanio(self.position().y())
       casa.terminarJuego()
       game.removeVisual(self)
       administradorDeEnemigos.eliminarEnemigo(self)

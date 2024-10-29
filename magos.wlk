@@ -39,9 +39,6 @@ class Mago {
 class MagoFuego inherits Mago(vida=100,imagen="magoFuego.png"){
 
   override method disparar(){
-    const pop = game.sound("m.pop.mp3")
-    game.schedule(50,{pop.play()})
-    pop.volume(0.4) 
     const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
     administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilNormal)
   }
@@ -64,9 +61,6 @@ class MagoIrlandes inherits Mago(vida=100, imagen="magoHealer.png") {
 class MagoHielo inherits Mago(vida=100,imagen="magoHielo.png") {
 
   override method disparar(){
-    const hielo = game.sound("m.hielo.mp3")
-    game.schedule(50,{hielo.play()})
-    hielo.volume(0.4) 
     const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
     administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilPenetrante)
   }
