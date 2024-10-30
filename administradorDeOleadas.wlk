@@ -4,7 +4,7 @@ import administradorDeEnemigos.*
 
 //Ver como hacer q llame a cada oleada
 object oleada {
-    var tipoEnemigos = [slimeBasico]
+    var tipoEnemigos = [slimeNinja,slimeNinja,slimeNinja,slimeNinja]
     var cantidadEnemigos = 10
     var numeroOleada = 1
     var tiempoSpawn = 3000
@@ -42,8 +42,8 @@ method siguienteOleada(){
     numeroOleada +=1
     enemigosRestantes = cantidadEnemigos
     if (tiempoSpawn >400) tiempoSpawn -= 400
-    
-
+    game.removeTickEvent("generar nuevo Enemigo")
+    self.iniciarOleada()
 
 }
 

@@ -13,11 +13,12 @@ class Slime{
   const imagen =  tipo.imagen()
   method image() = imagen
   var property danio = tipo.danio()
+  method sePuedeSuperponer() = false
 
   method movete() {
     self.meFreno()
     if(self.puedeMoverse())
-      return position.goLeft(1)
+      return position.goLeft(tipo.desplazamiento())
     else self.puedeMoverse(false)
   }
 
@@ -56,21 +57,25 @@ class Slime{
 object slimeBasico { 
   const property danio = 25
   const property vida= 150
+  method desplazamiento() = 1
   const  imagen="s.slimeBase.png"
   method imagen() {return imagen} 
   
 }
 
 object slimeNinja { 
-  const property danio = 100
-  const property vida= 50
+  const property danio = 200
+  const property vida= 120
+  method desplazamiento() = 2
   const imagen="s.slimeNinja.png"
   method imagen() {return imagen} 
+  
 }
 
 object slimeGuerrero { 
   const property danio = 25
   const property vida= 150
+  method desplazamiento() = 1
   const imagen="s.slimeGuerrero.png"
   method imagen() {return imagen} 
 }
@@ -78,6 +83,7 @@ object slimeGuerrero {
 object slimeBlessed { 
   const property danio = 150
   const property vida= 250
+  method desplazamiento() = 1
   const imagen="s.slimeBlessed.png"
   method imagen() {return imagen} 
 }
