@@ -4,7 +4,7 @@ import administradorDeEnemigos.*
 
 //Ver como hacer q llame a cada oleada
 object oleada {
-    var tipoEnemigos = [slimeNinja,slimeNinja,slimeNinja,slimeNinja]
+    var tipoEnemigos = [slimeBasico]
     var cantidadEnemigos = 10
     var numeroOleada = 1
     var tiempoSpawn = 3000

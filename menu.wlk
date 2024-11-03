@@ -1,6 +1,7 @@
 import administradorDeMagos.*
 import magos.*
 import cursor.*
+import wollok.game.*
 
 object menu {
   method pop() = game.sound("m.pop.mp3")
@@ -16,6 +17,7 @@ object menu {
     keyboard.d().onPressDo({ self.moverseDerecha() })
     keyboard.a().onPressDo({ self.moverseIzquierda() })
     keyboard.enter().onPressDo({self.generarMago()})
+    keyboard.p().onPressDo({ self.eliminarMago() })
     // cambiar aca para cambiar forma de generar enemigos
   }
   
@@ -34,7 +36,13 @@ object menu {
    self.pop().volume(0.4)
    self.pop().play()
   }
+  method eliminarMago() {
+    const magoAEliminar = game.colliders(cursor)
+    const magoSeleccionado = magoAEliminar.first()
+    game.removeVisual(magoSeleccionado)
+    administradorDeMagos.eliminarMago(magoSeleccionado)
   
+  }
   // Borre las instanciaciones porque las hice objetos en magos.wlk
   // Para usar la 2da forma de generar magos
   method iniciarTienda() {
@@ -53,5 +61,7 @@ object menu {
     //const zapalloTienda = new ZapalloEnojado(position = game.at(4,5))
     
     game.addVisual(magoExplosivoTienda)
+
+    //game.addVisual(pala)
   }
 }
