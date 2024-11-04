@@ -8,7 +8,7 @@ import casa.*
 import menu.*
 import administradorDeEnemigos.*
 import puntaje.*
-
+import pala.*
 object configuracion {
 var property sonido = "pvz8bit.mp3"
 const musica = game.sound(self.sonido()) // el reproductor es constante, lo unico que cambiamos es la referencia al mp3

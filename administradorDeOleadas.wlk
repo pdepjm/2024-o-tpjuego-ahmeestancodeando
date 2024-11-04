@@ -15,6 +15,9 @@ object oleada {
     method text() = "Oleada: " + numeroOleada.toString() +"     " + "Slimes Restantes: " + enemigosRestantes.toString() + tipoEnemigos.toString() + enemigosGenerados.toString()
     method textColor() = "#FA0770"
 
+    method inicioOleada() = game.sound("m.inicioOleada.mp3")
+    method finOleada() = game.sound("m.finOleada.mp3")
+
 method iniciarOleada(){
     //Delay para generar enemigos constantemente sin cortar
     //Ver como hacer que genere constantemente sin cortar
@@ -40,6 +43,8 @@ method iniciarOleada(){
             game.schedule(20000, {self.siguienteOleada()})
             //Decrementa la cantidad de enemigos generados
             enemigosGenerados = 0
+            self.finOleada().volume(0.1)
+            self.finOleada().play()
         } else if (enemigosRestantes == 0 && enemigosGenerados == 0){
             //Agrega un nuevo enemigo aleatorio de la lista
             if (tipoEnemigos.size() < 4) {tipoEnemigos.add(adminTipoOleada.agregarTipo(numeroOleada))}
@@ -49,6 +54,9 @@ method iniciarOleada(){
 }
 
 method siguienteOleada(){
+
+    self.inicioOleada().volume(0.1)
+    self.inicioOleada().play()
     // remuevo el evento que generaba enemigos en la oleada anterior
     game.removeTickEvent("agregar enemigo")
     // remuevo el evento que generaba el enemigo en la oleada anterior

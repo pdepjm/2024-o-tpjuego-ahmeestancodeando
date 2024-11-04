@@ -2,9 +2,10 @@ import administradorDeMagos.*
 import magos.*
 import cursor.*
 import wollok.game.*
-
+import pala.*
 object menu {
   method pop() = game.sound("m.pop.mp3")
+  method pff() = game.sound("m.pff.mp3")
   
   const position = new MutablePosition(x = 0, y = 5)
   var property imagen = "marcosRojo.png"
@@ -28,24 +29,27 @@ object menu {
   method generarMago() {
     const magoAGenerar = game.colliders(self) // no usamos uniqueColliders porque tira error si no hay ninguna
     const objetoCelda = game.colliders(cursor)
+    const posicionCelda = game.at(cursor.position().x(), cursor.position().y())
+
     if (!magoAGenerar.isEmpty() && objetoCelda.all({objeto => objeto.sePuedeSuperponer()}) && self.position().x() != 5){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
         const magoSeleccionado = magoAGenerar.first()
-        const posicion = game.at(cursor.position().x(), cursor.position().y())
-        administradorDeMagos.generarMago(magoSeleccionado, posicion)
-    } else  {
+        administradorDeMagos.generarMago(magoSeleccionado, posicionCelda)
+        self.pop().volume(0.2)
+        self.pop().play()
+    } else  if (self.position().x() == 5){
         const magoSeleccionado = objetoCelda.find({objeto => not objeto.sePuedeSuperponer()})
-        game.removeVisual(magoSeleccionado)
-        administradorDeMagos.eliminarMago(magoSeleccionado)
+        pala.eliminarMago(magoSeleccionado)
+        self.pff().volume(0.4)
+        self.pff().play()
     }
-   self.pop().volume(0.4)
-   self.pop().play()
+
   }
   method eliminarMago() {
-    const magoAEliminar = game.colliders(cursor)
-    if (!magoAEliminar.isEmpty()){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
-      const magoSeleccionado = magoAEliminar.find({objeto => not objeto.sePuedeSuperponer()})
-      game.removeVisual(magoSeleccionado)
-      administradorDeMagos.eliminarMago(magoSeleccionado)
+    const objetoCelda = game.colliders(cursor).find({objeto => not objeto.sePuedeSuperponer()})
+    if (!objetoCelda.isEmpty()){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
+      pala.eliminarMago(objetoCelda)
+      self.pff().volume(0.4)
+      self.pff().play()
     }
   }
   // Borre las instanciaciones porque las hice objetos en magos.wlk
@@ -67,6 +71,6 @@ object menu {
     
     game.addVisual(magoExplosivoTienda)
 
-    //game.addVisual(pala)
+    game.addVisual(pala)
   }
 }
