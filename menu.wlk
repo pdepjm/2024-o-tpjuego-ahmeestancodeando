@@ -27,21 +27,22 @@ object menu {
   
   method generarMago() {
     const magoAGenerar = game.colliders(self) // no usamos uniqueColliders porque tira error si no hay ninguna
-    const magosOProyectiles = game.colliders(cursor)
-    if (!magoAGenerar.isEmpty() && magosOProyectiles.all({objeto => objeto.sePuedeSuperponer()})){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
-    const magoSeleccionado = magoAGenerar.first()
-    const posicion = game.at(cursor.position().x(), cursor.position().y())
-    administradorDeMagos.generarMago(magoSeleccionado, posicion)
+    const objetoCelda = game.colliders(cursor)
+    if (!magoAGenerar.isEmpty() && objetoCelda.all({objeto => objeto.sePuedeSuperponer()})){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
+        const magoSeleccionado = magoAGenerar.first()
+        const posicion = game.at(cursor.position().x(), cursor.position().y())
+        administradorDeMagos.generarMago(magoSeleccionado, posicion)
     }
    self.pop().volume(0.4)
    self.pop().play()
   }
   method eliminarMago() {
     const magoAEliminar = game.colliders(cursor)
-    const magoSeleccionado = magoAEliminar.first()
-    game.removeVisual(magoSeleccionado)
-    administradorDeMagos.eliminarMago(magoSeleccionado)
-  
+    if (!magoAEliminar.isEmpty()){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
+      const magoSeleccionado = magoAEliminar.find({objeto => not objeto.sePuedeSuperponer()})
+      game.removeVisual(magoSeleccionado)
+      administradorDeMagos.eliminarMago(magoSeleccionado)
+    }
   }
   // Borre las instanciaciones porque las hice objetos en magos.wlk
   // Para usar la 2da forma de generar magos

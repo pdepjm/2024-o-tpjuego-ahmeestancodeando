@@ -37,7 +37,7 @@ object administradorDeMagos {
     }
 
     method eliminarMago(mago){
-      magos.remove(mago)
+        magos.remove(mago)
     }
 
 }

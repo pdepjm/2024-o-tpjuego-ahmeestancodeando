@@ -2,7 +2,7 @@ import wollok.game.*
 import iniciarJuego.configuracion
 
 program cursorGame {
-	game.boardGround("fondo_beta.png")
+	game.boardGround("fondo1.jpg")
 	game.title("cursor")
 	game.height(6)
 	game.width(15)
