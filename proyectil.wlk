@@ -17,7 +17,7 @@ class Proyectil{
 
     method mover(){
       position.goRight(1)
-        if (position.x() >= 12){
+        if (position.x() >= 14){
         game.removeVisual(self)
         administradorDeProyectiles.destruirProyectil(self)
       }
@@ -50,7 +50,7 @@ class Proyectil{
 }
 
 object proyectilNormal{
-const imagen = "p.bolaDeFuego.png"
+const imagen = "p.proyectilFuego.png"
 const imagenDestruido = "p.bolaDeFuegoDestruida.gif"
 method imagen() {return imagen} 
 method imagenDestruido() {return imagenDestruido} 

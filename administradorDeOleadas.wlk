@@ -9,8 +9,10 @@ object oleada {
     var numeroOleada = 1
     var tiempoSpawn = 3000
     var property enemigosRestantes = 10
+    var property enemigosGenerados = 0
+
     method position() = game.at(10, 5)
-    method text() = "Oleada: " + numeroOleada.toString() +"     " + "Slimes Restantes: " + enemigosRestantes.toString() + tipoEnemigos.toString()
+    method text() = "Oleada: " + numeroOleada.toString() +"     " + "Slimes Restantes: " + enemigosRestantes.toString() + tipoEnemigos.toString() + enemigosGenerados.toString()
     method textColor() = "#FA0770"
 
 method iniciarOleada(){
@@ -23,23 +25,23 @@ method iniciarOleada(){
       tiempoSpawn,
       "generar nuevo Enemigo",
       { 
-        if(enemigosRestantes>1){
+        if(enemigosGenerados <= cantidadEnemigos && enemigosRestantes > 0){
             //Genera un nuevo enemigo de la lista y lo agrega a la cantidad de enemigos restantes
             administradorDeEnemigos.sumarEnemigo()
             administradorDeEnemigos.generarEnemigo(tipoEnemigos.anyOne())
             //Decrementa la cantidad de enemigos restantes
-            enemigosRestantes-= 1
-        } else if (enemigosRestantes==1){
+            enemigosGenerados+= 1
+        } else if (enemigosRestantes==0 && enemigosGenerados == cantidadEnemigos){
             //Si se generaron todos los enemigos de la oleada, se llama a setear la proxima oleada
             //Limpia la lista de enemigos
             tipoEnemigos = []
             //Llama a setear la proxima oleada
-            game.schedule(10000, {self.siguienteOleada()})
-            //Decrementa la cantidad de enemigos restantes
-            enemigosRestantes-= 1
-        } else {
-             //Agrega un nuevo enemigo aleatorio de la lista
-             game.onTick(2250,"agregar enemigo",{self.agregarEnemigos()})
+            game.schedule(20000, {self.siguienteOleada()})
+            //Decrementa la cantidad de enemigos generados
+            enemigosGenerados = 0
+        } else if (enemigosRestantes==0 && enemigosGenerados == 0){
+            //Agrega un nuevo enemigo aleatorio de la lista
+            if (tipoEnemigos.size() < 4) {tipoEnemigos.add(adminTipoOleada.agregarTipo(numeroOleada))}
         }
        }
     )
@@ -48,7 +50,8 @@ method iniciarOleada(){
 method siguienteOleada(){
     // remuevo el evento que generaba enemigos en la oleada anterior
     game.removeTickEvent("agregar enemigo")
-    
+    // remuevo el evento que generaba el enemigo en la oleada anterior
+    game.removeTickEvent("generar nuevo Enemigo")
     // aumento la cantidad de enemigos en la siguiente oleada
     cantidadEnemigos +=5 
     //definir escalado de oleadas (por ahora es 5 enemigos mas por oleada)
@@ -62,16 +65,9 @@ method siguienteOleada(){
     // si el tiempo de spawn es mayor a 400, lo decreo en 400 para que se vayan spawnando mas rapido
     if (tiempoSpawn >400) 
         tiempoSpawn -= 400
-    
-    // remuevo el evento que generaba el enemigo en la oleada anterior
-    game.removeTickEvent("generar nuevo Enemigo")
-    
+
     // inicio la siguiente oleada
     self.iniciarOleada()
-}
-
-method agregarEnemigos(){
-    tipoEnemigos.add(adminTipoOleada.agregarTipo(numeroOleada)) //Aca hay que pensar la relacion entre oleada y slimes utiles
 }
 
 }

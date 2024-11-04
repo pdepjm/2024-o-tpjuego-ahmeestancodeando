@@ -3,13 +3,16 @@ import puntaje.*
 import proyectil.*
 import adminProyectiles.*
 import slime.*
-
+import administradorDeEnemigos.*
 class Mago {
   const position
   var property vida
   var property imagen
 
   method frenarEnemigo() = true
+
+  method enemigoEnSuFila() = administradorDeEnemigos.enemigos().any({enemigo => enemigo.position().y()==self.position().y()})
+
 
   method position() = position
   
@@ -40,7 +43,9 @@ class MagoFuego inherits Mago(vida=100,imagen="magoFuego.png"){
 
   override method disparar(){
     const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
-    administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilNormal)
+    if (self.enemigoEnSuFila()){
+      administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilNormal) 
+    }
   }
   
 }
@@ -62,9 +67,10 @@ class MagoHielo inherits Mago(vida=100,imagen="magoHielo.png") {
 
   override method disparar(){
     const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
-    administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilPenetrante)
+    if (self.enemigoEnSuFila()){
+      administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilPenetrante)
+    }
   }
-
 }
 
 class MagoPiedra inherits Mago(vida=300,imagen="magoPiedra.png"){}

@@ -1,6 +1,6 @@
 import game.*
 import slime.*
-
+import administradorDeOleadas.*
 object administradorDeEnemigos {
     var nombreEnemigo = 2000 /*asigno el nombre  a los enemigos que voy creando segun tipos, asi puedo crear nombres nuevos
                             automaticamente*/
@@ -36,6 +36,7 @@ object administradorDeEnemigos {
         enemigos.forEach({slime => slime.movete()})/*aplica la funcion movete a cada enemigo de la coleccion*/
     }
     method eliminarEnemigo(enemigo) {
+      oleada.enemigosRestantes(oleada.enemigosRestantes()-1)
       enemigos.remove(enemigo)
     }
 

@@ -13,7 +13,7 @@ class Slime{
   const imagen =  tipo.imagen()
   method image() = imagen
   var property danio = tipo.danio()
-  method sePuedeSuperponer() = false
+  method sePuedeSuperponer() = true
 
   method movete() {
     self.meFreno()

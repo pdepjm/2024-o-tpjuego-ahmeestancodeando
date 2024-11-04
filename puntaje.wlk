@@ -38,6 +38,6 @@ object cantidadDeBajas {
     method agregarBaja() {
         self.bajas(self.bajas()+1)
         }
-    method text() = bajas.toString() + " slimes asesinados"
-    method textColor() = "#FA0770"
+    //method text() = bajas.toString() + " slimes asesinados"
+    //method textColor() = "#FA0770"
 }
