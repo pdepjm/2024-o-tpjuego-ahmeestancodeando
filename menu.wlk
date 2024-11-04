@@ -21,17 +21,21 @@ object menu {
     // cambiar aca para cambiar forma de generar enemigos
   }
   
-  method moverseDerecha() = if (self.position().x() < 4) position.goRight(1)
+  method moverseDerecha() = if (self.position().x() < 5) position.goRight(1)
   
   method moverseIzquierda() = if (self.position().x() > 0) position.goLeft(1)
   
   method generarMago() {
     const magoAGenerar = game.colliders(self) // no usamos uniqueColliders porque tira error si no hay ninguna
     const objetoCelda = game.colliders(cursor)
-    if (!magoAGenerar.isEmpty() && objetoCelda.all({objeto => objeto.sePuedeSuperponer()})){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
+    if (!magoAGenerar.isEmpty() && objetoCelda.all({objeto => objeto.sePuedeSuperponer()}) && self.position().x() != 5){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
         const magoSeleccionado = magoAGenerar.first()
         const posicion = game.at(cursor.position().x(), cursor.position().y())
         administradorDeMagos.generarMago(magoSeleccionado, posicion)
+    } else  {
+        const magoSeleccionado = objetoCelda.find({objeto => not objeto.sePuedeSuperponer()})
+        game.removeVisual(magoSeleccionado)
+        administradorDeMagos.eliminarMago(magoSeleccionado)
     }
    self.pop().volume(0.4)
    self.pop().play()

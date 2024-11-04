@@ -1,6 +1,7 @@
 import game.*
 import slime.*
 import administradorDeOleadas.*
+
 object administradorDeEnemigos {
     var nombreEnemigo = 2000 /*asigno el nombre  a los enemigos que voy creando segun tipos, asi puedo crear nombres nuevos
                             automaticamente*/
@@ -8,6 +9,8 @@ object administradorDeEnemigos {
     const enemigos = #{}/*contiene cada enemigo que fue creando*/
 
     method enemigos() = enemigos
+
+    method columnaOcupada() = enemigos.filter({enemigo => enemigo.position().x()==14}).size() == 5
    
     method nombre() = nombreEnemigo /*para poder consultar el ultimo nombre usado*/
     method sumarEnemigo() { /*suma 1 a nombre enemigo para asi crear enemigos nuevos, luego hay que hacer la funcion
@@ -16,7 +19,7 @@ object administradorDeEnemigos {
         }
     method generarEnemigo(tipo){/*segun el tipo ingresado, se generara un tipo de enemigo distinto*/
       /*generara un slime normal*/
-
+      if (not self.columnaOcupada()){
         const posicionTemporal = new MutablePosition(x=14, y=0.randomUpTo(5).truncate(0))
             var nombreParaEnemigo = self.nombre() /* esto esta hecho porque sino wollok se enoja, para poder crear un enemigo*/
 
@@ -24,9 +27,10 @@ object administradorDeEnemigos {
             nombreParaEnemigo = new Slime(position = posicionTemporal, tipo=tipo)
             enemigos.add(nombreParaEnemigo)/*se añade a la lista de enemigos activos*/
             self.sumarEnemigo()
+            oleada.sumarEnemigo()
             return game.addVisual(nombreParaEnemigo)/*muestra al enemigo en el juego*/
             } else return
-      
+      }
     }
     method estanMuertos(){
         enemigos.forEach({enemigo => enemigo.estaMuerto()})
@@ -36,7 +40,7 @@ object administradorDeEnemigos {
         enemigos.forEach({slime => slime.movete()})/*aplica la funcion movete a cada enemigo de la coleccion*/
     }
     method eliminarEnemigo(enemigo) {
-      oleada.enemigosRestantes(oleada.enemigosRestantes()-1)
+      oleada.reducirEnemigos()
       enemigos.remove(enemigo)
     }
 

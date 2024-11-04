@@ -25,13 +25,14 @@ method iniciarOleada(){
       tiempoSpawn,
       "generar nuevo Enemigo",
       { 
-        if(enemigosGenerados <= cantidadEnemigos && enemigosRestantes > 0){
-            //Genera un nuevo enemigo de la lista y lo agrega a la cantidad de enemigos restantes
-            administradorDeEnemigos.sumarEnemigo()
+        if(cantidadEnemigos > enemigosGenerados && enemigosRestantes > 0){
+            //Genera un nuevo enemigo de la lista y lo agrega a la cantidad de enemigos generados
+            
             administradorDeEnemigos.generarEnemigo(tipoEnemigos.anyOne())
+    
             //Decrementa la cantidad de enemigos restantes
-            enemigosGenerados+= 1
-        } else if (enemigosRestantes==0 && enemigosGenerados == cantidadEnemigos){
+            
+        } else if (enemigosRestantes == 0 && enemigosGenerados == cantidadEnemigos){
             //Si se generaron todos los enemigos de la oleada, se llama a setear la proxima oleada
             //Limpia la lista de enemigos
             tipoEnemigos = []
@@ -39,7 +40,7 @@ method iniciarOleada(){
             game.schedule(20000, {self.siguienteOleada()})
             //Decrementa la cantidad de enemigos generados
             enemigosGenerados = 0
-        } else if (enemigosRestantes==0 && enemigosGenerados == 0){
+        } else if (enemigosRestantes == 0 && enemigosGenerados == 0){
             //Agrega un nuevo enemigo aleatorio de la lista
             if (tipoEnemigos.size() < 4) {tipoEnemigos.add(adminTipoOleada.agregarTipo(numeroOleada))}
         }
@@ -69,6 +70,11 @@ method siguienteOleada(){
     // inicio la siguiente oleada
     self.iniciarOleada()
 }
+
+method reducirEnemigos() { enemigosRestantes-=1}
+
+method sumarEnemigo() {enemigosGenerados += 1}
+
 
 }
 
