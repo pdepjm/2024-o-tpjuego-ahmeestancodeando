@@ -18,7 +18,6 @@ object menu {
     keyboard.d().onPressDo({ self.moverseDerecha() })
     keyboard.a().onPressDo({ self.moverseIzquierda() })
     keyboard.enter().onPressDo({self.generarMago()})
-    keyboard.p().onPressDo({ self.eliminarMago() })
     // cambiar aca para cambiar forma de generar enemigos
   }
   
@@ -29,7 +28,7 @@ object menu {
   method generarMago() {
     const magoAGenerar = game.colliders(self) // no usamos uniqueColliders porque tira error si no hay ninguna
     const objetoCelda = game.colliders(cursor)
-    const posicionCelda = game.at(cursor.position().x(), cursor.position().y())
+    const posicionCelda = new MutablePosition(x = cursor.position().x(), y = cursor.position().y())
 
     if (!magoAGenerar.isEmpty() && objetoCelda.all({objeto => objeto.sePuedeSuperponer()}) && self.position().x() != 5){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
         const magoSeleccionado = magoAGenerar.first()

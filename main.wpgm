@@ -1,5 +1,5 @@
 import wollok.game.*
-import iniciarJuego.configuracion
+import administradorDeJuego.configuracion
 
 program cursorGame {
 	game.boardGround("fondo1.jpg")
@@ -12,6 +12,7 @@ program cursorGame {
 
 	configuracion.agregarVisuals()
 	configuracion.crearTicks()
-	configuracion.iniciarMusica()
+	//configuracion.iniciarMusica()
+	
 }
 

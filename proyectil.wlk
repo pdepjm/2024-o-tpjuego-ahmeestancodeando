@@ -17,15 +17,12 @@ class Proyectil{
 
     method mover(){
       position.goRight(1)
-        if (position.x() >= 14){
-        game.removeVisual(self)
-        administradorDeProyectiles.destruirProyectil(self)
-      }
+        if (position.x() >= 14){self.eliminar()}
     }
    
     method colisionar(){
       const objetoEnMiCelda = game.getObjectsIn(position)
-      const posicionEnFrente = game.at(position.x() + 1 ,position.y())
+      const posicionEnFrente = new MutablePosition(x=position.x() + 1, y=position.y())
       const objetoEnFrente = game.getObjectsIn(posicionEnFrente)
 
     const choco1 = objetoEnFrente.map({objeto => objeto.recibeDanioEnemigo(danio)})
@@ -46,6 +43,10 @@ class Proyectil{
         }
     }
 
+    method eliminar() {
+        game.removeVisual(self)
+        administradorDeProyectiles.destruirProyectil(self)
+    }
 
 }
 

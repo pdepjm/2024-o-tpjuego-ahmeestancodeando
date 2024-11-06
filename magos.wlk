@@ -37,6 +37,12 @@ class Mago {
     return vida <= 0
   }
 
+    method eliminar(){
+      game.removeVisual(self)
+      administradorDeMagos.eliminarMago(self)
+    }
+
+
 }
 
 class MagoFuego inherits Mago(vida=100,imagen="magoFuego.png"){
@@ -54,11 +60,15 @@ class MagoIrlandes inherits Mago(vida=100, imagen="magoHealer.png") {
   override method estaMuerto(){
 
   if (vida <= 0 && game.hasVisual(self)){ // agregue el game.has visual porque sino restaba girasoles hasta que lo elimine el garbage collector
+    self.eliminar()
+    }
+     return vida <= 0
+  }
+
+  override method eliminar(){
       game.removeVisual(self)
       puntaje.quitarMagoIrlandes()
       administradorDeMagos.eliminarMago(self)
-    }
-     return vida <= 0
   }
   
 }
@@ -79,17 +89,14 @@ class MagoExplosivo inherits Mago(vida=30, imagen="magoExplosivo.png"){
 
 override method estaMuerto(){
     if (vida <= 0 && game.hasVisual(self)){ // agregue el game.has visual porque sino restaba girasoles hasta que lo elimine el garbage collector
-      const posicionEnFrente = game.at(position.x() + 1 ,position.y())
+      const posicionEnFrente = new MutablePosition(x=position.x() + 1, y=position.y())
       const enemigoEnFrente = game.getObjectsIn(posicionEnFrente)
       self.imagen("p.allahu.gif")
       const explosion = game.sound("m.explosion.mp3")
       game.schedule(50,{explosion.play()})
         explosion.volume(0.2) 
       enemigoEnFrente.map({objeto => objeto.recibeDanioEnemigo(1000)})
-      game.schedule(300, {
-        game.removeVisual(self)
-        administradorDeMagos.eliminarMago(self)
-        })
+      game.schedule(300, { self.eliminar() })
     } 
      return vida <= 0
 }
@@ -113,7 +120,7 @@ class MagoTienda{
 
   method efectoDeInvocacion(){}
 }
-object magoPiedraTienda inherits MagoTienda(position = game.at(0,5), imagen="magoPiedra.png", costo = 200) {
+object magoPiedraTienda inherits MagoTienda(position = new MutablePosition(x=0, y=5), imagen="magoPiedra.png", costo = 200) {
 
 override method generarMago(posicionMago){
     self.puedeGenerarMago()
@@ -122,7 +129,7 @@ override method generarMago(posicionMago){
   }
 }
 
-object magoFuegoTienda inherits MagoTienda(position = game.at(1,5), imagen="magoFuego.png", costo = 100) {
+object magoFuegoTienda inherits MagoTienda(position = new MutablePosition(x=1, y=5), imagen="magoFuego.png", costo = 100) {
 
 override method generarMago(posicionMago){
     self.puedeGenerarMago()
@@ -131,7 +138,7 @@ override method generarMago(posicionMago){
   }
 
 }
-object magoIrlandesTienda inherits MagoTienda(position = game.at(2,5), imagen="magoHealer.png", costo = 75) {
+object magoIrlandesTienda inherits MagoTienda(position = new MutablePosition(x=2, y=5), imagen="magoHealer.png", costo = 75) {
 
 override method generarMago(posicionMago) {
     self.puedeGenerarMago()
@@ -142,7 +149,7 @@ override method generarMago(posicionMago) {
 
 }
 
-object magoHieloTienda inherits MagoTienda(position = game.at(3,5), imagen="magoHielo.png", costo = 125) {
+object magoHieloTienda inherits MagoTienda(position = new MutablePosition(x=3, y=5), imagen="magoHielo.png", costo = 125) {
 
 override method generarMago(posicionMago){
     self.puedeGenerarMago()
@@ -151,7 +158,7 @@ override method generarMago(posicionMago){
   }
 
 }
-object magoExplosivoTienda inherits MagoTienda(position = game.at(4,5), imagen="magoExplosivo.png", costo = 200){
+object magoExplosivoTienda inherits MagoTienda(position = new MutablePosition(x=4, y=5), imagen="magoExplosivo.png", costo = 200){
 
 override method generarMago(posicionMago){
     self.puedeGenerarMago()

@@ -3,15 +3,10 @@ object administradorDeMagos {
     var nombreMago = 0 /*asigno el nombre  a los enemigos que voy creando segun numeros, asi puedo crear nombres nuevos
                             automaticamente*/
 
-    const magos = #{}/*contiene cada enemigo que fue creando*/
+    const magos = #{}/*contiene cada mago que fue creando*/
     method magos() = magos
 
-    var magoAGenerar = magoPiedraTienda
-    method magoAGenerar() = magoAGenerar
-    method magoAGenerar(mago){
-        magoAGenerar = mago
-        }
-
+    var property  magoAGenerar  = magoPiedraTienda
 
     method nombre() = nombreMago /*para poder consultar el ultimo nombre usado*/
     method sumarMago() { /*suma 1 a nombre mago para asi crear magos nuevos, luego hay que hacer la funcion para que reste 1 cuando maten a un enemigo*/
@@ -20,12 +15,12 @@ object administradorDeMagos {
         
     method generarMago(magoSeleccionado,posicion){ // metodo para no usar los if anidados
         self.magoAGenerar(magoSeleccionado) //esto para cambiar la mago segun lo que se elija
-        var nombreParaMago = self.nombre() 
-        nombreParaMago = self.magoAGenerar().generarMago(posicion) //lama al objeto de la tienda para saber como generar una mago
-        magos.add(nombreParaMago)
+        var nuevoMago = self.nombre() 
+        nuevoMago = self.magoAGenerar().generarMago(posicion) //lama al objeto de la tienda para saber como generar una mago
+        magos.add(nuevoMago)
         magoSeleccionado.efectoDeInvocacion()
         self.sumarMago()
-        return game.addVisual(nombreParaMago)
+        return game.addVisual(nuevoMago)
     }
 
     method estanMuertos(){
@@ -38,6 +33,11 @@ object administradorDeMagos {
 
     method eliminarMago(mago){
         magos.remove(mago)
+    }
+    
+    method reset() {
+        magos.forEach({mago => mago.eliminar()})
+        nombreMago = 0 
     }
 
 }

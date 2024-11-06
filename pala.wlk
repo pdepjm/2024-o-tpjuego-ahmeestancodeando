@@ -3,7 +3,7 @@ import magos.*
 import cursor.*
 import wollok.game.*
 object pala {
-    const position = game.at(5,5)
+    const position = new MutablePosition(x=5, y=5)
     var property imagen = "pala.png"
 
     method image() = imagen
@@ -11,8 +11,7 @@ object pala {
     method position() = position
 
     method eliminarMago(magoSeleccionado){
-        game.removeVisual(magoSeleccionado)
-        administradorDeMagos.eliminarMago(magoSeleccionado)
+        magoSeleccionado.eliminar()
     }
 
 }

@@ -4,8 +4,11 @@ import puntaje.cantidadDeBajas
 
 
 class Slime{
+  
 	const position 
   const tipo 
+
+
   var property puedeMoverse = true /*va  a servir para hacer que deje de avanzar*/
   var property vida = tipo.vida()
   method frenarEnemigo() = true
@@ -23,7 +26,7 @@ class Slime{
   }
 
   method meFreno(){
-    const posicionEnFrente = game.at(self.position().x()-1, self.position().y())
+    const posicionEnFrente =  new MutablePosition(x=self.position().x()-1, y=self.position().y())
     const objetoEnCeldaEnFrente = game.getObjectsIn(posicionEnFrente)
     if (objetoEnCeldaEnFrente.any({objeto => objeto.frenarEnemigo()})){ // solo frena cuando se choca contra un enemigo o una planta
       self.puedeMoverse(false)
@@ -41,7 +44,6 @@ class Slime{
   method estaMuerto(){
     if (self.position().x() < 0){
       casa.recibirDanio(self.position().y())
-      casa.terminarJuego()
       game.removeVisual(self)
       administradorDeEnemigos.eliminarEnemigo(self)
     }
@@ -52,6 +54,11 @@ class Slime{
       } 
     return vida <= 0 || position.x() <= 0
   }
+
+  method eliminar() {
+    vida=0
+    }
+
 }
 
 object slimeBasico { 

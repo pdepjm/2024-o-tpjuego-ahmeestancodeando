@@ -5,7 +5,7 @@ object administradorDeProyectiles {
     var nombreProyectil = 10000 /*asigno el nombre  a los enemigos que voy creando segun numeros, asi puedo crear nombres nuevos
                             automaticamente*/
 
-    const proyectiles = #{}/*contiene cada enemigo que fue creando*/
+    var proyectiles = #{}/*contiene cada enemigo que fue creando*/
     method proyectiles() = proyectiles
 
     method nombre() = nombreProyectil /*para poder consultar el ultimo nombre usado*/
@@ -32,6 +32,13 @@ object administradorDeProyectiles {
     }
     method destruirProyectil(proyectil) {
       proyectiles.remove(proyectil)
+    }
+
+    
+    method reset() {
+        proyectiles.forEach({proyectil => proyectil.eliminar()})
+        nombreProyectil = 0 
+        proyectiles = []
     }
     
 }
