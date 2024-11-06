@@ -1,74 +1,93 @@
+// ===============================
+// Revisado por nico
+// ===============================
+
 import adminProyectiles.*
 import game.*
 
-class Proyectil{
+// ===============================
+// Proyectil: Clase base para proyectiles
+// ===============================
+class Proyectil {
+    // Propiedades
     const tipo
     const position = new MutablePosition()
     const danio = tipo.danio()
     const imagen = tipo.imagen()
-    
+
+    // Métodos públicos
     method position() = position
-
     method image() = imagen
-
     method frenarEnemigo() = false
-
     method sePuedeSuperponer() = true
 
-    method mover(){
-      position.goRight(1)
-        if (position.x() >= 14){self.eliminar()}
+    // Método de movimiento
+    method mover() {
+        position.goRight(1)
+        if (self.llegueAlFinal()) { self.eliminar() }
     }
-   
-    method colisionar(){
-      const objetoEnMiCelda = game.getObjectsIn(position)
-      const posicionEnFrente = new MutablePosition(x=position.x() + 1, y=position.y())
-      const objetoEnFrente = game.getObjectsIn(posicionEnFrente)
+    // Método que revisa si llego al final
+    method llegueAlFinal() = position.x() >= 14
+    // Método de colisión
+    method colisionar() {
+        const objetoEnMiCelda = game.getObjectsIn(position)
+        const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
+        const objetoEnFrente = game.getObjectsIn(posicionEnFrente)
 
-    const choco1 = objetoEnFrente.map({objeto => objeto.recibeDanioEnemigo(danio)})
-    const choco2 = objetoEnMiCelda.map({objeto => objeto.recibeDanioEnemigo(danio)})
+        const colisionFrente = objetoEnFrente.any({ objeto => objeto.recibeDanioEnemigo(danio) })
+        const colisionCelda = objetoEnMiCelda.any({ objeto => objeto.recibeDanioEnemigo(danio) })
 
-    if ((!choco1.isEmpty() && choco1.contains(true)) || (!choco2.isEmpty() && choco2.contains(true))){
-      self.destruirse()
-    }  
-    }
-
-    method recibeDanioEnemigo(_danio){return false}
-    method recibeDanioMago(_danio){return false}
-
-    method destruirse(){
-     if (tipo.destruirse()){
-        game.removeVisual(self)
-        administradorDeProyectiles.destruirProyectil(self)
+        if (colisionFrente || colisionCelda) {
+            self.destruirse()
         }
     }
 
+    // Métodos para recibir daño
+    method recibeDanioEnemigo(_danio) { return false }
+    method recibeDanioMago(_danio) { return false }
+
+    // Método para destruir el proyectil
+    method destruirse() {
+        if (tipo.destruirse()) { self.eliminar()}
+    }
+
+    // Método para eliminar el proyectil
     method eliminar() {
         game.removeVisual(self)
         administradorDeProyectiles.destruirProyectil(self)
     }
-
 }
 
-object proyectilNormal{
-const imagen = "p.proyectilFuego.png"
-const imagenDestruido = "p.bolaDeFuegoDestruida.gif"
-method imagen() {return imagen} 
-method imagenDestruido() {return imagenDestruido} 
-const danio = 50
-method danio() = danio
 
-method destruirse() = true
+// ===============================
+// Proyectil Normal: Implementación específica de un proyectil normal
+// ===============================
+object proyectilNormal {
+    // Propiedades
+    const imagen = "p.proyectilFuego.png"
+    const imagenDestruido = "p.bolaDeFuegoDestruida.gif"
+    const danio = 50
+
+    // Métodos públicos
+    method imagen() { return imagen }
+    method imagenDestruido() { return imagenDestruido }
+    method danio() = danio
+    method destruirse() = true
 }
 
-object proyectilPenetrante{
-const imagen = "p.proyectilHielo.png"
-const imagenDestruido = "p.proyectilHieloDestuido.png"
-method imagen() {return imagen} 
-method imagenDestruido() {return imagenDestruido} 
-const danio = 25
-method danio() = danio
 
-method destruirse() = false
+// ===============================
+// Proyectil Penetrante: Implementación específica de un proyectil penetrante
+// ===============================
+object proyectilPenetrante {
+    // Propiedades
+    const imagen = "p.proyectilHielo.png"
+    const imagenDestruido = "p.proyectilHieloDestuido.png"
+    const danio = 25
 
+    // Métodos públicos
+    method imagen() { return imagen }
+    method imagenDestruido() { return imagenDestruido }
+    method danio() = danio
+    method destruirse() = false
 }

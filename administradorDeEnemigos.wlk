@@ -11,7 +11,7 @@ object administradorDeEnemigos {
     method enemigos() = enemigos
   
     method columnaOcupada() = enemigos.filter({enemigo => enemigo.position().x()==14}).size() == 5
-  
+    
     method nombre() = nombreEnemigo /*para poder consultar el ultimo nombre usado*/
 
     method sumarEnemigo() {  nombreEnemigo+=1  }
@@ -45,7 +45,7 @@ object administradorDeEnemigos {
     }
 
     method reset() {
-        enemigos.forEach({enemigo => enemigo.eliminar() game.removeVisual(enemigo)})
+        enemigos.map({enemigo => enemigo.eliminar() game.removeVisual(enemigo)})
         nombreEnemigo = 0 
         enemigos = []
     }

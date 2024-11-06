@@ -10,9 +10,8 @@ class Mago {
   var property imagen
 
   method frenarEnemigo() = true
-
+  
   method enemigoEnSuFila() = administradorDeEnemigos.enemigos().any({enemigo => enemigo.position().y()==self.position().y()})
-
 
   method position() = position
   
@@ -27,7 +26,8 @@ class Mago {
   }
 
   method sePuedeSuperponer() = false
-  
+  method doyPlata() = 0
+
   method estaMuerto(){
     if (vida <= 0 && game.hasVisual(self)) {
       game.removeVisual(self)
@@ -57,19 +57,7 @@ class MagoFuego inherits Mago(vida=100,imagen="magoFuego.png"){
 }
 class MagoIrlandes inherits Mago(vida=100, imagen="magoHealer.png") {
  
-  override method estaMuerto(){
-
-  if (vida <= 0 && game.hasVisual(self)){ // agregue el game.has visual porque sino restaba girasoles hasta que lo elimine el garbage collector
-    self.eliminar()
-    }
-     return vida <= 0
-  }
-
-  override method eliminar(){
-      game.removeVisual(self)
-      puntaje.quitarMagoIrlandes()
-      administradorDeMagos.eliminarMago(self)
-  }
+ override method doyPlata() = 10
   
 }
 
@@ -143,7 +131,6 @@ object magoIrlandesTienda inherits MagoTienda(position = new MutablePosition(x=2
 override method generarMago(posicionMago) {
     self.puedeGenerarMago()
     puntaje.restarPuntos(costo)
-    puntaje.sumarMagoIrlandes()
     return new MagoIrlandes(position = posicionMago)
    }
 

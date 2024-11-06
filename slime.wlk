@@ -1,99 +1,107 @@
+
+// ===============================
+// Revisado por nico
+// ===============================
 import administradorDeEnemigos.*
 import casa.*
-import puntaje.cantidadDeBajas
+// ===============================
+// Clase Base: Slime
+// ===============================
+  class Slime {
+    const position
+    const tipo 
+    var property enMovimiento = true // Indica si el slime puede moverse
+    var property vida = tipo.vida()
+    const imagen = tipo.imagen()
+    var property danio = tipo.danio()
 
+    method frenarEnemigo() = true
+    method position() = position
+    method image() = imagen
+    method sePuedeSuperponer() = true
 
-class Slime{
-  
-	const position 
-  const tipo 
-
-
-  var property puedeMoverse = true /*va  a servir para hacer que deje de avanzar*/
-  var property vida = tipo.vida()
-  method frenarEnemigo() = true
-  method position() = position
-  const imagen =  tipo.imagen()
-  method image() = imagen
-  var property danio = tipo.danio()
-  method sePuedeSuperponer() = true
-
-  method movete() {
-    self.meFreno()
-    if(self.puedeMoverse())
-      return position.goLeft(tipo.desplazamiento())
-    else self.puedeMoverse(false)
-  }
-
-  method meFreno(){
-    const posicionEnFrente =  new MutablePosition(x=self.position().x()-1, y=self.position().y())
-    const objetoEnCeldaEnFrente = game.getObjectsIn(posicionEnFrente)
-    if (objetoEnCeldaEnFrente.any({objeto => objeto.frenarEnemigo()})){ // solo frena cuando se choca contra un enemigo o una planta
-      self.puedeMoverse(false)
-      objetoEnCeldaEnFrente.map({objeto => objeto.recibeDanioMago(danio)})
+    method movete() {
+      self.meFreno()
+      if (self.enMovimiento()) 
+        return position.goLeft(tipo.desplazamiento())
+      else 
+        self.enMovimiento(false)
     }
-    else{self.puedeMoverse(true)} //Agregue el self.moverse(true) para que cuando maten la planta se sigan moviendo
-  }
 
-  method recibeDanioMago(_danio){return false}
-  method recibeDanioEnemigo(_danio){
-    self.vida(self.vida() - _danio)
-    return true
-  }
+    method meFreno() {
+      const posicionEnFrente = new MutablePosition(x = self.position().x() - 1, y = self.position().y())
+      const objetoEnCeldaEnFrente = game.getObjectsIn(posicionEnFrente)
+      if (objetoEnCeldaEnFrente.any({ objeto => objeto.frenarEnemigo() })) { 
+        self.enMovimiento(false)
+        objetoEnCeldaEnFrente.map({ objeto => objeto.recibeDanioMago(danio) })
+      } else {
+        self.enMovimiento(true)
+      }
+    }
 
-  method estaMuerto(){
-    if (self.position().x() < 0){
-      casa.recibirDanio(self.position().y())
+    method recibeDanioMago(_danio) = false
+
+    method recibeDanioEnemigo(_danio) {
+      self.vida(self.vida() - _danio)
+      return true
+    }
+
+    method estaMuerto() {
+      if (self.llegoACasa()) {
+        casa.recibirDanio(self.position().y())
+        self.eliminar()
+      } else if (self.sinVida()) {
+        self.eliminar()
+      }
+      return self.sinVida() || self.llegoACasa()
+    }
+
+    method matar() { vida = 0 }
+
+    method eliminar() {
       game.removeVisual(self)
       administradorDeEnemigos.eliminarEnemigo(self)
     }
-    else if (self.vida()<=0){
-      cantidadDeBajas.agregarBaja()
-      game.removeVisual(self)
-      administradorDeEnemigos.eliminarEnemigo(self)
-      } 
-    return vida <= 0 || position.x() <= 0
+
+    method sinVida() = vida <= 0
+    method llegoACasa() = self.position().x() < 0
+  }
+// ===============================
+// Tipos de Slime: Variantes
+// ===============================
+  object slimeBasico { 
+    const property danio = 25
+    const property vida= 150
+    method desplazamiento() = 1
+    const  imagen="s.slimeBase.png"
+    method imagen() {return imagen} 
+    
   }
 
-  method eliminar() {
-    vida=0
-    }
+  object slimeNinja { 
+    const property danio = 200
+    const property vida= 120
+    method desplazamiento() = 2
+    const imagen="s.slimeNinja.png"
+    method imagen() {return imagen} 
+    
+  }
 
-}
+  object slimeGuerrero { 
+    const property danio = 25
+    const property vida= 150
+    method desplazamiento() = 1
+    const imagen="s.slimeGuerrero.png"
+    method imagen() {return imagen} 
+  }
 
-object slimeBasico { 
-  const property danio = 25
-  const property vida= 150
-  method desplazamiento() = 1
-  const  imagen="s.slimeBase.png"
-  method imagen() {return imagen} 
-  
-}
-
-object slimeNinja { 
-  const property danio = 200
-  const property vida= 120
-  method desplazamiento() = 2
-  const imagen="s.slimeNinja.png"
-  method imagen() {return imagen} 
-  
-}
-
-object slimeGuerrero { 
-  const property danio = 25
-  const property vida= 150
-  method desplazamiento() = 1
-  const imagen="s.slimeGuerrero.png"
-  method imagen() {return imagen} 
-}
-
-object slimeBlessed { 
-  const property danio = 150
-  const property vida= 250
-  method desplazamiento() = 1
-  const imagen="s.slimeBlessed.png"
-  method imagen() {return imagen} 
-}
+  object slimeBlessed { 
+    const property danio = 150
+    const property vida= 250
+    method desplazamiento() = 1
+    const imagen="s.slimeBlessed.png"
+    method imagen() {return imagen} 
+  }
 
 
 

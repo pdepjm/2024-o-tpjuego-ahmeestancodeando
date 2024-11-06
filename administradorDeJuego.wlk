@@ -18,60 +18,49 @@ object administradorDeJuego {
       //configuracion.detenerMusica()
       //game.schedule(100,{musica2.play()})
       //musica2.volume(0.4) 
-        game.addVisual(derrota)
-        self.perder()
-
-        }
-method perder() {
-        /* configuracion.detenerMusica()
-        game.schedule(100,{derrota.sonido.play()})
-        derrota.sonido.volume(0.4) 
-        game.addVisual(derrota)
-        game.schedule(500,{derrota.sonido.stop()}) */
+        puntaje.reset()
+        game.addVisual(pantalla)
         self.resetGame()
-        }
 
-method ganar() {
-        configuracion.detenerMusica()
-        game.schedule(100,{victoria.sonido.play()})
-        derrota.sonido.volume(0.4) 
-        game.addVisual(victoria)
-        game.schedule(500,{victoria.sonido.stop()})
-        keyboard.enter().onPressDo({self.resetGame()})
         }
-
-    
 
   method resetGame() {
+    configuracion.eliminarTicks()
     administradorDeEnemigos.reset()
     administradorDeMagos.reset()
     administradorDeProyectiles.reset()
     administradorDeOleadas.reset()
     casa.reset()
-    cantidadDeBajas.reset()
-    
     
     //configuracion.iniciarMusica()
   }
+
+  
 }
 
 object derrota {
     method position() = new MutablePosition(x=0, y=0)
-    method image() = "fin.jpg"
-    const sonido = game.sound("m.deathScreen.mp3")
+    method imagen() = "fin.jpg"
+    method sonido() = game.sound("m.deathScreen.mp3")
 }
 
 
 object victoria {
     method position() = new MutablePosition(x=0, y=0)
-    method image() = "victoria.jpg"
-    const sonido = game.sound("m.deathScreen.mp3")
+    method imagen() = "victoria.jpg"
+    method sonido() = game.sound("m.deathScreen.mp3")
 }
-/*class Pantalla {
+
+object pantalla {
     method position() = new MutablePosition(x=0, y=0)
-    method image()
-    const sonido
-}*/
+    method image() = estado.imagen()
+    var sonido = estado.sonido()
+    var estado = derrota
+    method estado(estadoNuevo){
+      estado = estadoNuevo
+    }
+}
+
 object configuracion {
   
     var property sonido = "pvz8bit.mp3"
@@ -85,13 +74,16 @@ method agregarVisuals() {
     menu.accion()
     cursor.accion()
     menu.iniciarTienda()
-    game.addVisual(cantidadDeBajas)
-    keyboard.r().onPressDo({
+    keyboard.p().onPressDo({
         administradorDeJuego.resetGame()
-        game.removeVisual(derrota) 
-        puntaje.reset()
-        game.schedule(4000,{administradorDeOleadas.iniciarOleada()})})
+        game.removeVisual(pantalla) 
+        ////puntaje.reset()
+        self.crearTicks()
+        ////////////game.schedule(4000,{administradorDeOleadas.iniciarOleada()})//para reiniciar el juego
+        })
+    keyboard.i().onPressDo({game.stop()})//para frenar el juego
   }
+
 method crearTicks(){
     game.schedule(4000, {administradorDeOleadas.iniciarOleada()})//espera un tiempo e inicia la primer oleada
 
@@ -126,6 +118,16 @@ method iniciarMusica(){
     musica.stop() // despues veo como lo implemento para que cambie o se detenga cuando moris
   }
 
+method eliminarTicks(){
+    game.removeTickEvent("mover enemigo")
+    game.removeTickEvent("matar enemigos")
+    game.removeTickEvent("matar magos")
+    game.removeTickEvent("aumentar dinero")
+    game.removeTickEvent("disparar")
+    game.removeTickEvent("moverDisparos")
+    game.removeTickEvent("impactarDisparos")
+    
+}
 
 
 }

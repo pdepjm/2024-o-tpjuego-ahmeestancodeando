@@ -6,7 +6,7 @@ import administradorDeJuego.*
 // Ver cómo hacer que llame a cada oleada correctamente
 object administradorDeOleadas {
     var oleadaActual = oleadaNormal
-    var property numeroOleada = 0
+    var property numeroOleada = 1
     const numOleadaFinal = 3
     
 
@@ -21,7 +21,7 @@ object administradorDeOleadas {
 
     
     method iniciarOleada() {
-        numeroOleada+=1
+        
         game.onTick(
             oleadaActual.tiempoSpawn(),
             "gestionar oleada",
@@ -41,10 +41,11 @@ object administradorDeOleadas {
     }
 
     method siguienteOleada() {
+        numeroOleada+=1
         //self.inicioOleada().volume(0.0001)
         //self.inicioOleada().play()
         oleadaActual.terminarOleada()
-        if(numeroOleada==(numOleadaFinal-1)) oleadaActual = oleadaFinal
+        if(numeroOleada==(numOleadaFinal)) oleadaActual = oleadaFinal
         game.schedule(20000, { self.iniciarOleada() })
         
 
@@ -66,7 +67,7 @@ object administradorDeOleadas {
         game.removeTickEvent("gestionar oleada")
         oleadaNormal.reset()
         oleadaFinal.reset()
-        numeroOleada = 0
+        numeroOleada = 1
         oleadaActual = oleadaNormal
     }
 
@@ -121,7 +122,10 @@ object oleadaFinal{
     const property tiempoSpawn = 400
 
     method ejecutando() = cantidadEnemigos > enemigosGenerados && enemigosRestantes > 0
-    method terminarOleada() {administradorDeJuego.ganar()}
+    method terminarOleada() {
+        pantalla.estado(victoria)
+        administradorDeJuego.terminarJuego()
+        }
     method finalizo () = enemigosRestantes == 0 && enemigosGenerados == cantidadEnemigos
 
     method reset() {enemigosGenerados=0}

@@ -5,7 +5,7 @@ object administradorDeMagos {
 
     const magos = #{}/*contiene cada mago que fue creando*/
     method magos() = magos
-
+    
     var property  magoAGenerar  = magoPiedraTienda
 
     method nombre() = nombreMago /*para poder consultar el ultimo nombre usado*/
@@ -22,7 +22,6 @@ object administradorDeMagos {
         self.sumarMago()
         return game.addVisual(nuevoMago)
     }
-
     method estanMuertos(){
         magos.forEach({mago => mago.estaMuerto()})
     }
