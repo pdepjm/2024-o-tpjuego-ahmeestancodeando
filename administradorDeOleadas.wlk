@@ -7,7 +7,7 @@ import administradorDeJuego.*
 object administradorDeOleadas {
     var oleadaActual = oleadaNormal
     var property numeroOleada = 0
-    const numOleadaFinal = 3
+    const numOleadaFinal = 2
     
 
     const posiblesTipos = [slimeBasico, slimeBasico, slimeGuerrero, slimeNinja, slimeBlessed]
@@ -21,10 +21,12 @@ object administradorDeOleadas {
 
     
     method iniciarOleada() {
-        numeroOleada+=1
+        numeroOleada= numeroOleada+1
+        game.removeTickEvent("generar siguiente oleada")
+        game.removeTickEvent("generar primera oleada")
         game.onTick(
             oleadaActual.tiempoSpawn(),
-            "gestionar oleada",
+            "generar siguiente oleada",
             { 
                 if (oleadaActual.ejecutando()) {
                     // Genera un nuevo enemigo de la lista y lo agrega a la cantidad de enemigos generados
@@ -45,7 +47,7 @@ object administradorDeOleadas {
         //self.inicioOleada().play()
         oleadaActual.terminarOleada()
         if(numeroOleada==(numOleadaFinal-1)) oleadaActual = oleadaFinal
-        game.schedule(20000, { self.iniciarOleada() })
+        game.onTick(20000,"generar siguiente oleada", { self.iniciarOleada() })
         
 
         // Remueve eventos anteriores de generación de enemigos
@@ -121,7 +123,7 @@ object oleadaFinal{
     const property tiempoSpawn = 400
 
     method ejecutando() = cantidadEnemigos > enemigosGenerados && enemigosRestantes > 0
-    method terminarOleada() {administradorDeJuego.ganar()}
+    method terminarOleada() {administradorDeJuego.terminarJuego(victoria)}
     method finalizo () = enemigosRestantes == 0 && enemigosGenerados == cantidadEnemigos
 
     method reset() {enemigosGenerados=0}

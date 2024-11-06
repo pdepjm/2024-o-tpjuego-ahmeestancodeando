@@ -91,17 +91,15 @@ override method estaMuerto(){
     if (vida <= 0 && game.hasVisual(self)){ // agregue el game.has visual porque sino restaba girasoles hasta que lo elimine el garbage collector
       const posicionEnFrente = new MutablePosition(x=position.x() + 1, y=position.y())
       const enemigoEnFrente = game.getObjectsIn(posicionEnFrente)
-      self.imagen("p.allahu.gif")
       const explosion = game.sound("m.explosion.mp3")
-      game.schedule(50,{explosion.play()})
-        explosion.volume(0.2) 
-      enemigoEnFrente.map({objeto => objeto.recibeDanioEnemigo(1000)})
-      game.schedule(300, { self.eliminar() })
-    } 
-     return vida <= 0
+      explosion.play()
+      explosion.volume(0.1) 
+      enemigoEnFrente.map({slime => slime.eliminar()})
+      self.eliminar()
+  }
+  return vida <= 0
 }
 }
-
 
 class MagoTienda{
   const position

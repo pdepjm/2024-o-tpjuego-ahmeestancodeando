@@ -3,7 +3,7 @@ object puntaje {
 
 method position() = new MutablePosition(x=7, y=5)
 
-var property puntos = 50
+var property puntos = 900000
 
 var property cantidadDeMagosIrlandeses = 0
 

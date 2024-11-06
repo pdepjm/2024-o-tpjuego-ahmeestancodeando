@@ -46,8 +46,8 @@ object administradorDeEnemigos {
 
     method reset() {
         enemigos.forEach({enemigo => enemigo.eliminar()})
+        self.estanMuertos()
         nombreEnemigo = 0 
-        enemigos = []
     }
 
 }

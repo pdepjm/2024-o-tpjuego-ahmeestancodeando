@@ -12,38 +12,50 @@ import pala.*
 import casa.casa
 
 object administradorDeJuego {
-    
-  method terminarJuego(){
-      //const musica2 = game.sound("m.deathScreen.mp3")
-      //configuracion.detenerMusica()
-      //game.schedule(100,{musica2.play()})
-      //musica2.volume(0.4) 
-        game.addVisual(derrota)
-        game.schedule(500,{game.stop()})
+  var property hayPantalla = false
+  var pantallita = derrota
+  method terminarJuego(pantalla){
+    hayPantalla = true 
+    pantallita = pantalla
+    game.removeTickEvent("gestionar oleada")
+    //const musica2 = game.sound("m.deathScreen.mp3")
+    //configuracion.detenerMusica()
+    //game.schedule(100,{musica2.play()})
+    //musica2.volume(0.4) 
+    game.addVisual(pantalla)
+    //game.schedule(500,{game.stop()})
+    keyboard.r().onPressDo({self.resetGame()})
+    keyboard.backspace().onPressDo({game.stop()})
 
-        }
+   }
+/* No funca sin musica
+  SE ROMPE TODO POR LA MUSICA DE MIERDA >:(
 method perder() {
+        const sonido = game.sound("m.deathScreen.mp3")
         configuracion.detenerMusica()
-        game.schedule(100,{derrota.sonido.play()})
-        derrota.sonido.volume(0.4) 
+        game.schedule(100,{sonido.play()})
+        sonido.volume(0.4) 
         game.addVisual(derrota)
-        game.schedule(500,{derrota.sonido.stop()})
+        game.schedule(500,{sonido.stop()})
         keyboard.enter().onPressDo({self.resetGame()})
         }
 
 method ganar() {
+        const sonido = game.sound("m.deathScreen.mp3")
         configuracion.detenerMusica()
-        game.schedule(100,{victoria.sonido.play()})
-        derrota.sonido.volume(0.4) 
+        game.schedule(100,{sonido.play()})
+        sonido.volume(0.4) 
         game.addVisual(victoria)
-        game.schedule(500,{victoria.sonido.stop()})
+        game.schedule(500,{sonido.stop()})
         keyboard.enter().onPressDo({self.resetGame()})
         }
-
+*/
     
 
   method resetGame() {
     //game.clear()
+    hayPantalla = false
+    game.removeVisual(pantallita)
     administradorDeEnemigos.reset()
     administradorDeMagos.reset()
     administradorDeProyectiles.reset()
@@ -51,6 +63,9 @@ method ganar() {
     casa.reset()
     puntaje.reset()
     cantidadDeBajas.reset()
+    configuracion.primeraOleada()
+
+
     //configuracion.iniciarMusica()
   }
 }
@@ -58,14 +73,12 @@ method ganar() {
 object derrota {
     method position() = new MutablePosition(x=0, y=0)
     method image() = "fin.jpg"
-    const sonido = game.sound("m.deathScreen.mp3")
 }
 
 
 object victoria {
     method position() = new MutablePosition(x=0, y=0)
     method image() = "victoria.jpg"
-    const sonido = game.sound("m.deathScreen.mp3")
 }
 /*class Pantalla {
     method position() = new MutablePosition(x=0, y=0)
@@ -88,10 +101,10 @@ method agregarVisuals() {
     game.addVisual(cantidadDeBajas)
   }
 method crearTicks(){
-    game.schedule(4000, {administradorDeOleadas.iniciarOleada()})//espera un tiempo e inicia la primer oleada
+    self.primeraOleada()
 
     game.onTick(
-      250,
+      1000,
       "mover enemigo",
       { administradorDeEnemigos.moverEnemigos() }
     )
@@ -108,7 +121,9 @@ method crearTicks(){
     game.onTick(1000,"moverDisparos",{ administradorDeProyectiles.moverProyectiles() })
     game.onTick(1000,"impactarDisparos",{ administradorDeProyectiles.impactarProyectiles() })
 }
-
+method primeraOleada(){
+      game.onTick(4000,"generar primera oleada", { administradorDeOleadas.iniciarOleada() })//espera un tiempo e inicia la primer oleada
+}
 
 method iniciarMusica(){
     

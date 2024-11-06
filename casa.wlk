@@ -10,13 +10,10 @@ object casa {
     administradorDeEnemigos.enemigos().filter({enemigo => enemigo.position().y() == fila}).map({enemigo => enemigo.eliminar()})// elimina enemigos de la misma fila
      // self.explosion().volume(0.4)
      // self.explosion().play()
-      if(vida <= 0) {administradorDeJuego.terminarJuego()}
+      if(vida <= 0) {administradorDeJuego.terminarJuego(derrota)}
       
     }
 
-
-
-    
     method reset() {
         vida=1
     }

@@ -3,6 +3,8 @@ import magos.*
 import cursor.*
 import wollok.game.*
 import pala.*
+import administradorDeJuego.*
+
 object menu {
   method pop() = game.sound("m.pop.mp3")
   method pff() = game.sound("m.pff.mp3")
@@ -30,12 +32,12 @@ object menu {
     const objetoCelda = game.colliders(cursor)
     const posicionCelda = new MutablePosition(x = cursor.position().x(), y = cursor.position().y())
 
-    if (!magoAGenerar.isEmpty() && objetoCelda.all({objeto => objeto.sePuedeSuperponer()}) && self.position().x() != 5){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
+    if (!magoAGenerar.isEmpty() && objetoCelda.all({objeto => objeto.sePuedeSuperponer()}) && self.position().x() != 5 && not administradorDeJuego.hayPantalla()){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
         const magoSeleccionado = magoAGenerar.first()
         administradorDeMagos.generarMago(magoSeleccionado, posicionCelda)
         self.pop().volume(0.2)
         self.pop().play()
-    } else  if (self.position().x() == 5){
+    } else  if (self.position().x() == 5 && not administradorDeJuego.hayPantalla()){
         const magoSeleccionado = objetoCelda.find({objeto => not objeto.sePuedeSuperponer()})
         pala.eliminarMago(magoSeleccionado)
         self.pff().volume(0.4)
