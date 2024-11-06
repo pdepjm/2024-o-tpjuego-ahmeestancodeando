@@ -45,7 +45,7 @@ object administradorDeEnemigos {
     }
 
     method reset() {
-        enemigos.forEach({enemigo => enemigo.eliminar()})
+        enemigos.forEach({enemigo => enemigo.eliminar() game.removeVisual(enemigo)})
         nombreEnemigo = 0 
         enemigos = []
     }

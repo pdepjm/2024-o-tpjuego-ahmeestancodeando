@@ -19,16 +19,16 @@ object administradorDeJuego {
       //game.schedule(100,{musica2.play()})
       //musica2.volume(0.4) 
         game.addVisual(derrota)
-        game.schedule(500,{game.stop()})
+        self.perder()
 
         }
 method perder() {
-        configuracion.detenerMusica()
+        /* configuracion.detenerMusica()
         game.schedule(100,{derrota.sonido.play()})
         derrota.sonido.volume(0.4) 
         game.addVisual(derrota)
-        game.schedule(500,{derrota.sonido.stop()})
-        keyboard.enter().onPressDo({self.resetGame()})
+        game.schedule(500,{derrota.sonido.stop()}) */
+        self.resetGame()
         }
 
 method ganar() {
@@ -43,14 +43,14 @@ method ganar() {
     
 
   method resetGame() {
-    //game.clear()
     administradorDeEnemigos.reset()
     administradorDeMagos.reset()
     administradorDeProyectiles.reset()
     administradorDeOleadas.reset()
     casa.reset()
-    puntaje.reset()
     cantidadDeBajas.reset()
+    
+    
     //configuracion.iniciarMusica()
   }
 }
@@ -86,6 +86,11 @@ method agregarVisuals() {
     cursor.accion()
     menu.iniciarTienda()
     game.addVisual(cantidadDeBajas)
+    keyboard.r().onPressDo({
+        administradorDeJuego.resetGame()
+        game.removeVisual(derrota) 
+        puntaje.reset()
+        game.schedule(4000,{administradorDeOleadas.iniciarOleada()})})
   }
 method crearTicks(){
     game.schedule(4000, {administradorDeOleadas.iniciarOleada()})//espera un tiempo e inicia la primer oleada

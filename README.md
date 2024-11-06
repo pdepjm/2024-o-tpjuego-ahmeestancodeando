@@ -36,3 +36,4 @@ liveshare: https://prod.liveshare.vsengsaas.visualstudio.com/join?CE16CF3EFD9938
 - `ARROW_RIGHT` para mover derecha cursor
 - `ARROW_DOWN` para mover abajo cursor
 - `ENTER` para poner planta
+- `R` para reiniciar juego
