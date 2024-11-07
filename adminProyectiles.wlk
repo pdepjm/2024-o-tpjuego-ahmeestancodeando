@@ -23,7 +23,6 @@ object administradorDeProyectiles {
         nombreParaProyectil = new Proyectil(position = posicion, tipo = tipoProyectil)
         proyectiles.add(nombreParaProyectil)
         self.sumarProyectil()
-        
         return game.addVisual(nombreParaProyectil)
     }
 

@@ -25,7 +25,7 @@ class Proyectil {
     // Método de movimiento
     method mover() {
         imagen=tipo.imagenes().get(0)
-        frame=1
+        frame=0
         //game.onTick(190, "frame", {self.cambiarFrame()})
         //game.schedule(600, {game.removeTickEvent("frame")}) ESTOS POR SI QUEREMOS QUE CREEN SUS PROPIOS TICK PARA LAS ANIMACIONES
         position.goRight(1)
@@ -41,9 +41,8 @@ class Proyectil {
         const objetoEnFrente = game.getObjectsIn(posicionEnFrente)
         const colisionFrente = objetoEnFrente.any({ objeto => objeto.recibeDanioEnemigo(danio) })
         const colisionCelda = objetoEnMiCelda.any({ objeto => objeto.recibeDanioEnemigo(danio) })
-        
         if (colisionFrente || colisionCelda) {
-            self.destruirse()
+            game.schedule(100, {self.destruirse()})
         }
     }
 
@@ -67,7 +66,8 @@ class Proyectil {
     method cambiarFrame() {
         imagen=tipo.imagenes().get(frame)
         if(frame<2) {frame+=1}
-        else frame=2
+        else {self.mover()}
+        //game.schedule(150, {self.colisionar()})}
     }
     method matarSlime(){}
 }
@@ -78,7 +78,7 @@ class Proyectil {
 // ===============================
 object proyectilNormal {
     // Métodos públicos
-    const property imagenes = ["p.proyectilFuego - frame1.png", "p.proyectilFuego - frame2.png", "p.proyectilFuego - frame3.png"]
+    const property imagenes = ["p.proyectilFuego - frame1.png", "p.proyectilFuego - frame3.png", "p.proyectilFuego - frame3.png"]
     method danio() = 50
     method destruirse() = true
 }
@@ -89,7 +89,7 @@ object proyectilNormal {
 // ===============================
 object proyectilPenetrante {
     // Métodos públicos
-    const property imagenes = ["p.proyectilHielo-frame1.png", "p.proyectilHielo-frame2.png", "p.proyectilHielo-frame3.png"]
+    const property imagenes = ["p.proyectilHielo-frame1.png", "p.proyectilHielo-frame3.png", "p.proyectilHielo-frame3.png"]
     method danio() = 25
     method destruirse() = false
 

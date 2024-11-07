@@ -159,8 +159,9 @@ describe "Funcionalidad" {
     const casaPrueba = casa
     const posicionTemporal = new MutablePosition(x=0, y=2)
     const slime = new Slime(position = posicionTemporal, tipo=slimeBasico)
+    administradorDeEnemigos.enemigos().add(slime)
     slime.movete()
-    assert.that(slime.llegoACasa() && slime.estaMuerto())
+    assert.that(administradorDeEnemigos.enemigos().isEmpty())
 
   }
     test "Si Slime llega a casa, toda la fila muere"{
@@ -171,12 +172,13 @@ describe "Funcionalidad" {
     const slime1 = new Slime(position = posicionTemporal, tipo=slimeBasico)
     const slime2 = new Slime(position = posicionTemporal2, tipo=slimeBasico)
     const slime3 = new Slime(position = posicionTemporal3, tipo=slimeBasico)
+    
     administradorDeEnemigos.enemigos().add(slime1)
     administradorDeEnemigos.enemigos().add(slime2)
     administradorDeEnemigos.enemigos().add(slime3)
     slime1.movete()
-    slime1.estaMuerto()
-    assert.that(slime2.sinVida() && slime3.sinVida())
+    slime2.movete()
+    assert.that(administradorDeEnemigos.enemigos().isEmpty())
 
   }
   test "Si Casa se queda sin Vida pierde"{

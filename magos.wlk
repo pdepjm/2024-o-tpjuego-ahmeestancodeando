@@ -30,6 +30,8 @@ class Mago {
   
   method recibeDanioMago(_danio) {
     self.vida(self.vida() - _danio)
+    self.matar()
+
   }
 
   method sePuedeSuperponer() = false

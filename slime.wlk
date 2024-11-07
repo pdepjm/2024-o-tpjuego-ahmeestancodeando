@@ -23,12 +23,17 @@ class Slime {
 
 
     // Movimiento del Slime
-    method movete() {
+    method movete() { 
         self.meFreno()
         if (self.enMovimiento()) 
-            return position.goLeft(tipo.desplazamiento())
+            position.goLeft(tipo.desplazamiento())
+            if(self.llegoACasa()){
+            casa.recibirDanio(self.position().y())
+            return
+        }
         else 
-            self.enMovimiento(false)
+            self.enMovimiento(false) 
+        
     }
 
     // Lógica para frenar el movimiento
@@ -49,23 +54,19 @@ class Slime {
 
     method recibeDanioEnemigo(_danio) {
         self.vida(self.vida() - _danio)
+        self.estaMuerto()
         return true
     }
 
     // Comprobación de estado de vida y eliminación
     method estaMuerto() {
-        if (self.llegoACasa()) {
-            casa.recibirDanio(self.position().y())
-            self.eliminar()
-        } else if (self.sinVida()) {
-            self.eliminar()
-        }
-        return self.sinVida() || self.llegoACasa()
+        if (self.sinVida()) self.eliminar()
+        return self.sinVida()
     }
 
     method sinVida() = vida <= 0
     method llegoACasa() = self.position().x() < 0
-    method matarSlime() { vida = 0 }
+    method matarSlime() {self.eliminar()}
 
     // Eliminación del Slime
     method eliminar() {
