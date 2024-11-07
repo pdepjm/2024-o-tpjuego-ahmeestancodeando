@@ -65,7 +65,7 @@ class Slime {
 
     method sinVida() = vida <= 0
     method llegoACasa() = self.position().x() < 0
-    method matar() { vida = 0 }
+    method matarSlime() { vida = 0 }
 
     // Eliminación del Slime
     method eliminar() {

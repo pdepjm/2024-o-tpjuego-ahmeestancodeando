@@ -56,7 +56,7 @@ class Proyectil {
         administradorDeProyectiles.destruirProyectil(self)
     }
 
-    method matar(){}
+    method matarSlime(){}
 }
 
 
