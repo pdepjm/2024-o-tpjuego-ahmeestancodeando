@@ -1,4 +1,4 @@
-![diagrama5](https://github.com/user-attachments/assets/054ea89d-2759-449c-b381-63a5e5fbdda1)Magos Vs Slime
+Magos Vs Slime
     El juego consiste en defender la base de slimes Atacantes, a partir de una variedad de Magos. 
 
 Elementos:
