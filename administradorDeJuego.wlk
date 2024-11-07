@@ -102,13 +102,13 @@ object configuracion {
     method crearTicks() {
         game.schedule(4000, { administradorDeOleadas.iniciarOleada() }) // Inicia la primera oleada tras 4 segundos
         
-        game.onTick(1000, "mover enemigo", { administradorDeEnemigos.moverEnemigos() })
+        game.onTick(1500, "mover enemigo", { administradorDeEnemigos.moverEnemigos() })
         game.onTick(1000, "matar enemigos", { administradorDeEnemigos.estanMuertos() })
         game.onTick(1000, "matar magos", { administradorDeMagos.matarMagos() })
         game.onTick(500, "aumentar dinero", { puntaje.sumarPuntos() })
         game.onTick(3000, "disparar", { administradorDeMagos.disparar() })
-        game.onTick(1000, "moverDisparos", { administradorDeProyectiles.moverProyectiles() })
-        game.onTick(1000, "impactarDisparos", { administradorDeProyectiles.impactarProyectiles() })
+        game.onTick(700, "moverDisparos", { administradorDeProyectiles.moverProyectiles() })
+        game.onTick(700, "impactarDisparos", { administradorDeProyectiles.impactarProyectiles() })
     }
 
     // Método para iniciar la música de fondo en bucle
