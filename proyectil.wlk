@@ -13,17 +13,23 @@ class Proyectil {
     const tipo
     const position = new MutablePosition()
     const property danio = tipo.danio()
-
+   /*  var frame = 0
+    var imagen = tipo.imagenes().get(0) */
+    var imagen = tipo.imagen()
     // Métodos públicos
     method position() = position
-    method image() = tipo.imagen()
+    method image() = imagen
     method frenarEnemigo() = false
     method sePuedeSuperponer() = true
 
     // Método de movimiento
     method mover() {
+       /*  imagen=tipo.imagenes().get(0)
+        frame=1
+        game.onTick(190, "frame", {self.cambiarFrame()}) */
         position.goRight(1)
         if (self.llegueAlFinal() || self.verificarEnemigosEnfrente()) { self.eliminar() }
+        /* game.schedule(600, {game.removeTickEvent("frame")}) */
     }
     // Método que revisa si llego al final
     method llegueAlFinal() = position.x() >= 14
@@ -32,10 +38,9 @@ class Proyectil {
         const objetoEnMiCelda = game.getObjectsIn(self.position())
         const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
         const objetoEnFrente = game.getObjectsIn(posicionEnFrente)
-
         const colisionFrente = objetoEnFrente.any({ objeto => objeto.recibeDanioEnemigo(danio) })
         const colisionCelda = objetoEnMiCelda.any({ objeto => objeto.recibeDanioEnemigo(danio) })
-
+        
         if (colisionFrente || colisionCelda) {
             self.destruirse()
         }
@@ -56,9 +61,13 @@ class Proyectil {
         administradorDeProyectiles.destruirProyectil(self)
     }
 
-    method verificarEnemigosEnfrente() = !administradorDeEnemigos.enemigos().any({enemigo => enemigo.position().y() == self.position().y() && enemigo.position().x() >= self.position().x()-1})
+    method verificarEnemigosEnfrente() = !administradorDeEnemigos.enemigos().any({enemigo => enemigo.position().y() == self.position().y() && enemigo.position().x() >= self.position().x()-2})
     
-
+  /*   method cambiarFrame() {
+        imagen=tipo.imagenes().get(frame)
+        if(frame<2) {frame+=1}
+        else frame=2
+    } */
     method matarSlime(){}
 }
 
@@ -68,9 +77,17 @@ class Proyectil {
 // ===============================
 object proyectilNormal {
     // Métodos públicos
-    method imagen() = "p.proyectilFuego.png"
+    const property imagenes = ["p.proyectilFuego - frame1.png", "p.proyectilFuego - frame2.png", "p.proyectilFuego - frame3.png"]
+    var frame = "p.proyectilFuego - frame1.png"
+    var property nroFrame = 0
+    method imagen() = frame
     method danio() = 50
     method destruirse() = true
+    method cambiarFrame() {
+        frame=self.imagenes().get(nroFrame)
+        if(nroFrame<2) {nroFrame+=1}
+        else nroFrame=2
+    } 
 }
 
 
@@ -79,7 +96,12 @@ object proyectilNormal {
 // ===============================
 object proyectilPenetrante {
     // Métodos públicos
-    method imagen() = "p.proyectilHielo.png"
+    /* method imagen() = "p.proyectilHielo.png"
+    method danio() = 25
+    method destruirse() = false */
+    const property imagenes = ["p.proyectilHielo-frame1.png", "p.proyectilHielo-frame2.png", "p.proyectilHielo-frame3.png"]
+    method imagen() = "p.proyectilHielo-frame1.png"
     method danio() = 25
     method destruirse() = false
+
 }

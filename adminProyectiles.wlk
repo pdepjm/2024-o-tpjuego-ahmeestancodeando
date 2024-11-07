@@ -23,6 +23,7 @@ object administradorDeProyectiles {
         nombreParaProyectil = new Proyectil(position = posicion, tipo = tipoProyectil)
         proyectiles.add(nombreParaProyectil)
         self.sumarProyectil()
+        
         return game.addVisual(nombreParaProyectil)
     }
 
@@ -40,7 +41,10 @@ object administradorDeProyectiles {
     method destruirProyectil(proyectil) {
         proyectiles.remove(proyectil)
     }
-
+    
+    method cambiarFrame(){
+        proyectiles.forEach({proyectil => proyectil.tipo().cambiarFrame()})
+    }
     // Restablece el administrador, eliminando todos los proyectiles y reiniciando el contador de nombres
     method reset() {
         proyectiles.forEach({ proyectil => proyectil.eliminar() })
