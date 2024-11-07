@@ -32,7 +32,7 @@ object administradorDeOleadas {
             { 
                 if (oleadaActual.ejecutando()) {
                     administradorDeEnemigos.generarEnemigo(oleadaActual.enemigos().anyOne())
-                } else if (oleadaActual.finalizo()) {
+                } else if(oleadaActual.finalizo()){
                     self.siguienteOleada()
                     game.removeTickEvent("gestionar oleada")
                     self.finOleada().volume(0.1)
@@ -44,10 +44,18 @@ object administradorDeOleadas {
 
     // Pasa a la siguiente oleada
     method siguienteOleada() {
+        // por ahora funciona , si intento mejorar la logica se rompe 
         numeroOleada += 1
-        oleadaActual.terminarOleada()
-        if (numeroOleada == numOleadaFinal) oleadaActual = oleadaFinal
-        game.schedule(20000, { self.iniciarOleada() })
+        if (numeroOleada > numOleadaFinal){
+            oleadaActual.terminarOleada()
+        } else {
+            oleadaActual.terminarOleada()
+            if (numeroOleada == numOleadaFinal){
+            oleadaActual = oleadaFinal
+            }
+            game.schedule(5000, { self.iniciarOleada() })
+        }
+        
     }
 
     // Gestión de contadores de enemigos

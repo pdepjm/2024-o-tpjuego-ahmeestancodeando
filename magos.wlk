@@ -38,8 +38,8 @@ class Mago {
   method doyPlata() = 0
 
   method estaMuerto() {
-    if (vida <= 0) {self.eliminar()}
-    return vida <= 0
+    if (self.vida() <= 0) {self.eliminar()}
+    return self.vida() <= 0
   }
 
   method eliminar() {
@@ -86,18 +86,17 @@ class MagoPiedra inherits Mago(vida = 300, imagen = "magoPiedra.png") {}
 // Mago Explosivo
 class MagoExplosivo inherits Mago(vida = 30, imagen = "magoExplosivo.png") {
   const explosion = game.sound("m.explosion.mp3")
-  const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
-  var enemigoEnFrente = game.getObjectsIn(posicionEnFrente)
-
 
   override method estaMuerto() {
-    if (vida <= 0 ) {
+    if (self.vida() <= 0 ) {
+      const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
+      const enemigoEnFrente = game.getObjectsIn(posicionEnFrente)
       explosion.volume(0.2)
       explosion.play()
       enemigoEnFrente.map({ objeto => objeto.matarSlime() })
       self.eliminar()
     }
-    return vida <= 0
+    return self.vida() <= 0
   }
 }
 
