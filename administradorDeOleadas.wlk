@@ -49,7 +49,10 @@ object administradorDeOleadas {
         numeroOleada += 1
         game.onTick(10000,"Iniciar Oleada", { self.iniciarOleada() })
         oleadaActual.terminarOleada()
-        if (numeroOleada == numOleadaFinal) oleadaActual = oleadaFinal
+        if (numeroOleada == numOleadaFinal){
+            oleadaActual = oleadaFinal
+            administradorDeJuego.imagenFondo("theEndOfMagosVSSLimes.jpg")
+        } 
         
     }
 

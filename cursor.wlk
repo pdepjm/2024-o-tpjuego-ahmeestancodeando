@@ -32,4 +32,6 @@ object cursor {
     method frenarEnemigo() = false
     method recibeDanioEnemigo(_danio) { return false }
     method recibeDanioMago(_danio) { return false }
+    method matarSlime() {}
+    
 }

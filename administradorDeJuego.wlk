@@ -14,25 +14,29 @@ import casa.casa
 // Administrador de Juego: Control central del juego, reseteo y fin del juego
 // =======================================
 object administradorDeJuego {
-  
+    var property imagenFondo = "fondo1.jpg"
+
+    method image() = imagenFondo
+    method position() = new MutablePosition(x = 0, y = 0)
+
   // Método para finalizar el juego y resetear el estado
-  method terminarJuego() {
-    puntaje.reset()
-    game.addVisual(pantalla)
-    self.resetGame()
-  }
+    method terminarJuego() {
+        puntaje.reset()
+        game.addVisual(pantalla)
+        self.resetGame()
+    }
 
   // Método para resetear todos los administradores y configuraciones del juego
-  method resetGame() {
-    configuracion.eliminarTicks()
-    administradorDeEnemigos.reset()
-    administradorDeMagos.reset()
-    administradorDeProyectiles.reset()
-    administradorDeOleadas.reset()
-    casa.reset()
-    puntaje.reset()
-    // configuracion.iniciarMusica() // Iniciar música (opcional)
-  }
+    method resetGame() {
+        configuracion.eliminarTicks()
+        administradorDeEnemigos.reset()
+        administradorDeMagos.reset()
+        administradorDeProyectiles.reset()
+        administradorDeOleadas.reset()
+        casa.reset()
+        puntaje.reset()
+        // configuracion.iniciarMusica() // Iniciar música (opcional)
+    }
 }
 
 // =======================================
@@ -72,16 +76,18 @@ object pantalla {
 object configuracion {
   
     var property sonido = "pvz8bit.mp3"
+
     const musica = game.sound(self.sonido()) // El reproductor de música es constante; solo cambia el archivo de sonido
 
     // Método para agregar elementos visuales y configurar teclas de control
     method agregarVisuals() {
+        
+        game.addVisual(administradorDeJuego)
         game.addVisual(cursor)
         game.addVisual(menu)
         game.addVisual(puntaje)
         game.addVisual(administradorDeOleadas)
         game.addVisual(casa)
-
         menu.accion()
         cursor.accion()
         menu.iniciarTienda()
