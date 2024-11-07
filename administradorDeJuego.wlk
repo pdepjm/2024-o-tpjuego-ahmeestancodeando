@@ -30,6 +30,7 @@ object administradorDeJuego {
     administradorDeProyectiles.reset()
     administradorDeOleadas.reset()
     casa.reset()
+    puntaje.reset()
     // configuracion.iniciarMusica() // Iniciar música (opcional)
   }
 }
@@ -88,6 +89,7 @@ object configuracion {
             administradorDeJuego.resetGame()
             game.removeVisual(pantalla)
             self.crearTicks()
+            puntaje.reset()
         })
 
         // Tecla "I" para detener el juego

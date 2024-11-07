@@ -83,18 +83,18 @@ class MagoPiedra inherits Mago(vida = 300, imagen = "magoPiedra.png") {}
 
 // Mago Explosivo
 class MagoExplosivo inherits Mago(vida = 30, imagen = "magoExplosivo.png") {
-
+  const explosion = game.sound("m.explosion.mp3")
+  const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
+  va enemigoEnFrente = game.getObjectsIn(posicionEnFrente)
 
 
   override method estaMuerto() {
-  const explosion = game.sound("m.explosion.mp3")
-  const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
-  const enemigoEnFrente = game.getObjectsIn(posicionEnFrente)
+
     if (vida <= 0 ) {
       explosion.volume(0.2)
       explosion.play()
       enemigoEnFrente.map({ objeto => objeto.matar() })
-      vida = 0
+      self.eliminar()
     }
     return vida <= 0
   }
