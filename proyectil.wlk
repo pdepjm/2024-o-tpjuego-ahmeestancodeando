@@ -10,12 +10,12 @@ import administradorDeEnemigos.administradorDeEnemigos
 // ===============================
 class Proyectil {
     // Propiedades
-    const tipo
+    const property tipo
     const position = new MutablePosition()
     const property danio = tipo.danio()
-   /*  var frame = 0
-    var imagen = tipo.imagenes().get(0) */
-    var imagen = tipo.imagen()
+    var frame = 0
+    var imagen = tipo.imagenes().get(0)
+   
     // Métodos públicos
     method position() = position
     method image() = imagen
@@ -24,12 +24,13 @@ class Proyectil {
 
     // Método de movimiento
     method mover() {
-       /*  imagen=tipo.imagenes().get(0)
+        imagen=tipo.imagenes().get(0)
         frame=1
-        game.onTick(190, "frame", {self.cambiarFrame()}) */
+        //game.onTick(190, "frame", {self.cambiarFrame()})
+        //game.schedule(600, {game.removeTickEvent("frame")}) ESTOS POR SI QUEREMOS QUE CREEN SUS PROPIOS TICK PARA LAS ANIMACIONES
         position.goRight(1)
         if (self.llegueAlFinal() || self.verificarEnemigosEnfrente()) { self.eliminar() }
-        /* game.schedule(600, {game.removeTickEvent("frame")}) */
+        
     }
     // Método que revisa si llego al final
     method llegueAlFinal() = position.x() >= 14
@@ -63,11 +64,11 @@ class Proyectil {
 
     method verificarEnemigosEnfrente() = !administradorDeEnemigos.enemigos().any({enemigo => enemigo.position().y() == self.position().y() && enemigo.position().x() >= self.position().x()-2})
     
-  /*   method cambiarFrame() {
+    method cambiarFrame() {
         imagen=tipo.imagenes().get(frame)
         if(frame<2) {frame+=1}
         else frame=2
-    } */
+    }
     method matarSlime(){}
 }
 
@@ -78,16 +79,8 @@ class Proyectil {
 object proyectilNormal {
     // Métodos públicos
     const property imagenes = ["p.proyectilFuego - frame1.png", "p.proyectilFuego - frame2.png", "p.proyectilFuego - frame3.png"]
-    var frame = "p.proyectilFuego - frame1.png"
-    var property nroFrame = 0
-    method imagen() = frame
     method danio() = 50
     method destruirse() = true
-    method cambiarFrame() {
-        frame=self.imagenes().get(nroFrame)
-        if(nroFrame<2) {nroFrame+=1}
-        else nroFrame=2
-    } 
 }
 
 
@@ -96,11 +89,7 @@ object proyectilNormal {
 // ===============================
 object proyectilPenetrante {
     // Métodos públicos
-    /* method imagen() = "p.proyectilHielo.png"
-    method danio() = 25
-    method destruirse() = false */
     const property imagenes = ["p.proyectilHielo-frame1.png", "p.proyectilHielo-frame2.png", "p.proyectilHielo-frame3.png"]
-    method imagen() = "p.proyectilHielo-frame1.png"
     method danio() = 25
     method destruirse() = false
 

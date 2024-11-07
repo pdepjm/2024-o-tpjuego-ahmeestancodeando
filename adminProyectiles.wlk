@@ -41,9 +41,8 @@ object administradorDeProyectiles {
     method destruirProyectil(proyectil) {
         proyectiles.remove(proyectil)
     }
-    
     method cambiarFrame(){
-        proyectiles.forEach({proyectil => proyectil.tipo().cambiarFrame()})
+        proyectiles.forEach({proyectil=> proyectil.cambiarFrame()})
     }
     // Restablece el administrador, eliminando todos los proyectiles y reiniciando el contador de nombres
     method reset() {
