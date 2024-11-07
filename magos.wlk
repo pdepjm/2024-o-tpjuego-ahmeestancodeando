@@ -91,13 +91,13 @@ class MagoExplosivo inherits Mago(vida = 10, imagen = "magoExplosivo.png") {
 
 
   override method estaMuerto() {
-    if (vida <= 0 ) {
+    if (self.vida() <= 0 ) {
       explosion.volume(0.2)
       explosion.play()
       enemigoEnFrente.map({ objeto => objeto.matarSlime() })
       self.eliminar()
-    } else {}
-    return vida <= 0
+    }
+    return self.vida() <= 0
   }
 }
 
