@@ -104,7 +104,7 @@ object configuracion {
         
         game.onTick(1000, "mover enemigo", { administradorDeEnemigos.moverEnemigos() })
         game.onTick(1000, "matar enemigos", { administradorDeEnemigos.estanMuertos() })
-        game.onTick(1000, "matar magos", { administradorDeMagos.estanMuertos() })
+        game.onTick(1000, "matar magos", { administradorDeMagos.matarMagos() })
         game.onTick(500, "aumentar dinero", { puntaje.sumarPuntos() })
         game.onTick(3000, "disparar", { administradorDeMagos.disparar() })
         game.onTick(1000, "moverDisparos", { administradorDeProyectiles.moverProyectiles() })

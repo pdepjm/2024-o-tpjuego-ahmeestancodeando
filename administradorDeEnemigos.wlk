@@ -49,18 +49,18 @@ object administradorDeEnemigos {
 
     // Resetea el estado del administrador, eliminando todos los enemigos y reiniciando el contador
     method reset() {
-        enemigos.map({ enemigo => enemigo.eliminar() })
+        enemigos.forEach({ enemigo => enemigo.eliminar() })
         nombreEnemigo = 0
         enemigos = []
     }
 
     // Verifica si los enemigos están muertos
     method estanMuertos() {
-        enemigos.map({ enemigo => enemigo.estaMuerto() })
+        enemigos.forEach({ enemigo => enemigo.estaMuerto() })
     }
 
     // Ordena a cada enemigo ejecutar la función de movimiento
     method moverEnemigos() {
-        enemigos.map({ enemigo => enemigo.movete() })
+        enemigos.forEach({ enemigo => enemigo.movete() })
     }
 }

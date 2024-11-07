@@ -37,13 +37,13 @@ object administradorDeMagos {
     }
 
     // Verifica el estado de cada mago para determinar si están muertos 
-    method estanMuertos() { magos.map({ mago => mago.estaMuerto() })  }
+    method matarMagos() { magos.forEach({ mago => mago.matar() })  }
     //Ordena a cada mago realizar su acción de disparar
-    method disparar() { magos.map({ mago => mago.disparar() })  }
+    method disparar() { magos.forEach({ mago => mago.disparar() })  }
     
     //Resetea el administrador de magos, eliminando todos los magos y reiniciando el contador de nombres 
     method reset() {
-        magos.map({ mago => mago.eliminar() })
+        magos.forEach({ mago => mago.eliminar() })
         nombreMago = 0 
     }
     

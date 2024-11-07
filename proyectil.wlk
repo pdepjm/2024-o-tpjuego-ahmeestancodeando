@@ -29,7 +29,7 @@ class Proyectil {
     method llegueAlFinal() = position.x() >= 14
     // Método de colisión
     method colisionar() {
-        const objetoEnMiCelda = game.getObjectsIn(position)
+        const objetoEnMiCelda = game.getObjectsIn(self.position())
         const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
         const objetoEnFrente = game.getObjectsIn(posicionEnFrente)
 
@@ -42,8 +42,8 @@ class Proyectil {
     }
 
     // Métodos para recibir daño
-    method recibeDanioEnemigo(_danio) { return false }
-    method recibeDanioMago(_danio) { return false }
+    method recibeDanioEnemigo(_danio) {return false}
+    method recibeDanioMago(_danio) { }
 
     // Método para destruir el proyectil
     method destruirse() {

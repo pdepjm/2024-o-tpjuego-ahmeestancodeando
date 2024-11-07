@@ -28,12 +28,12 @@ object administradorDeProyectiles {
 
     // Mueve cada proyectil en la lista
     method moverProyectiles() {
-        proyectiles.map({ proyectil => proyectil.mover() })
+        proyectiles.forEach({ proyectil => proyectil.mover() })
     }
 
     // Activa la colisión para cada proyectil en la lista
     method impactarProyectiles() {
-        proyectiles.map({ proyectil => proyectil.colisionar() })
+        proyectiles.forEach({ proyectil => proyectil.colisionar() })
     }
 
     // Elimina un proyectil de la lista
@@ -43,7 +43,7 @@ object administradorDeProyectiles {
 
     // Restablece el administrador, eliminando todos los proyectiles y reiniciando el contador de nombres
     method reset() {
-        proyectiles.map({ proyectil => proyectil.eliminar() })
+        proyectiles.forEach({ proyectil => proyectil.eliminar() })
         nombreProyectil = 0
         proyectiles = []
     }

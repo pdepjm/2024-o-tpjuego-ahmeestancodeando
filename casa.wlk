@@ -20,7 +20,7 @@ object casa {
 
   method recibirDanio(fila) {
     vida -= 1
-    administradorDeEnemigos.enemigos().filter({enemigo => enemigo.position().y() == fila}).map({enemigo => enemigo.matarSlime()})// elimina enemigos de la misma fila
+    administradorDeEnemigos.enemigos().filter({enemigo => enemigo.position().y() == fila}).forEach({enemigo => enemigo.matarSlime()})// elimina enemigos de la misma fila
     self.sonidoDanio().volume(0.3)
     //self.explosion().play()
     if(vida <= 0) {

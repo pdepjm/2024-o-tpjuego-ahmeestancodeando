@@ -30,16 +30,19 @@ class Mago {
   
   method recibeDanioMago(_danio) {
     self.vida(self.vida() - _danio)
-    return false
   }
 
   method sePuedeSuperponer() = false
 
-  method doyPlata() = 0
+  method valorAgregado() = 0 // cambiar a cantidadDePlataGenerada()
 
+// agregar metodo
   method estaMuerto() {
-    if (self.vida() <= 0) {self.eliminar()}
     return self.vida() <= 0
+  }
+
+  method matar(){
+    if (self.estaMuerto()) self.eliminar()
   }
 
   method eliminar() {
@@ -67,7 +70,7 @@ class MagoFuego inherits Mago(vida = 100, imagen = "magoFuego.png") {
 
 // Mago Irlandés (sanador)
 class MagoIrlandes inherits Mago(vida = 100, imagen = "magoHealer.png") {
-  override method doyPlata() = 10
+  override method valorAgregado() = 10
 }
 
 // Mago de Hielo
@@ -87,16 +90,15 @@ class MagoPiedra inherits Mago(vida = 300, imagen = "magoPiedra.png") {}
 class MagoExplosivo inherits Mago(vida = 10, imagen = "magoExplosivo.png") {
   const explosion = game.sound("m.explosion.mp3")
 
-  override method estaMuerto() {
-    if (self.vida() <= 0 ) {
+  override method matar() {
+    if (self.estaMuerto()) {
       const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
       const enemigoEnFrente = game.getObjectsIn(posicionEnFrente)
       explosion.volume(0.1)
       explosion.play()
-      enemigoEnFrente.map({ objeto => objeto.matarSlime() })
+      enemigoEnFrente.forEach({ objeto => objeto.matarSlime() }) //Map devuelve lista, usar forEach
       self.eliminar()
     }
-    return self.vida() <= 0
   }
 }
 
@@ -105,12 +107,12 @@ class MagoExplosivo inherits Mago(vida = 10, imagen = "magoExplosivo.png") {
 
 // ===============================
 // Tiendas de Magos: Creación de Magos desde la tienda
-// ===============================
+// ======r()=========================
 
 class MagoTienda{
   const position
   const costo
-
+  
   method position() = position
 
   method image() = ""
@@ -125,65 +127,51 @@ class MagoTienda{
     }
   }
   
-  method generarMago(posicionMago){}
+  method magoQueGenera(posicionMago){return} 
+
+  method generarMago(posicionMago){ 
+    self.puedeGenerarMago()//Idem en todo mago
+    puntaje.restarPuntos(costo)//Idem en todo mago
+    const mago = self.magoQueGenera(posicionMago)
+    return mago
+    }
 
   // method efectoDeInvocacion(){} //esto estaba porque antes los magos irlandeses interactuaban directamente con el contador de puntos
 }
 
 // Mago de Piedra en Tienda
 object magoPiedraTienda inherits MagoTienda(position = new MutablePosition(x = 0, y = 5), costo = 200) {
-  override method generarMago(posicionMago) {
-    self.puedeGenerarMago()
-    puntaje.restarPuntos(costo)
-    return new MagoPiedra(position = posicionMago)
-  }
-
   
+  override method magoQueGenera(posicionMago){return new MagoPiedra(position = posicionMago)}
+
   override method image() = "magoPiedra.png"
 }
 
 // Mago de Fuego en Tienda
 object magoFuegoTienda inherits MagoTienda(position = new MutablePosition(x = 1, y = 5), costo = 100) {
-  
-  override method generarMago(posicionMago) {
-    self.puedeGenerarMago()
-    puntaje.restarPuntos(costo)
-    return new MagoFuego(position = posicionMago)
-  }
-
+  override method magoQueGenera(posicionMago){return new MagoFuego(position = posicionMago)}
   override method image() = "magoFuego.png"
 }
 
 // Mago Irlandés en Tienda
 object magoIrlandesTienda inherits MagoTienda(position = new MutablePosition(x = 2, y = 5), costo = 75) {
-  override method generarMago(posicionMago) {
-    self.puedeGenerarMago()
-    puntaje.restarPuntos(costo)
-    return new MagoIrlandes(position = posicionMago)
-  }
 
+override method magoQueGenera(posicionMago){return new MagoIrlandes(position = posicionMago)}
   
   override method image() = "magoHealer.png"
 }
 
 // Mago de Hielo en Tienda
 object magoHieloTienda inherits MagoTienda(position = new MutablePosition(x = 3, y = 5), costo = 125) {
-  override method generarMago(posicionMago) {
-    self.puedeGenerarMago()
-    puntaje.restarPuntos(costo)
-    return new MagoHielo(position = posicionMago)
-  }
+
+  override method magoQueGenera(posicionMago){return new MagoHielo(position = posicionMago)}
   
   override method image() = "magoHielo.png"
 }
 
 // Mago Explosivo en Tienda
 object magoExplosivoTienda inherits MagoTienda(position = new MutablePosition(x = 4, y = 5), costo = 200) {
-  override method generarMago(posicionMago) {
-    self.puedeGenerarMago()
-    puntaje.restarPuntos(costo)
-    return new MagoExplosivo(position = posicionMago)
-  }
+override method magoQueGenera(posicionMago){return new MagoExplosivo(position = posicionMago)}
 
   override method image() = "magoExplosivo.png"
 }

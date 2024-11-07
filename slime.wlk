@@ -38,14 +38,14 @@ class Slime {
 
         if (objetoEnCeldaEnFrente.any({ objeto => objeto.frenarEnemigo() })) { 
             self.enMovimiento(false)
-            objetoEnCeldaEnFrente.map({ objeto => objeto.recibeDanioMago(danio) })
+            objetoEnCeldaEnFrente.forEach({ objeto => objeto.recibeDanioMago(danio) })
         } else {
             self.enMovimiento(true)
         }
     }
 
     // Métodos para recibir daño
-    method recibeDanioMago(_danio) = false
+    method recibeDanioMago(_danio){}
 
     method recibeDanioEnemigo(_danio) {
         self.vida(self.vida() - _danio)
