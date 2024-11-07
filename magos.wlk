@@ -84,7 +84,7 @@ class MagoHielo inherits Mago(vida = 100, imagen = "magoHielo.png") {
 class MagoPiedra inherits Mago(vida = 300, imagen = "magoPiedra.png") {}
 
 // Mago Explosivo
-class MagoExplosivo inherits Mago(vida = 30, imagen = "magoExplosivo.png") {
+class MagoExplosivo inherits Mago(vida = 10, imagen = "magoExplosivo.png") {
   const explosion = game.sound("m.explosion.mp3")
   const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
   var enemigoEnFrente = game.getObjectsIn(posicionEnFrente)
@@ -96,7 +96,7 @@ class MagoExplosivo inherits Mago(vida = 30, imagen = "magoExplosivo.png") {
       explosion.play()
       enemigoEnFrente.map({ objeto => objeto.matarSlime() })
       self.eliminar()
-    }
+    } else {}
     return vida <= 0
   }
 }

@@ -17,9 +17,9 @@ object administradorDeJuego {
   
   // Método para finalizar el juego y resetear el estado
   method terminarJuego() {
-      puntaje.reset()
-      game.addVisual(pantalla)
-      self.resetGame()
+    puntaje.reset()
+    game.addVisual(pantalla)
+    self.resetGame()
   }
 
   // Método para resetear todos los administradores y configuraciones del juego
@@ -42,6 +42,7 @@ object derrota {
     method position() = new MutablePosition(x = 0, y = 0)
     method imagen() = "fin.jpg"
     method sonido() = game.sound("m.deathScreen.mp3")
+    
 }
 
 object victoria {
@@ -79,6 +80,7 @@ object configuracion {
         game.addVisual(menu)
         game.addVisual(puntaje)
         game.addVisual(administradorDeOleadas)
+        game.addVisual(casa)
 
         menu.accion()
         cursor.accion()
@@ -130,5 +132,6 @@ object configuracion {
         game.removeTickEvent("disparar")
         game.removeTickEvent("moverDisparos")
         game.removeTickEvent("impactarDisparos")
+        game.removeTickEvent("Iniciar Oleada")
     }
 }
