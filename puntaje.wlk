@@ -9,7 +9,7 @@ import administradorDeMagos.*
 // Puntaje: Manejo de puntos
 // ===============================
 object puntaje {
-	var property puntos = 50000
+	var property puntos = 500
 
 	method position() = new MutablePosition(x = 7, y = 5)
 	method sumarPuntos() { self.puntos(puntos + 10 + administradorDeMagos.magos().map({mago => mago.doyPlata()}).sum())} // preguntar que opina fede | posiblemente se cambie para la presentacion del concurso
