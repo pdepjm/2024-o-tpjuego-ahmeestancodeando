@@ -27,7 +27,6 @@ object administradorDeMagos {
         var nuevoMago = self.nombre() 
         nuevoMago = self.magoAGenerar().generarMago(posicion) 
         magos.add(nuevoMago)
-        magoSeleccionado.efectoDeInvocacion()
         self.sumarMago()
         return game.addVisual(nuevoMago)
     }

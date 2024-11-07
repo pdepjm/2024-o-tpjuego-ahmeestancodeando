@@ -91,7 +91,7 @@ class MagoExplosivo inherits Mago(vida = 10, imagen = "magoExplosivo.png") {
     if (self.vida() <= 0 ) {
       const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
       const enemigoEnFrente = game.getObjectsIn(posicionEnFrente)
-      explosion.volume(0.2)
+      explosion.volume(0.1)
       explosion.play()
       enemigoEnFrente.map({ objeto => objeto.matarSlime() })
       self.eliminar()
@@ -127,7 +127,7 @@ class MagoTienda{
   
   method generarMago(posicionMago){}
 
-  method efectoDeInvocacion(){}
+  // method efectoDeInvocacion(){} //esto estaba porque antes los magos irlandeses interactuaban directamente con el contador de puntos
 }
 
 // Mago de Piedra en Tienda

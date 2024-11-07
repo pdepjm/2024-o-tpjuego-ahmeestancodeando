@@ -58,7 +58,7 @@ object pantalla {
     method position() = new MutablePosition(x = 0, y = 0)
     method image() = estado.imagen()
     
-    var property estado = derrota
+    var estado = derrota
     var sonido = estado.sonido()
 
     method estado(estadoNuevo) {

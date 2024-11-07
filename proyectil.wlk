@@ -64,13 +64,8 @@ class Proyectil {
 // Proyectil Normal: Implementación específica de un proyectil normal
 // ===============================
 object proyectilNormal {
-    // Propiedades
-    const imagen = "p.proyectilFuego.png"
-    const imagenDestruido = "p.bolaDeFuegoDestruida.gif"
-
     // Métodos públicos
-    method imagen() { return imagen }
-    method imagenDestruido() { return imagenDestruido }
+    method imagen() = "p.proyectilFuego.png"
     method danio() = 50
     method destruirse() = true
 }
@@ -80,12 +75,8 @@ object proyectilNormal {
 // Proyectil Penetrante: Implementación específica de un proyectil penetrante
 // ===============================
 object proyectilPenetrante {
-    // Propiedades
-    const imagen = "p.proyectilHielo.png"
-    const imagenDestruido = "p.proyectilHieloDestuido.png"
     // Métodos públicos
-    method imagen() { return imagen }
-    method imagenDestruido() { return imagenDestruido }
+    method imagen() = "p.proyectilHielo.png"
     method danio() = 25
     method destruirse() = false
 }

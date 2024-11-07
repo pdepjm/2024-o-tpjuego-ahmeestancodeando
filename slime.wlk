@@ -13,13 +13,13 @@ class Slime {
     const tipo 
     var property enMovimiento = true // Indica si el slime puede moverse
     var property vida = tipo.vida()
-    var property danio = tipo.danio()
+    const property danio = tipo.danio()
 
     // Métodos de visualización y estado
     method frenarEnemigo() = true
     method position() = position
     method image() = tipo.imagen()
-    method sePuedeSuperponer() = true
+    method sePuedeSuperponer() = false
 
 
     // Movimiento del Slime
