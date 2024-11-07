@@ -12,12 +12,13 @@ Magos: Encargadas de defender la base, su vida, daño y atributos varían según
     -Mago Piedra: Unida con 300 puntos de vida, no realiza daño a enemigos.
     -Mago Explosivo: Al entrar en contacto con un slime, explota.
 
-Puntos: Utilizado para comprar magos, su generación es automática y la cantidad dependerá de la cantidad de magos irlandes que haya en el campo. La producción base es de $10/s.
+Puntos: Utilizado para comprar magos, su generación es automática y la cantidad dependerá de la cantidad de magos irlandes que haya en el campo. La producción base es de $10.
+
+Pala: Elimina Magos del juego.
 
 El objetivo del juego es evitar que los slimes lleguen a la base, a partir de la compra y ubicación estratégica de los magos.
 
-Se utiliza polimorfismo para por ejemplo, cuando los slimes detectan las colisiones contra plantas u otros slimes. Todos los objetos que pueden aparecer en los carriles(plantas, el cursor,slimes) tienen el método queSoy(), con el cual retornan qué clase de objeto son.
-Otro ejemplo es el método disparar() que utilizan los magos. Todos los magos tienen este método, sin importar si disparan o no.
+Se utiliza polimorfismo para por ejemplo, 
 
 Además, se utiliza ampliamente la comunicación entre los distintos objetos, como es por ejemplo el caso del menú, el cual en base a los inputs que realice el jugador, enviará al objeto generadorDeEnemigos que clase de enemigo deberá generar y en qué posición.
 

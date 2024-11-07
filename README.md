@@ -24,8 +24,10 @@ liveshare: https://prod.liveshare.vsengsaas.visualstudio.com/join?CE16CF3EFD9938
 ![slimeBasico](Cosas_juego/slime_base.png)
 
 ## Reglas de Juego / Instrucciones
+En Nuestra mision es defender la EL ULTIMO FARO DE LA HUMANIDAD, la ciudad de "Utopía de las Tierras de Nortfernand (UTN)", de los slimes, evitando que lleguen 3 o más de ellos a nuestras puertas. Para protegernos, contaremos con la ayuda de magos, cada uno con habilidades únicas, que se unirán en la defensa de la aldea.
 
-(completar...)
+El objetivo del Juegos es Defender la Ciudad de oleadas de Diversos Slimes. Después de varias oleadas, alcanzaremos la ronda final, si logramos superar esta ronda sin morir, ganaremos la partida.
+Podremos seleccionar, utilizar y eliminar a los distintos tipos de magos estratégicamente para enfrentar las oleadas de enemigos que amenzas la ciudad. 
 
 ## Controles:
 
@@ -35,5 +37,6 @@ liveshare: https://prod.liveshare.vsengsaas.visualstudio.com/join?CE16CF3EFD9938
 - `ARROW_LEFT` para mover izquierda cursor
 - `ARROW_RIGHT` para mover derecha cursor
 - `ARROW_DOWN` para mover abajo cursor
-- `ENTER` para poner planta
-- `R` para reiniciar juego
+- `ENTER` para poner planta / utilizar pala
+- `P` para reiniciar juego
+- `I` para reiniciar juego

@@ -1,71 +1,78 @@
+// ===============================
+// Revisado
+// ===============================
 
-// ===============================
-// Revisado por nico
-// ===============================
 import administradorDeEnemigos.*
 import casa.*
 // ===============================
 // Clase Base: Slime
 // ===============================
-  class Slime {
+class Slime {
+    // Propiedades
     const position
     const tipo 
     var property enMovimiento = true // Indica si el slime puede moverse
     var property vida = tipo.vida()
-    const imagen = tipo.imagen()
     var property danio = tipo.danio()
 
+    // Métodos de visualización y estado
     method frenarEnemigo() = true
     method position() = position
-    method image() = imagen
+    method image() = tipo.imagen()
     method sePuedeSuperponer() = true
 
+
+    // Movimiento del Slime
     method movete() {
-      self.meFreno()
-      if (self.enMovimiento()) 
-        return position.goLeft(tipo.desplazamiento())
-      else 
-        self.enMovimiento(false)
+        self.meFreno()
+        if (self.enMovimiento()) 
+            return position.goLeft(tipo.desplazamiento())
+        else 
+            self.enMovimiento(false)
     }
 
+    // Lógica para frenar el movimiento
     method meFreno() {
-      const posicionEnFrente = new MutablePosition(x = self.position().x() - 1, y = self.position().y())
-      const objetoEnCeldaEnFrente = game.getObjectsIn(posicionEnFrente)
-      if (objetoEnCeldaEnFrente.any({ objeto => objeto.frenarEnemigo() })) { 
-        self.enMovimiento(false)
-        objetoEnCeldaEnFrente.map({ objeto => objeto.recibeDanioMago(danio) })
-      } else {
-        self.enMovimiento(true)
-      }
+        const posicionEnFrente = new MutablePosition(x = self.position().x() - 1, y = self.position().y())
+        const objetoEnCeldaEnFrente = game.getObjectsIn(posicionEnFrente)
+
+        if (objetoEnCeldaEnFrente.any({ objeto => objeto.frenarEnemigo() })) { 
+            self.enMovimiento(false)
+            objetoEnCeldaEnFrente.map({ objeto => objeto.recibeDanioMago(danio) })
+        } else {
+            self.enMovimiento(true)
+        }
     }
 
+    // Métodos para recibir daño
     method recibeDanioMago(_danio) = false
 
     method recibeDanioEnemigo(_danio) {
-      self.vida(self.vida() - _danio)
-      return true
+        self.vida(self.vida() - _danio)
+        return true
     }
 
+    // Comprobación de estado de vida y eliminación
     method estaMuerto() {
-      if (self.llegoACasa()) {
-        casa.recibirDanio(self.position().y())
-        self.eliminar()
-      } else if (self.sinVida()) {
-        self.eliminar()
-      }
-      return self.sinVida() || self.llegoACasa()
-    }
-
-    method matar() { vida = 0 }
-
-    method eliminar() {
-      game.removeVisual(self)
-      administradorDeEnemigos.eliminarEnemigo(self)
+        if (self.llegoACasa()) {
+            casa.recibirDanio(self.position().y())
+            self.eliminar()
+        } else if (self.sinVida()) {
+            self.eliminar()
+        }
+        return self.sinVida() || self.llegoACasa()
     }
 
     method sinVida() = vida <= 0
     method llegoACasa() = self.position().x() < 0
-  }
+    method matar() { vida = 0 }
+
+    // Eliminación del Slime
+    method eliminar() {
+        game.removeVisual(self)
+        administradorDeEnemigos.eliminarEnemigo(self)
+    }
+}
 // ===============================
 // Tipos de Slime: Variantes
 // ===============================

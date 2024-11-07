@@ -1,5 +1,5 @@
 // ===============================
-// Revisado por nico
+// Revisado
 // ===============================
 
 import adminProyectiles.*
@@ -12,12 +12,11 @@ class Proyectil {
     // Propiedades
     const tipo
     const position = new MutablePosition()
-    const danio = tipo.danio()
-    const imagen = tipo.imagen()
+    const property danio = tipo.danio()
 
     // Métodos públicos
     method position() = position
-    method image() = imagen
+    method image() = tipo.imagen()
     method frenarEnemigo() = false
     method sePuedeSuperponer() = true
 
@@ -56,6 +55,8 @@ class Proyectil {
         game.removeVisual(self)
         administradorDeProyectiles.destruirProyectil(self)
     }
+
+    method matar(){}
 }
 
 
@@ -66,12 +67,11 @@ object proyectilNormal {
     // Propiedades
     const imagen = "p.proyectilFuego.png"
     const imagenDestruido = "p.bolaDeFuegoDestruida.gif"
-    const danio = 50
 
     // Métodos públicos
     method imagen() { return imagen }
     method imagenDestruido() { return imagenDestruido }
-    method danio() = danio
+    method danio() = 50
     method destruirse() = true
 }
 
@@ -83,11 +83,9 @@ object proyectilPenetrante {
     // Propiedades
     const imagen = "p.proyectilHielo.png"
     const imagenDestruido = "p.proyectilHieloDestuido.png"
-    const danio = 25
-
     // Métodos públicos
     method imagen() { return imagen }
     method imagenDestruido() { return imagenDestruido }
-    method danio() = danio
+    method danio() = 25
     method destruirse() = false
 }

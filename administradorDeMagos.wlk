@@ -1,42 +1,51 @@
+// ===============================
+// Revisado
+// ===============================
 import magos.*
+import wollok.game.*
+
+
+/* ===============================
+   Administrador de Magos: Gestión de los magos en el juego
+   =============================== */
 object administradorDeMagos {
-    var nombreMago = 0 /*asigno el nombre  a los enemigos que voy creando segun numeros, asi puedo crear nombres nuevos
-                            automaticamente*/
+    var nombreMago = 0 
+    const magos = #{}
+    var property magoAGenerar = magoPiedraTienda
 
-    const magos = #{}/*contiene cada mago que fue creando*/
+    // Métodos de Consulta
     method magos() = magos
-    
-    var property  magoAGenerar  = magoPiedraTienda
+    method nombre() = nombreMago
 
-    method nombre() = nombreMago /*para poder consultar el ultimo nombre usado*/
-    method sumarMago() { /*suma 1 a nombre mago para asi crear magos nuevos, luego hay que hacer la funcion para que reste 1 cuando maten a un enemigo*/
-        nombreMago+=1
-        }
-        
-    method generarMago(magoSeleccionado,posicion){ // metodo para no usar los if anidados
-        self.magoAGenerar(magoSeleccionado) //esto para cambiar la mago segun lo que se elija
+    
+    // Suma 1 al contador de nombres de mago para crear nuevos nombres.
+    method sumarMago() { nombreMago += 1  }
+
+    // Método para generar un nuevo mago sin usar múltiples if anidados
+    method generarMago(magoSeleccionado, posicion) { 
+        self.magoAGenerar(magoSeleccionado) 
         var nuevoMago = self.nombre() 
-        nuevoMago = self.magoAGenerar().generarMago(posicion) //lama al objeto de la tienda para saber como generar una mago
+        nuevoMago = self.magoAGenerar().generarMago(posicion) 
         magos.add(nuevoMago)
         magoSeleccionado.efectoDeInvocacion()
         self.sumarMago()
         return game.addVisual(nuevoMago)
     }
-    method estanMuertos(){
-        magos.forEach({mago => mago.estaMuerto()})
-    }
-
-    method disparar() {
-      magos.forEach({mago => mago.disparar()})
-    }
-
-    method eliminarMago(mago){
+    
+    // Elimina un mago específico del conjunto de magos gestionados
+    method eliminarMago(mago) {
         magos.remove(mago)
     }
+
+    // Verifica el estado de cada mago para determinar si están muertos 
+    method estanMuertos() { magos.map({ mago => mago.estaMuerto() })  }
+    //Ordena a cada mago realizar su acción de disparar
+    method disparar() { magos.map({ mago => mago.disparar() })  }
     
+    //Resetea el administrador de magos, eliminando todos los magos y reiniciando el contador de nombres 
     method reset() {
-        magos.forEach({mago => mago.eliminar()})
+        magos.map({ mago => mago.eliminar() })
         nombreMago = 0 
     }
-
+    
 }

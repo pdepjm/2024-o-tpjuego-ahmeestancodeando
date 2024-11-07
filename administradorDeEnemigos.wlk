@@ -2,52 +2,65 @@ import game.*
 import slime.*
 import administradorDeOleadas.*
 
-// REVISADO POR NICO
 
+/* =======================================
+   Administrador de Enemigos: Gestión de enemigos en el juego
+   ======================================= */
 object administradorDeEnemigos {
-    var nombreEnemigo = 0 /*asigno el nombre  a los enemigos que voy creando segun tipos, asi puedo crear nombres nuevos automaticamente*/
-    var enemigos = #{}/*contiene cada enemigo que fue creando*/
+    // Propiedades
+    var nombreEnemigo = 10000
+    var enemigos = #{}
 
+    // Métodos de Consulta
     method enemigos() = enemigos
-  
-    method columnaOcupada() = enemigos.filter({enemigo => enemigo.position().x()==14}).size() == 5
-    
-    method nombre() = nombreEnemigo /*para poder consultar el ultimo nombre usado*/
+    method columnaOcupada() = enemigos.filter({ enemigo => enemigo.position().x() == 14 }).size() == 5 // Verifica si la columna de posición x=14 está ocupada por 5 enemigos
+    method nombre() = nombreEnemigo
 
-    method sumarEnemigo() {  nombreEnemigo+=1  }
+    // Genera un nuevo nombre para los enemigos
+    method sumarEnemigo() { nombreEnemigo += 1 }
 
-    method generarEnemigo(tipo){/*segun el tipo ingresado, se generara un tipo de enemigo distinto*/
-                                /*generara un slime normal*/
-      if (not self.columnaOcupada()){
-        const posicionTemporal = new MutablePosition(x=14, y=0.randomUpTo(5).truncate(0))
-            var nombreParaEnemigo = self.nombre() /* esto esta hecho porque sino wollok se enoja, para poder crear un enemigo*/
+    // Genera un nuevo enemigo del tipo especificado, si hay espacio en la columna 
+    method generarEnemigo(tipo) {
+        if (not self.columnaOcupada()) {
+            const posicionTemporal = new MutablePosition(x = 14, y = 0.randomUpTo(5).truncate(0))
+            var nombreParaEnemigo = self.nombre() 
 
-            if (game.getObjectsIn(posicionTemporal).isEmpty()){ // el if es para que no genere enemigos sobre otros
-            nombreParaEnemigo = new Slime(position = posicionTemporal, tipo=tipo)
-            enemigos.add(nombreParaEnemigo)/*se añade a la lista de enemigos activos*/
-            self.sumarEnemigo()
-            administradorDeOleadas.sumarEnemigo()
-            return game.addVisual(nombreParaEnemigo)/*muestra al enemigo en el juego*/
-            } else return
-      }
-    }
-    method estanMuertos(){
-        enemigos.forEach({enemigo => enemigo.estaMuerto()})
-    }
-
-    method moverEnemigos() {
-        enemigos.forEach({enemigo => enemigo.movete()})/*aplica la funcion movete a cada enemigo de la coleccion*/
+            /* Solo genera el enemigo si la posición temporal está vacía */
+            if (game.getObjectsIn(posicionTemporal).isEmpty()) {
+                
+                nombreParaEnemigo = new Slime(position = posicionTemporal, tipo = tipo)
+                enemigos.add(nombreParaEnemigo) /* Añade el nuevo enemigo a la colección de enemigos activos */
+                
+                self.sumarEnemigo() /* Incrementa el contador de enemigos en el administrador */
+                administradorDeOleadas.sumarEnemigo() /* Notifica al administrador de oleadas */
+                
+                return game.addVisual(nombreParaEnemigo) /* Muestra al enemigo en el juego */
+            } else {
+                return /* No genera el enemigo si la posición está ocupada */
+            }
+        }
     }
 
+    // Elimina un enemigo específico de la colección de enemigos activos
     method eliminarEnemigo(enemigo) {
-      administradorDeOleadas.reducirEnemigo()
-      enemigos.remove(enemigo)
+        administradorDeOleadas.reducirEnemigo()
+        enemigos.remove(enemigo)
     }
 
+    // Resetea el estado del administrador, eliminando todos los enemigos y reiniciando el contador
     method reset() {
-        enemigos.map({enemigo => enemigo.eliminar() game.removeVisual(enemigo)})
-        nombreEnemigo = 0 
+        enemigos.map({ enemigo => enemigo.eliminar() })
+        nombreEnemigo = 0
         enemigos = []
     }
 
+    // Verifica si los enemigos están muertos
+    method estanMuertos() {
+        enemigos.map({ enemigo => enemigo.estaMuerto() })
+    }
+
+    // Ordena a cada enemigo ejecutar la función de movimiento
+    method moverEnemigos() {
+        enemigos.map({ enemigo => enemigo.movete() })
+    }
 }

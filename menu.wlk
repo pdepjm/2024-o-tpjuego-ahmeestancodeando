@@ -1,75 +1,80 @@
+
+
 import administradorDeMagos.*
 import magos.*
 import cursor.*
 import wollok.game.*
 import pala.*
-object menu {
-  method pop() = game.sound("m.pop.mp3")
-  method pff() = game.sound("m.pff.mp3")
-  
-  const position = new MutablePosition(x = 0, y = 5)
-  var property imagen = "marcosRojo.png"
-  
-  method position() = position
-  
-  method image() = imagen
-  
-  method accion() {
-    keyboard.d().onPressDo({ self.moverseDerecha() })
-    keyboard.a().onPressDo({ self.moverseIzquierda() })
-    keyboard.enter().onPressDo({self.generarMago()})
-    // cambiar aca para cambiar forma de generar enemigos
-  }
-  
-  method moverseDerecha() = if (self.position().x() < 5) position.goRight(1)
-  
-  method moverseIzquierda() = if (self.position().x() > 0) position.goLeft(1)
-  
-  method generarMago() {
-    const magoAGenerar = game.colliders(self) // no usamos uniqueColliders porque tira error si no hay ninguna
-    const objetoCelda = game.colliders(cursor)
-    const posicionCelda = new MutablePosition(x = cursor.position().x(), y = cursor.position().y())
 
-    if (!magoAGenerar.isEmpty() && objetoCelda.all({objeto => objeto.sePuedeSuperponer()}) && self.position().x() != 5){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
-        const magoSeleccionado = magoAGenerar.first()
+
+// ===============================
+// Menú: Control y acciones del menú
+// ===============================
+object menu {
+    // Propiedades y posición
+    const position = new MutablePosition(x = 0, y = 5)
+
+    // Métodos públicos
+    method position() = position
+    method image() = "marcosRojo.png"
+
+    // Métodos de sonido
+    method pop() = game.sound("m.pop.mp3")
+    method pff() = game.sound("m.pff.mp3")
+
+
+    // Acción del menú: Configura las teclas
+    method accion() {
+        keyboard.d().onPressDo({ self.moverseDerecha() })
+        keyboard.a().onPressDo({ self.moverseIzquierda() })
+        keyboard.enter().onPressDo({ self.seleccionarMenu() })
+        // cambiar aca para cambiar forma de generar enemigos
+    }
+    
+    // Movimiento del menú
+    method moverseDerecha() = if (self.position().x() < 5) position.goRight(1)
+    method moverseIzquierda() = if (self.position().x() > 0) position.goLeft(1)
+
+    // Detecta si se está seleccionando pala
+    method seleccionandoPala() = self.position().x() == pala.position().x()
+
+    // Generación y eliminación de magos
+    method seleccionarMenu() {
+        const magoAGenerar = game.colliders(self) // no usamos uniqueColliders porque tira error si no hay ninguna
+        const objetoCelda = game.colliders(cursor)
+        const posicionCelda = new MutablePosition(x = cursor.position().x(), y = cursor.position().y())
+
+        if (!magoAGenerar.isEmpty() && objetoCelda.all({ objeto => objeto.sePuedeSuperponer() }) && !self.seleccionandoPala()) {
+            self.generarMago(magoAGenerar.first(), posicionCelda)
+      
+        } 
+        else if (self.seleccionandoPala()) {
+            self.eliminarMago( objetoCelda.find({ objeto => not objeto.sePuedeSuperponer() }))
+        }
+    }
+
+    method generarMago(magoSeleccionado,posicionCelda){
         administradorDeMagos.generarMago(magoSeleccionado, posicionCelda)
         self.pop().volume(0.2)
         self.pop().play()
-    } else  if (self.position().x() == 5){
-        const magoSeleccionado = objetoCelda.find({objeto => not objeto.sePuedeSuperponer()})
+    }
+
+    method eliminarMago(magoSeleccionado){
         pala.eliminarMago(magoSeleccionado)
-        self.pff().volume(0.4)
+        self.pff().volume(0.2)
         self.pff().play()
     }
 
-  }
-  method eliminarMago() {
-    const objetoCelda = game.colliders(cursor).find({objeto => not objeto.sePuedeSuperponer()})
-    if (!objetoCelda.isEmpty()){ // estaba tirando un error de que estaba aplicando un metodo a una lista vacia
-      pala.eliminarMago(objetoCelda)
-      self.pff().volume(0.4)
-      self.pff().play()
-    }
-  }
-  // Borre las instanciaciones porque las hice objetos en magos.wlk
-  // Para usar la 2da forma de generar magos
-  method iniciarTienda() {
-    // const papaTienda = new Papa(position = game.at(0,5))
-    game.addVisual(magoPiedraTienda)
-    
-    // const guisanteTienda = new Guisante(position = game.at(1,5))
-    
-    game.addVisual(magoFuegoTienda)
-    //const girasolTIenda = new Girasol(position = game.at(2,5))
-    
-    game.addVisual(magoIrlandesTienda)
-    // const cactusTienda = new Cactus(position = game.at(3,5))
-    
-    game.addVisual(magoHieloTienda)
-    //const zapalloTienda = new ZapalloEnojado(position = game.at(4,5))
-    
-    game.addVisual(magoExplosivoTienda)
+    // Tienda: Inicialización de los magos
+    method iniciarTienda() {
+        // Añadiendo los magos disponibles en la tienda
+        game.addVisual(magoPiedraTienda)
+        game.addVisual(magoFuegoTienda)
+        game.addVisual(magoIrlandesTienda)
+        game.addVisual(magoHieloTienda)
+        game.addVisual(magoExplosivoTienda)
 
-    game.addVisual(pala)
-  }
+        // Añadiendo la pala a la tienda
+        game.addVisual(pala)
+    }
 }
