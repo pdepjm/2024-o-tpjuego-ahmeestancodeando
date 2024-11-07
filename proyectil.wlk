@@ -4,7 +4,7 @@
 
 import adminProyectiles.*
 import game.*
-
+import administradorDeEnemigos.administradorDeEnemigos
 // ===============================
 // Proyectil: Clase base para proyectiles
 // ===============================
@@ -23,7 +23,7 @@ class Proyectil {
     // Método de movimiento
     method mover() {
         position.goRight(1)
-        if (self.llegueAlFinal()) { self.eliminar() }
+        if (self.llegueAlFinal() || self.verificarEnemigosEnfrente()) { self.eliminar() }
     }
     // Método que revisa si llego al final
     method llegueAlFinal() = position.x() >= 14
@@ -55,6 +55,9 @@ class Proyectil {
         game.removeVisual(self)
         administradorDeProyectiles.destruirProyectil(self)
     }
+
+    method verificarEnemigosEnfrente() = !administradorDeEnemigos.enemigos().any({enemigo => enemigo.position().y() == self.position().y() && enemigo.position().x() >= self.position().x()-1})
+    
 
     method matarSlime(){}
 }
