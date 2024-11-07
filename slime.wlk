@@ -19,7 +19,7 @@ class Slime {
     method frenarEnemigo() = true
     method position() = position
     method image() = tipo.imagen()
-    method sePuedeSuperponer() = true
+    method sePuedeSuperponer() = false
 
 
     // Movimiento del Slime
