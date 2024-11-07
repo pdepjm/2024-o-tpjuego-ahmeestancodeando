@@ -17,11 +17,15 @@ liveshare: https://prod.liveshare.vsengsaas.visualstudio.com/join?CE16CF3EFD9938
 
 ## Capturas 
 
-![captura](Cosas_juego/capturaAlpha.png)
+![captura1](Cosas_juego/screen1.png)
+
+![captura2](Cosas_juego/screen2.png)
 
 ![mago fuego](assets/magoFuego.png)
 
 ![slimeBasico](Cosas_juego/slime_base.png)
+
+![papajhon](assets/magoExplosivo.png)
 
 ## Reglas de Juego / Instrucciones
 En Nuestra mision es defender la EL ULTIMO FARO DE LA HUMANIDAD, la ciudad de "Utopía de las Tierras de Nortfernand (UTN)", de los slimes, evitando que lleguen 3 o más de ellos a nuestras puertas. Para protegernos, contaremos con la ayuda de magos, cada uno con habilidades únicas, que se unirán en la defensa de la aldea.

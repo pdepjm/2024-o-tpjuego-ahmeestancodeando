@@ -12,7 +12,7 @@ program cursorGame {
 
 	configuracion.agregarVisuals()
 	configuracion.crearTicks()
-	//configuracion.iniciarMusica()
+	configuracion.iniciarMusica()
 	
 }
 

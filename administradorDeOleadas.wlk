@@ -16,7 +16,7 @@ object administradorDeOleadas {
     
 
     // Métodos de visualización y sonido
-    method position() = new MutablePosition(x = 10, y = 5)
+    method position() = new MutablePosition(x = 9, y = 5)
     method text() = "Oleada: " + numeroOleada.toString() + "     " + "Slimes Restantes: " + oleadaActual.enemigosRestantes().toString()
     method textColor() = "#FA0770"
     method inicioOleada() = game.sound("m.inicioOleada.mp3")
@@ -24,8 +24,10 @@ object administradorDeOleadas {
 
     // Inicia la oleada y gestiona enemigos
     method iniciarOleada() {
+        game.removeTickEvent("Iniciar Oleada")
+        oleadaActual.cargarSlimesRestantes()
         self.inicioOleada().volume(0.0001)
-       // self.inicioOleada().play()
+       self.inicioOleada().play()
         game.onTick(
             oleadaActual.tiempoSpawn(),
             "gestionar oleada",
@@ -36,7 +38,7 @@ object administradorDeOleadas {
                     self.siguienteOleada()
                     game.removeTickEvent("gestionar oleada")
                     self.finOleada().volume(0.1)
-                  //  self.finOleada().play()
+                    self.finOleada().play()
                 }
             }
         )
@@ -101,11 +103,13 @@ object oleadaNormal {
     method terminarOleada() {
         cantidadEnemigos += 5
         enemigosGenerados = 0
-        enemigosRestantes = cantidadEnemigos 
         if (tiempoSpawn > 400) tiempoSpawn -= 400
         enemigos = []
         game.onTick(100, "agregar slimes posibles", { self.agregarSlimes() })
     }
+
+    method cargarSlimesRestantes () {enemigosRestantes = cantidadEnemigos }
+
 
     // Agrega slimes a la oleada hasta alcanzar el límite
     method agregarSlimes() { 
@@ -132,7 +136,7 @@ object oleadaNormal {
 // ===============================
 object oleadaFinal {
     const property enemigos = [slimeBlessed]
-    const property cantidadEnemigos = 5
+    const property cantidadEnemigos = 30
     var property enemigosRestantes = cantidadEnemigos 
     var property enemigosGenerados = 0
     const property tiempoSpawn = 400
@@ -149,8 +153,10 @@ object oleadaFinal {
     method terminarOleada() {
         pantalla.estado(victoria)
         administradorDeJuego.terminarJuego()
+        game.removeTickEvent("Iniciar Oleada")
     }
 
+     method cargarSlimesRestantes () {enemigosRestantes = cantidadEnemigos }
     // Verifica si la oleada final ha finalizado
     method finalizo() = enemigosRestantes == 0 && enemigosGenerados == cantidadEnemigos
 

@@ -84,7 +84,7 @@ class MagoHielo inherits Mago(vida = 100, imagen = "magoHielo.png") {
 class MagoPiedra inherits Mago(vida = 300, imagen = "magoPiedra.png") {}
 
 // Mago Explosivo
-class MagoExplosivo inherits Mago(vida = 30, imagen = "magoExplosivo.png") {
+class MagoExplosivo inherits Mago(vida = 10, imagen = "magoExplosivo.png") {
   const explosion = game.sound("m.explosion.mp3")
 
   override method estaMuerto() {
