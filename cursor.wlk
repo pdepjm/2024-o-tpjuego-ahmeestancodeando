@@ -33,4 +33,5 @@ object cursor {
     method recibeDanioEnemigo(_danio) { return false }
     method recibeDanioMago(_danio) { return false }
     method matarSlime(){return false}
+    method combinarProyectil(proyectil){return false}
 }

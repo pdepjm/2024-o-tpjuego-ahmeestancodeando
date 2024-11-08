@@ -108,8 +108,9 @@ object configuracion {
         game.onTick(500, "aumentar dinero", { puntaje.sumarPuntos() })
         game.onTick(3000, "disparar", { administradorDeMagos.disparar() })
         //game.onTick(600, "moverDisparos", { administradorDeProyectiles.moverProyectiles() })
-        game.onTick(600, "impactarDisparos", { administradorDeProyectiles.impactarProyectiles() })
-        game.onTick(200, "frame", {administradorDeProyectiles.cambiarFrame()})
+        game.onTick(210, "frame", {administradorDeProyectiles.cambiarFrame()})
+        //game.onTick(600, "impactarDisparos", { administradorDeProyectiles.impactarProyectiles() })
+        
     }
 
     // Método para iniciar la música de fondo en bucle

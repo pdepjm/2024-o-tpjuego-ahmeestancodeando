@@ -53,6 +53,8 @@ class Mago {
   }
 
   method matarSlime(){}
+
+  method combinarProyectil(proyectil) {return false}
 }
 
 
