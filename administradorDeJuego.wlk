@@ -104,10 +104,12 @@ object configuracion {
         // Tecla "P" para reiniciar el juego
         keyboard.p().onPressDo({
             administradorDeJuego.resetGame()
+            administradorDeJuego.usuarioEnMenu(false)
+            administradorDeJuego.pausado(false)
             game.removeVisual(pantalla)
             self.crearTicks()
             puntaje.reset()
-            administradorDeJuego.usuarioEnMenu(false)
+            
         })
 
         // Tecla "I" para detener el juego
