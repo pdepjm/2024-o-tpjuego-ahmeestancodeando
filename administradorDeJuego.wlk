@@ -15,8 +15,10 @@ import proyectil.*
 // =======================================
 object administradorDeJuego {
     var property pausado = false
+    var property usuarioEnMenu = false
   // Método para finalizar el juego y resetear el estado
   method terminarJuego() {
+    usuarioEnMenu = true
     puntaje.reset()
     game.addVisual(pantalla)
     self.resetGame()
@@ -35,12 +37,14 @@ object administradorDeJuego {
   }
 
     method pausar(){
-        if (pausado == false){
-            configuracion.eliminarTicks()
-            pausado = true
-        } else {
-            configuracion.iniciarTicks()
-            pausado = false
+        if (usuarioEnMenu == false){
+            if (pausado == false){
+                configuracion.eliminarTicks()
+                pausado = true
+            } else {
+                configuracion.iniciarTicks()
+                pausado = false
+            }
         }
     }
 
@@ -103,6 +107,7 @@ object configuracion {
             game.removeVisual(pantalla)
             self.crearTicks()
             puntaje.reset()
+            administradorDeJuego.usuarioEnMenu(false)
         })
 
         // Tecla "I" para detener el juego
