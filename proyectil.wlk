@@ -55,18 +55,18 @@ class Proyectil {
         const objetoEnFrente = game.getObjectsIn(posicionEnFrente)
         const colisionFrente = objetoEnFrente.any({ objeto => objeto.combinarProyectil(tipo) && objeto != self })
         const colisionCelda = objetoEnMiCelda.any({ objeto => objeto.recibeDanioEnemigo(danio) && objeto != self })
-        if (colisionFrente) {
+        if (colisionFrente && tipo.puedeCombinarse()) {
             self.destruirse()
         }
     }
 
     method combinarProyectil(_tipo){
-        if (_tipo.identity()==tipo.identity()){ 
+        if (_tipo.identity()==tipo.identity() && tipo.puedeCombinarse()){ 
             tipo = tipo.combinar()
             texto = "Soy un combineta"
             return true
             }
-        return _tipo.identity()==tipo.identity()
+        return _tipo.identity()==tipo.identity() && tipo.puedeCombinarse()
     }
 
     // Métodos para recibir daño
@@ -104,6 +104,7 @@ object proyectilNormal {
     method danio() = 50
     method destruirse() = true
     method combinar() = proyectilPenetrante
+    method puedeCombinarse() = true
 }
 
 
@@ -115,6 +116,7 @@ object proyectilPenetrante {
     const property imagenes = ["p.proyectilHielo-frame1.png", "p.proyectilHielo-frame2.png", "p.proyectilHielo-frame3.png"]
     method danio() = 25
     method destruirse() = false
-    method combinar() = proyectilPenetrante
+    method combinar() = self
+    method puedeCombinarse() = false
 
 }
