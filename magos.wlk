@@ -28,6 +28,8 @@ class Mago {
 
   method recibeDanioEnemigo(_danio) { return false }
   
+  method combinarProyectil(_tipo){return false}
+  
   method recibeDanioMago(_danio) {
     self.vida(self.vida() - _danio)
   }

@@ -52,6 +52,9 @@ class Slime {
         return true
     }
 
+    method combinarProyectil(_tipo){return false}
+
+
     // Comprobación de estado de vida y eliminación
     method estaMuerto() {
         if (self.llegoACasa()) {

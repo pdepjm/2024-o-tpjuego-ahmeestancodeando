@@ -37,6 +37,10 @@ object administradorDeProyectiles {
         proyectiles.forEach({ proyectil => proyectil.colisionar() })
     }
 
+    method combinarProyectiles() {
+        proyectiles.forEach({ proyectil => proyectil.combinar() })
+    }
+
     // Elimina un proyectil de la lista
     method destruirProyectil(proyectil) {
         proyectiles.remove(proyectil)

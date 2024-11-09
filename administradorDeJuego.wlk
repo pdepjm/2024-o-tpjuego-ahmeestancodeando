@@ -137,7 +137,10 @@ object configuracion {
         game.onTick(tiempoDinero, "aumentar dinero", { puntaje.sumarPuntos() })
         game.onTick(tiempoDisparo, "disparar", { administradorDeMagos.disparar() })
         game.onTick(tiemposProyectiles, "moverDisparos", { administradorDeProyectiles.moverProyectiles() })
-        game.onTick(tiemposProyectiles, "impactarDisparos", { administradorDeProyectiles.impactarProyectiles() })
+        game.onTick(tiemposProyectiles, "impactarDisparos", { 
+                                                                administradorDeProyectiles.impactarProyectiles() 
+                                                                administradorDeProyectiles.combinarProyectiles()
+                                                            })
         game.onTick((tiemposProyectiles/3)-5, "frame", {administradorDeProyectiles.cambiarFrame()})
     }
 

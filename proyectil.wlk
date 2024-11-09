@@ -10,17 +10,19 @@ import administradorDeEnemigos.administradorDeEnemigos
 // ===============================
 class Proyectil {
     // Propiedades
-    const property tipo
+    var property tipo
     const position = new MutablePosition()
     const property danio = tipo.danio()
     var frame = 0
     var imagen = tipo.imagenes().get(0)
+    var texto = ""
    
     // Métodos públicos
     method position() = position
     method image() = imagen
     method frenarEnemigo() = false
     method sePuedeSuperponer() = true
+    method text() = texto
 
     // Método de movimiento
     method mover() {
@@ -41,10 +43,30 @@ class Proyectil {
         const objetoEnFrente = game.getObjectsIn(posicionEnFrente)
         const colisionFrente = objetoEnFrente.any({ objeto => objeto.recibeDanioEnemigo(danio) })
         const colisionCelda = objetoEnMiCelda.any({ objeto => objeto.recibeDanioEnemigo(danio) })
-        
+
         if (colisionFrente || colisionCelda) {
             self.destruirse()
         }
+    }
+
+    method combinar(){
+        const objetoEnMiCelda = game.getObjectsIn(self.position())
+        const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
+        const objetoEnFrente = game.getObjectsIn(posicionEnFrente)
+        const colisionFrente = objetoEnFrente.any({ objeto => objeto.combinarProyectil(tipo) && objeto != self })
+        const colisionCelda = objetoEnMiCelda.any({ objeto => objeto.recibeDanioEnemigo(danio) && objeto != self })
+        if (colisionFrente) {
+            self.destruirse()
+        }
+    }
+
+    method combinarProyectil(_tipo){
+        if (_tipo.identity()==tipo.identity()){ 
+            tipo = tipo.combinar()
+            texto = "Soy un combineta"
+            return true
+            }
+        return _tipo.identity()==tipo.identity()
     }
 
     // Métodos para recibir daño
@@ -81,6 +103,7 @@ object proyectilNormal {
     const property imagenes = ["p.proyectilFuego - frame1.png", "p.proyectilFuego - frame2.png", "p.proyectilFuego - frame3.png"]
     method danio() = 50
     method destruirse() = true
+    method combinar() = proyectilPenetrante
 }
 
 
@@ -92,5 +115,6 @@ object proyectilPenetrante {
     const property imagenes = ["p.proyectilHielo-frame1.png", "p.proyectilHielo-frame2.png", "p.proyectilHielo-frame3.png"]
     method danio() = 25
     method destruirse() = false
+    method combinar() = proyectilPenetrante
 
 }
