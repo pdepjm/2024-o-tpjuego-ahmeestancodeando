@@ -14,7 +14,7 @@ import proyectil.*
 // Administrador de Juego: Control central del juego, reseteo y fin del juego
 // =======================================
 object administradorDeJuego {
-  
+    var property pausado = false
   // Método para finalizar el juego y resetear el estado
   method terminarJuego() {
     puntaje.reset()
@@ -33,6 +33,17 @@ object administradorDeJuego {
     puntaje.reset()
     // configuracion.iniciarMusica() // Iniciar música (opcional)
   }
+
+    method pausar(){
+        if (pausado == false){
+            configuracion.eliminarTicks()
+            pausado = true
+        } else {
+            configuracion.iniciarTicks()
+            pausado = false
+        }
+    }
+
 }
 
 // =======================================
@@ -96,12 +107,17 @@ object configuracion {
 
         // Tecla "I" para detener el juego
         keyboard.i().onPressDo({ game.stop() })
-    }
+
+        keyboard.o().onPressDo({administradorDeJuego.pausar()})
+    }   
 
     // Método para programar eventos de actualización periódicos (ticks)
     method crearTicks() {
         game.schedule(4000, { administradorDeOleadas.iniciarOleada() }) // Inicia la primera oleada tras 4 segundos
-        
+        self.iniciarTicks()
+    }
+
+    method iniciarTicks() {
         game.onTick(1500, "mover enemigo", { administradorDeEnemigos.moverEnemigos() })
         game.onTick(1000, "matar enemigos", { administradorDeEnemigos.estanMuertos() })
         game.onTick(1000, "matar magos", { administradorDeMagos.matarMagos() })

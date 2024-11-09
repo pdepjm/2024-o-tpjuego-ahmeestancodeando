@@ -19,27 +19,24 @@ object administradorDeOleadas {
     method position() = new MutablePosition(x = 9, y = 5)
     method text() = "Oleada: " + numeroOleada.toString() + "     " + "Slimes Restantes: " + oleadaActual.enemigosRestantes().toString()
     method textColor() = "#FA0770"
-    method inicioOleada() = game.sound("m.inicioOleada.mp3")
-    method finOleada() = game.sound("m.finOleada.mp3")
+    method enemigosVivos() = oleadaActual.enemigosVivos()
 
     // Inicia la oleada y gestiona enemigos
     method iniciarOleada() {
-        game.removeTickEvent("Iniciar Oleada")
-        oleadaActual.cargarSlimesRestantes()
-        self.inicioOleada().volume(0.0001)
-       self.inicioOleada().play()
+        oleadaActual.iniciarOleada()
         game.onTick(
             oleadaActual.tiempoSpawn(),
             "gestionar oleada",
             { 
-                if (oleadaActual.ejecutando()) {
-                    administradorDeEnemigos.generarEnemigo(oleadaActual.enemigos().anyOne())
-                } else if(oleadaActual.finalizo()){
-                    self.siguienteOleada()
-                    game.removeTickEvent("gestionar oleada")
-                    self.finOleada().volume(0.1)
-                    self.finOleada().play()
-                }
+               if (not administradorDeJuego.pausado()){
+                    if (oleadaActual.ejecutando()) {
+                        administradorDeEnemigos.generarEnemigo(oleadaActual.enemigos().anyOne())
+                    } else if(oleadaActual.finalizo()){
+                        self.siguienteOleada()
+                        game.removeTickEvent("gestionar oleada")
+
+                    }
+                } 
             }
         )
     }
@@ -52,10 +49,8 @@ object administradorDeOleadas {
             oleadaActual.terminarOleada()
         } else {
             oleadaActual.terminarOleada()
-            if (numeroOleada == numOleadaFinal){
-            oleadaActual = oleadaFinal
-            }
-            game.schedule(5000, { self.iniciarOleada() })
+            if (numeroOleada == numOleadaFinal){ oleadaActual = oleadaFinal }
+            game.schedule(10000, { self.iniciarOleada() })
         }
         
     }
@@ -89,6 +84,10 @@ object oleadaNormal {
     var property tiempoSpawn = 3000
     const cantSlimesPosibles = 4
 
+    method inicioOleada() = game.sound("m.inicioOleada.mp3")
+    method finOleada() = game.sound("m.finOleada.mp3")
+
+    method enemigosVivos() = enemigosGenerados - (cantidadEnemigos - enemigosRestantes) 
     // Verifica si la oleada está en ejecución
     method ejecutando() = cantidadEnemigos > enemigosGenerados && enemigosRestantes > 0
 
@@ -106,9 +105,15 @@ object oleadaNormal {
         if (tiempoSpawn > 400) tiempoSpawn -= 400
         enemigos = []
         game.onTick(100, "agregar slimes posibles", { self.agregarSlimes() })
+        self.finOleada().volume(0.1)
+        self.finOleada().play()
     }
 
-    method cargarSlimesRestantes () {enemigosRestantes = cantidadEnemigos }
+    method iniciarOleada(){
+        self.inicioOleada().volume(0.0001)
+        self.inicioOleada().play()
+        enemigosRestantes = cantidadEnemigos
+    }
 
 
     // Agrega slimes a la oleada hasta alcanzar el límite
@@ -148,13 +153,24 @@ object oleadaFinal {
 
     method seMurioEnemigo() {enemigosRestantes-=1}
 
+    method inicioOleada() = game.sound("m.inicioOleada.mp3")
+
+    method enemigosVivos() =  enemigosGenerados - (cantidadEnemigos - enemigosRestantes) 
 
     // Termina la oleada final y concluye el juego
     method terminarOleada() {
         pantalla.estado(victoria)
         administradorDeJuego.terminarJuego()
-        game.removeTickEvent("Iniciar Oleada")
+
     }
+
+        method iniciarOleada(){
+        self.inicioOleada().volume(0.0001)
+        self.inicioOleada().play()
+        enemigosRestantes = cantidadEnemigos
+    }
+
+
 
      method cargarSlimesRestantes () {enemigosRestantes = cantidadEnemigos }
     // Verifica si la oleada final ha finalizado

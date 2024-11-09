@@ -7,6 +7,8 @@ import administradorDeOleadas.*
    Administrador de Enemigos: Gestión de enemigos en el juego
    ======================================= */
 object administradorDeEnemigos {
+    // constantes
+    const maxEnemigosEnPantalla = 8
     // Propiedades
     var nombreEnemigo = 10000
     var enemigos = #{}
@@ -15,13 +17,14 @@ object administradorDeEnemigos {
     method enemigos() = enemigos
     method columnaOcupada() = enemigos.filter({ enemigo => enemigo.position().x() == 14 }).size() == 5 // Verifica si la columna de posición x=14 está ocupada por 5 enemigos
     method nombre() = nombreEnemigo
+    method pocosEnemigosEnPantalla() = administradorDeOleadas.enemigosVivos() < maxEnemigosEnPantalla
 
     // Genera un nuevo nombre para los enemigos
     method sumarEnemigo() { nombreEnemigo += 1 }
 
     // Genera un nuevo enemigo del tipo especificado, si hay espacio en la columna 
     method generarEnemigo(tipo) {
-        if (not self.columnaOcupada()) {
+        if (not self.columnaOcupada() && self.pocosEnemigosEnPantalla()) {
             const posicionTemporal = new MutablePosition(x = 14, y = 0.randomUpTo(5).truncate(0))
             var nombreParaEnemigo = self.nombre() 
 

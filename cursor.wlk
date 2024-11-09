@@ -8,6 +8,9 @@ import wollok.game.*
 // Cursor: Controlador de movimiento
 // ===============================
 object cursor {
+    const celdaMaxima = 9
+
+
     // Propiedad de posición
     var property position = new MutablePosition(x = 7, y = 3)
 
@@ -23,7 +26,7 @@ object cursor {
     }
 
     // Métodos de movimiento
-    method moverseDerecha() = if (self.position().x() < 12) position.goRight(1)
+    method moverseDerecha() = if (self.position().x() < celdaMaxima) position.goRight(1)
     method moverseIzquierda() = if (self.position().x() > 1) position.goLeft(1)
     method moverseArriba() = if (self.position().y() < 4) position.goUp(1)
     method moverseAbajo() = if (self.position().y() > 0) position.goDown(1)
