@@ -48,7 +48,7 @@ class Proyectil {
     }
 
     // Métodos para recibir daño
-   dd method recibeDanioEnemigo(_danio) {return false}
+    method recibeDanioEnemigo(_danio) {return false}
     method recibeDanioMago(_danio) { }
 
     // Método para destruir el proyectil

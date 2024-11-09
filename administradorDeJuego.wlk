@@ -85,7 +85,13 @@ object pantalla {
 // Configuración del Juego: Música, Visuales y Eventos
 // =======================================
 object configuracion {
-  
+    const tiemposProyectiles = 600
+    const tiempoDisparo = 3000
+    const tiempoDinero = 500
+    const tiempoMuerte = 1000
+    const tiempoMoverEnemigo = 1000
+
+
     var property sonido = "pvz8bit.mp3"
     const musica = game.sound(self.sonido()) // El reproductor de música es constante; solo cambia el archivo de sonido
 
@@ -125,14 +131,14 @@ object configuracion {
     }
 
     method iniciarTicks() {
-        game.onTick(1500, "mover enemigo", { administradorDeEnemigos.moverEnemigos() })
-        game.onTick(1000, "matar enemigos", { administradorDeEnemigos.estanMuertos() })
-        game.onTick(1000, "matar magos", { administradorDeMagos.matarMagos() })
-        game.onTick(500, "aumentar dinero", { puntaje.sumarPuntos() })
-        game.onTick(3000, "disparar", { administradorDeMagos.disparar() })
-        game.onTick(600, "moverDisparos", { administradorDeProyectiles.moverProyectiles() })
-        game.onTick(600, "impactarDisparos", { administradorDeProyectiles.impactarProyectiles() })
-        game.onTick(195, "frame", {administradorDeProyectiles.cambiarFrame()})
+        game.onTick(tiempoMoverEnemigo, "mover enemigo", { administradorDeEnemigos.moverEnemigos() })
+        game.onTick(tiempoMuerte, "matar enemigos", { administradorDeEnemigos.estanMuertos() })
+        game.onTick(tiempoMuerte, "matar magos", { administradorDeMagos.matarMagos() })
+        game.onTick(tiempoDinero, "aumentar dinero", { puntaje.sumarPuntos() })
+        game.onTick(tiempoDisparo, "disparar", { administradorDeMagos.disparar() })
+        game.onTick(tiemposProyectiles, "moverDisparos", { administradorDeProyectiles.moverProyectiles() })
+        game.onTick(tiemposProyectiles, "impactarDisparos", { administradorDeProyectiles.impactarProyectiles() })
+        game.onTick((tiemposProyectiles/3)-5, "frame", {administradorDeProyectiles.cambiarFrame()})
     }
 
     // Método para iniciar la música de fondo en bucle
