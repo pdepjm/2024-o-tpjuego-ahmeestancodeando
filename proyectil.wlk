@@ -55,15 +55,14 @@ class Proyectil {
         const objetoEnFrente = game.getObjectsIn(posicionEnFrente)
         const colisionFrente = objetoEnFrente.any({ objeto => objeto.combinarProyectil(tipo) && objeto != self })
         const colisionCelda = objetoEnMiCelda.any({ objeto => objeto.recibeDanioEnemigo(danio) && objeto != self })
-        if (colisionFrente && tipo.puedeCombinarse()) {
-            self.destruirse()
+        if (tipo.puedeCombinarse() && (colisionFrente || colisionCelda) ) {
+            self.eliminar()
         }
     }
 
     method combinarProyectil(_tipo){
         if (_tipo.identity()==tipo.identity() && tipo.puedeCombinarse()){ 
             tipo = tipo.combinar()
-            texto = "Soy un combineta"
             return true
             }
         return _tipo.identity()==tipo.identity() && tipo.puedeCombinarse()
@@ -115,6 +114,18 @@ object proyectilPenetrante {
     // Métodos públicos
     const property imagenes = ["p.proyectilHielo-frame1.png", "p.proyectilHielo-frame2.png", "p.proyectilHielo-frame3.png"]
     method danio() = 25
+    method destruirse() = false
+    method combinar() = superProyectil
+    method puedeCombinarse() = true
+
+}
+// ===============================
+// Proyectil Penetrante: Implementación específica de un proyectil penetrante
+// ===============================
+object superProyectil {
+    // Métodos públicos
+    const property imagenes = ["p.superProyectil-1.png", "p.superProyectil-2.png", "p.superProyectil-3.png"]
+    method danio() = 50
     method destruirse() = false
     method combinar() = self
     method puedeCombinarse() = false
