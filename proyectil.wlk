@@ -15,14 +15,12 @@ class Proyectil {
     const property danio = tipo.danio()
     var frame = 0
     var imagen = tipo.imagenes().get(0)
-    var texto = ""
    
     // Métodos públicos
     method position() = position
     method image() = imagen
     method frenarEnemigo() = false
     method sePuedeSuperponer() = true
-    method text() = texto
 
     // Método de movimiento
     method mover() {
@@ -38,24 +36,24 @@ class Proyectil {
     method llegueAlFinal() = position.x() >= 14
     // Método de colisión
     method colisionar() {
-        const objetoEnMiCelda = game.getObjectsIn(self.position())
         const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
-        const objetoEnFrente = game.getObjectsIn(posicionEnFrente)
-        const colisionFrente = objetoEnFrente.any({ objeto => objeto.recibeDanioEnemigo(danio) })
-        const colisionCelda = objetoEnMiCelda.any({ objeto => objeto.recibeDanioEnemigo(danio) })
 
-        if (colisionFrente || colisionCelda) {
+        const objetosEnPosicion = game.getObjectsIn(self.position()) + game.getObjectsIn(posicionEnFrente)
+        
+        const hayColision =  objetosEnPosicion.any({objeto => objeto.recibeDanioEnemigo(danio) })
+       
+        if (hayColision) {
             self.destruirse()
         }
     }
 
     method combinar(){
-        const objetoEnMiCelda = game.getObjectsIn(self.position())
         const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
-        const objetoEnFrente = game.getObjectsIn(posicionEnFrente)
-        const colisionFrente = objetoEnFrente.any({ objeto => objeto.combinarProyectil(tipo) && objeto != self })
-        const colisionCelda = objetoEnMiCelda.any({ objeto => objeto.recibeDanioEnemigo(danio) && objeto != self })
-        if (tipo.puedeCombinarse() && (colisionFrente || colisionCelda) ) {
+
+        const objetosEnPosicion = game.getObjectsIn(self.position()) + game.getObjectsIn(posicionEnFrente)
+
+        const hayColision =  objetosEnPosicion.any({ objeto => objeto != self && objeto.combinarProyectil(tipo) }) //aparentemente wollok tiene lazy evaluation, chad wollok ;)
+        if (tipo.puedeCombinarse() && hayColision ) {
             self.eliminar()
         }
     }
@@ -88,7 +86,6 @@ class Proyectil {
     method cambiarFrame() {
         imagen=tipo.imagenes().get(frame)
         if(frame<2) {frame+=1}
-        else frame=2
     }
     method matarSlime(){}
 }

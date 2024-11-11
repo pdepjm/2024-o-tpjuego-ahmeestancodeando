@@ -2,7 +2,7 @@ import wollok.game.*
 import administradorDeJuego.configuracion
 
 program cursorGame {
-	game.boardGround("fondo1.jpg")
+	game.boardGround("fondo2.jpg")
 	game.title("cursor")
 	game.height(6)
 	game.width(15)
