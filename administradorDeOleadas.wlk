@@ -141,7 +141,7 @@ object oleadaNormal {
 // ===============================
 object oleadaFinal {
     const property enemigos = [slimeBlessed]
-    const property cantidadEnemigos = 30
+    const property cantidadEnemigos = 20
     var property enemigosRestantes = cantidadEnemigos 
     var property enemigosGenerados = 0
     const property tiempoSpawn = 400

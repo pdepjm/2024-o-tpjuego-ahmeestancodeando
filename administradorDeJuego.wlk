@@ -87,7 +87,7 @@ object pantalla {
 object configuracion {
     const tiemposProyectiles = 600
     const tiempoDisparo = 3000
-    const tiempoDinero = 500
+    const tiempoDinero = 750
     const tiempoMuerte = 1000
     const tiempoMoverEnemigo = 1000
 
@@ -148,7 +148,7 @@ object configuracion {
     method iniciarMusica() {
         musica.shouldLoop(true)
         game.schedule(1500, { musica.play() })
-        musica.volume(0.4)
+        musica.volume(1)
     }
 
     // Método para detener la música de fondo

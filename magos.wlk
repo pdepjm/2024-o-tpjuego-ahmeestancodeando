@@ -86,7 +86,7 @@ class MagoHielo inherits Mago(vida = 100, imagen = "magoHielo.png") {
 }
 
 // Mago de Piedra
-class MagoPiedra inherits Mago(vida = 300, imagen = "magoPiedra.png") {}
+class MagoPiedra inherits Mago(vida = 400, imagen = "magoPiedra.png") {}
 
 // Mago Explosivo
 class MagoExplosivo inherits Mago(vida = 10, imagen = "magoExplosivo.png") {
@@ -142,7 +142,7 @@ class MagoTienda{
 }
 
 // Mago de Piedra en Tienda
-object magoPiedraTienda inherits MagoTienda(position = new MutablePosition(x = 0, y = 5), costo = 200) {
+object magoPiedraTienda inherits MagoTienda(position = new MutablePosition(x = 0, y = 5), costo = 100) {
   
   override method magoQueGenera(posicionMago){return new MagoPiedra(position = posicionMago)}
 
@@ -164,7 +164,7 @@ override method magoQueGenera(posicionMago){return new MagoIrlandes(position = p
 }
 
 // Mago de Hielo en Tienda
-object magoHieloTienda inherits MagoTienda(position = new MutablePosition(x = 3, y = 5), costo = 125) {
+object magoHieloTienda inherits MagoTienda(position = new MutablePosition(x = 3, y = 5), costo = 250) { //Nico: ver si 250 es una banda o no
 
   override method magoQueGenera(posicionMago){return new MagoHielo(position = posicionMago)}
   
@@ -172,7 +172,7 @@ object magoHieloTienda inherits MagoTienda(position = new MutablePosition(x = 3,
 }
 
 // Mago Explosivo en Tienda
-object magoExplosivoTienda inherits MagoTienda(position = new MutablePosition(x = 4, y = 5), costo = 200) {
+object magoExplosivoTienda inherits MagoTienda(position = new MutablePosition(x = 4, y = 5), costo = 400) {
 override method magoQueGenera(posicionMago){return new MagoExplosivo(position = posicionMago)}
 
   override method image() = "magoExplosivo.png"

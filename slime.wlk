@@ -99,15 +99,15 @@ class Slime {
 
   object slimeGuerrero { 
     const property danio = 25
-    const property vida= 150
+    const property vida= 200
     method desplazamiento() = 1
     const imagen = "s.slimeGuerrero.png"
     method imagen() {return imagen} 
   }
 
   object slimeBlessed { 
-    const property danio = 150
-    const property vida= 250
+    const property danio = 200
+    const property vida= 300
     method desplazamiento() = 1
     const imagen="s.slimeBlessed.png"
     method imagen() {return imagen} 
