@@ -12,18 +12,19 @@ program cursorGame {
 
 	game.addVisual(pantalla)
 	
-	/*game.schedule(4000, {
+	game.schedule(5000, {
     	game.removeVisual(pantalla)
 		configuracion.agregarVisuals()
 		configuracion.crearTicks()
 		configuracion.iniciarMusica()
-	})*/
-
-    keyboard.p().onPressDo({
+	})
+/*
+    keyboard.v().onPressDo({
 		game.removeVisual(pantalla)
 		configuracion.agregarVisuals()
 		configuracion.crearTicks()
 		configuracion.iniciarMusica()
         })
+*/
 }
 
