@@ -23,8 +23,6 @@ liveshare: https://prod.liveshare.vsengsaas.visualstudio.com/join?CE16CF3EFD9938
 
 ## Magos
 
-<div style="display:inline">
-
 ![mago fuego](assets/magoFuego.png) 
 
 ![mago hielo](assets/magoHielo.png)
@@ -35,7 +33,6 @@ liveshare: https://prod.liveshare.vsengsaas.visualstudio.com/join?CE16CF3EFD9938
 
 ![papajhon](assets/magoExplosivo.png)
  
-</div>
 
 
 
