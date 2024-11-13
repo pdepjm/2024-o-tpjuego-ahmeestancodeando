@@ -21,11 +21,37 @@ liveshare: https://prod.liveshare.vsengsaas.visualstudio.com/join?CE16CF3EFD9938
 
 ![captura2](Cosas_juego/screen2.png)
 
-![mago fuego](assets/magoFuego.png)
+## Magos
+
+![mago fuego](assets/magoFuego.png) 
+
+![mago hielo](assets/magoHielo.png)
+
+![mago irlandes](assets/magoHealer.png)
+
+![mago piedra](assets/magoPiedra.png)
+
+![papajhon](assets/magoExplosivo.png)
+
+## Proyectiles
+
+![proyectil Normal](assets/p.proyectilFuego.png)
+
+![proyectil Penetrante](assets/p.proyectilHielo.png)
+
+![superProyectil](assets/p.superProyectil-1.png)
+
+## Slimes
 
 ![slimeBasico](Cosas_juego/slime_base.png)
 
-![papajhon](assets/magoExplosivo.png)
+![slimeGuerrero](assets/s.slimeGuerrero.png)
+
+![slimeNinja](assets/s.slimeNinja.png)
+
+![slimeBlessed](assets/s.slimeBlessed.png)
+
+
 
 ## Reglas de Juego / Instrucciones
 En Nuestra mision es defender la EL ULTIMO FARO DE LA HUMANIDAD, la ciudad de "Utopía de las Tierras de Nortfernand (UTN)", de los slimes, evitando que lleguen 3 o más de ellos a nuestras puertas. Para protegernos, contaremos con la ayuda de magos, cada uno con habilidades únicas, que se unirán en la defensa de la aldea.
