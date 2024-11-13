@@ -81,7 +81,7 @@ class Slime {
 // ===============================
   object slimeBasico { 
     const property danio = 25
-    const property vida= 150
+    const property vida= 100
     method desplazamiento() = 1
     const  imagen="s.slimeBase.png"
     method imagen() {return imagen} 
