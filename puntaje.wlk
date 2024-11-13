@@ -9,7 +9,7 @@ import administradorDeMagos.*
 // Puntaje: Manejo de puntos
 // ===============================
 object puntaje {
-	const puntajeInicial = 50
+	const puntajeInicial = 5000
 
 	var property puntos = puntajeInicial
 

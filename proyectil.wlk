@@ -52,18 +52,18 @@ class Proyectil {
 
         const objetosEnPosicion = game.getObjectsIn(self.position()) + game.getObjectsIn(posicionEnFrente)
 
-        const hayColision =  objetosEnPosicion.any({ objeto => objeto != self && objeto.combinarProyectil(tipo) }) //aparentemente wollok tiene lazy evaluation, chad wollok ;)
+        const hayColision =  objetosEnPosicion.any({ objeto => objeto != self && objeto.combinarProyectil(self.tipo()) }) //aparentemente wollok tiene lazy evaluation, chad wollok ;)
         if (tipo.puedeCombinarse() && hayColision ) {
             self.eliminar()
         }
     }
 
-    method combinarProyectil(_tipo){
-        if (_tipo.identity()==tipo.identity() && tipo.puedeCombinarse()){ 
+    method combinarProyectil(otroTipo){
+        if (tipo.condicionParaCombinarse(otroTipo) && tipo.puedeCombinarse()){ 
             tipo = tipo.combinar()
             return true
             }
-        return _tipo.identity()==tipo.identity() && tipo.puedeCombinarse()
+        return tipo.condicionParaCombinarse(otroTipo) && tipo.puedeCombinarse()
     }
 
     // Métodos para recibir daño
@@ -101,6 +101,9 @@ object proyectilNormal {
     method destruirse() = true
     method combinar() = proyectilPenetrante
     method puedeCombinarse() = true
+    method puedeCombinarseConNormal() = true
+    method puedeCombinarseConPenetrante() = false
+    method condicionParaCombinarse(otroTipo) = otroTipo.puedeCombinarseConNormal() 
 }
 
 
@@ -114,6 +117,9 @@ object proyectilPenetrante {
     method destruirse() = false
     method combinar() = superProyectil
     method puedeCombinarse() = true
+    method puedeCombinarseConNormal() = false
+    method puedeCombinarseConPenetrante() = true
+    method condicionParaCombinarse(otroTipo) = otroTipo.puedeCombinarseConPenetrante() 
 
 }
 // ===============================
@@ -126,5 +132,7 @@ object superProyectil {
     method destruirse() = false
     method combinar() = self
     method puedeCombinarse() = false
-
+    method puedoCombinarseConNormal() = false
+    method puedoCombinarseConPenetrante() = false
+    method condicionParaCombinarse(otroTipo){}
 }

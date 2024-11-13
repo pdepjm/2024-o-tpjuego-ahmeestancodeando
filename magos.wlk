@@ -55,20 +55,23 @@ class Mago {
   method matarSlime(){}
 }
 
+class MagoQueDispara inherits Mago{
+  const tipoProyectil
+  override method disparar(){
+    const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
+    if (self.enemigoEnSuFila()) {
+      administradorDeProyectiles.generarProyectil(posicionProyectil, tipoProyectil)
+    }
+  }
+}
+
 
 // ===============================
 // Subclases de Mago: Tipos de magos
 // ===============================
 
 // Mago de Fuego
-class MagoFuego inherits Mago(vida = 100, imagen = "magoFuego.png") {
-  override method disparar() {
-    const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
-    if (self.enemigoEnSuFila()) {
-      administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilNormal)
-    }
-  }
-}
+class MagoFuego inherits MagoQueDispara(vida = 100, imagen = "magoFuego.png", tipoProyectil = proyectilNormal){}
 
 // Mago Irlandés (sanador)
 class MagoIrlandes inherits Mago(vida = 100, imagen = "magoHealer.png") {
@@ -76,14 +79,7 @@ class MagoIrlandes inherits Mago(vida = 100, imagen = "magoHealer.png") {
 }
 
 // Mago de Hielo
-class MagoHielo inherits Mago(vida = 100, imagen = "magoHielo.png") {
-  override method disparar() {
-    const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
-    if (self.enemigoEnSuFila()) {
-      administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilPenetrante)
-    }
-  }
-}
+class MagoHielo inherits MagoQueDispara(vida = 100, imagen = "magoHielo.png", tipoProyectil = proyectilPenetrante){}
 
 // Mago de Piedra
 class MagoPiedra inherits Mago(vida = 400, imagen = "magoPiedra.png") {}

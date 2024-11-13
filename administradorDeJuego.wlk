@@ -34,7 +34,7 @@ object administradorDeJuego {
     administradorDeOleadas.reset()
     casa.reset()
     puntaje.reset()
-    // configuracion.iniciarMusica() // Iniciar música (opcional)
+   // configuracion.iniciarMusica() // Iniciar música (opcional)
   }
 
     method pausar(){
@@ -177,6 +177,7 @@ object configuracion {
         game.removeTickEvent("disparar")
         game.removeTickEvent("moverDisparos")
         game.removeTickEvent("impactarDisparos")
+        game.removeTickEvent("frame")
         game.removeTickEvent("Iniciar Oleada")
     }
 }
