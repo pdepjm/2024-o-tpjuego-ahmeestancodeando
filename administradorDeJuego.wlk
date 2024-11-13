@@ -24,6 +24,7 @@ object administradorDeJuego {
     self.resetGame()
   }
 
+
   // Método para resetear todos los administradores y configuraciones del juego
   method resetGame() {
     configuracion.eliminarTicks()
@@ -65,6 +66,11 @@ object victoria {
     method imagen() = "victoria.jpg"
     method sonido() = game.sound("m.deathScreen.mp3")
 }
+object portada {
+    method position() = new MutablePosition(x = 0, y = 0)
+    method imagen() = "portada3.png"
+    method sonido() = game.sound("m.deathScreen.mp3")
+}
 
 // =======================================
 // Pantalla de Estado Actual del Juego
@@ -73,7 +79,7 @@ object pantalla {
     method position() = new MutablePosition(x = 0, y = 0)
     method image() = estado.imagen()
     
-    var estado = derrota
+    var estado = portada
     var sonido = estado.sonido()
 
     method estado(estadoNuevo) {
@@ -96,16 +102,22 @@ object configuracion {
     const musica = game.sound(self.sonido()) // El reproductor de música es constante; solo cambia el archivo de sonido
 
     // Método para agregar elementos visuales y configurar teclas de control
-    method agregarVisuals() {
+    method agregarVisuals() {  
+
         game.addVisual(cursor)
         game.addVisual(menu)
         game.addVisual(puntaje)
         game.addVisual(administradorDeOleadas)
         game.addVisual(casa)
 
+
         menu.accion()
         cursor.accion()
         menu.iniciarTienda()
+            
+
+
+
 
         // Tecla "P" para reiniciar el juego
         keyboard.p().onPressDo({
