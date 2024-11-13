@@ -23,36 +23,20 @@ liveshare: https://prod.liveshare.vsengsaas.visualstudio.com/join?CE16CF3EFD9938
 
 ## Magos
 
-![mago fuego](assets/magoFuego.png) 
-
-![mago hielo](assets/magoHielo.png)
-
-![mago irlandes](assets/magoHealer.png)
-
-![mago piedra](assets/magoPiedra.png)
-
-![papajhon](assets/magoExplosivo.png)
+![mago fuego](assets/magoFuego.png)    ![mago hielo](assets/magoHielo.png)    ![mago irlandes](assets/magoHealer.png)    ![mago piedra](assets/magoPiedra.png)    ![papajhon](assets/magoExplosivo.png)
  
-
-
+ Daño: *  Daño: **                                 Daño: $$$                                   Daño:                                Daño: *** 
+ 
+ Vida: *                                      Vida: *                                  Vida: *                                     Vida: ***                            Vida: es lolero
 
 ## Proyectiles
 
-![proyectil Normal](assets/p.proyectilFuego.png)
-
-![proyectil Penetrante](assets/p.proyectilHielo.png)
-
-![superProyectil](assets/p.superProyectil-1.png)
+![proyectil Normal](assets/p.proyectilFuego.png)    ![proyectil Penetrante](assets/p.proyectilHielo.png)     ![superProyectil](assets/p.superProyectil-1.png)
+Proyectil Normal                                        Proyectil Penetrante = Dos proyectiles Normales             Super Proyectil = Dos proyectiles Penetrantes
 
 ## Slimes
 
-![slimeBasico](Cosas_juego/slime_base.png)
-
-![slimeGuerrero](assets/s.slimeGuerrero.png)
-
-![slimeNinja](assets/s.slimeNinja.png)
-
-![slimeBlessed](assets/s.slimeBlessed.png)
+![slimeBasico](Cosas_juego/slime_base.png)  ![slimeGuerrero](assets/s.slimeGuerrero.png)   ![slimeNinja](assets/s.slimeNinja.png)    ![slimeBlessed](assets/s.slimeBlessed.png)
 
 
 
@@ -72,4 +56,5 @@ Podremos seleccionar, utilizar y eliminar a los distintos tipos de magos estrat�
 - `ARROW_DOWN` para mover abajo cursor
 - `ENTER` para poner planta / utilizar pala
 - `P` para reiniciar juego
-- `I` para reiniciar juego
+- `I` termina el juego
+- `O` para pausar juego
