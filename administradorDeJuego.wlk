@@ -16,6 +16,8 @@ import proyectil.*
 object administradorDeJuego {
     var property pausado = false
     var property usuarioEnMenu = false
+
+
   // Método para finalizar el juego y resetear el estado
   method terminarJuego() {
     usuarioEnMenu = true
@@ -34,6 +36,7 @@ object administradorDeJuego {
     administradorDeOleadas.reset()
     casa.reset()
     puntaje.reset()
+    pantalla.reproducirSonido()
    // configuracion.iniciarMusica() // Iniciar música (opcional)
   }
 
@@ -69,7 +72,7 @@ object victoria {
 object portada {
     method position() = new MutablePosition(x = 0, y = 0)
     method imagen() = "portada3.png"
-    method sonido() = game.sound("m.deathScreen.mp3")
+    method sonido() = game.sound("m.inicio.mp3")
 }
 
 // =======================================
@@ -81,6 +84,10 @@ object pantalla {
     
     var estado = portada
     var sonido = estado.sonido()
+
+    method reproducirSonido(){
+        sonido.play()
+    }
 
     method estado(estadoNuevo) {
         estado = estadoNuevo

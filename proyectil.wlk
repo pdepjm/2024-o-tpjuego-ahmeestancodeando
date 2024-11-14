@@ -123,7 +123,7 @@ object proyectilPenetrante {
 
 }
 // ===============================
-// Proyectil Penetrante: Implementación específica de un proyectil penetrante
+// Super Proyectil: Implementación específica de un super proyectil
 // ===============================
 object superProyectil {
     // Métodos públicos
@@ -132,7 +132,7 @@ object superProyectil {
     method destruirse() = false
     method combinar() = self
     method puedeCombinarse() = false
-    method puedoCombinarseConNormal() = false
-    method puedoCombinarseConPenetrante() = false
+    method puedeCombinarseConNormal() = false
+    method puedeCombinarseConPenetrante() = false
     method condicionParaCombinarse(otroTipo){}
 }
