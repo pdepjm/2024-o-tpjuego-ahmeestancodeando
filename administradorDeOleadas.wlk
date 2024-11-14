@@ -110,8 +110,8 @@ object oleadaNormal {
     }
 
     method iniciarOleada(){
-        self.inicioOleada().volume(0.0001)
-        self.inicioOleada().play()
+        self.inicioOleada().volume(0)
+        //self.inicioOleada().play()
         enemigosRestantes = cantidadEnemigos
     }
 
@@ -159,14 +159,14 @@ object oleadaFinal {
 
     // Termina la oleada final y concluye el juego
     method terminarOleada() {
-        pantalla.estado(victoria)
+        pantalla.nuevoEstado(victoria)
         administradorDeJuego.terminarJuego()
 
     }
 
         method iniciarOleada(){
-        self.inicioOleada().volume(0.0001)
-        self.inicioOleada().play()
+        self.inicioOleada().volume(0)
+        //self.inicioOleada().play()
         enemigosRestantes = cantidadEnemigos
     }
 

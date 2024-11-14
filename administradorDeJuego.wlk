@@ -13,6 +13,8 @@ import proyectil.*
 // =======================================
 // Administrador de Juego: Control central del juego, reseteo y fin del juego
 // =======================================
+
+class MyException inherits wollok.lang.Exception {}
 object administradorDeJuego {
     var property pausado = false
     var property usuarioEnMenu = false
@@ -36,7 +38,7 @@ object administradorDeJuego {
     administradorDeOleadas.reset()
     casa.reset()
     puntaje.reset()
-    pantalla.reproducirSonido()
+    //pantalla.reproducirSonido()
    // configuracion.iniciarMusica() // Iniciar música (opcional)
   }
 
@@ -82,21 +84,40 @@ object pantalla {
     method position() = new MutablePosition(x = 0, y = 0)
     method image() = estado.imagen()
     
-    var estado = portada
+    var  property estado = portada
     var sonido = estado.sonido()
+    method estado()=estado
 
     method reproducirSonido(){
-        sonido.play()
+        estado.sonido().volume(0.1)
+        estado.sonido().play()
     }
-
-    method estado(estadoNuevo) {
-        estado = estadoNuevo
+    method detenerSonido(){
+        estado.sonido().stop()
+    }
+    method nuevoEstado(estadoNuevo) {
+        estado=estadoNuevo
+        
+        self.reproducirSonido()
     }
 }
 
 // =======================================
 // Configuración del Juego: Música, Visuales y Eventos
 // =======================================
+
+object sonidoPartida{
+    var property sonido = "pvz8bit.mp3"
+    const musica = game.sound(sonido)
+    method iniciarMusica() {
+        musica.shouldLoop(true)
+        game.schedule(1500, { musica.play() })
+        musica.volume(0.5)
+    }
+    method detenerMusica(){
+        musica.stop()
+    }
+}
 object configuracion {
     const tiemposProyectiles = 600
     const tiempoDisparo = 3000
@@ -107,7 +128,11 @@ object configuracion {
 
     var property sonido = "pvz8bit.mp3"
     const musica = game.sound(self.sonido()) // El reproductor de música es constante; solo cambia el archivo de sonido
-
+    method iniciarMusica() {sonidoPartida.iniciarMusica()} 
+    // Método para detener la música de fondo
+    method detenerMusica() {
+        musica.stop()
+    }
     // Método para agregar elementos visuales y configurar teclas de control
     method agregarVisuals() {  
 
@@ -127,14 +152,18 @@ object configuracion {
 
 
         // Tecla "P" para reiniciar el juego
-        keyboard.p().onPressDo({
+            keyboard.p().onPressDo({
+            try sonidoPartida.detenerMusica()
+            catch e : MyException {}
+            then always {
+            self.iniciarMusica()
             administradorDeJuego.resetGame()
             administradorDeJuego.usuarioEnMenu(false)
             administradorDeJuego.pausado(false)
             game.removeVisual(pantalla)
             self.crearTicks()
             puntaje.reset()
-            
+            }
         })
 
         // Tecla "I" para detener el juego
@@ -151,8 +180,8 @@ object configuracion {
 
     method iniciarTicks() {
         game.onTick(tiempoMoverEnemigo, "mover enemigo", { administradorDeEnemigos.moverEnemigos() })
-        game.onTick(tiempoMuerte, "matar enemigos", { administradorDeEnemigos.estanMuertos() })
-        game.onTick(tiempoMuerte, "matar magos", { administradorDeMagos.matarMagos() })
+        //game.onTick(tiempoMuerte, "matar enemigos", { administradorDeEnemigos.estanMuertos() })
+        //game.onTick(tiempoMuerte, "matar magos", { administradorDeMagos.matarMagos() })
         game.onTick(tiempoDinero, "aumentar dinero", { puntaje.sumarPuntos() })
         game.onTick(tiempoDisparo, "disparar", { administradorDeMagos.disparar() })
         game.onTick(tiemposProyectiles, "moverDisparos", { administradorDeProyectiles.moverProyectiles() })
@@ -164,16 +193,9 @@ object configuracion {
     }
 
     // Método para iniciar la música de fondo en bucle
-    method iniciarMusica() {
-        musica.shouldLoop(true)
-        game.schedule(1500, { musica.play() })
-        musica.volume(1)
-    }
+    
 
-    // Método para detener la música de fondo
-    method detenerMusica() {
-        musica.stop()
-    }
+   
 
     // Método para eliminar todos los eventos programados de actualización (ticks)
     method eliminarTicks() {

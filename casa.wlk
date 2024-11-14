@@ -24,8 +24,10 @@ object casa {
     self.sonidoDanio().volume(0.3)
     //self.explosion().play()
     if(vida <= 0) {
-      pantalla.estado(derrota)
       administradorDeJuego.terminarJuego()
+      sonidoPartida.detenerMusica()
+      pantalla.nuevoEstado(derrota)
+      
     }
   }
   method reset() {

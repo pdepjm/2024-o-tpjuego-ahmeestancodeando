@@ -1,6 +1,7 @@
 import wollok.game.*
 import administradorDeJuego.*
 
+
 program juego {
 
 	game.boardGround("fondo2.jpg")
@@ -12,8 +13,6 @@ program juego {
 	
 	game.addVisual(pantalla)
 	game.schedule(100, {pantalla.reproducirSonido()})
-	
-
 	game.schedule(8000, {
     	game.removeVisual(pantalla)
 		configuracion.agregarVisuals()

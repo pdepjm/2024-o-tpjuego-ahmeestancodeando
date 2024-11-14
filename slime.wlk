@@ -24,6 +24,7 @@ class Slime {
 
     // Movimiento del Slime
     method movete() {
+        self.estaMuerto()
         self.meFreno()
         if (self.enMovimiento()) 
             return position.goLeft(tipo.desplazamiento())
