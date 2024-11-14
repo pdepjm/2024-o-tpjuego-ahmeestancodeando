@@ -84,8 +84,8 @@ object oleadaNormal {
     var property tiempoSpawn = 3000
     const cantSlimesPosibles = 4
 
-    method inicioOleada() = game.sound("m.inicioOleada.mp3")
-    method finOleada() = game.sound("m.finOleada.mp3")
+    method inicioOleada() = game.sound("m.iOleada.mp3")
+    method finOleada() = game.sound("m.fOleada.mp3")
 
     method enemigosVivos() = enemigosGenerados - (cantidadEnemigos - enemigosRestantes) 
     // Verifica si la oleada está en ejecución
@@ -153,7 +153,7 @@ object oleadaFinal {
 
     method seMurioEnemigo() {enemigosRestantes-=1}
 
-    method inicioOleada() = game.sound("m.inicioOleada.mp3")
+    method inicioOleada() = game.sound("m.iOleada.mp3")
 
     method enemigosVivos() =  enemigosGenerados - (cantidadEnemigos - enemigosRestantes) 
 
