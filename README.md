@@ -21,6 +21,7 @@ UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programaci√≥n
 ![3](https://github.com/user-attachments/assets/78192b7f-5ce0-4f2e-b012-98eb4f4dc90a)
 
 
+
 ## Magos
 
 
@@ -64,6 +65,7 @@ Podremos seleccionar, utilizar y eliminar a los distintos tipos de magos estrat√
 - `I` termina el juego
 - `O` para pausar juego
 
+![portada3](https://github.com/user-attachments/assets/fef46cef-605c-4468-923a-923fea237f71)
 
 
 Link al Lore: https://docs.google.com/document/d/1lBfEKnoyl5uwRfzc_BIOiNtRY3-iJxHwnHqUtpygSzU/edit?tab=t.0
