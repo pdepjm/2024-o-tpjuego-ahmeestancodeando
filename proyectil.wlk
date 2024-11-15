@@ -10,11 +10,11 @@ import administradorDeEnemigos.administradorDeEnemigos
 // ===============================
 class Proyectil {
     // Propiedades
-    var property tipo
+    var property tipoProyectil
     const position = new MutablePosition()
-    const property danio = tipo.danio()
+    const property danio = tipoProyectil.danio()
     var frame = 0
-    var imagen = tipo.imagenes().get(0)
+    var imagen = tipoProyectil.imagenes().get(0)
    
     // Métodos públicos
     method position() = position
@@ -24,7 +24,7 @@ class Proyectil {
 
     // Método de movimiento
     method mover() {
-        imagen=tipo.imagenes().get(0)
+        imagen=tipoProyectil.imagenes().get(0)
         frame=1
         //game.onTick(190, "frame", {self.cambiarFrame()})
         //game.schedule(600, {game.removeTickEvent("frame")}) ESTOS POR SI QUEREMOS QUE CREEN SUS PROPIOS TICK PARA LAS ANIMACIONES
@@ -48,22 +48,22 @@ class Proyectil {
     }
 
     method combinar(){
-        const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
+        const posicionEnFrente = new MutablePosition(x = position.x(), y = position.y())
 
         const objetosEnPosicion = game.getObjectsIn(self.position()) + game.getObjectsIn(posicionEnFrente)
 
-        const hayColision =  objetosEnPosicion.any({ objeto => objeto != self && objeto.combinarProyectil(self.tipo()) }) //aparentemente wollok tiene lazy evaluation, chad wollok ;)
-        if (tipo.puedeCombinarse() && hayColision ) {
+        const hayColision =  objetosEnPosicion.any({ objeto => objeto != self && objeto.combinarProyectil(self.tipoProyectil())}) //aparentemente wollok tiene lazy evaluation, chad wollok ;)
+        if (tipoProyectil.puedeCombinarse() &&  hayColision ) {
             self.eliminar()
         }
     }
 
     method combinarProyectil(otroTipo){
-        if (tipo.condicionParaCombinarse(otroTipo) && tipo.puedeCombinarse()){ 
-            tipo = tipo.combinar()
+        if (tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()){ 
+            tipoProyectil = tipoProyectil.combinar()
             return true
             }
-        return tipo.condicionParaCombinarse(otroTipo) && tipo.puedeCombinarse()
+        return tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()
     }
 
     // Métodos para recibir daño
@@ -72,7 +72,7 @@ class Proyectil {
 
     // Método para destruir el proyectil
     method destruirse() {
-        if (tipo.destruirse()) { self.eliminar()}
+        if (tipoProyectil.destruirse()) { self.eliminar()}
     }
 
     // Método para eliminar el proyectil
@@ -84,7 +84,7 @@ class Proyectil {
     method verificarEnemigosEnfrente() = !administradorDeEnemigos.enemigos().any({enemigo => enemigo.position().y() == self.position().y() && enemigo.position().x() >= self.position().x()-2})
     
     method cambiarFrame() {
-        imagen=tipo.imagenes().get(frame)
+        imagen=tipoProyectil.imagenes().get(frame)
         if(frame<2) {frame+=1}
     }
     method matarSlime(){}

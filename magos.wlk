@@ -57,13 +57,22 @@ class Mago {
 }
 
 class MagoQueDispara inherits Mago{
-  const tipoProyectil
+  const proyectilBase
+  var property tipoProyectil=proyectilBase
   override method disparar(){
     const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
     if (self.enemigoEnSuFila()) {
       administradorDeProyectiles.generarProyectil(posicionProyectil, tipoProyectil)
     }
+    tipoProyectil = proyectilBase
   }
+  override method combinarProyectil(otroTipo){
+        if (tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()){ 
+            tipoProyectil = tipoProyectil.combinar()
+            return true
+            }
+        return tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()
+    }
 }
 
 
@@ -72,7 +81,7 @@ class MagoQueDispara inherits Mago{
 // ===============================
 
 // Mago de Fuego
-class MagoFuego inherits MagoQueDispara(vida = 100, imagen = "magoFuego.png", tipoProyectil = proyectilNormal){}
+class MagoFuego inherits MagoQueDispara(vida = 100, imagen = "magoFuego.png", proyectilBase = proyectilNormal){}
 
 // Mago Irlandés (sanador)
 class MagoIrlandes inherits Mago(vida = 100, imagen = "magoHealer.png") {
@@ -80,7 +89,7 @@ class MagoIrlandes inherits Mago(vida = 100, imagen = "magoHealer.png") {
 }
 
 // Mago de Hielo
-class MagoHielo inherits MagoQueDispara(vida = 100, imagen = "magoHielo.png", tipoProyectil = proyectilPenetrante){}
+class MagoHielo inherits MagoQueDispara(vida = 100, imagen = "magoHielo.png", proyectilBase = proyectilPenetrante){}
 
 // Mago de Piedra
 class MagoPiedra inherits Mago(vida = 400, imagen = "magoPiedra.png") {}

@@ -37,4 +37,5 @@ object cursor {
     method recibeDanioMago(_danio) { return false }
     method combinarProyectil(_tipo){return false}
     method matarSlime(){return false}
+    method tipoProyectil()=false
 }

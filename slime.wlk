@@ -76,6 +76,7 @@ class Slime {
         game.removeVisual(self)
         administradorDeEnemigos.eliminarEnemigo(self)
     }
+    method tipoProyectil()=false
 }
 // ===============================
 // Tipos de Slime: Variantes

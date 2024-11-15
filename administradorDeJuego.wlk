@@ -119,7 +119,7 @@ object sonidoPartida{
     }
 }
 object configuracion {
-    const tiemposProyectiles = 600
+    const tiemposProyectiles = 500
     const tiempoDisparo = 3000
     const tiempoDinero = 750
     const tiempoMuerte = 1000
@@ -153,17 +153,17 @@ object configuracion {
 
         // Tecla "P" para reiniciar el juego
             keyboard.p().onPressDo({
-            try sonidoPartida.detenerMusica()
-            catch e : MyException {}
-            then always {
-            self.iniciarMusica()
+        
+            /* try self.iniciarMusica()
+            catch e: MyException {"YA ESTA INICIADA LA MUSICA"}
+            then always{ */
             administradorDeJuego.resetGame()
             administradorDeJuego.usuarioEnMenu(false)
             administradorDeJuego.pausado(false)
             game.removeVisual(pantalla)
             self.crearTicks()
             puntaje.reset()
-            }
+           // }
         })
 
         // Tecla "I" para detener el juego
@@ -183,12 +183,12 @@ object configuracion {
         //game.onTick(tiempoMuerte, "matar enemigos", { administradorDeEnemigos.estanMuertos() })
         //game.onTick(tiempoMuerte, "matar magos", { administradorDeMagos.matarMagos() })
         game.onTick(tiempoDinero, "aumentar dinero", { puntaje.sumarPuntos() })
-        game.onTick(tiempoDisparo, "disparar", { administradorDeMagos.disparar() })
-        game.onTick(tiemposProyectiles, "moverDisparos", { administradorDeProyectiles.moverProyectiles() })
-        game.onTick(tiemposProyectiles, "impactarDisparos", { 
+        game.onTick(tiempoDisparo, "disparar", { administradorDeMagos.disparar()})
+        game.onTick(tiemposProyectiles, "moverDisparos", { administradorDeProyectiles.moverProyectiles() /* administradorDeProyectiles.combinarProyectiles() */ administradorDeProyectiles.impactarProyectiles() })
+        /* game.onTick(tiemposProyectiles, "impactarDisparos", { 
                                                                 administradorDeProyectiles.impactarProyectiles() 
                                                                 administradorDeProyectiles.combinarProyectiles()
-                                                            })
+                                                            }) */
         game.onTick((tiemposProyectiles/3)-5, "frame", {administradorDeProyectiles.cambiarFrame()})
     }
 

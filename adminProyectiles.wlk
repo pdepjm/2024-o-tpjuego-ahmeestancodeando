@@ -7,6 +7,7 @@ import proyectil.*
 // ===============================
 // Administrador de Proyectiles: Controla la creación y gestión de proyectiles
 // ===============================
+class MiException inherits wollok.lang.Exception {}
 object administradorDeProyectiles {
     // Propiedades
     var nombreProyectil = 20000 // Identificador único para cada proyectil creado
@@ -20,11 +21,12 @@ object administradorDeProyectiles {
     // Genera un nuevo proyectil en la posición y tipo especificado
     method generarProyectil(posicion, tipoProyectil) {
         var nombreParaProyectil = self.nombre()
-        nombreParaProyectil = new Proyectil(position = posicion, tipo = tipoProyectil)
+        nombreParaProyectil = new Proyectil(position = posicion, tipoProyectil = tipoProyectil)
         proyectiles.add(nombreParaProyectil)
         self.sumarProyectil()
+        game.addVisual(nombreParaProyectil)
+        nombreParaProyectil.combinar()
         
-        return game.addVisual(nombreParaProyectil)
     }
 
     // Mueve cada proyectil en la lista
