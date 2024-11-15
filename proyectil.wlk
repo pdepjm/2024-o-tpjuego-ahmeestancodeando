@@ -14,7 +14,7 @@ class Proyectil {
     const position = new MutablePosition()
     const property danio = tipoProyectil.danio()
     var frame = 0
-    var imagen = tipoProyectil.imagenes().get(0)
+    var imagen = tipoProyectil.imagen()//tipoProyectil.imagenes().get(0)
    
     // Métodos públicos
     method position() = position
@@ -24,11 +24,13 @@ class Proyectil {
 
     // Método de movimiento
     method mover() {
-        imagen=tipoProyectil.imagenes().get(0)
-        frame=1
+        
+        /* imagen=tipoProyectil.imagenes().get(0)
+        frame=1 */
         //game.onTick(190, "frame", {self.cambiarFrame()})
         //game.schedule(600, {game.removeTickEvent("frame")}) ESTOS POR SI QUEREMOS QUE CREEN SUS PROPIOS TICK PARA LAS ANIMACIONES
         position.goRight(1)
+        
         if (self.llegueAlFinal() || self.verificarEnemigosEnfrente()) { self.eliminar() }
         
     }
@@ -97,6 +99,8 @@ class Proyectil {
 object proyectilNormal {
     // Métodos públicos
     const property imagenes = ["p.proyectilFuego - frame1.png", "p.proyectilFuego - frame2.png", "p.proyectilFuego - frame3.png"]
+    const imagen = "p.proyectilFuego.gif"
+    method imagen()= imagen
     method danio() = 50
     method destruirse() = true
     method combinar() = proyectilPenetrante
@@ -113,6 +117,8 @@ object proyectilNormal {
 object proyectilPenetrante {
     // Métodos públicos
     const property imagenes = ["p.proyectilHielo-frame1.png", "p.proyectilHielo-frame2.png", "p.proyectilHielo-frame3.png"]
+    const imagen ="p.proyectilHielo.gif"
+    method imagen()=imagen
     method danio() = 50
     method destruirse() = false
     method combinar() = superProyectil
@@ -128,6 +134,8 @@ object proyectilPenetrante {
 object superProyectil {
     // Métodos públicos
     const property imagenes = ["p.superProyectil-1.png", "p.superProyectil-2.png", "p.superProyectil-3.png"]
+    const  imagen="p.superProyectil.gif"
+    method imagen()=imagen
     method danio() = 75
     method destruirse() = false
     method combinar() = self

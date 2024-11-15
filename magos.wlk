@@ -89,7 +89,7 @@ class MagoIrlandes inherits Mago(vida = 100, imagen = "magoHealer.png") {
 }
 
 // Mago de Hielo
-class MagoHielo inherits MagoQueDispara(vida = 100, imagen = "magoHielo.png", proyectilBase = proyectilPenetrante){}
+class MagoHielo inherits MagoQueDispara(vida = 100, imagen =  "magoHielo.png",  proyectilBase = proyectilPenetrante){}
 
 // Mago de Piedra
 class MagoPiedra inherits Mago(vida = 400, imagen = "magoPiedra.png") {}

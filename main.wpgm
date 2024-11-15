@@ -11,9 +11,10 @@ program juego {
 	game.cellSize(100)
 	game.start()
 	
-/* 	game.addVisual(pantalla)
+	/* game.addVisual(pantalla)
 	game.schedule(100, {pantalla.reproducirSonido()}) */
-	//
+	
+	//game.schedule(8000, 
     game.removeVisual(pantalla)
 	configuracion.agregarVisuals()
 	configuracion.crearTicks()

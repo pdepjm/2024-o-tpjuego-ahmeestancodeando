@@ -73,7 +73,7 @@ object victoria {
 }
 object portada {
     method position() = new MutablePosition(x = 0, y = 0)
-    method imagen() = "portada3.png"
+    method imagen() = "inicio.gif"//"portada3.png"
     method sonido() = game.sound("m.inicio.mp3")
 }
 
@@ -119,7 +119,7 @@ object sonidoPartida{
     }
 }
 object configuracion {
-    const tiemposProyectiles = 500
+    const tiemposProyectiles = 320
     const tiempoDisparo = 3000
     const tiempoDinero = 750
     const tiempoMuerte = 1000
@@ -189,7 +189,7 @@ object configuracion {
                                                                 administradorDeProyectiles.impactarProyectiles() 
                                                                 administradorDeProyectiles.combinarProyectiles()
                                                             }) */
-        game.onTick((tiemposProyectiles/3)-5, "frame", {administradorDeProyectiles.cambiarFrame()})
+        //game.onTick((tiemposProyectiles/3)-5, "frame", {administradorDeProyectiles.cambiarFrame()})
     }
 
     // Método para iniciar la música de fondo en bucle
