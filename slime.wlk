@@ -101,7 +101,7 @@ class Slime {
         const posicionEnFrente = new MutablePosition(x = slime.position().x() - 1, y = slime.position().y())
         const objetoEnCeldaEnFrente = game.getObjectsIn(posicionEnFrente)
 
-        if (objetoEnCeldaEnFrente.any({ objeto => objeto.frenarEnemigo() })) { 
+        if (objetoEnCeldaEnFrente.any({ objeto => objeto.frenarEnemigo()})) { 
             slime.enMovimiento(false)
             objetoEnCeldaEnFrente.forEach({ objeto => objeto.recibeDanioMago(danio) })
         } else {
@@ -192,3 +192,27 @@ object  slimeDorado {
         return slime.sinVida() || slime.llegoACasa()
     }
 }
+
+object slimeDeMedioOriente{ 
+    const property danio = 500
+    const property vida= 180
+    method desplazamiento() = 1
+    const imagen="s.slimeMedioOriente.png"
+    method imagen() {return imagen} 
+    method moverse()= slimeBasico.moverse()
+    method meFreno()={slime=> 
+        const posicionEnFrente = new MutablePosition(x = slime.position().x(), y = slime.position().y())
+        const objetoEnCeldaSiguiente = game.getObjectsIn(posicionEnFrente)
+
+        if (objetoEnCeldaSiguiente.any({ objeto => objeto.frenarEnemigo() && !objeto.recibeDanioEnemigo(0)})) { 
+            slime.enMovimiento(false)
+            const posicionArriba = new MutablePosition(x = slime.position().x(), y = slime.position().y()+1)
+            const posicionAbajo = new MutablePosition(x = slime.position().x(), y = slime.position().y()-1)
+            const objetosAmatar= game.getObjectsIn(posicionArriba)+game.getObjectsIn(posicionAbajo)+objetoEnCeldaSiguiente
+            objetosAmatar.forEach({ objeto => objeto.recibeDanioMago(danio) })
+            slime.eliminar()
+        } else {
+            slime.enMovimiento(true)
+        }}
+    method estaMuerto()=slimeBasico.estaMuerto()
+  }

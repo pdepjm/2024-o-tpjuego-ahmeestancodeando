@@ -70,6 +70,7 @@ object administradorDeOleadas {
         numeroOleada = 1
         oleadaActual = oleadaNormal
     }
+    method recibeDanioMago(danio){}
 }
 
 
@@ -77,7 +78,7 @@ object administradorDeOleadas {
 // Oleada Normal: Configuración y gestión de una oleada estándar
 // ===============================
 object oleadaNormal {
-    var property enemigos =  [slimeBasico]
+    var property enemigos =  [/* slimeBasico */slimeDeMedioOriente]
     var property cantidadEnemigos = 10
     var property enemigosRestantes = cantidadEnemigos 
     var property enemigosGenerados = 0
@@ -133,6 +134,7 @@ object oleadaNormal {
         enemigosGenerados = 0
         tiempoSpawn = 3000
     }
+    
 }
 
 

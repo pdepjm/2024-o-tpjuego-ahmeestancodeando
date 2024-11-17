@@ -19,7 +19,7 @@ object pala {
     method eliminarMago(magoSeleccionado){
         magoSeleccionado.eliminar()
     }
-
+    method recibeDanioMago(danio){}
 }
 // Me da ansiedad la pala
 //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⣶⣶⣶⣤⣀⠀⠀⠀⠀⠀⠀

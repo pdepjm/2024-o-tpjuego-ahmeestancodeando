@@ -143,7 +143,7 @@ class MagoTienda{
     const mago = self.magoQueGenera(posicionMago)
     return mago
     }
-
+  method recibeDanioMago(danio){}
   // method efectoDeInvocacion(){} //esto estaba porque antes los magos irlandeses interactuaban directamente con el contador de puntos
 }
 
