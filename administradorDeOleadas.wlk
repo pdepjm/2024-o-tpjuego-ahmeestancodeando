@@ -9,7 +9,7 @@ import administradorDeJuego.*
 // ===============================
 object administradorDeOleadas {
     const numOleadaFinal = 3
-    const posiblesTipos = [slimeBasico, slimeBasico, slimeGuerrero, slimeNinja, slimeBlessed]
+    const posiblesTipos = [slimeBasico, slimeBasico, slimeGuerrero, slimeNinja, slimeBlessed,slimeLadron]
 
     var oleadaActual = oleadaNormal
     var numeroOleada = 1
@@ -77,7 +77,7 @@ object administradorDeOleadas {
 // Oleada Normal: Configuración y gestión de una oleada estándar
 // ===============================
 object oleadaNormal {
-    var property enemigos = [slimeBasico]
+    var property enemigos =  [slimeBasico]
     var property cantidadEnemigos = 10
     var property enemigosRestantes = cantidadEnemigos 
     var property enemigosGenerados = 0

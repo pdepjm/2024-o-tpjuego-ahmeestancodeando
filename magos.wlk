@@ -90,7 +90,7 @@ class MagoIrlandes inherits Mago(vida = 100, imagen = "magoHealer.png") {
 
 // Mago de Hielo
 class MagoHielo inherits MagoQueDispara(vida = 100, imagen = "magoHielo.png", proyectilBase = proyectilPenetrante){}
-
+class MagoStop inherits MagoQueDispara(vida = 100, imagen = "magoStop.png", proyectilBase = proyectilDeStop){}
 // Mago de Piedra
 class MagoPiedra inherits Mago(vida = 400, imagen = "magoPiedra.png") {}
 
@@ -182,4 +182,11 @@ object magoExplosivoTienda inherits MagoTienda(position = new MutablePosition(x 
 override method magoQueGenera(posicionMago){return new MagoExplosivo(position = posicionMago)}
 
   override method image() = "magoExplosivo.png"
+}
+
+object magoStopTienda inherits MagoTienda(position = new MutablePosition(x = 5, y = 5), costo = 300) { //Nico: ver si 250 es una banda o no
+
+  override method magoQueGenera(posicionMago){return new MagoStop(position = posicionMago)}
+  
+  override method image() = "magoStop.png"
 }

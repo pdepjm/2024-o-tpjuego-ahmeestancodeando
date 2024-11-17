@@ -119,7 +119,7 @@ object sonidoPartida{
     }
 }
 object configuracion {
-    const tiemposProyectiles = 500
+    const tiemposProyectiles = 600
     const tiempoDisparo = 3000
     const tiempoDinero = 750
     const tiempoMuerte = 1000

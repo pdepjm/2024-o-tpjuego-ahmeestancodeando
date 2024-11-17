@@ -73,7 +73,7 @@ object menu {
         game.addVisual(magoIrlandesTienda)
         game.addVisual(magoHieloTienda)
         game.addVisual(magoExplosivoTienda)
-
+        game.addVisual(magoStopTienda)
         // Añadiendo la pala a la tienda
         game.addVisual(pala)
     }

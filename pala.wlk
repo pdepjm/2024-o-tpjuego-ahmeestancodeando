@@ -10,7 +10,7 @@ import wollok.game.*
 // Pala: Lo que no me gusta agarrar
 // ===============================
 object pala {
-    const position = new MutablePosition(x=5, y=5)
+    const position = new MutablePosition(x=6, y=5)
     
     method image() = "pala.png"
 

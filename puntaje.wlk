@@ -15,7 +15,7 @@ object puntaje {
 
 	method position() = new MutablePosition(x = 7, y = 5)
 	method sumarPuntos() { self.puntos(puntos + 5 + administradorDeMagos.magos().map({mago => mago.valorAgregado()}).sum())} // preguntar que opina fede | posiblemente se cambie para la presentacion del concurso
-	method restarPuntos(costo) { self.puntos(puntos - costo) }
+	method restarPuntos(costo) { if (puntos>costo) self.puntos(puntos - costo) else puntos=0 }
 
 	// Métodos para mostrar el puntaje
 	method text() = puntos.toString() + "$"
