@@ -14,10 +14,13 @@ program juego {
 /* 	game.addVisual(pantalla)
 	game.schedule(100, {pantalla.reproducirSonido()}) */
 	//
+	
     game.removeVisual(pantalla)
+	
 	configuracion.agregarVisuals()
 	configuracion.crearTicks()
 	configuracion.iniciarMusica()
+	//administradorDeJuego.pausado()
 	//})
 /*
     keyboard.v().onPressDo({

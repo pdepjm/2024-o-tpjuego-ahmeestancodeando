@@ -1,3 +1,4 @@
+import administradorDeEnemigos.*
 
 
 import administradorDeMagos.*
@@ -5,7 +6,7 @@ import magos.*
 import cursor.*
 import wollok.game.*
 import pala.*
-
+import administradorDeJuego.administradorDeJuego
 
 // ===============================
 // Menú: Control y acciones del menú

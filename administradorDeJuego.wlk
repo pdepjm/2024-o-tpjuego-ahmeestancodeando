@@ -19,7 +19,8 @@ object administradorDeJuego {
     var property pausado = false
     var property usuarioEnMenu = false
 
-
+  
+  
   // Método para finalizar el juego y resetear el estado
   method terminarJuego() {
     usuarioEnMenu = true
@@ -31,7 +32,7 @@ object administradorDeJuego {
 
   // Método para resetear todos los administradores y configuraciones del juego
   method resetGame() {
-    configuracion.eliminarTicks()
+    configuracion.resetTicks()
     administradorDeEnemigos.reset()
     administradorDeMagos.reset()
     administradorDeProyectiles.reset()
@@ -43,13 +44,18 @@ object administradorDeJuego {
   }
 
     method pausar(){
-        if (usuarioEnMenu == false){
-            if (pausado == false){
-                configuracion.eliminarTicks()
+        if (usuarioEnMenu==false){
+            if (pausado==false){
+                configuracion.frenarTicks()
                 pausado = true
+                pantalla.estado(pausa)
+                game.addVisual(pantalla)
+                return pausado
             } else {
                 configuracion.iniciarTicks()
+                game.removeVisual(pantalla)
                 pausado = false
+                return pausado
             }
         }
     }
@@ -75,6 +81,11 @@ object portada {
     method position() = new MutablePosition(x = 0, y = 0)
     method imagen() = "portada3.png"
     method sonido() = game.sound("m.inicio.mp3")
+}
+object pausa{
+    method position() = new MutablePosition(x = 0, y = 0)
+    method imagen() = "pantallaPausa.png"
+    method sonido() = game.sound("")
 }
 
 // =======================================
@@ -127,6 +138,21 @@ object configuracion {
     const tiempoMuerte = 1000
     const tiempoMoverEnemigo = 1000
 
+    //ticks que usa el juego
+    const tickParaMoverEnemigos = game.tick(tiempoMoverEnemigo,{administradorDeEnemigos.moverEnemigos()},false)
+    const tickParaAumentarDinero = game.tick(tiempoDinero, { puntaje.sumarPuntos() },false)
+    const tickParaDisparar= game.tick(tiempoDisparo,  { administradorDeMagos.disparar()},false)
+    const tickParaMoverYColisionarDisparos= game.tick(tiemposProyectiles,  { administradorDeProyectiles.moverProyectiles() administradorDeProyectiles.impactarProyectiles() },false)
+    const tickParaCambiarFrames= game.tick((tiemposProyectiles/3)-5, {administradorDeProyectiles.cambiarFrame()},false)
+    //game.onTick(tiempoMuerte, "matar enemigos", { administradorDeEnemigos.estanMuertos() })
+    //game.onTick(tiempoMuerte, "matar magos", { administradorDeMagos.matarMagos() })
+    
+    /* game.onTick(tiemposProyectiles, "impactarDisparos", { 
+                                                                administradorDeProyectiles.impactarProyectiles() 
+                                                                administradorDeProyectiles.combinarProyectiles()
+                                                            }) */
+    
+
 
     var property sonido = "pvz8bit.mp3"
     const musica = game.sound(self.sonido()) // El reproductor de música es constante; solo cambia el archivo de sonido
@@ -145,24 +171,26 @@ object configuracion {
         game.addVisual(casa)
 
 
+/*         menu.accion()
+        cursor.accion() */
+        menu.iniciarTienda()
+        //administradorDeJuego.pausar()   
+
         menu.accion()
         cursor.accion()
-        menu.iniciarTienda()
-            
-
-
-
-
-        // Tecla "P" para reiniciar el juego
-            keyboard.p().onPressDo({
         
+        
+        // Tecla "P" para reiniciar el juego
+        keyboard.p().onPressDo({
             /* try self.iniciarMusica()
             catch e: MyException {"YA ESTA INICIADA LA MUSICA"}
             then always{ */
             administradorDeJuego.resetGame()
             administradorDeJuego.usuarioEnMenu(false)
             administradorDeJuego.pausado(false)
+            //administradorDeJuego.pausado(false)
             game.removeVisual(pantalla)
+            self.frenarTicks()
             self.crearTicks()
             puntaje.reset()
            // }
@@ -172,6 +200,7 @@ object configuracion {
         keyboard.i().onPressDo({ game.stop() })
 
         keyboard.o().onPressDo({administradorDeJuego.pausar()})
+        
     }   
 
     // Método para programar eventos de actualización periódicos (ticks)
@@ -179,36 +208,33 @@ object configuracion {
         game.schedule(4000, { administradorDeOleadas.iniciarOleada() }) // Inicia la primera oleada tras 4 segundos
         self.iniciarTicks()
     }
-
+    
     method iniciarTicks() {
-        game.onTick(tiempoMoverEnemigo, "mover enemigo", { administradorDeEnemigos.moverEnemigos() })
-        //game.onTick(tiempoMuerte, "matar enemigos", { administradorDeEnemigos.estanMuertos() })
-        //game.onTick(tiempoMuerte, "matar magos", { administradorDeMagos.matarMagos() })
-        game.onTick(tiempoDinero, "aumentar dinero", { puntaje.sumarPuntos() })
-        game.onTick(tiempoDisparo, "disparar", { administradorDeMagos.disparar()})
-        game.onTick(tiemposProyectiles, "moverDisparos", { administradorDeProyectiles.moverProyectiles() /* administradorDeProyectiles.combinarProyectiles() */ administradorDeProyectiles.impactarProyectiles() })
-        /* game.onTick(tiemposProyectiles, "impactarDisparos", { 
-                                                                administradorDeProyectiles.impactarProyectiles() 
-                                                                administradorDeProyectiles.combinarProyectiles()
-                                                            }) */
-        game.onTick((tiemposProyectiles/3)-5, "frame", {administradorDeProyectiles.cambiarFrame()})
+        tickParaAumentarDinero.start()
+        tickParaCambiarFrames.start()
+        tickParaDisparar.start()
+        tickParaMoverYColisionarDisparos.start()
+        tickParaMoverEnemigos.start()
     }
-
+    method frenarTicks() {
+            tickParaAumentarDinero.stop()
+            tickParaCambiarFrames.stop()
+            tickParaDisparar.stop()
+            tickParaMoverYColisionarDisparos.stop()
+            tickParaMoverEnemigos.stop()
+        }
+    method resetTicks(){
+        tickParaAumentarDinero.reset()
+        tickParaCambiarFrames.reset()
+        tickParaDisparar.reset()
+        tickParaMoverYColisionarDisparos.reset()
+        tickParaMoverEnemigos.reset()
+    }
     // Método para iniciar la música de fondo en bucle
     
 
    
 
     // Método para eliminar todos los eventos programados de actualización (ticks)
-    method eliminarTicks() {
-        game.removeTickEvent("mover enemigo")
-        game.removeTickEvent("matar enemigos")
-        game.removeTickEvent("matar magos")
-        game.removeTickEvent("aumentar dinero")
-        game.removeTickEvent("disparar")
-        game.removeTickEvent("moverDisparos")
-        game.removeTickEvent("impactarDisparos")
-        game.removeTickEvent("frame")
-        game.removeTickEvent("Iniciar Oleada")
-    }
+    
 }
