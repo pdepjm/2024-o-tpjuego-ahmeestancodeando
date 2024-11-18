@@ -26,9 +26,9 @@ object menu {
 
     // Acción del menú: Configura las teclas
     method accion() {
-        keyboard.d().onPressDo({ self.moverseDerecha() })
-        keyboard.a().onPressDo({ self.moverseIzquierda() })
-        keyboard.enter().onPressDo({ self.seleccionarMenu() })
+        keyboard.d().onPressDo({ if(!administradorDeJuego.pausado()){self.moverseDerecha() }})
+        keyboard.a().onPressDo({ if(!administradorDeJuego.pausado()){self.moverseIzquierda()} })
+        keyboard.enter().onPressDo({  if(!administradorDeJuego.pausado()){self.seleccionarMenu()}})
         // cambiar aca para cambiar forma de generar enemigos
     }
     

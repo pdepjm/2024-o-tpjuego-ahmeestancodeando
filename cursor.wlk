@@ -3,7 +3,7 @@
 // ===============================
 
 import wollok.game.*
-
+import administradorDeJuego.administradorDeJuego
 // ===============================
 // Cursor: Controlador de movimiento
 // ===============================
@@ -19,10 +19,10 @@ object cursor {
 
     // Acciones del teclado
     method accion() {
-        keyboard.right().onPressDo({ self.moverseDerecha() })
-        keyboard.left().onPressDo({ self.moverseIzquierda() })
-        keyboard.up().onPressDo({ self.moverseArriba() })
-        keyboard.down().onPressDo({ self.moverseAbajo() })
+        keyboard.right().onPressDo({ if(!administradorDeJuego.pausado()){self.moverseDerecha()} })
+        keyboard.left().onPressDo({ if(!administradorDeJuego.pausado()){self.moverseIzquierda()} })
+        keyboard.up().onPressDo({ if(!administradorDeJuego.pausado()){self.moverseArriba() }})
+        keyboard.down().onPressDo({ if(!administradorDeJuego.pausado()){self.moverseAbajo()} })
     }
 
     // Métodos de movimiento

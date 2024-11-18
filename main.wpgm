@@ -1,6 +1,6 @@
 import wollok.game.*
 import administradorDeJuego.*
-
+import menu.*
 
 program juego {
 
@@ -16,7 +16,7 @@ program juego {
 	//
 	
     game.removeVisual(pantalla)
-	
+
 	configuracion.agregarVisuals()
 	configuracion.crearTicks()
 	configuracion.iniciarMusica()

@@ -54,6 +54,8 @@ object administradorDeJuego {
             } else {
                 configuracion.iniciarTicks()
                 game.removeVisual(pantalla)
+                
+        
                 pausado = false
                 return pausado
             }
@@ -169,16 +171,15 @@ object configuracion {
         game.addVisual(puntaje)
         game.addVisual(administradorDeOleadas)
         game.addVisual(casa)
-
+        menu.accion()
+        cursor.accion()
 
 /*         menu.accion()
         cursor.accion() */
         menu.iniciarTienda()
         //administradorDeJuego.pausar()   
 
-        menu.accion()
-        cursor.accion()
-        
+       
         
         // Tecla "P" para reiniciar el juego
         keyboard.p().onPressDo({
