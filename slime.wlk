@@ -11,7 +11,7 @@ import puntaje.puntaje
 // ===============================
 class Slime {
     // Propiedades
-    const position
+    var property position
     const property tipo 
     var property enMovimiento = true // Indica si el slime puede moverse
     var property vida = tipo.vida()
@@ -53,7 +53,8 @@ class Slime {
 
     method recibeDanioEnemigo(_danio) {
         self.vida(self.vida() - _danio)
-        return true
+        tipo.accionAlRecibirDanio().apply(self)
+        return true 
     }
 
     method combinarProyectil(_tipo){return false}
@@ -109,14 +110,17 @@ class Slime {
         }
     }
     method estaMuerto()= {slime=>
-        if (slime.llegoACasa()) {
+        if (slime.llegoACasa()||slime.position().y()>4||slime.position().y()<0) {
+            game.sound("m.deathScreen.mp3").play()
             casa.recibirDanio(slime.position().y())
             slime.eliminar()
         } else if (slime.sinVida()) {
+            game.sound("m.explosion.mp3").play()
             slime.eliminar()
         }
         return slime.sinVida() || slime.llegoACasa()
     }
+     method accionAlRecibirDanio() ={slime => return }
   }
 
   object slimeNinja { 
@@ -128,6 +132,7 @@ class Slime {
     method moverse()= slimeBasico.moverse()
     method meFreno()=slimeBasico.meFreno()
     method estaMuerto()=slimeBasico.estaMuerto()
+    method recibeDanioEnemigo(_danio) = slimeBasico.accionAlRecibirDanio()
   }
 
   object slimeGuerrero { 
@@ -139,6 +144,7 @@ class Slime {
     method moverse()= slimeBasico.moverse()
     method meFreno()=slimeBasico.meFreno()
     method estaMuerto()=slimeBasico.estaMuerto()
+    method recibeDanioEnemigo(_danio) = slimeBasico.accionAlRecibirDanio()
   }
 
   object slimeBlessed { 
@@ -150,6 +156,7 @@ class Slime {
     method moverse()= slimeBasico.moverse()
     method meFreno()=slimeBasico.meFreno()
     method estaMuerto()=slimeBasico.estaMuerto()
+    method recibeDanioEnemigo(_danio) = slimeBasico.accionAlRecibirDanio()
   }
 
 
@@ -172,6 +179,7 @@ object  slimeLadron {
         }
     }
     method estaMuerto()=slimeBasico.estaMuerto()
+    method recibeDanioEnemigo(_danio) = slimeBasico.accionAlRecibirDanio()
 }
 
 object  slimeDorado {
@@ -189,12 +197,13 @@ object  slimeDorado {
             puntaje.puntos(puntaje.puntos()+1000)
             slime.eliminar()
         }
-        return slime.sinVida() || slime.llegoACasa()
+        return slime.sinVida() || slime.llegoACasa()  
     }
+    method recibeDanioEnemigo(_danio) = slimeBasico.accionAlRecibirDanio()
 }
 
 object slimeDeMedioOriente{ 
-    const property danio = 500
+    const property danio = 250
     const property vida= 180
     method desplazamiento() = 1
     const imagen="s.slimeMedioOriente.png"
@@ -215,4 +224,36 @@ object slimeDeMedioOriente{
             slime.enMovimiento(true)
         }}
     method estaMuerto()=slimeBasico.estaMuerto()
+    method recibeDanioEnemigo(_danio) = slimeBasico.accionAlRecibirDanio()
   }
+
+object slimeAgil{
+    const property danio = 50
+    const property vida= 450
+    method desplazamiento() = 1
+    const imagen="s.slimeAgil.png"
+    method imagen() {return imagen} 
+    method moverse()= slimeBasico.moverse()
+    method meFreno()=slimeBasico.meFreno()
+    method estaMuerto()= slimeBasico.estaMuerto()
+    method accionAlRecibirDanio() = {slime=>
+       if(slime.vida()<=self.vida()*0.5){
+        self.cambiarDeCarril().apply(slime)
+        }
+    }
+    method cambiarDeCarril()={slime=>
+        const posicionArriba= new MutablePosition(x = slime.position().x(), y = slime.position().y()+1)
+        const posicionAbajo= new MutablePosition(x = slime.position().x(), y = slime.position().y()-1)
+        const celA=game.getObjectsIn(posicionArriba)
+        const celAB=game.getObjectsIn(posicionAbajo)
+        const celdaArriba= [celA,posicionArriba]
+        const celdaAbajo= [celAB,posicionAbajo]
+        const posiciones = [celdaArriba,celdaAbajo]
+        posiciones.any({ celda => celda.get(0).all({objeto=>!objeto.frenarEnemigo()})    &&  self.moverAcarrilAledanio(slime, celda.get(1))})
+    }
+    method moverAcarrilAledanio(slime,carril){
+        if(carril.y()<5 && carril.y()>=0 ){
+        slime.position(carril)
+        }
+    }
+}

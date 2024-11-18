@@ -26,7 +26,7 @@ object administradorDeProyectiles {
         self.sumarProyectil()
         game.addVisual(nombreParaProyectil)
         nombreParaProyectil.combinar()
-        
+        try nombreParaProyectil.colisionar() catch e "YA NO EXISTE PROYECTIL"
     }
 
     // Mueve cada proyectil en la lista

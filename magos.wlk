@@ -144,6 +144,7 @@ class MagoTienda{
     return mago
     }
   method recibeDanioMago(danio){}
+  method frenarEnemigo()= true
   // method efectoDeInvocacion(){} //esto estaba porque antes los magos irlandeses interactuaban directamente con el contador de puntos
 }
 

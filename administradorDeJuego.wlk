@@ -99,7 +99,9 @@ object pantalla {
         estado=estadoNuevo
         
         self.reproducirSonido()
+        
     }
+    method frenarEnemigo()= true
 }
 
 // =======================================

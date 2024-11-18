@@ -112,7 +112,7 @@ object proyectilNormal {
 
         const objetosEnPosicion = game.getObjectsIn(proyectil.position()) + game.getObjectsIn(posicionEnFrente)
 
-        const hayColision =  objetosEnPosicion.any({objeto => objeto.recibeDanioEnemigo(proyectil.danio())})
+        const hayColision =  objetosEnPosicion.any({objeto => try objeto.recibeDanioEnemigo(proyectil.danio()) catch e false})
        
         if (hayColision) {
             proyectil.destruirse()

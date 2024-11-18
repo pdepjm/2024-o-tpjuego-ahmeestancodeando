@@ -20,6 +20,7 @@ object pala {
         magoSeleccionado.eliminar()
     }
     method recibeDanioMago(danio){}
+    method frenarEnemigo()= true
 }
 // Me da ansiedad la pala
 //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⣶⣶⣶⣤⣀⠀⠀⠀⠀⠀⠀
