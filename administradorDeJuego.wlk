@@ -1,3 +1,4 @@
+import magos.*
 import administradorDeOleadas.*
 import adminProyectiles.*
 import administradorDeMagos.*
@@ -10,6 +11,8 @@ import puntaje.*
 import pala.*
 import casa.casa
 import proyectil.*
+import administradorDeNiveles.*
+
 // =======================================
 // Administrador de Juego: Control central del juego, reseteo y fin del juego
 // =======================================
@@ -169,7 +172,7 @@ object configuracion {
         game.addVisual(cursor)
         game.addVisual(menu)
         game.addVisual(puntaje)
-        game.addVisual(administradorDeOleadas)
+        
         game.addVisual(casa)
         menu.accion()
         cursor.accion()
@@ -206,7 +209,7 @@ object configuracion {
 
     // Método para programar eventos de actualización periódicos (ticks)
     method crearTicks() {
-        game.schedule(4000, { administradorDeOleadas.iniciarOleada() }) // Inicia la primera oleada tras 4 segundos
+        //game.schedule(4000, { administradorDeOleadas.iniciarOleada() }) // Inicia la primera oleada tras 4 segundos
         self.iniciarTicks()
     }
     
@@ -242,20 +245,22 @@ object configuracion {
 
 
 object menuInicial{
-    var imagen="MenuInicial.png"
+    var property imagen="MenuInicial.png"
     method position()=new MutablePosition(x=0,y=0)
     method image() = imagen
     var botonSeleccionado = 0
-    var property botones=[botonDeInicio,botonMutearMusica]
+    var property botones=[botonDeInicio,botonNiveles,botonMutearMusica]
     method iniciarMenu(){
+        botonSeleccionado=0
         botones.forEach({boton=>game.addVisual(boton)})
         
     }
     method finalizarMenu(){
-        botones.forEach({boton=>game.removeVisual(boton)})
+        self.quitarBotones()
         administradorDeJuego.usuarioEnMenu(false)
         game.removeVisual(self)
     }
+    method quitarBotones(){botones.forEach({boton=>game.removeVisual(boton)})}
     method moverseEntreBotones(){
         keyboard.right().onPressDo({  if(administradorDeJuego.usuarioEnMenu()  && botonSeleccionado<botones.size()-1)
                                         {   self.deseleccionarBoton()
@@ -283,10 +288,13 @@ object menuInicial{
 object botonDeInicio{
     var imagen="botonInicioSeleccionado.png"
     method image()=imagen
-    method position()= new MutablePosition(x=4,y=1)
+    method position()= new MutablePosition(x=2,y=1)
     method accion(){
     configuracion.agregarVisuals()
-	configuracion.crearTicks()
+    configuracion.iniciarTicks()
+    administradorDeEnemigos.administradorUtilizado(administradorDeOleadas)
+	game.schedule(4000, { administradorDeOleadas.iniciarOleada() })
+    game.addVisual(administradorDeOleadas)
     menuInicial.finalizarMenu()
     }
 
@@ -303,6 +311,32 @@ object botonDeInicio{
         imagen="botonInicio.png"
     }
 
+}
+
+object botonNiveles{
+    var imagen="botonNiveles.png"
+    method image()=imagen
+    method position()= new MutablePosition(x=7,y=1)
+    const property niveles=[botonNivel1, botonNivel2]
+    method accion(){
+    menuInicial.quitarBotones()
+    menuInicial.imagen("MenuInicialVacio.png")
+    menuInicial.botones(niveles)
+    menuInicial.iniciarMenu()
+    }
+
+    method cambiarEstadoDeSeleccion(estado){
+        if(estado){
+            self.ponerMarcoDeSeleccion()
+        }
+        else{self.quitarMarcoDeSeleccion()}
+    }
+    method ponerMarcoDeSeleccion(){
+        imagen="botonNivelesSeleccionado.png"
+    }
+    method quitarMarcoDeSeleccion(){
+        imagen="botonNiveles.png"
+    }
 }
 
 object botonMutearMusica{
@@ -344,3 +378,41 @@ object botonMutearMusica{
     }
   
 }
+
+class BotonDeNivel{
+    const imagenSinSeleccionar
+    const imagenDeSeleccion
+    var property imagen=imagenSinSeleccionar
+    const numNivel
+    const property nivel
+    method image()=imagen
+    const posicion
+    method position()=posicion
+    method accion(){
+    configuracion.agregarVisuals()
+	configuracion.crearTicks()
+    administradorDeNiveles.numNivel(numNivel)
+    administradorDeEnemigos.administradorUtilizado(administradorDeNiveles)
+    game.schedule(4000, { administradorDeNiveles.iniciarOleada() })
+    game.addVisual(administradorDeNiveles)
+    menuInicial.finalizarMenu()
+    }
+
+    method cambiarEstadoDeSeleccion(estado){
+        if(estado){
+            self.ponerMarcoDeSeleccion()
+        }
+        else{self.quitarMarcoDeSeleccion()}
+    }
+    method ponerMarcoDeSeleccion(){
+        imagen=imagenDeSeleccion
+    }
+    method quitarMarcoDeSeleccion(){
+        imagen=imagenSinSeleccionar
+    }
+}
+
+const botonNivel1= new BotonDeNivel(imagenSinSeleccionar="botonNivel1.png", imagenDeSeleccion="botonNivel1Seleccionado.png",
+posicion= new MutablePosition(x=0,y=5), numNivel=1,nivel=nivel1)
+const botonNivel2= new BotonDeNivel(imagenSinSeleccionar="botonNivel2.png", imagenDeSeleccion="botonNivel2Seleccionado.png",
+posicion= new MutablePosition(x=1,y=5), numNivel=2,nivel=nivel2)
