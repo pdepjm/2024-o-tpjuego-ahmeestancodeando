@@ -111,11 +111,9 @@ class Slime {
     }
     method estaMuerto()= {slime=>
         if (slime.llegoACasa()||slime.position().y()>4||slime.position().y()<0) {
-            game.sound("m.deathScreen.mp3").play()
             casa.recibirDanio(slime.position().y())
             slime.eliminar()
         } else if (slime.sinVida()) {
-            game.sound("m.explosion.mp3").play()
             slime.eliminar()
         }
         return slime.sinVida() || slime.llegoACasa()

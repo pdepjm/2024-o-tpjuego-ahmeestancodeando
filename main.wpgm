@@ -14,12 +14,15 @@ program juego {
 /* 	game.addVisual(pantalla)
 	game.schedule(100, {pantalla.reproducirSonido()}) */
 	//
-	
-    game.removeVisual(pantalla)
+	game.addVisual(menuInicial)
+	menuInicial.iniciarMenu()
+	menuInicial.moverseEntreBotones()
+	menuInicial.activarBoton()
+    //game.removeVisual(pantalla)
 
-	configuracion.agregarVisuals()
+	/* configuracion.agregarVisuals()
 	configuracion.crearTicks()
-	configuracion.iniciarMusica()
+	configuracion.iniciarMusica() */
 	//administradorDeJuego.pausado()
 	//})
 /*

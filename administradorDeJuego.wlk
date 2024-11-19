@@ -17,7 +17,7 @@ import proyectil.*
 class MyException inherits wollok.lang.Exception {}
 object administradorDeJuego {
     var property pausado = false
-    var property usuarioEnMenu = false
+    var property usuarioEnMenu = true
 
   
   
@@ -127,7 +127,7 @@ object sonidoPartida{
     method iniciarMusica() {
         musica.shouldLoop(true)
         game.schedule(1500, { musica.play() })
-        musica.volume(0.5)
+        musica.volume(1)
     }
     method detenerMusica(){
         musica.stop()
@@ -161,7 +161,7 @@ object configuracion {
     method iniciarMusica() {sonidoPartida.iniciarMusica()} 
     // Método para detener la música de fondo
     method detenerMusica() {
-        musica.stop()
+        sonidoPartida.detenerMusica()
     }
     // Método para agregar elementos visuales y configurar teclas de control
     method agregarVisuals() {  
@@ -238,4 +238,109 @@ object configuracion {
 
     // Método para eliminar todos los eventos programados de actualización (ticks)
     
+}
+
+
+object menuInicial{
+    var imagen="MenuInicial.png"
+    method position()=new MutablePosition(x=0,y=0)
+    method image() = imagen
+    var botonSeleccionado = 0
+    var property botones=[botonDeInicio,botonMutearMusica]
+    method iniciarMenu(){
+        botones.forEach({boton=>game.addVisual(boton)})
+        
+    }
+    method finalizarMenu(){
+        botones.forEach({boton=>game.removeVisual(boton)})
+        administradorDeJuego.usuarioEnMenu(false)
+        game.removeVisual(self)
+    }
+    method moverseEntreBotones(){
+        keyboard.right().onPressDo({  if(administradorDeJuego.usuarioEnMenu()  && botonSeleccionado<botones.size()-1)
+                                        {   self.deseleccionarBoton()
+                                            botonSeleccionado+=1
+                                            self.seleccionarBoton() }})
+        keyboard.left().onPressDo({  if(administradorDeJuego.usuarioEnMenu()  && botonSeleccionado>0 )
+                                        {   self.deseleccionarBoton()
+                                            botonSeleccionado-=1 
+                                            self.seleccionarBoton()}})            
+        
+    }
+
+    method seleccionarBoton(){
+        botones.get(botonSeleccionado).cambiarEstadoDeSeleccion(true)
+    }
+
+    method deseleccionarBoton(){
+        botones.get(botonSeleccionado).cambiarEstadoDeSeleccion(false)
+    }
+    method activarBoton(){
+        keyboard.enter().onPressDo({  if(administradorDeJuego.usuarioEnMenu()){
+                                        botones.get(botonSeleccionado).accion()}})
+    }
+}
+object botonDeInicio{
+    var imagen="botonInicioSeleccionado.png"
+    method image()=imagen
+    method position()= new MutablePosition(x=4,y=1)
+    method accion(){
+    configuracion.agregarVisuals()
+	configuracion.crearTicks()
+    menuInicial.finalizarMenu()
+    }
+
+    method cambiarEstadoDeSeleccion(estado){
+        if(estado){
+            self.ponerMarcoDeSeleccion()
+        }
+        else{self.quitarMarcoDeSeleccion()}
+    }
+    method ponerMarcoDeSeleccion(){
+        imagen="botonInicioSeleccionado.png"
+    }
+    method quitarMarcoDeSeleccion(){
+        imagen="botonInicio.png"
+    }
+
+}
+
+object botonMutearMusica{
+    var imagen="botonMuteo.png"
+    method image()=imagen
+    method position()= new MutablePosition(x=13,y=1)
+    var muteada=true
+    method accion(){
+        if (muteada){
+            configuracion.iniciarMusica()
+            imagen="botonDesmuteoSeleccionado.png"
+            muteada=false
+        }
+        else {
+            configuracion.detenerMusica()
+            imagen="botonMuteoSeleccionado.png"
+            muteada=true
+            }
+    }
+
+    method cambiarEstadoDeSeleccion(estado){
+        if(estado){
+            self.ponerMarcoDeSeleccion()
+        }
+        else{self.quitarMarcoDeSeleccion()}
+    }
+    method ponerMarcoDeSeleccion(){
+        if(muteada){
+        imagen="botonMuteoSeleccionado.png"
+        }
+        else imagen="botonDesmuteoSeleccionado.png"
+    }
+    method quitarMarcoDeSeleccion(){
+        if(muteada){
+        imagen="botonMuteo.png"
+        }
+        else imagen="botonDesmuteo.png"
+        
+    }
+  
 }
