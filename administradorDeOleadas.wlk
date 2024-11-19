@@ -13,32 +13,27 @@ object administradorDeOleadas {
 
     var oleadaActual = oleadaNormal
     var numeroOleada = 1
-    
-
+    const property oleadaInicial = game.tick(4000, {self.iniciarOleada() self.frenarTickInicial()},false)
+    method frenarTickInicial()=oleadaInicial.stop()
     // Métodos de visualización y sonido
     method position() = new MutablePosition(x = 9, y = 5)
     method text() = "Oleada: " + numeroOleada.toString() + "     " + "Slimes Restantes: " + oleadaActual.enemigosRestantes().toString()
     method textColor() = "#FA0770"
     method enemigosVivos() = oleadaActual.enemigosVivos()
-
-    // Inicia la oleada y gestiona enemigos
-    method iniciarOleada() {
-        oleadaActual.iniciarOleada()
-        game.onTick(
-            oleadaActual.tiempoSpawn(),
-            "gestionar oleada",
-            { 
-               if (not administradorDeJuego.pausado()){
+    const tickParaGenerarEnemigos=game.tick(oleadaActual.tiempoSpawn(),{self.spawnearOleada()},false)
+    method spawnearOleada(){
+            if (not administradorDeJuego.pausado()){
                     if (oleadaActual.ejecutando()) {
                         administradorDeEnemigos.generarEnemigo(oleadaActual.enemigos().anyOne())
                     } else if(oleadaActual.finalizo()){
                         self.siguienteOleada()
-                        game.removeTickEvent("gestionar oleada")
-
+                        tickParaGenerarEnemigos.stop()
                     }
-                } 
-            }
-        )
+                } }
+    // Inicia la oleada y gestiona enemigos
+    method iniciarOleada() {
+        oleadaActual.iniciarOleada()
+        tickParaGenerarEnemigos.start()
     }
 
     // Pasa a la siguiente oleada
@@ -50,7 +45,9 @@ object administradorDeOleadas {
         } else {
             oleadaActual.terminarOleada()
             if (numeroOleada == numOleadaFinal){ oleadaActual = oleadaFinal }
-            game.schedule(10000, { self.iniciarOleada() })
+            oleadaInicial.interval(10000)
+            oleadaInicial.start()
+            /* game.schedule(10000, { self.iniciarOleada() }) */
         }
         
     }
@@ -69,7 +66,10 @@ object administradorDeOleadas {
         oleadaFinal.reset()
         numeroOleada = 1
         oleadaActual = oleadaNormal
-        game.schedule(4000, { self.iniciarOleada() })
+        self.frenarTickInicial()
+        oleadaInicial.interval(4000)
+        tickParaGenerarEnemigos.stop()
+        //game.schedule(4000, { self.iniciarOleada() })
     }
     method recibeDanioMago(danio){}
     method frenarEnemigo()= true

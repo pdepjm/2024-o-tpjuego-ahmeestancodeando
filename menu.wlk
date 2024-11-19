@@ -13,7 +13,7 @@ import administradorDeJuego.administradorDeJuego
 // ===============================
 object menu {
     // Propiedades y posición
-    const position = new MutablePosition(x = 0, y = 5)
+    var position = new MutablePosition(x = -1, y = 5)
 
     // Métodos públicos
     method position() = position
@@ -26,9 +26,9 @@ object menu {
 
     // Acción del menú: Configura las teclas
     method accion() {
-        keyboard.d().onPressDo({ if(!administradorDeJuego.pausado()){self.moverseDerecha() }})
-        keyboard.a().onPressDo({ if(!administradorDeJuego.pausado()){self.moverseIzquierda()} })
-        keyboard.enter().onPressDo({  if(!administradorDeJuego.pausado()){self.seleccionarMenu()}})
+        keyboard.d().onPressDo({ if(!administradorDeJuego.pausado() && !administradorDeJuego.usuarioEnMenu()){self.moverseDerecha() }})
+        keyboard.a().onPressDo({ if(!administradorDeJuego.pausado()&& !administradorDeJuego.usuarioEnMenu()){self.moverseIzquierda()} })
+        keyboard.enter().onPressDo({  if(!administradorDeJuego.pausado()&& !administradorDeJuego.usuarioEnMenu()){self.seleccionarMenu()}})
         // cambiar aca para cambiar forma de generar enemigos
     }
     
@@ -68,6 +68,7 @@ object menu {
 
     // Tienda: Inicialización de los magos
     method iniciarTienda() {
+        position= new MutablePosition(x = 0, y = 5)
         // Añadiendo los magos disponibles en la tienda
         game.addVisual(magoPiedraTienda)
         game.addVisual(magoFuegoTienda)
@@ -77,5 +78,16 @@ object menu {
         game.addVisual(magoStopTienda)
         // Añadiendo la pala a la tienda
         game.addVisual(pala)
+    }
+    method finalizarTienda(){
+        game.removeVisual(magoPiedraTienda)
+        game.removeVisual(magoFuegoTienda)
+        game.removeVisual(magoIrlandesTienda)
+        game.removeVisual(magoHieloTienda)
+        game.removeVisual(magoExplosivoTienda)
+        game.removeVisual(magoStopTienda)
+        // Añadiendo la pala a la tienda
+        game.removeVisual(pala)
+        position= new MutablePosition(x = -1, y = 5)
     }
 }

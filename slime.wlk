@@ -130,7 +130,8 @@ class Slime {
     method moverse()= slimeBasico.moverse()
     method meFreno()=slimeBasico.meFreno()
     method estaMuerto()=slimeBasico.estaMuerto()
-    method recibeDanioEnemigo(_danio) = slimeBasico.accionAlRecibirDanio()
+    method accionAlRecibirDanio() = slimeBasico.accionAlRecibirDanio()
+
   }
 
   object slimeGuerrero { 
@@ -142,7 +143,7 @@ class Slime {
     method moverse()= slimeBasico.moverse()
     method meFreno()=slimeBasico.meFreno()
     method estaMuerto()=slimeBasico.estaMuerto()
-    method recibeDanioEnemigo(_danio) = slimeBasico.accionAlRecibirDanio()
+    method accionAlRecibirDanio() = slimeBasico.accionAlRecibirDanio()
   }
 
   object slimeBlessed { 
@@ -154,7 +155,7 @@ class Slime {
     method moverse()= slimeBasico.moverse()
     method meFreno()=slimeBasico.meFreno()
     method estaMuerto()=slimeBasico.estaMuerto()
-    method recibeDanioEnemigo(_danio) = slimeBasico.accionAlRecibirDanio()
+    method accionAlRecibirDanio() = slimeBasico.accionAlRecibirDanio()
   }
 
 
@@ -178,6 +179,7 @@ object  slimeLadron {
     }
     method estaMuerto()=slimeBasico.estaMuerto()
     method recibeDanioEnemigo(_danio) = slimeBasico.accionAlRecibirDanio()
+    method accionAlRecibirDanio() =slimeBasico.accionAlRecibirDanio()
 }
 
 object  slimeDorado {
@@ -197,7 +199,7 @@ object  slimeDorado {
         }
         return slime.sinVida() || slime.llegoACasa()  
     }
-    method recibeDanioEnemigo(_danio) = slimeBasico.accionAlRecibirDanio()
+   method accionAlRecibirDanio() = slimeBasico.accionAlRecibirDanio()
 }
 
 object slimeDeMedioOriente{ 
@@ -222,7 +224,7 @@ object slimeDeMedioOriente{
             slime.enMovimiento(true)
         }}
     method estaMuerto()=slimeBasico.estaMuerto()
-    method recibeDanioEnemigo(_danio) = slimeBasico.accionAlRecibirDanio()
+    method accionAlRecibirDanio() = slimeBasico.accionAlRecibirDanio()
   }
 
 object slimeAgil{

@@ -39,16 +39,17 @@ object administradorDeJuego {
     administradorDeEnemigos.reset()
     administradorDeMagos.reset()
     administradorDeProyectiles.reset()
-    administradorUtilizado.reset()
     casa.reset()
     puntaje.reset()
+    administradorUtilizado.reset()
+    configuracion.quitarVisuals()
     //pantalla.reproducirSonido()
    // configuracion.iniciarMusica() // Iniciar música (opcional)
   }
 
     method pausar(){
-        if (usuarioEnMenu==false){
-            if (pausado==false){
+        if (!usuarioEnMenu){
+            if (!pausado){
                 configuracion.frenarTicks()
                 pausado = true
                 pantalla.estado(pausa)
@@ -64,7 +65,17 @@ object administradorDeJuego {
             }
         }
     }
-
+    method mostrarMenuInicial(){
+        try {self.resetGame() game.removeVisual(administradorUtilizado) game.schedule(10, {configuracion.frenarTicks()
+        game.removeVisual(pantalla)})}
+        catch e "no hay ticks"
+        game.schedule(1000, {usuarioEnMenu=true})
+        menuInicial.quitarBotones()
+        menuInicial.imagen("MenuInicial.png")
+        menuInicial.botones(menuInicial.botonesIniciales())
+        try game.addVisual(menuInicial) catch e "ya se esta mostrando el menu"
+        menuInicial.iniciarMenu()
+    }
 }
 
 // =======================================
@@ -166,30 +177,16 @@ object configuracion {
     method detenerMusica() {
         sonidoPartida.detenerMusica()
     }
-    // Método para agregar elementos visuales y configurar teclas de control
-    method agregarVisuals() {  
 
-        game.addVisual(cursor)
-        game.addVisual(menu)
-        game.addVisual(puntaje)
-        
-        game.addVisual(casa)
-        menu.accion()
+    method iniciarConfig(){
+        menu.accion() 
         cursor.accion()
-
-/*         menu.accion()
-        cursor.accion() */
-        menu.iniciarTienda()
-        //administradorDeJuego.pausar()   
-
-       
-        
         // Tecla "P" para reiniciar el juego
         keyboard.p().onPressDo({
             /* try self.iniciarMusica()
             catch e: MyException {"YA ESTA INICIADA LA MUSICA"}
             then always{ */
-            administradorDeJuego.resetGame()
+            if(!administradorDeJuego.usuarioEnMenu()){administradorDeJuego.resetGame()
             administradorDeJuego.usuarioEnMenu(false)
             administradorDeJuego.pausado(false)
             //administradorDeJuego.pausado(false)
@@ -197,14 +194,34 @@ object configuracion {
             self.frenarTicks()
             self.crearTicks()
             puntaje.reset()
-           // }
-        })
+            administradorDeJuego.administradorUtilizado().oleadaInicial().start()
+            self.agregarVisuals()}})
 
         // Tecla "I" para detener el juego
         keyboard.i().onPressDo({ game.stop() })
-
         keyboard.o().onPressDo({administradorDeJuego.pausar()})
+       }
+    // Método para agregar elementos visuales y configurar teclas de control
+    method quitarVisuals(){
+        game.removeVisual(cursor)
+        cursor.position(new MutablePosition(x = 7, y = 3))
+        game.removeVisual(menu)
+        game.removeVisual(puntaje)
+        game.removeVisual(casa)
+        menu.finalizarTienda()
+    }
+    method agregarVisuals() {  
+
+        game.addVisual(cursor)
+        game.addVisual(menu)
+        game.addVisual(puntaje)
         
+        game.addVisual(casa)
+        menu.iniciarTienda()
+/*         menu.accion()
+        cursor.accion() */
+        
+        //administradorDeJuego.pausar()   
     }   
 
     // Método para programar eventos de actualización periódicos (ticks)
@@ -249,18 +266,21 @@ object menuInicial{
     method position()=new MutablePosition(x=0,y=0)
     method image() = imagen
     var botonSeleccionado = 0
-    var property botones=[botonDeInicio,botonNiveles,botonMutearMusica]
+    var property botones= botonesIniciales
+    const property botonesIniciales = [botonDeInicio,botonNiveles,botonMutearMusica]
     method iniciarMenu(){
         botonSeleccionado=0
+        self.seleccionarBoton()
         botones.forEach({boton=>game.addVisual(boton)})
         
     }
     method finalizarMenu(){
         self.quitarBotones()
-        administradorDeJuego.usuarioEnMenu(false)
+        game.schedule(100, {administradorDeJuego.usuarioEnMenu(false)})
         game.removeVisual(self)
     }
-    method quitarBotones(){botones.forEach({boton=>game.removeVisual(boton)})}
+    method quitarBotones(){botones.forEach({boton=>game.removeVisual(boton)
+    boton.cambiarEstadoDeSeleccion(false)})}
     method moverseEntreBotones(){
         keyboard.right().onPressDo({  if(administradorDeJuego.usuarioEnMenu()  && botonSeleccionado<botones.size()-1)
                                         {   self.deseleccionarBoton()
@@ -269,7 +289,8 @@ object menuInicial{
         keyboard.left().onPressDo({  if(administradorDeJuego.usuarioEnMenu()  && botonSeleccionado>0 )
                                         {   self.deseleccionarBoton()
                                             botonSeleccionado-=1 
-                                            self.seleccionarBoton()}})            
+                                            self.seleccionarBoton()}})    
+                
         
     }
 
@@ -393,9 +414,10 @@ class BotonDeNivel{
     configuracion.agregarVisuals()
 	configuracion.crearTicks()
     administradorDeNiveles.numNivel(numNivel)
+    administradorDeNiveles.enemigosRestantes(nivel.cantidadEnemigos())
     administradorDeEnemigos.administradorUtilizado(administradorDeNiveles)
     administradorDeJuego.administradorUtilizado(administradorDeNiveles)
-    game.schedule(4000, { administradorDeNiveles.iniciarOleada() })
+    administradorDeJuego.administradorUtilizado().oleadaInicial().start()
     game.addVisual(administradorDeNiveles)
     menuInicial.finalizarMenu()
     }

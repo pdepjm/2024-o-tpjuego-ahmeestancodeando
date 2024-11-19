@@ -18,6 +18,8 @@ program juego {
 	menuInicial.iniciarMenu()
 	menuInicial.moverseEntreBotones()
 	menuInicial.activarBoton()
+	configuracion.iniciarConfig()
+	keyboard.x().onPressDo({administradorDeJuego.mostrarMenuInicial()})
     //game.removeVisual(pantalla)
 
 	/* configuracion.agregarVisuals()

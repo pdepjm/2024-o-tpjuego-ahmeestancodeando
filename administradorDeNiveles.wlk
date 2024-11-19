@@ -11,33 +11,30 @@ object administradorDeNiveles {
     const niveles = botonNiveles.niveles()
     var property numNivel = 1
     method nivel() = niveles.get(numNivel-1).nivel()
+    var property enemigosRestantes = niveles.get(numNivel-1).nivel().cantidadEnemigos()
 
     // Métodos de visualización y sonido
     method position() = new MutablePosition(x = 9, y = 5)
-    method text() = "Nivel: " + numNivel.toString() + "     " + "Slimes Restantes: " + self.nivel().enemigosRestantes().toString()
+    method text() = "Nivel: " + numNivel.toString() + "     " + "Slimes Restantes: " + enemigosRestantes.toString()
     method textColor() = "#FA0770"
     method enemigosVivos() = self.nivel().enemigosVivos()
-
+    const property oleadaInicial = game.tick(4000, {self.iniciarOleada() self.frenarTickInicial()},false)
+    method frenarTickInicial() { oleadaInicial.stop()}
     // Inicia la oleada y gestiona enemigos
+    const tickParaGenerarEnemigos= game.tick(self.nivel().tiempoSpawn(),
+            {self.spawnearOleada()} 
+            ,false)
     method iniciarOleada() {
         self.nivel().iniciarOleada()
-        game.onTick(
-            self.nivel().tiempoSpawn(),
-            "gestionar oleada",
-            { 
-               if (not administradorDeJuego.pausado()){
+        tickParaGenerarEnemigos.start()      
+    }
+    method spawnearOleada(){ if (not administradorDeJuego.pausado()){
                     if (self.nivel().ejecutando()) {
                         administradorDeEnemigos.generarEnemigo(self.nivel().enemigos().anyOne())
                     } else if(self.nivel().finalizo()){
                         self.siguienteOleada()
-                        game.removeTickEvent("gestionar oleada")
-
-                    }
-                } 
-            }
-        )
-    }
-
+                        tickParaGenerarEnemigos.stop()
+                    }}}
     // Pasa a la siguiente oleada
     method siguienteOleada() {
         // por ahora funciona , si intento mejorar la logica se rompe 
@@ -46,20 +43,30 @@ object administradorDeNiveles {
         if (numNivel == niveles.size()){
             pantalla.estado(victoria) game.addVisual(pantalla) 
         return}
-        else {numNivel += 1 game.schedule(10000, { self.iniciarOleada() })}   
+        else {numNivel += 1 
+        enemigosRestantes = niveles.get(numNivel-1).nivel().cantidadEnemigos()
+        tickParaGenerarEnemigos.interval(self.nivel().tiempoSpawn())
+        oleadaInicial.interval(10000)
+        oleadaInicial.start()
+        /* game.schedule(10000, { self.iniciarOleada()} )*/}   
     }
-
+    
     // Gestión de contadores de enemigos
-    method reducirEnemigo() { self.nivel().seMurioEnemigo()}
+    method reducirEnemigo() { self.nivel().seMurioEnemigo() 
+    enemigosRestantes-=1}
     method sumarEnemigo() { self.nivel().seGeneroEnemigo()}
 
 
     // Resetea el administrador de oleadas
     method reset() {
-        game.removeTickEvent("gestionar oleada")
+        
         niveles.forEach({nivelAResetear=>nivelAResetear.nivel().reset()})
         numNivel = 1
-        game.schedule(4000, { self.iniciarOleada() })
+        tickParaGenerarEnemigos.stop()
+        oleadaInicial.interval(4000)
+        enemigosRestantes = niveles.get(numNivel-1).nivel().cantidadEnemigos()
+        //game.schedule(4000, { self.iniciarOleada() })
+        self.frenarTickInicial()
     }
     method recibeDanioMago(danio){}
     method frenarEnemigo()= true
@@ -67,9 +74,9 @@ object administradorDeNiveles {
 
 class Nivel {
     const property enemigos 
-    var property cantidadEnemigos
+    const property cantidadEnemigos
     const property tiempoSpawn
-    var property enemigosRestantes = cantidadEnemigos 
+    var  enemigosRestantes = cantidadEnemigos 
     var property enemigosGenerados = 0
     
     method inicioOleada() = game.sound("m.iOleada.mp3")
@@ -106,5 +113,5 @@ class Nivel {
     } 
 }
 
-const nivel1= new Nivel(enemigos=[slimeBasico],cantidadEnemigos=5,tiempoSpawn=4000)
-const nivel2= new Nivel(enemigos=[slimeGuerrero,slimeGuerrero,slimeBasico],cantidadEnemigos=10,tiempoSpawn=4000)
+const nivel1= new Nivel(enemigos=[slimeBasico],cantidadEnemigos=2,tiempoSpawn=4000)
+const nivel2= new Nivel(enemigos=[slimeGuerrero,slimeGuerrero,slimeBasico],cantidadEnemigos=4,tiempoSpawn=4000)

@@ -19,10 +19,10 @@ object cursor {
 
     // Acciones del teclado
     method accion() {
-        keyboard.right().onPressDo({ if(!administradorDeJuego.pausado()){self.moverseDerecha()} })
-        keyboard.left().onPressDo({ if(!administradorDeJuego.pausado()){self.moverseIzquierda()} })
-        keyboard.up().onPressDo({ if(!administradorDeJuego.pausado()){self.moverseArriba() }})
-        keyboard.down().onPressDo({ if(!administradorDeJuego.pausado()){self.moverseAbajo()} })
+        keyboard.right().onPressDo({ if(!administradorDeJuego.pausado()&& !administradorDeJuego.usuarioEnMenu()){self.moverseDerecha()} })
+        keyboard.left().onPressDo({ if(!administradorDeJuego.pausado()&& !administradorDeJuego.usuarioEnMenu()){self.moverseIzquierda()} })
+        keyboard.up().onPressDo({ if(!administradorDeJuego.pausado()&& !administradorDeJuego.usuarioEnMenu()){self.moverseArriba() }})
+        keyboard.down().onPressDo({ if(!administradorDeJuego.pausado()&& !administradorDeJuego.usuarioEnMenu()){self.moverseAbajo()} })
     }
 
     // Métodos de movimiento
