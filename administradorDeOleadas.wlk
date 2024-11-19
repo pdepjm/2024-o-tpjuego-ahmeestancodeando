@@ -69,6 +69,7 @@ object administradorDeOleadas {
         oleadaFinal.reset()
         numeroOleada = 1
         oleadaActual = oleadaNormal
+        game.schedule(4000, { self.iniciarOleada() })
     }
     method recibeDanioMago(danio){}
     method frenarEnemigo()= true

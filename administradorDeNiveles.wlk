@@ -57,8 +57,9 @@ object administradorDeNiveles {
     // Resetea el administrador de oleadas
     method reset() {
         game.removeTickEvent("gestionar oleada")
-        niveles.forEach({nivelAResetear=>nivelAResetear.reset()})
+        niveles.forEach({nivelAResetear=>nivelAResetear.nivel().reset()})
         numNivel = 1
+        game.schedule(4000, { self.iniciarOleada() })
     }
     method recibeDanioMago(danio){}
     method frenarEnemigo()= true

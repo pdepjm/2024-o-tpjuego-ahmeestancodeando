@@ -21,7 +21,7 @@ class MyException inherits wollok.lang.Exception {}
 object administradorDeJuego {
     var property pausado = false
     var property usuarioEnMenu = true
-
+    var property administradorUtilizado = administradorDeOleadas
   
   
   // Método para finalizar el juego y resetear el estado
@@ -39,7 +39,7 @@ object administradorDeJuego {
     administradorDeEnemigos.reset()
     administradorDeMagos.reset()
     administradorDeProyectiles.reset()
-    administradorDeOleadas.reset()
+    administradorUtilizado.reset()
     casa.reset()
     puntaje.reset()
     //pantalla.reproducirSonido()
@@ -293,6 +293,7 @@ object botonDeInicio{
     configuracion.agregarVisuals()
     configuracion.iniciarTicks()
     administradorDeEnemigos.administradorUtilizado(administradorDeOleadas)
+    administradorDeJuego.administradorUtilizado(administradorDeOleadas)
 	game.schedule(4000, { administradorDeOleadas.iniciarOleada() })
     game.addVisual(administradorDeOleadas)
     menuInicial.finalizarMenu()
@@ -393,6 +394,7 @@ class BotonDeNivel{
 	configuracion.crearTicks()
     administradorDeNiveles.numNivel(numNivel)
     administradorDeEnemigos.administradorUtilizado(administradorDeNiveles)
+    administradorDeJuego.administradorUtilizado(administradorDeNiveles)
     game.schedule(4000, { administradorDeNiveles.iniciarOleada() })
     game.addVisual(administradorDeNiveles)
     menuInicial.finalizarMenu()
