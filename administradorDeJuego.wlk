@@ -282,11 +282,11 @@ object menuInicial{
     method quitarBotones(){botones.forEach({boton=>game.removeVisual(boton)
     boton.cambiarEstadoDeSeleccion(false)})}
     method moverseEntreBotones(){
-        keyboard.right().onPressDo({  if(administradorDeJuego.usuarioEnMenu()  && botonSeleccionado<botones.size()-1)
+        keyboard.right().onPressDo({  if(administradorDeJuego.usuarioEnMenu()  && botonSeleccionado<botones.size()-1&&!game.hasVisual(pantalla))
                                         {   self.deseleccionarBoton()
                                             botonSeleccionado+=1
                                             self.seleccionarBoton() }})
-        keyboard.left().onPressDo({  if(administradorDeJuego.usuarioEnMenu()  && botonSeleccionado>0 )
+        keyboard.left().onPressDo({  if(administradorDeJuego.usuarioEnMenu()  && botonSeleccionado>0 &&!game.hasVisual(pantalla))
                                         {   self.deseleccionarBoton()
                                             botonSeleccionado-=1 
                                             self.seleccionarBoton()}})    
@@ -302,7 +302,7 @@ object menuInicial{
         botones.get(botonSeleccionado).cambiarEstadoDeSeleccion(false)
     }
     method activarBoton(){
-        keyboard.enter().onPressDo({  if(administradorDeJuego.usuarioEnMenu()){
+        keyboard.enter().onPressDo({  if(administradorDeJuego.usuarioEnMenu()&&!game.hasVisual(pantalla)){
                                         botones.get(botonSeleccionado).accion()}})
     }
 }

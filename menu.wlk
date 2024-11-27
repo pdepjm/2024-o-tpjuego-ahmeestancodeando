@@ -7,6 +7,7 @@ import cursor.*
 import wollok.game.*
 import pala.*
 import administradorDeJuego.administradorDeJuego
+import administradorDeJuego.pantalla
 
 // ===============================
 // Menú: Control y acciones del menú
@@ -26,9 +27,9 @@ object menu {
 
     // Acción del menú: Configura las teclas
     method accion() {
-        keyboard.d().onPressDo({ if(!administradorDeJuego.pausado() && !administradorDeJuego.usuarioEnMenu()){self.moverseDerecha() }})
-        keyboard.a().onPressDo({ if(!administradorDeJuego.pausado()&& !administradorDeJuego.usuarioEnMenu()){self.moverseIzquierda()} })
-        keyboard.enter().onPressDo({  if(!administradorDeJuego.pausado()&& !administradorDeJuego.usuarioEnMenu()){self.seleccionarMenu()}})
+        keyboard.d().onPressDo({ if(!game.hasVisual(pantalla) && !administradorDeJuego.usuarioEnMenu()){self.moverseDerecha() }})
+        keyboard.a().onPressDo({ if(!game.hasVisual(pantalla) && !administradorDeJuego.usuarioEnMenu()){self.moverseIzquierda()} })
+        keyboard.enter().onPressDo({  if(!game.hasVisual(pantalla) && !administradorDeJuego.usuarioEnMenu()){self.seleccionarMenu()}})
         // cambiar aca para cambiar forma de generar enemigos
     }
     

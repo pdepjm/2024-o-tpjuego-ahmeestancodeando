@@ -4,6 +4,7 @@
 
 import wollok.game.*
 import administradorDeJuego.administradorDeJuego
+import administradorDeJuego.pantalla
 // ===============================
 // Cursor: Controlador de movimiento
 // ===============================
@@ -19,10 +20,10 @@ object cursor {
 
     // Acciones del teclado
     method accion() {
-        keyboard.right().onPressDo({ if(!administradorDeJuego.pausado()&& !administradorDeJuego.usuarioEnMenu()){self.moverseDerecha()} })
-        keyboard.left().onPressDo({ if(!administradorDeJuego.pausado()&& !administradorDeJuego.usuarioEnMenu()){self.moverseIzquierda()} })
-        keyboard.up().onPressDo({ if(!administradorDeJuego.pausado()&& !administradorDeJuego.usuarioEnMenu()){self.moverseArriba() }})
-        keyboard.down().onPressDo({ if(!administradorDeJuego.pausado()&& !administradorDeJuego.usuarioEnMenu()){self.moverseAbajo()} })
+        keyboard.right().onPressDo({ if(!game.hasVisual(pantalla)&& !administradorDeJuego.usuarioEnMenu()){self.moverseDerecha()} })
+        keyboard.left().onPressDo({ if(!game.hasVisual(pantalla)&& !administradorDeJuego.usuarioEnMenu()){self.moverseIzquierda()} })
+        keyboard.up().onPressDo({ if(!game.hasVisual(pantalla)&& !administradorDeJuego.usuarioEnMenu()){self.moverseArriba() }})
+        keyboard.down().onPressDo({ if(!game.hasVisual(pantalla)&& !administradorDeJuego.usuarioEnMenu()){self.moverseAbajo()} })
     }
 
     // Métodos de movimiento

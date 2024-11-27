@@ -279,5 +279,9 @@ const oleadaUnoDos = new OleadaDeNivel(enemigos=[slimeLadron,slimeBasico],tiempo
 const oleadaDosUno = new OleadaDeNivel(enemigos=[slimeBasico,slimeDorado],tiempoSpawn=4000,cantidadEnemigos=3)
 const oleadaDosDos = new OleadaDeNivel(enemigos=[slimeAgil,slimeBasico,slimeBasico],tiempoSpawn=4000,cantidadEnemigos=4)
 
-const nivelUno=new Nivel(oleadas=[oleadaUnoUno,oleadaUnoDos])
-const nivelDos=new Nivel(oleadas=[oleadaDosUno,oleadaDosDos])
+const nivelUno = new Nivel(oleadas=[oleadaUnoUno,oleadaUnoDos])
+const nivelDos = new Nivel(oleadas=[oleadaDosUno,oleadaDosDos])
+
+
+
+// nivel = new Nivel(enemigos=[[basico, basico, gerrero], [guerrero, ladron]])
