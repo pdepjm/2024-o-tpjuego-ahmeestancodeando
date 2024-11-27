@@ -316,6 +316,7 @@ object botonDeInicio{
     administradorDeEnemigos.administradorUtilizado(administradorDeOleadas)
     administradorDeJuego.administradorUtilizado(administradorDeOleadas)
     administradorDeOleadas.modoNiveles(false)
+    administradorDeOleadas.actualizarOleada()
 	game.schedule(4000, { administradorDeOleadas.iniciarOleada() })
     game.addVisual(administradorDeOleadas)
     menuInicial.finalizarMenu()

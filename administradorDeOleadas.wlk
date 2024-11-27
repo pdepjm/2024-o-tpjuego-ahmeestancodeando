@@ -19,7 +19,8 @@ object administradorDeOleadas {
     const niveles = botonNiveles.niveles()
     var property numNivel = 1
     method nivel() = niveles.get(numNivel-1).nivel()
-    method actualizarOleada(){oleadaActual= self.nivel().oleadaActual()}
+    method actualizarOleada(){if(modoNiveles) oleadaActual= self.nivel().oleadaActual()
+    else oleadaActual=oleadaNormal}
     // Métodos de visualización y sonido
     method position() = new MutablePosition(x = 9, y = 5)
     method text() = "Oleada: " + numeroOleada.toString() + "     " + "Slimes Restantes: " + oleadaActual.enemigosRestantes().toString()
@@ -94,8 +95,7 @@ object administradorDeOleadas {
         niveles.forEach({botonNivel=>botonNivel.nivel().resetearOleadas()})
         numeroOleada = 1
         numNivel=1
-        oleadaActual = oleadaNormal
-        if(modoNiveles){self.actualizarOleada()}
+        self.actualizarOleada()
         self.frenarTickInicial()
         oleadaInicial.interval(4000)
         tickParaGenerarEnemigos.stop()
