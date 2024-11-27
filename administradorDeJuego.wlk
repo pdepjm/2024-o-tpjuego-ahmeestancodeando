@@ -436,6 +436,6 @@ class BotonDeNivel{
 }
 
 const botonNivel1= new BotonDeNivel(imagenSinSeleccionar="botonNivel1.png", imagenDeSeleccion="botonNivel1Seleccionado.png",
-posicion= new MutablePosition(x=0,y=5), numNivel=1,nivel=nivelUno)
+posicion= new MutablePosition(x=0,y=5), numNivel=1,nivel=nivel1)
 const botonNivel2= new BotonDeNivel(imagenSinSeleccionar="botonNivel2.png", imagenDeSeleccion="botonNivel2Seleccionado.png",
-posicion= new MutablePosition(x=1,y=5), numNivel=2,nivel=nivelDos)
+posicion= new MutablePosition(x=1,y=5), numNivel=2,nivel=nivel2)

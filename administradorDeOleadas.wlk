@@ -19,7 +19,7 @@ object administradorDeOleadas {
     const niveles = botonNiveles.niveles()
     var property numNivel = 1
     method nivel() = niveles.get(numNivel-1).nivel()
-    method actualizarOleada(){if(modoNiveles) oleadaActual= self.nivel().oleadaActual()
+    method actualizarOleada(){if(modoNiveles) oleadaActual= self.nivel()
     else oleadaActual=oleadaNormal}
     // Métodos de visualización y sonido
     method position() = new MutablePosition(x = 9, y = 5)
@@ -63,20 +63,18 @@ object administradorDeOleadas {
     }
     method siguienteOleadaNivel(){
         if(self.nivel().noTerminoNivel()){
-            oleadaActual.terminarOleada()
             self.nivel().siguienteOleada()
-            oleadaActual=self.nivel().oleadaActual()
             oleadaInicial.start()
         }
         else{
-            self.nivel().resetearOleadas()
+            self.nivel().reset()
             numNivel+=1
             if(numNivel>niveles.size()){
                 pantalla.nuevoEstado(victoria)
                 administradorDeJuego.terminarJuego() 
             }
             else{
-            oleadaActual=self.nivel().oleadaActual()
+            oleadaActual=self.nivel()
             oleadaInicial.start()}
         }
     }
@@ -92,6 +90,7 @@ object administradorDeOleadas {
         game.removeTickEvent("gestionar oleada")
         oleadaNormal.reset()
         oleadaFinal.reset()
+        oleadaActual.reset()
         niveles.forEach({botonNivel=>botonNivel.nivel().resetearOleadas()})
         numeroOleada = 1
         numNivel=1
@@ -273,7 +272,58 @@ class Nivel{
         numOleada=0
     }
 } 
+class NivelConOleadasIntegradas{
+    const oleadas
+    const property cantidadEnemigos
+    var property enemigosRestantes = cantidadEnemigos 
+    var property enemigosGenerados = 0
+    const property tiempoSpawn
 
+    method enemigos()=oleadas.get(numOleada)
+    var numOleada=0
+    method oleadaActual()= if (numOleada<oleadas.size()) oleadas.get(numOleada) else return oleadaNormal
+    method noTerminoNivel()=numOleada!=oleadas.size()-1
+    method siguienteOleada(){numOleada+=1 self.reset()}
+    method resetearOleadas(){
+        numOleada=0
+    }
+    method inicioOleada() = game.sound("m.iOleada.mp3")
+    method finOleada() = game.sound("m.fOleada.mp3")
+    // Verifica si la oleada final está en ejecución
+    method ejecutando() = cantidadEnemigos > enemigosGenerados && enemigosRestantes > 0
+
+    method seGeneroEnemigo() {enemigosGenerados+=1}
+
+    method seMurioEnemigo() {enemigosRestantes-=1}
+
+    method enemigosVivos() =  enemigosGenerados - (cantidadEnemigos - enemigosRestantes) 
+
+    // Termina la oleada final y concluye el juego
+    method terminarOleada() {
+        self.finOleada().volume(0.1)
+        self.finOleada().play()
+
+    }
+
+        method iniciarOleada(){
+        self.inicioOleada().volume(0)
+        //self.inicioOleada().play()
+        enemigosRestantes = cantidadEnemigos
+    }
+
+
+
+    method cargarSlimesRestantes () {enemigosRestantes = cantidadEnemigos }
+    // Verifica si la oleada final ha finalizado
+    method finalizo() = enemigosRestantes == 0 && enemigosGenerados == cantidadEnemigos
+
+    // Resetea la oleada final
+    method reset() {
+        enemigosGenerados = 0
+        enemigosRestantes = cantidadEnemigos
+    }
+
+} 
 const oleadaUnoUno = new OleadaDeNivel(enemigos=[slimeBasico,slimeGuerrero,slimeGuerrero],tiempoSpawn=4000,cantidadEnemigos=5)
 const oleadaUnoDos = new OleadaDeNivel(enemigos=[slimeLadron,slimeBasico],tiempoSpawn=4000,cantidadEnemigos=6)
 const oleadaDosUno = new OleadaDeNivel(enemigos=[slimeBasico,slimeDorado],tiempoSpawn=4000,cantidadEnemigos=3)
@@ -281,7 +331,8 @@ const oleadaDosDos = new OleadaDeNivel(enemigos=[slimeAgil,slimeBasico,slimeBasi
 
 const nivelUno = new Nivel(oleadas=[oleadaUnoUno,oleadaUnoDos])
 const nivelDos = new Nivel(oleadas=[oleadaDosUno,oleadaDosDos])
-
+const nivel1 = new NivelConOleadasIntegradas(oleadas=[[slimeBasico,slimeGuerrero,slimeGuerrero],[slimeLadron,slimeBasico]],tiempoSpawn=4000, cantidadEnemigos=5)
+const nivel2 = new NivelConOleadasIntegradas(oleadas=[[slimeBasico,slimeDorado],[slimeAgil,slimeBasico,slimeBasico]],tiempoSpawn=4000, cantidadEnemigos=4)
 object nivelFinal inherits Nivel (oleadas = [oleadaDosUno]){
 
     override method oleadaActual()= oleadaDosUno
