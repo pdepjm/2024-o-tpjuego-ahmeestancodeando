@@ -41,7 +41,7 @@ object administradorDeJuego {
     administradorDeProyectiles.reset()
     casa.reset()
     puntaje.reset()
-    administradorUtilizado.reset()
+    administradorDeOleadas.reset()
     configuracion.quitarVisuals()
     //pantalla.reproducirSonido()
    // configuracion.iniciarMusica() // Iniciar música (opcional)

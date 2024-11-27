@@ -91,10 +91,11 @@ object administradorDeOleadas {
         game.removeTickEvent("gestionar oleada")
         oleadaNormal.reset()
         oleadaFinal.reset()
-        niveles.forEach({nivel=>nivel.resetearOleadas()})
+        niveles.forEach({botonNivel=>botonNivel.nivel().resetearOleadas()})
         numeroOleada = 1
         numNivel=1
         oleadaActual = oleadaNormal
+        if(modoNiveles){self.actualizarOleada()}
         self.frenarTickInicial()
         oleadaInicial.interval(4000)
         tickParaGenerarEnemigos.stop()
