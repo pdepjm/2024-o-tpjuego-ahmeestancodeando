@@ -331,7 +331,7 @@ const oleadaDosDos = new OleadaDeNivel(enemigos=[slimeAgil,slimeBasico,slimeBasi
 
 const nivelUno = new Nivel(oleadas=[oleadaUnoUno,oleadaUnoDos])
 const nivelDos = new Nivel(oleadas=[oleadaDosUno,oleadaDosDos])
-const nivel1 = new NivelConOleadasIntegradas(oleadas=[[slimeBasico,slimeGuerrero,slimeGuerrero],[slimeLadron,slimeBasico]],tiempoSpawn=4000, cantidadEnemigos=5)
+const nivel1 = new NivelConOleadasIntegradas(oleadas=[[slimeDeMedioOriente,slimeBasico,slimeBasico],[slimeBasico,slimeGuerrero,slimeGuerrero],[slimeLadron,slimeBasico]],tiempoSpawn=4000, cantidadEnemigos=5)
 const nivel2 = new NivelConOleadasIntegradas(oleadas=[[slimeBasico,slimeDorado],[slimeAgil,slimeBasico,slimeBasico]],tiempoSpawn=4000, cantidadEnemigos=4)
 object nivelFinal inherits Nivel (oleadas = [oleadaDosUno]){
 
