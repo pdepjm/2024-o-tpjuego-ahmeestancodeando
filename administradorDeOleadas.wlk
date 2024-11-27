@@ -9,7 +9,6 @@ import administradorDeJuego.*
 // ===============================
 object administradorDeOleadas {
     const numOleadaFinal = 3
-    const posiblesTipos = [slimeBasico, slimeBasico, slimeGuerrero, slimeNinja, slimeBlessed,slimeLadron]
     var oleadaActual = oleadaNormal
     var numeroOleada = 1
     const property oleadaInicial = game.tick(4000, {self.iniciarOleada() self.frenarTickInicial()},false)
@@ -20,7 +19,7 @@ object administradorDeOleadas {
     var property numNivel = 1
     method nivel() = niveles.get(numNivel-1).nivel()
     method actualizarOleada(){if(modoNiveles) oleadaActual= self.nivel()
-    else oleadaActual=oleadaNormal}
+    else oleadaActual=nivelInfinito}
     // Métodos de visualización y sonido
     method position() = new MutablePosition(x = 9, y = 5)
     method text() = "Oleada: " + numeroOleada.toString() + "     " + "Slimes Restantes: " + oleadaActual.enemigosRestantes().toString()
@@ -36,7 +35,7 @@ object administradorDeOleadas {
                             self.siguienteOleadaNivel()
                         }
                         else{
-                        self.siguienteOleada()}
+                        self.siguienteOleadaNivel()}
                         tickParaGenerarEnemigos.stop()
                         
                     }
@@ -62,12 +61,12 @@ object administradorDeOleadas {
         }
     }
     method siguienteOleadaNivel(){
-        if(self.nivel().noTerminoNivel()){
-            self.nivel().siguienteOleada()
+        if(oleadaActual.noTerminoNivel()){
+            oleadaActual.siguienteOleada()
             oleadaInicial.start()
         }
         else{
-            self.nivel().reset()
+            oleadaActual.reset()
             numNivel+=1
             if(numNivel>niveles.size()){
                 pantalla.nuevoEstado(victoria)
@@ -83,21 +82,18 @@ object administradorDeOleadas {
     method sumarEnemigo() { oleadaActual.seGeneroEnemigo() }
 
     // Selecciona un tipo de slime aleatorio en función de la oleada
-    method agregarTipo(numero) { return posiblesTipos.get(0.randomUpTo(numero + 4).round())}
+    //method agregarTipo(numero) { return posiblesTipos.get(0.randomUpTo(numero + 4).round())}
 
     // Resetea el administrador de oleadas
     method reset() {
-        game.removeTickEvent("gestionar oleada")
-        oleadaNormal.reset()
-        oleadaFinal.reset()
+        self.frenarTickInicial()
+        oleadaInicial.interval(4000)
+        tickParaGenerarEnemigos.stop()
         oleadaActual.reset()
         niveles.forEach({botonNivel=>botonNivel.nivel().resetearOleadas()})
         numeroOleada = 1
         numNivel=1
         self.actualizarOleada()
-        self.frenarTickInicial()
-        oleadaInicial.interval(4000)
-        tickParaGenerarEnemigos.stop()
         //game.schedule(4000, { self.iniciarOleada() })
     }
     method recibeDanioMago(danio){}
@@ -131,7 +127,7 @@ object oleadaNormal {
     method seMurioEnemigo() {enemigosRestantes-=1}
 
     // Termina la oleada y configura la siguiente
-    method terminarOleada() {
+   /*  method terminarOleada() {
         cantidadEnemigos += 5
         enemigosGenerados = 0
         if (tiempoSpawn > 400) tiempoSpawn -= 400
@@ -139,7 +135,7 @@ object oleadaNormal {
         game.onTick(100, "agregar slimes posibles", { self.agregarSlimes() })
         self.finOleada().volume(0.1)
         self.finOleada().play()
-    }
+    } */
 
     method iniciarOleada(){
         self.inicioOleada().volume(0)
@@ -149,13 +145,13 @@ object oleadaNormal {
 
 
     // Agrega slimes a la oleada hasta alcanzar el límite
-    method agregarSlimes() { 
+   /*  method agregarSlimes() { 
         if (enemigos.size() < cantSlimesPosibles) {
             enemigos.add(administradorDeOleadas.agregarTipo(0))
         } else {
             game.removeTickEvent("agregar slimes posibles")
         }
-    }
+    } */
 
     // Resetea la oleada a su configuración inicial
     method reset() {
@@ -340,9 +336,21 @@ object nivelFinal inherits Nivel (oleadas = [oleadaDosUno]){
     // siguienteoleada oleadafinal socotroco cambia imagen listo :)
 }
 //algo asi deberia ser nivefinal
-object nivelInfinito inherits Nivel (oleadas = [oleadaDosUno]){
-
-    override method oleadaActual()= oleadaDosUno
+object nivelInfinito inherits NivelConOleadasIntegradas (oleadas = [slimeBasico],tiempoSpawn=4000,cantidadEnemigos=3){
+    const posiblesEnemigos=[slimeBasico, slimeGuerrero, slimeNinja, slimeBlessed,slimeLadron]
+    const oleadaAleatoria=[slimeBasico]
+     method cambiarEnemigosOleada(){
+        oleadaAleatoria.clear()
+        
+        oleadaAleatoria.add(posiblesEnemigos.get(0.randomUpTo(posiblesEnemigos.size()-1).round()))
+        oleadaAleatoria.add(posiblesEnemigos.get(0.randomUpTo(posiblesEnemigos.size()-1).round()))
+        oleadaAleatoria.add(posiblesEnemigos.get(0.randomUpTo(posiblesEnemigos.size()-1).round()))
+        oleadaAleatoria.add(posiblesEnemigos.get(0.randomUpTo(posiblesEnemigos.size()-1).round())) 
+    } 
+    override method siguienteOleada(){self.cambiarEnemigosOleada()  self.reset()}
+    override method enemigos()=oleadaAleatoria
+    override method oleadaActual()= oleadaAleatoria
+    override method noTerminoNivel()=true
 }
 //algo asi deberia ser nive Infinito
 // nivel = new Nivel(enemigos=[[basico, basico, gerrero], [guerrero, ladron]])
