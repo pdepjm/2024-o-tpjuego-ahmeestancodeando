@@ -282,6 +282,16 @@ const oleadaDosDos = new OleadaDeNivel(enemigos=[slimeAgil,slimeBasico,slimeBasi
 const nivelUno = new Nivel(oleadas=[oleadaUnoUno,oleadaUnoDos])
 const nivelDos = new Nivel(oleadas=[oleadaDosUno,oleadaDosDos])
 
+object nivelFinal inherits Nivel (oleadas = [oleadaDosUno]){
 
+    override method oleadaActual()= oleadaDosUno
 
+    // siguienteoleada oleadafinal socotroco cambia imagen listo :)
+}
+//algo asi deberia ser nivefinal
+object nivelInfinito inherits Nivel (oleadas = [oleadaDosUno]){
+
+    override method oleadaActual()= oleadaDosUno
+}
+//algo asi deberia ser nive Infinito
 // nivel = new Nivel(enemigos=[[basico, basico, gerrero], [guerrero, ladron]])
