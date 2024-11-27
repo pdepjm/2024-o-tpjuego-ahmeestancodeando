@@ -33,7 +33,7 @@ object menu {
     }
     
     // Movimiento del menú
-    method moverseDerecha() = if (self.position().x() < 5) position.goRight(1)
+    method moverseDerecha() = if (self.position().x() < 6) position.goRight(1)
     method moverseIzquierda() = if (self.position().x() > 0) position.goLeft(1)
 
     // Detecta si se está seleccionando pala

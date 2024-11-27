@@ -315,6 +315,7 @@ object botonDeInicio{
     configuracion.iniciarTicks()
     administradorDeEnemigos.administradorUtilizado(administradorDeOleadas)
     administradorDeJuego.administradorUtilizado(administradorDeOleadas)
+    administradorDeOleadas.modoNiveles(false)
 	game.schedule(4000, { administradorDeOleadas.iniciarOleada() })
     game.addVisual(administradorDeOleadas)
     menuInicial.finalizarMenu()
@@ -413,12 +414,13 @@ class BotonDeNivel{
     method accion(){
     configuracion.agregarVisuals()
 	configuracion.crearTicks()
-    administradorDeNiveles.numNivel(numNivel)
-    administradorDeNiveles.enemigosRestantes(nivel.cantidadEnemigos())
-    administradorDeEnemigos.administradorUtilizado(administradorDeNiveles)
-    administradorDeJuego.administradorUtilizado(administradorDeNiveles)
+    administradorDeOleadas.numNivel(numNivel)
+    administradorDeEnemigos.administradorUtilizado(administradorDeOleadas)
+    administradorDeJuego.administradorUtilizado(administradorDeOleadas)
+    administradorDeOleadas.modoNiveles(true)
+    administradorDeOleadas.actualizarOleada()
     administradorDeJuego.administradorUtilizado().oleadaInicial().start()
-    game.addVisual(administradorDeNiveles)
+    game.addVisual(administradorDeOleadas)
     menuInicial.finalizarMenu()
     }
 
@@ -437,6 +439,6 @@ class BotonDeNivel{
 }
 
 const botonNivel1= new BotonDeNivel(imagenSinSeleccionar="botonNivel1.png", imagenDeSeleccion="botonNivel1Seleccionado.png",
-posicion= new MutablePosition(x=0,y=5), numNivel=1,nivel=nivel1)
+posicion= new MutablePosition(x=0,y=5), numNivel=1,nivel=nivelUno)
 const botonNivel2= new BotonDeNivel(imagenSinSeleccionar="botonNivel2.png", imagenDeSeleccion="botonNivel2Seleccionado.png",
-posicion= new MutablePosition(x=1,y=5), numNivel=2,nivel=nivel2)
+posicion= new MutablePosition(x=1,y=5), numNivel=2,nivel=nivelDos)
