@@ -12,12 +12,12 @@ object administradorDeEnemigos {
     // Propiedades
     var nombreEnemigo = 10000
     var enemigos = #{}
-    var property administradorUtilizado=administradorDeOleadas
+   
     // Métodos de Consulta
     method enemigos() = enemigos
     method columnaOcupada() = enemigos.filter({ enemigo => enemigo.position().x() == 14 }).size() == 5 // Verifica si la columna de posición x=14 está ocupada por 5 enemigos
     method nombre() = nombreEnemigo
-    method pocosEnemigosEnPantalla() = administradorUtilizado.enemigosVivos() < maxEnemigosEnPantalla
+    method pocosEnemigosEnPantalla() = administradorDeOleadas.enemigosVivos() < maxEnemigosEnPantalla
 
     // Genera un nuevo nombre para los enemigos
     method sumarEnemigo() { nombreEnemigo += 1 }
@@ -35,7 +35,7 @@ object administradorDeEnemigos {
                 enemigos.add(nombreParaEnemigo) /* Añade el nuevo enemigo a la colección de enemigos activos */
                 
                 self.sumarEnemigo() /* Incrementa el contador de enemigos en el administrador */
-                administradorUtilizado.sumarEnemigo() /* Notifica al administrador de oleadas */
+                administradorDeOleadas.sumarEnemigo() /* Notifica al administrador de oleadas */
                 
                 return game.addVisual(nombreParaEnemigo) /* Muestra al enemigo en el juego */
             } else {
@@ -46,7 +46,7 @@ object administradorDeEnemigos {
 
     // Elimina un enemigo específico de la colección de enemigos activos
     method eliminarEnemigo(enemigo) {
-        administradorUtilizado.reducirEnemigo()
+        administradorDeOleadas.reducirEnemigo()
         enemigos.remove(enemigo)
     }
 

@@ -11,7 +11,7 @@ import puntaje.*
 import pala.*
 import casa.casa
 import proyectil.*
-import administradorDeNiveles.*
+
 
 // =======================================
 // Administrador de Juego: Control central del juego, reseteo y fin del juego
@@ -21,7 +21,7 @@ class MyException inherits wollok.lang.Exception {}
 object administradorDeJuego {
     var property pausado = false
     var property usuarioEnMenu = true
-    var property administradorUtilizado = administradorDeOleadas
+   
   
   
   // Método para finalizar el juego y resetear el estado
@@ -66,7 +66,7 @@ object administradorDeJuego {
         }
     }
     method mostrarMenuInicial(){
-        try {self.resetGame() game.removeVisual(administradorUtilizado) game.schedule(10, {configuracion.frenarTicks()
+        try {self.resetGame() game.removeVisual(administradorDeOleadas) game.schedule(10, {configuracion.frenarTicks()
         game.removeVisual(pantalla)})}
         catch e "no hay ticks"
         game.schedule(1000, {usuarioEnMenu=true})
@@ -194,7 +194,7 @@ object configuracion {
             self.frenarTicks()
             self.crearTicks()
             puntaje.reset()
-            administradorDeJuego.administradorUtilizado().oleadaInicial().start()
+            administradorDeOleadas.oleadaInicial().start()
             self.agregarVisuals()}})
 
         // Tecla "I" para detener el juego
@@ -313,8 +313,6 @@ object botonDeInicio{
     method accion(){
     configuracion.agregarVisuals()
     configuracion.iniciarTicks()
-    administradorDeEnemigos.administradorUtilizado(administradorDeOleadas)
-    administradorDeJuego.administradorUtilizado(administradorDeOleadas)
     administradorDeOleadas.modoNiveles(false)
     administradorDeOleadas.actualizarOleada()
 	game.schedule(4000, { administradorDeOleadas.iniciarOleada() })
@@ -416,11 +414,9 @@ class BotonDeNivel{
     configuracion.agregarVisuals()
 	configuracion.crearTicks()
     administradorDeOleadas.numNivel(numNivel)
-    administradorDeEnemigos.administradorUtilizado(administradorDeOleadas)
-    administradorDeJuego.administradorUtilizado(administradorDeOleadas)
     administradorDeOleadas.modoNiveles(true)
     administradorDeOleadas.actualizarOleada()
-    administradorDeJuego.administradorUtilizado().oleadaInicial().start()
+    administradorDeOleadas.oleadaInicial().start()
     game.addVisual(administradorDeOleadas)
     menuInicial.finalizarMenu()
     }
