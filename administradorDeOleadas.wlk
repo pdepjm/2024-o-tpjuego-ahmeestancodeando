@@ -11,7 +11,7 @@ object administradorDeOleadas {
     const numOleadaFinal = 3
     var nivelActual = nivelInfinito
     var numeroOleada = 1
-    const property oleadaInicial = game.tick(4000, {self.frenarTickInicial() self.iniciarOleada()},false)
+    const property oleadaInicial = game.tick(5000, {self.frenarTickInicial() self.iniciarOleada()},false)
     method frenarTickInicial()=oleadaInicial.stop()
     var property modoNiveles = false
     //cosas para funcionamiento con niveles

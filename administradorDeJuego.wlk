@@ -315,7 +315,7 @@ object botonDeInicio{
     configuracion.iniciarTicks()
     administradorDeOleadas.modoNiveles(false)
     administradorDeOleadas.actualizarOleada()
-	game.schedule(4000, { administradorDeOleadas.iniciarOleada() })
+	administradorDeOleadas.iniciarOleada()
     game.addVisual(administradorDeOleadas)
     menuInicial.finalizarMenu()
     }
@@ -416,7 +416,7 @@ class BotonDeNivel{
     administradorDeOleadas.numNivel(numNivel)
     administradorDeOleadas.modoNiveles(true)
     administradorDeOleadas.actualizarOleada()
-    administradorDeOleadas.oleadaInicial().start()
+    administradorDeOleadas.iniciarOleada()
     game.addVisual(administradorDeOleadas)
     menuInicial.finalizarMenu()
     }
