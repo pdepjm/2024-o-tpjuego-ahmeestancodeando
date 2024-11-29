@@ -166,11 +166,8 @@ object nivelInfinito inherits Nivel(oleadas = [slimeBasico],tiempoSpawn=4000,can
     const oleadaAleatoria = [slimeBasico]
      method cambiarEnemigosOleada(){
         oleadaAleatoria.clear()
-        
-        oleadaAleatoria.add(posiblesEnemigos.get(0.randomUpTo(posiblesEnemigos.size()-1).round()))
-        oleadaAleatoria.add(posiblesEnemigos.get(0.randomUpTo(posiblesEnemigos.size()-1).round()))
-        oleadaAleatoria.add(posiblesEnemigos.get(0.randomUpTo(posiblesEnemigos.size()-1).round()))
-        oleadaAleatoria.add(posiblesEnemigos.get(0.randomUpTo(posiblesEnemigos.size()-1).round())) 
+        4.times({i=> oleadaAleatoria.add(posiblesEnemigos.get(0.randomUpTo(posiblesEnemigos.size()-1).round()))})
+       
   
     cantidadEnemigos += 1.randomUpTo(3.4).round() // aumentar la cantidad de enemigos entre 1 y 3
     } 

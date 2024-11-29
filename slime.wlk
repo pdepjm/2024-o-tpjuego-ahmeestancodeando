@@ -130,12 +130,12 @@ object slimeDorado inherits Tipo(danio=0, vida=175, imagen="s.slimeDorado.png"){
     override method estaMuerto()={slime=>
          if (slime.sinVida()) {
             puntaje.puntos(puntaje.puntos()+1000)
+            slime.eliminar()
         }
-        slime.eliminar()
+        if(slime.llegoACasa()){slime.eliminar()}
         return slime.sinVida() || slime.llegoACasa()  
     }
 }
-
 object slimeDeMedioOriente inherits Tipo(danio=250, vida=180, imagen="s.slimeMedioOriente.png"){ 
 
     override method meFreno()={slime=> 
