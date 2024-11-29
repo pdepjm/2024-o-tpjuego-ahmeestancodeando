@@ -46,5 +46,9 @@ object administradorDeMagos {
         magos.forEach({ mago => mago.eliminar() })
         nombreMago = 0 
     }
+
+    method reiniciarVisuals(){
+        game.schedule(150, {magos.forEach({ mago => mago.reiniciarVisual()})}) 
+    }
     
 }

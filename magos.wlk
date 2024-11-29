@@ -1,7 +1,7 @@
 // ===============================
 // Revisado
 // ===============================
-
+import game.*
 import administradorDeMagos.*
 import puntaje.*
 import proyectil.*
@@ -54,16 +54,30 @@ class Mago {
   }
 
   method matarSlime(){}
+
+  method reiniciarVisual(){
+    game.removeVisual(self)
+    game.schedule(50, {game.addVisual(self)})
+  }
 }
 
 class MagoQueDispara inherits Mago{
-  const tipoProyectil
+  const proyectilBase
+  var property tipoProyectil=proyectilBase
   override method disparar(){
     const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
     if (self.enemigoEnSuFila()) {
       administradorDeProyectiles.generarProyectil(posicionProyectil, tipoProyectil)
     }
+    tipoProyectil = proyectilBase
   }
+  override method combinarProyectil(otroTipo){
+        if (tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()){ 
+            tipoProyectil = tipoProyectil.combinar()
+            return true
+            }
+        return tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()
+    }
 }
 
 
@@ -72,7 +86,7 @@ class MagoQueDispara inherits Mago{
 // ===============================
 
 // Mago de Fuego
-class MagoFuego inherits MagoQueDispara(vida = 100, imagen = "magoFuego.png", tipoProyectil = proyectilNormal){}
+class MagoFuego inherits MagoQueDispara(vida = 100, imagen = "magoFuego.png", proyectilBase = proyectilNormal){}
 
 // Mago Irlandés (sanador)
 class MagoIrlandes inherits Mago(vida = 100, imagen = "magoHealer.png") {
@@ -80,8 +94,8 @@ class MagoIrlandes inherits Mago(vida = 100, imagen = "magoHealer.png") {
 }
 
 // Mago de Hielo
-class MagoHielo inherits MagoQueDispara(vida = 100, imagen = "magoHielo.png", tipoProyectil = proyectilPenetrante){}
-
+class MagoHielo inherits MagoQueDispara(vida = 100, imagen = "magoHielo.png", proyectilBase = proyectilPenetrante){}
+class MagoStop inherits MagoQueDispara(vida = 100, imagen = "magoStop.png", proyectilBase = proyectilDeStop){}
 // Mago de Piedra
 class MagoPiedra inherits Mago(vida = 400, imagen = "magoPiedra.png") {}
 
@@ -134,7 +148,8 @@ class MagoTienda{
     const mago = self.magoQueGenera(posicionMago)
     return mago
     }
-
+  method recibeDanioMago(danio){}
+  method frenarEnemigo()= true
   // method efectoDeInvocacion(){} //esto estaba porque antes los magos irlandeses interactuaban directamente con el contador de puntos
 }
 
@@ -173,4 +188,11 @@ object magoExplosivoTienda inherits MagoTienda(position = new MutablePosition(x 
 override method magoQueGenera(posicionMago){return new MagoExplosivo(position = posicionMago)}
 
   override method image() = "magoExplosivo.png"
+}
+
+object magoStopTienda inherits MagoTienda(position = new MutablePosition(x = 5, y = 5), costo = 300) { //Nico: ver si 250 es una banda o no
+
+  override method magoQueGenera(posicionMago){return new MagoStop(position = posicionMago)}
+  
+  override method image() = "magoStop.png"
 }

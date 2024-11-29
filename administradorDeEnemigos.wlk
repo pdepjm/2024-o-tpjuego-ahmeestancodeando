@@ -12,7 +12,7 @@ object administradorDeEnemigos {
     // Propiedades
     var nombreEnemigo = 10000
     var enemigos = #{}
-
+   
     // Métodos de Consulta
     method enemigos() = enemigos
     method columnaOcupada() = enemigos.filter({ enemigo => enemigo.position().x() == 14 }).size() == 5 // Verifica si la columna de posición x=14 está ocupada por 5 enemigos

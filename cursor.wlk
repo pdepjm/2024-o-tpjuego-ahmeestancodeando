@@ -3,7 +3,8 @@
 // ===============================
 
 import wollok.game.*
-
+import administradorDeJuego.administradorDeJuego
+import administradorDeJuego.pantalla
 // ===============================
 // Cursor: Controlador de movimiento
 // ===============================
@@ -19,10 +20,10 @@ object cursor {
 
     // Acciones del teclado
     method accion() {
-        keyboard.right().onPressDo({ self.moverseDerecha() })
-        keyboard.left().onPressDo({ self.moverseIzquierda() })
-        keyboard.up().onPressDo({ self.moverseArriba() })
-        keyboard.down().onPressDo({ self.moverseAbajo() })
+        keyboard.right().onPressDo({ if(!game.hasVisual(pantalla)&& !administradorDeJuego.usuarioEnMenu()){self.moverseDerecha()} })
+        keyboard.left().onPressDo({ if(!game.hasVisual(pantalla)&& !administradorDeJuego.usuarioEnMenu()){self.moverseIzquierda()} })
+        keyboard.up().onPressDo({ if(!game.hasVisual(pantalla)&& !administradorDeJuego.usuarioEnMenu()){self.moverseArriba() }})
+        keyboard.down().onPressDo({ if(!game.hasVisual(pantalla)&& !administradorDeJuego.usuarioEnMenu()){self.moverseAbajo()} })
     }
 
     // Métodos de movimiento
@@ -37,4 +38,5 @@ object cursor {
     method recibeDanioMago(_danio) { return false }
     method combinarProyectil(_tipo){return false}
     method matarSlime(){return false}
+    method tipoProyectil()=false
 }
