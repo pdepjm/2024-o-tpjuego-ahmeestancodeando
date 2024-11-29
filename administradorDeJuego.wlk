@@ -208,11 +208,13 @@ object configuracion {
             administradorDeJuego.pausado(false)
             //administradorDeJuego.pausado(false)
             game.removeVisual(pantalla)
+           
             self.frenarTicks()
             self.crearTicks()
             puntaje.reset()
             administradorDeOleadas.oleadaInicial().start()
-            self.agregarVisuals()}})
+            self.agregarVisuals() 
+            }})
 
         // Tecla "I" para detener el juego
         keyboard.i().onPressDo({ game.stop() })
@@ -225,10 +227,10 @@ object configuracion {
         game.removeVisual(menu)
         game.removeVisual(puntaje)
         game.removeVisual(casa)
-
         game.removeVisual(fondo)
-
+        game.removeVisual(administradorDeOleadas)
         menu.finalizarTienda()
+
     }
     method agregarVisuals() {  
 
@@ -243,6 +245,7 @@ object configuracion {
         game.addVisual(casa)
 
         menu.iniciarTienda()
+        game.addVisual(administradorDeOleadas)
 /*         menu.accion()
         cursor.accion() */
         
@@ -341,7 +344,7 @@ object botonDeInicio{
     administradorDeOleadas.modoNiveles(false)
     administradorDeOleadas.actualizarOleada()
 	administradorDeOleadas.iniciarOleada()
-    game.addVisual(administradorDeOleadas)
+    
     menuInicial.finalizarMenu()
     }
 
@@ -442,7 +445,7 @@ class BotonDeNivel{
     administradorDeOleadas.modoNiveles(true)
     administradorDeOleadas.actualizarOleada()
     administradorDeOleadas.iniciarOleada()
-    game.addVisual(administradorDeOleadas)
+    
     menuInicial.finalizarMenu()
     }
 

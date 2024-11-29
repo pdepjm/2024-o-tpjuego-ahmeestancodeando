@@ -179,6 +179,8 @@ object nivelInfinito inherits Nivel(oleadas = [slimeBasico],tiempoSpawn=4000,can
     override method noTerminoNivel()=true
     override method resetearCantEnemigosComoAlInicio(){
         cantidadEnemigos=cantidadEnemigosInicial
+        oleadaAleatoria.clear()
+        oleadaAleatoria.add(slimeBasico)
     }
 }
 //algo asi deberia ser nive Infinito
