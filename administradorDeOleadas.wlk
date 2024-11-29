@@ -8,7 +8,6 @@ import administradorDeJuego.*
 // Administrador de Oleadas: Control de las oleadas de enemigos
 // ===============================
 object administradorDeOleadas {
-    const numOleadaFinal = 3
     var nivelActual = nivelInfinito
     var numeroOleada = 1
     const property oleadaInicial = game.tick(5000, {self.frenarTickInicial() self.iniciarOleada()},false)
@@ -81,7 +80,6 @@ object administradorDeOleadas {
         nivelActual.resetearCantEnemigosComoAlInicio()
         niveles.forEach({botonNivel=>botonNivel.nivel().resetearOleadas()})
         numeroOleada = 1
-        numNivel=1
         self.actualizarOleada()
         //game.schedule(4000, { self.iniciarOleada() })
     }
@@ -152,7 +150,7 @@ object nivelFinal inherits Nivel(oleadas=[[slimeDeMedioOriente,slimeBasico,slime
 override method siguienteOleada(){
     indiceOleada +=1
     if (indiceOleada == oleadas.size()-1){
-        fondo.cambiarFondo()
+        fondo.cambiarFondo("fondo_final.jpg")
     }
     self.reset()
     }
@@ -164,7 +162,7 @@ const nivel2 = new Nivel(oleadas=[[slimeBasico,slimeDorado],[slimeAgil,slimeBasi
 //algo asi deberia ser nivefinal
 object nivelInfinito inherits Nivel(oleadas = [slimeBasico],tiempoSpawn=4000,cantidadEnemigos=3){
     const posiblesEnemigos = [slimeBasico, slimeGuerrero, slimeNinja, slimeBlessed,slimeLadron]
-    const cantidadEnemigosInicial=cantidadEnemigos
+    const cantidadEnemigosInicial = cantidadEnemigos
     const oleadaAleatoria = [slimeBasico]
      method cambiarEnemigosOleada(){
         oleadaAleatoria.clear()
@@ -178,10 +176,13 @@ object nivelInfinito inherits Nivel(oleadas = [slimeBasico],tiempoSpawn=4000,can
     override method oleadaActual()= oleadaAleatoria
     override method noTerminoNivel()=true
     override method resetearCantEnemigosComoAlInicio(){
-        cantidadEnemigos=cantidadEnemigosInicial
+
+        cantidadEnemigos = cantidadEnemigosInicial
+        enemigosRestantes = cantidadEnemigos // agregue esto porque no se actualizaba, cambiarlo a metodo
         oleadaAleatoria.clear()
         oleadaAleatoria.add(slimeBasico)
     }
+
 }
 //algo asi deberia ser nive Infinito
 // nivel = new Nivel(enemigos=[[basico, basico, gerrero], [guerrero, ladron]])

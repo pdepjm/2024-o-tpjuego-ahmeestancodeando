@@ -40,6 +40,7 @@ object administradorDeJuego {
     administradorDeMagos.reset()
     administradorDeProyectiles.reset()
     casa.reset()
+    fondo.reset()
     puntaje.reset()
     administradorDeOleadas.reset()
     configuracion.quitarVisuals()
@@ -56,7 +57,7 @@ object administradorDeJuego {
                 game.addVisual(pantalla)
                 return pausado
             } else {
-                configuracion.iniciarTicks()
+                configuracion.crearTicks()
                 game.removeVisual(pantalla)
                 
         
@@ -136,14 +137,16 @@ object fondo{
     method position() = new MutablePosition(x = 0, y = 0)
     method image() = imagen
 
-    method cambiarFondo(){
-        imagen = "MenuInicialVacio.png"
+    method cambiarFondo(fondoNuevo){
+        imagen = fondoNuevo
         configuracion.quitarVisuals()
         configuracion.agregarVisuals()
         administradorDeOleadas.reiniciarVisual()
         administradorDeMagos.reiniciarVisuals()
-        
+    }
 
+    method reset(){
+        imagen = "fondo2.jpg"
     }
     method frenarEnemigo() = false
 }
@@ -193,15 +196,11 @@ object configuracion {
         cursor.accion()
         // Tecla "P" para reiniciar el juego
         keyboard.p().onPressDo({
-            /* try self.iniciarMusica()
-            catch e: MyException {"YA ESTA INICIADA LA MUSICA"}
-            then always{ */
             if(!administradorDeJuego.usuarioEnMenu()){administradorDeJuego.resetGame()
             administradorDeJuego.usuarioEnMenu(false)
             administradorDeJuego.pausado(false)
             //administradorDeJuego.pausado(false)
             game.removeVisual(pantalla)
-           
             self.frenarTicks()
             self.crearTicks()
             puntaje.reset()
@@ -220,45 +219,39 @@ object configuracion {
         game.removeVisual(menu)
         game.removeVisual(puntaje)
         game.removeVisual(casa)
-        game.removeVisual(fondo)
         game.removeVisual(administradorDeOleadas)
+        game.removeVisual(fondo)
+       
         menu.finalizarTienda()
 
     }
     method agregarVisuals() {  
-
         game.addVisual(fondo)
 
-        game.addVisual(puntaje)
-
         game.addVisual(menu)
+
+        game.addVisual(puntaje)
 
         game.addVisual(cursor)
 
         game.addVisual(casa)
 
-        menu.iniciarTienda()
         game.addVisual(administradorDeOleadas)
-/*         menu.accion()
-        cursor.accion() */
-        
-        //administradorDeJuego.pausar()   
+
+        menu.iniciarTienda()
     }   
 
     // Método para programar eventos de actualización periódicos (ticks)
     method crearTicks() {
         //game.schedule(4000, { administradorDeOleadas.iniciarOleada() }) // Inicia la primera oleada tras 4 segundos
-        self.iniciarTicks()
-    }
-    
-    method iniciarTicks() {
-        tickParaAumentarDinero.start()
+       tickParaAumentarDinero.start()
         tickParaCambiarFrames.start()
         tickParaDisparar.start()
         tickParaMoverYColisionarDisparos.start()
         tickParaMoverEnemigos.start()
         tickParaCambiarFramesEnemigos.start()
     }
+    
     method frenarTicks() {
             tickParaAumentarDinero.stop()
             tickParaCambiarFrames.stop()
@@ -266,7 +259,7 @@ object configuracion {
             tickParaMoverYColisionarDisparos.stop()
             tickParaMoverEnemigos.stop()
             tickParaCambiarFramesEnemigos.stop()
-        }
+    }
     method resetTicks(){
         tickParaAumentarDinero.reset()
         tickParaCambiarFrames.reset()
@@ -275,13 +268,7 @@ object configuracion {
         tickParaMoverEnemigos.reset()
         tickParaCambiarFramesEnemigos.reset()
     }
-    // Método para iniciar la música de fondo en bucle
-    
 
-   
-
-    // Método para eliminar todos los eventos programados de actualización (ticks)
-    
 }
 
 
@@ -336,7 +323,7 @@ object botonDeInicio{
     method position()= new MutablePosition(x=2,y=1)
     method accion(){
     configuracion.agregarVisuals()
-    configuracion.iniciarTicks()
+    configuracion.crearTicks()
     administradorDeOleadas.modoNiveles(false)
     administradorDeOleadas.actualizarOleada()
 	administradorDeOleadas.iniciarOleada()
