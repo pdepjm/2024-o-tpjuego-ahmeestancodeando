@@ -78,6 +78,7 @@ object administradorDeOleadas {
         oleadaInicial.interval(4000)
         tickParaGenerarEnemigos.stop()
         nivelActual.reset()
+        nivelActual.resetearCantEnemigosComoAlInicio()
         niveles.forEach({botonNivel=>botonNivel.nivel().resetearOleadas()})
         numeroOleada = 1
         numNivel=1
@@ -144,7 +145,7 @@ class Nivel{
         enemigosGenerados = 0
         enemigosRestantes = cantidadEnemigos
     }
-
+    method resetearCantEnemigosComoAlInicio(){}
 } 
 
 object nivelFinal inherits Nivel(oleadas=[[slimeDeMedioOriente,slimeBasico,slimeBasico],[slimeBasico,slimeGuerrero,slimeGuerrero],[slimeLadron,slimeBasico]],tiempoSpawn=4000, cantidadEnemigos=2){
@@ -163,6 +164,7 @@ const nivel2 = new Nivel(oleadas=[[slimeBasico,slimeDorado],[slimeAgil,slimeBasi
 //algo asi deberia ser nivefinal
 object nivelInfinito inherits Nivel(oleadas = [slimeBasico],tiempoSpawn=4000,cantidadEnemigos=3){
     const posiblesEnemigos = [slimeBasico, slimeGuerrero, slimeNinja, slimeBlessed,slimeLadron]
+    const cantidadEnemigosInicial=cantidadEnemigos
     const oleadaAleatoria = [slimeBasico]
      method cambiarEnemigosOleada(){
         oleadaAleatoria.clear()
@@ -175,6 +177,9 @@ object nivelInfinito inherits Nivel(oleadas = [slimeBasico],tiempoSpawn=4000,can
     override method enemigos()=oleadaAleatoria
     override method oleadaActual()= oleadaAleatoria
     override method noTerminoNivel()=true
+    override method resetearCantEnemigosComoAlInicio(){
+        cantidadEnemigos=cantidadEnemigosInicial
+    }
 }
 //algo asi deberia ser nive Infinito
 // nivel = new Nivel(enemigos=[[basico, basico, gerrero], [guerrero, ladron]])
