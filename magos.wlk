@@ -57,7 +57,7 @@ class Mago {
 
   method reiniciarVisual(){
     game.removeVisual(self)
-    game.schedule(50, {game.addVisual(self)})
+    game.addVisual(self)
   }
 }
 

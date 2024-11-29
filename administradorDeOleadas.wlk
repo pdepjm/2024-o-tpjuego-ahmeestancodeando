@@ -79,11 +79,6 @@ object administradorDeOleadas {
         tickParaGenerarEnemigos.stop()
         nivelActual.reset()
         niveles.forEach({botonNivel=>botonNivel.nivel().resetearOleadas()})
-        self.frenarTickInicial()
-        oleadaInicial.interval(4000)
-        tickParaGenerarEnemigos.stop()
-        nivelActual.reset()
-        niveles.forEach({botonNivel=>botonNivel.nivel().resetearOleadas()})
         numeroOleada = 1
         numNivel=1
         self.actualizarOleada()
@@ -91,6 +86,11 @@ object administradorDeOleadas {
     }
     method recibeDanioMago(danio){}
     method frenarEnemigo()= true
+
+    method reiniciarVisual(){
+        game.removeVisual(self)
+        game.addVisual(self)
+    }
 }
 
 
@@ -123,8 +123,6 @@ class Nivel{
 
     // Termina la oleada final y concluye el juego
     method terminarOleada() {
-        self.finOleada().volume(0.1)
-        self.finOleada().play()
         self.finOleada().volume(0.1)
         self.finOleada().play()
 

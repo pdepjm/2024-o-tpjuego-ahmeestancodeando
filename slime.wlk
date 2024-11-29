@@ -37,8 +37,6 @@ class Slime {
         self.vida(self.vida() - _danio)
         tipo.accionAlRecibirDanio().apply(self)
         return true 
-        tipo.accionAlRecibirDanio().apply(self)
-        return true 
     }
 
     method combinarProyectil(_tipo){return false}

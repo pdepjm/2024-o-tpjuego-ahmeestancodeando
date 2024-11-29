@@ -137,10 +137,12 @@ object fondo{
     method image() = imagen
 
     method cambiarFondo(){
-        
-        configuracion.quitarVisuals()
         imagen = "MenuInicialVacio.png"
+        configuracion.quitarVisuals()
         configuracion.agregarVisuals()
+        administradorDeOleadas.reiniciarVisual()
+        administradorDeMagos.reiniciarVisuals()
+        
 
     }
 
@@ -239,9 +241,6 @@ object configuracion {
         game.addVisual(cursor)
 
         game.addVisual(casa)
-
-        administradorDeMagos.reiniciarVisuals()
-
 
         menu.iniciarTienda()
 /*         menu.accion()
