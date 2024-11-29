@@ -66,4 +66,7 @@ object administradorDeEnemigos {
     method moverEnemigos() {
         enemigos.forEach({ enemigo => enemigo.movete() })
     }
+    method cambiarFrame(){
+        enemigos.forEach({ enemigo => enemigo.cambiarFrame()})
+    }
 }

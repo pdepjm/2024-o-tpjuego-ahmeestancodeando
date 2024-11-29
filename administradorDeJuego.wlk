@@ -177,14 +177,7 @@ object configuracion {
     const tickParaDisparar= game.tick(tiempoDisparo,  { administradorDeMagos.disparar()},false)
     const tickParaMoverYColisionarDisparos= game.tick(tiemposProyectiles,  { administradorDeProyectiles.moverProyectiles() administradorDeProyectiles.impactarProyectiles() },false)
     const tickParaCambiarFrames= game.tick((tiemposProyectiles/3)-5, {administradorDeProyectiles.cambiarFrame()},false)
-    //game.onTick(tiempoMuerte, "matar enemigos", { administradorDeEnemigos.estanMuertos() })
-    //game.onTick(tiempoMuerte, "matar magos", { administradorDeMagos.matarMagos() })
-    
-    /* game.onTick(tiemposProyectiles, "impactarDisparos", { 
-                                                                administradorDeProyectiles.impactarProyectiles() 
-                                                                administradorDeProyectiles.combinarProyectiles()
-                                                            }) */
-    
+    const tickParaCambiarFramesEnemigos= game.tick((tiempoMoverEnemigo/3)-5, {administradorDeEnemigos.cambiarFrame()},false)
 
 
     var property sonido = "pvz8bit.mp3"
@@ -192,7 +185,7 @@ object configuracion {
     method iniciarMusica() {sonidoPartida.iniciarMusica()} 
     // Método para detener la música de fondo
     method detenerMusica() {
-        sonidoPartida.detenerMusica()
+        try sonidoPartida.detenerMusica() catch e return
     }
 
     method iniciarConfig(){
@@ -264,6 +257,7 @@ object configuracion {
         tickParaDisparar.start()
         tickParaMoverYColisionarDisparos.start()
         tickParaMoverEnemigos.start()
+        tickParaCambiarFramesEnemigos.start()
     }
     method frenarTicks() {
             tickParaAumentarDinero.stop()
@@ -271,6 +265,7 @@ object configuracion {
             tickParaDisparar.stop()
             tickParaMoverYColisionarDisparos.stop()
             tickParaMoverEnemigos.stop()
+            tickParaCambiarFramesEnemigos.stop()
         }
     method resetTicks(){
         tickParaAumentarDinero.reset()
@@ -278,6 +273,7 @@ object configuracion {
         tickParaDisparar.reset()
         tickParaMoverYColisionarDisparos.reset()
         tickParaMoverEnemigos.reset()
+        tickParaCambiarFramesEnemigos.reset()
     }
     // Método para iniciar la música de fondo en bucle
     
