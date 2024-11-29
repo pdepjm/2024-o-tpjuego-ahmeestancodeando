@@ -318,7 +318,7 @@ object menuInicial{
     }
 }
 object botonDeInicio{
-    var imagen="botonInicioSeleccionado.png"
+    var imagen="botonEternoSeleccionado.png"
     method image()=imagen
     method position()= new MutablePosition(x=2,y=1)
     method accion(){
@@ -338,16 +338,16 @@ object botonDeInicio{
         else{self.quitarMarcoDeSeleccion()}
     }
     method ponerMarcoDeSeleccion(){
-        imagen="botonInicioSeleccionado.png"
+        imagen="botonEternoSeleccionado.png"
     }
     method quitarMarcoDeSeleccion(){
-        imagen="botonInicio.png"
+        imagen="botonEterno.png"
     }
 
 }
 
 object botonNiveles{
-    var imagen="botonNiveles.png"
+    var imagen="botonHistoria.png"
     method image()=imagen
     method position()= new MutablePosition(x=7,y=1)
     const property niveles=[botonNivel1, botonNivel2, botonNivel3, botonNivel4, botonNivel5]
@@ -365,10 +365,10 @@ object botonNiveles{
         else{self.quitarMarcoDeSeleccion()}
     }
     method ponerMarcoDeSeleccion(){
-        imagen="botonNivelesSeleccionado.png"
+        imagen="botonHistoriaSeleccionado.png"
     }
     method quitarMarcoDeSeleccion(){
-        imagen="botonNiveles.png"
+        imagen="botonHistoria.png"
     }
 }
 
@@ -446,13 +446,13 @@ class BotonDeNivel{
     }
 }
 
-const botonNivel1 = new BotonDeNivel(imagenSinSeleccionar="botonDesmuteo.png", imagenDeSeleccion="botonDesmuteoSeleccionado.png",
+const botonNivel1 = new BotonDeNivel(imagenSinSeleccionar="botonNivel1.png", imagenDeSeleccion="botonNivelSeleccionado.png",
 posicion= new MutablePosition(x=5,y=4), numNivel=1,nivel=nivel1)
-const botonNivel2 = new BotonDeNivel(imagenSinSeleccionar="botonDesmuteo.png", imagenDeSeleccion="botonDesmuteoSeleccionado.png",
+const botonNivel2 = new BotonDeNivel(imagenSinSeleccionar="botonNivel2.png", imagenDeSeleccion="botonNive2Seleccionado.png",
 posicion= new MutablePosition(x=7,y=4), numNivel=2,nivel=nivel2)
-const botonNivel3 = new BotonDeNivel(imagenSinSeleccionar="botonDesmuteo.png", imagenDeSeleccion="botonDesmuteoSeleccionado.png",
+const botonNivel3 = new BotonDeNivel(imagenSinSeleccionar="botonNivel3.png", imagenDeSeleccion="botonNivel3Seleccionado.png",
 posicion= new MutablePosition(x=9,y=4), numNivel=3,nivel=nivel2)
-const botonNivel4 = new BotonDeNivel(imagenSinSeleccionar="botonDesmuteo.png", imagenDeSeleccion="botonDesmuteoSeleccionado.png",
+const botonNivel4 = new BotonDeNivel(imagenSinSeleccionar="botonNivel4.png", imagenDeSeleccion="botonNive4Seleccionado.png",
 posicion= new MutablePosition(x=6,y=2), numNivel=4,nivel=nivel2)
-const botonNivel5 = new BotonDeNivel(imagenSinSeleccionar="botonDesmuteo.png", imagenDeSeleccion="botonDesmuteoSeleccionado.png",
+const botonNivel5 = new BotonDeNivel(imagenSinSeleccionar="botonNivelFINAL.png", imagenDeSeleccion="botonNivelFINALSeleccionado.png",
 posicion= new MutablePosition(x=8,y=2), numNivel=5,nivel=nivelFinal)

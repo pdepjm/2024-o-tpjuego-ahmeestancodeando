@@ -39,7 +39,7 @@ class Slime {
      method meFreno(estado) {self.enMovimiento(estado) return true}
 
     // Métodos para recibir daño
-    method recibeDanioMago(_danio){}
+    method recibeDanioMago(_danio){ return false}
 
     method recibeDanioEnemigo(_danio) {
         imagen=tipo.imagenesRecibeDanio().get(frame)
@@ -81,6 +81,7 @@ class Tipo{
         if (slime.enMovimiento()) 
             slime.position().goLeft(slime.tipo().desplazamiento())
         else 
+            
             slime.enMovimiento(false)
         slime.meFreno()    
             }
@@ -89,8 +90,10 @@ class Tipo{
         const objetoEnCeldaEnFrente = game.getObjectsIn(posicionEnFrente)
 
         if (objetoEnCeldaEnFrente.any({ objeto => objeto.frenarEnemigo()})) { 
-            slime.enMovimiento(false)
             objetoEnCeldaEnFrente.forEach({ objeto => objeto.recibeDanioMago(danio) })
+            const objetoEnCeldaEnFrente2 = game.getObjectsIn(posicionEnFrente)
+            if (objetoEnCeldaEnFrente2.any({ objeto => objeto.frenarEnemigo()})) slime.enMovimiento(false)
+            else slime.enMovimiento(true)
         } else {
             slime.enMovimiento(true)
         }
@@ -154,7 +157,7 @@ object slimeDeMedioOriente inherits Tipo(danio=250, vida=180, imagen="s.slimeMed
         const posicionEnFrente = new MutablePosition(x = slime.position().x(), y = slime.position().y())
         const objetoEnCeldaSiguiente = game.getObjectsIn(posicionEnFrente)
 
-        if (objetoEnCeldaSiguiente.any({ objeto => objeto.frenarEnemigo() && !objeto.recibeDanioEnemigo(0)})) { 
+        if (objetoEnCeldaSiguiente.any({ objeto => objeto.frenarEnemigo()  && objeto.recibeDanioMago(0)})) { 
             slime.enMovimiento(false)
             const posicionArriba = new MutablePosition(x = slime.position().x(), y = slime.position().y()+1)
             const posicionAbajo = new MutablePosition(x = slime.position().x(), y = slime.position().y()-1)
