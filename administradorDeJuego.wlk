@@ -143,10 +143,6 @@ object fondo{
 
     method cambiarFondo(fondoNuevo){
         imagen = fondoNuevo
-        configuracion.quitarVisuals()
-        configuracion.agregarVisuals()
-        administradorDeOleadas.reiniciarVisual()
-        administradorDeMagos.reiniciarVisuals()
     }
 
     method reset(){
