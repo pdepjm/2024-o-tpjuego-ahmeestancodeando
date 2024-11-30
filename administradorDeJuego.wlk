@@ -72,7 +72,7 @@ object administradorDeJuego {
         catch e "no hay ticks"
         game.schedule(1000, {usuarioEnMenu=true})
         menuInicial.quitarBotones()
-        menuInicial.imagen("MenuInicial.png")
+        menuInicial.imagen("MenuInicial2.png")
         menuInicial.botones(menuInicial.botonesIniciales())
         try game.addVisual(menuInicial) catch e "ya se esta mostrando el menu"
         menuInicial.iniciarMenu()
@@ -84,13 +84,13 @@ object administradorDeJuego {
 // =======================================
 object derrota {
     method position() = new MutablePosition(x = 0, y = 0)
-    method imagen() = "fin.jpg"
+    method imagen() = "fin3.jpg"
     method sonido() = game.sound("m.deathScreen.mp3")
     
 }
 object victoria {
     method position() = new MutablePosition(x = 0, y = 0)
-    method imagen() = "victoria.jpg"
+    method imagen() = "Victoria3.png"
     method sonido() = game.sound("m.deathScreen.mp3")
 }
 object portada {
@@ -277,7 +277,7 @@ object configuracion {
 
 
 object menuInicial{
-    var property imagen="MenuInicial.png"
+    var property imagen="MenuInicial2.png"
     method position()=new MutablePosition(x=0,y=0)
     method image() = imagen
     var botonSeleccionado = 0
@@ -458,5 +458,5 @@ const botonNivel3 = new BotonDeNivel(imagenSinSeleccionar="botonNivel3.png", ima
 posicion= new MutablePosition(x=9,y=4), numNivel=3,nivel=nivel3)
 const botonNivel4 = new BotonDeNivel(imagenSinSeleccionar="botonNivel4.png", imagenDeSeleccion="botonNivel4Seleccionado.png",
 posicion= new MutablePosition(x=6,y=2), numNivel=4,nivel=nivel4)
-const botonNivel5 = new BotonDeNivel(imagenSinSeleccionar="botonNivel4.png", imagenDeSeleccion="botonNivel4Seleccionado.png",
+const botonNivel5 = new BotonDeNivel(imagenSinSeleccionar="botonFINAL.png", imagenDeSeleccion="botonFINALSeleccionado.png",
 posicion= new MutablePosition(x=8,y=2), numNivel=5,nivel=nivelFinal)
