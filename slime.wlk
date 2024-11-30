@@ -151,7 +151,7 @@ object slimeDorado inherits Tipo(danio=0, vida=175, imagen="s.slimeDorado_01.png
         return slime.sinVida() || slime.llegoACasa()  
     }
 }
-object slimeDeMedioOriente inherits Tipo(danio=250, vida=180, imagen="s.slimeMedioOriente_01.png",imagenesNormales=["s.slimeMedioOriente_01.png","s.slimeMedioOriente_02.png","s.slimeMedioOriente_03.png"],imagenesRecibeDanio=["s.slimeMedioOrienteDanio_01.png","s.slimeMedioOrienteDanio_02.png","s.slimeMedioOrienteDanio_03.png"]){ 
+object slimeBomba inherits Tipo(danio=250, vida=180, imagen="s.slimeMedioOriente_01.png",imagenesNormales=["s.slimeMedioOriente_01.png","s.slimeMedioOriente_02.png","s.slimeMedioOriente_03.png"],imagenesRecibeDanio=["s.slimeMedioOrienteDanio_01.png","s.slimeMedioOrienteDanio_02.png","s.slimeMedioOrienteDanio_03.png"]){ 
 
     override method meFreno()={slime=> 
         const posicionEnFrente = new MutablePosition(x = slime.position().x(), y = slime.position().y())
@@ -170,7 +170,7 @@ object slimeDeMedioOriente inherits Tipo(danio=250, vida=180, imagen="s.slimeMed
    
   }
 
-object slimeAgil inherits Tipo(danio=50, vida=450, imagen="s.slimeAgil_01.png",imagenesNormales=["s.slimeAgil_01.png","s.slimeAgil_02.png","s.slimeAgil_03.png"],imagenesRecibeDanio=["s.slimeAgilDanio_01.png","s.slimeAgilDanio_02.png","s.slimeAgilDanio_03.png"]){
+object slimeAgil inherits Tipo(danio=50, vida=200, imagen="s.slimeAgil_01.png",imagenesNormales=["s.slimeAgil_01.png","s.slimeAgil_02.png","s.slimeAgil_03.png"],imagenesRecibeDanio=["s.slimeAgilDanio_01.png","s.slimeAgilDanio_02.png","s.slimeAgilDanio_03.png"]){
 
     override method accionAlRecibirDanio() = {slime=>
        if(slime.vida()<=self.vida()*0.5){

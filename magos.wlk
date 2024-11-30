@@ -15,6 +15,8 @@ class Mago {
   const position
   var property vida
   var property imagen
+ /*  const imagenBase=imagen
+  const imagenDisparo */
 
   // Métodos
   method frenarEnemigo() = true

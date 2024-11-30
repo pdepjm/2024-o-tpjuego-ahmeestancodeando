@@ -10,7 +10,7 @@ import puntaje.puntaje
 // ===============================
 object administradorDeOleadas {
     var nivelActual = nivelInfinito
-    var numeroOleada = 1
+    var property numeroOleada = 1
     const property oleadaInicial = game.tick(5000, {self.frenarTickInicial() self.iniciarOleada()},false)
     method frenarTickInicial()=oleadaInicial.stop()
     var property modoNiveles = false
@@ -20,13 +20,13 @@ object administradorDeOleadas {
     var property numNivel = 1
     method nivel() = niveles.get(numNivel-1).nivel()
     method actualizarOleada(){
-        if(modoNiveles) nivelActual= self.nivel()
-        else nivelActual=nivelInfinito
+        if(modoNiveles) nivelActual = self.nivel()
+        else nivelActual = nivelInfinito
         }
 
     // Métodos de visualización y sonido
     method position() = new MutablePosition(x = 9, y = 5)
-    method text() = "Oleada: " + /* nivelActual.oleada().toString()  */ +"     Nivel: " + nivelActual.nombre().toString()  + "     " + "Slimes Restantes: " + nivelActual.enemigosRestantes().toString()
+    method text() = "Oleada: " +  numeroOleada.toString() +"     Nivel: " + nivelActual.nombre().toString()  + "     " + "Slimes Restantes: " + nivelActual.enemigosRestantes().toString()
     method textColor() = "#FA0770"
     method enemigosVivos() = nivelActual.enemigosVivos()
     
@@ -35,7 +35,7 @@ object administradorDeOleadas {
     method spawnearOleada(){
             if (not administradorDeJuego.pausado()){
                     if (nivelActual.ejecutando()) {
-                        administradorDeEnemigos.generarEnemigo(nivelActual.enemigos().anyOne())
+                        if(!nivelActual.seGeneraronSuficientes())administradorDeEnemigos.generarEnemigo(nivelActual.enemigos().anyOne())
                     } else if(nivelActual.finalizo()){
                         self.siguienteOleadaNivel()
                         tickParaGenerarEnemigos.stop()
@@ -62,8 +62,9 @@ object administradorDeOleadas {
             }
             else{
             puntaje.reset()
+            numeroOleada = 1
             administradorDeMagos.reset()
-            nivelActual=self.nivel()
+            nivelActual = self.nivel()
             oleadaInicial.start()}
         }
     }
@@ -103,15 +104,16 @@ class Nivel{
     var property enemigosGenerados = 0
     const property tiempoSpawn
     const nombre
-   /*  method oleada(){
-        if (indiceOleada+1<oleadas.size()) return indiceOleada+1
+    /*method numeroOleada(){
+        if (indiceOleada+1<oleadas.size()) return (indiceOleada + 1).toString()
         else return "oleada final"
-    } */
+    } 
+    */
     method nombre()=nombre
     method enemigos()=oleadas.get(indiceOleada)
-    var indiceOleada=0
+    var property indiceOleada=0
     method oleadaActual()= oleadas.get(indiceOleada)
-    method noTerminoNivel()= indiceOleada != oleadas.size()-1
+    method noTerminoNivel()= indiceOleada < oleadas.size()-1
     method siguienteOleada(){indiceOleada +=1 self.reset()}
     method resetearOleadas(){
         indiceOleada=0
@@ -144,8 +146,8 @@ class Nivel{
 
     method cargarSlimesRestantes () {enemigosRestantes = cantidadEnemigos }
     // Verifica si la oleada final ha finalizado
-    method finalizo() = enemigosRestantes == 0 && enemigosGenerados == cantidadEnemigos
-
+    method finalizo() = enemigosRestantes <= 0 || enemigosGenerados >= cantidadEnemigos
+    method seGeneraronSuficientes() = cantidadEnemigos == self.enemigosVivos() || self.enemigosVivos() == enemigosRestantes
     // Resetea la oleada final
     method reset() {
         enemigosGenerados = 0
@@ -154,32 +156,91 @@ class Nivel{
     method resetearCantEnemigosComoAlInicio(){}
 } 
 
-object nivelFinal inherits Nivel(oleadas=[[slimeDeMedioOriente,slimeBasico,slimeBasico],[slimeBasico,slimeGuerrero,slimeGuerrero],[slimeLadron,slimeBasico]],tiempoSpawn=4000, cantidadEnemigos=2,nombre="final"){
+object nivelFinal inherits Nivel(oleadas=[[slimeBasico,slimeBasico,slimeGuerrero,slimeDorado],
+                                          [slimeBasico,slimeGuerrero, slimeBomba,slimeGuerrero],
+                                          [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja],
+                                          [slimeBomba, slimeBomba, slimeBomba, slimeBomba, slimeBomba, slimeDorado],
+                                          [slimeBomba, slimeBomba, slimeNinja, slimeLadron],
+                                          [slimeBomba, slimeBomba, slimeNinja, slimeNinja, slimeNinja, slimeNinja, slimeNinja, slimeLadron],
+                                          [slimeBomba, slimeBomba, slimeNinja,slimeNinja, slimeLadron, slimeBlessed],
+                                          [slimeNinja, slimeNinja, slimeNinja, slimeBlessed,slimeBlessed, slimeBomba],
+                                          [slimeBasico, slimeDorado],[slimeBlessed,slimeNinja,slimeBomba]],tiempoSpawn=4000, cantidadEnemigos=10,nombre="Final"){
 override method siguienteOleada(){
     indiceOleada +=1
     if (indiceOleada == oleadas.size()-1){
-        fondo.cambiarFondo("fondo_final.jpg")
+        fondo.cambiarFondo("fondo3.jpg")
+        cantidadEnemigos += 5
     }
     self.reset()
     }
 }
 
-const nivel1 = new Nivel(oleadas=[[slimeDeMedioOriente,slimeBasico,slimeBasico],[slimeBasico,slimeGuerrero,slimeGuerrero],[slimeLadron,slimeBasico]],tiempoSpawn=4000, cantidadEnemigos=5,nombre="1")
-const nivel2 = new Nivel(oleadas=[[slimeBasico,slimeDorado],[slimeAgil,slimeBasico,slimeBasico]],tiempoSpawn=4000, cantidadEnemigos=4,nombre="2")
+const nivel1 = new Nivel(oleadas=[[slimeBasico],[slimeBasico,slimeBasico,slimeGuerrero,slimeDorado],[slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBasico]],tiempoSpawn=4000, cantidadEnemigos=5,nombre="1")
+const nivel2 = new Nivel(oleadas=[[slimeBasico,slimeBasico,slimeGuerrero,slimeDorado],
+                                  [slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBasico],
+                                  [slimeAgil,slimeGuerrero,slimeLadron,slimeBasico],
+                                  [slimeAgil,slimeGuerrero,slimeLadron,slimeBasico],
+                                  [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja]],tiempoSpawn=4000, cantidadEnemigos=6,nombre="2")
+const nivel3 = new Nivel(oleadas=[[slimeBasico, slimeBasico, slimeGuerrero,slimeLadron],
+                                  [slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBasico],
+                                  [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja],
+                                  [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja,slimeBomba],
+                                  [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja,slimeBomba],
+                                  [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja,slimeBomba]],
+                                  tiempoSpawn=4000, cantidadEnemigos=7,nombre="3")
+const nivel4 = new Nivel(oleadas=[[slimeBasico, slimeBasico, slimeGuerrero,slimeLadron],
+                                  [slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBasico],
+                                  [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja],
+                                  [slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBomba],
+                                  [slimeBomba, slimeNinja,slimeLadron,slimeGuerrero],
+                                  [slimeBomba, slimeNinja,slimeLadron,slimeAgil],
+                                  [slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBlessed],
+                                  [slimeBlessed, slimeNinja, slimeBomba]],
+                                  tiempoSpawn=4000, cantidadEnemigos=8,nombre="4")
 
 //algo asi deberia ser nivefinal
 object nivelInfinito inherits Nivel(oleadas = [slimeBasico],tiempoSpawn=4000,cantidadEnemigos=3,nombre="infinito"){
-    const posiblesEnemigos = [slimeBasico, slimeGuerrero, slimeNinja, slimeBlessed,slimeLadron]
+    
+    
+    const enemigosEZ = [slimeBasico, slimeBasico, slimeBasico, slimeGuerrero, slimeGuerrero, slimeDorado] // 20%
+    const enemigosMolestos = [slimeNinja, slimeAgil, slimeLadron,slimeGuerrero,slimeNinja, slimeAgil, slimeLadron,slimeGuerrero,slimeDorado] // 1/6
+    const enemigosJodidos = [slimeNinja, slimeAgil, slimeLadron,slimeGuerrero,slimeBomba,slimeNinja, slimeAgil, slimeLadron,slimeGuerrero,slimeBomba,slimeDorado] // 9%
+    const enemigosAyuda = [slimeBomba, slimeNinja, slimeBlessed,slimeLadron,slimeBomba, slimeNinja, slimeBlessed,slimeLadron,slimeDorado] // 11,1%
+   
+    var posiblesEnemigos = enemigosEZ
+    
     const cantidadEnemigosInicial = cantidadEnemigos
+
+    var cantidadAgregarALaLista = 7
+
     const oleadaAleatoria = [slimeBasico]
      method cambiarEnemigosOleada(){
         oleadaAleatoria.clear()
-        4.times({i=> oleadaAleatoria.add(posiblesEnemigos.get(0.randomUpTo(posiblesEnemigos.size()-1).round()))})
+        cantidadAgregarALaLista.times({i=> oleadaAleatoria.add(posiblesEnemigos.get(0.randomUpTo(posiblesEnemigos.size()-1).round()))})
        
   
-    cantidadEnemigos += 1.randomUpTo(3.4).round() // aumentar la cantidad de enemigos entre 1 y 3
-    } 
-    override method siguienteOleada(){self.cambiarEnemigosOleada()  self.reset()}
+    cantidadEnemigos += 1.randomUpTo(1.8).round() // aumentar la cantidad de enemigos entre 1 y 3
+    }
+
+    method cambiarTipoOleada(nuevoTipo){ posiblesEnemigos = nuevoTipo }
+    //override method oleada() = (indiceOleada+1).toString()
+    override method siguienteOleada(){
+        if (administradorDeOleadas.numeroOleada() == 2) self.cambiarTipoOleada(enemigosMolestos) {cantidadAgregarALaLista += 1}
+        if (administradorDeOleadas.numeroOleada() == 3){
+            self.cambiarTipoOleada(enemigosJodidos)
+            cantidadAgregarALaLista += 1
+            fondo.cambiarFondo("fondo2.jpg")
+            }
+        if (administradorDeOleadas.numeroOleada() == 4){
+            self.cambiarTipoOleada(enemigosAyuda)
+            cantidadAgregarALaLista += 1
+            fondo.cambiarFondo("fondo3.jpg")
+            }
+        
+        self.cambiarEnemigosOleada()  
+        self.reset()
+        }
+
     override method enemigos()=oleadaAleatoria
     override method oleadaActual()= oleadaAleatoria
     override method noTerminoNivel()=true

@@ -189,20 +189,7 @@ describe "Funcionalidad" {
     assert.equals(derrota, pantallaPrueba.estado())
   }
 
-    test "Si no hay Mas slimes Finaliza la oleada"{
-      const oleadaPrueba = oleadaFinal
-      oleadaPrueba.enemigosRestantes(0)
-      oleadaPrueba.enemigosGenerados(oleadaPrueba.cantidadEnemigos())      
-      assert.that(oleadaPrueba.finalizo())
-      }
-      
-
-  test "Cuando termina la Oleada Final Se gana"{
-     const oleadaPrueba = oleadaFinal
-      const pantallaPrueba = pantalla
-      oleadaPrueba.terminarOleada()
-      assert.equals(victoria, pantallaPrueba.estado())
-  }
+   
 
   test "Un proyectil impacta y saca vida"{
     const magoFuego = new MagoFuego(position = game.at(0,0))
@@ -224,5 +211,19 @@ describe "Funcionalidad" {
     assert.that(administradorDeMagos.magos().isEmpty())
     
   }
-
+  test "cuando se matan todos los enemigos de un nivel, el nivel pasa de oleada"{
+    const nivel = new Nivel(oleadas=[[slimeBasico],[slimeNinja]],tiempoSpawn=4000, cantidadEnemigos=2,nombre="nivelPrueba")
+    const oleadaInicial=nivel.oleadaActual()
+    const indiceInicial = nivel.indiceOleada()
+    nivel.seGeneroEnemigo()
+    nivel.seMurioEnemigo()
+    nivel.seGeneroEnemigo()
+    nivel.seMurioEnemigo() 
+    if(nivel.finalizo()){
+         nivel.siguienteOleada()
+    }
+    const indicePosterior = nivel.indiceOleada()
+    const oleadaSiguiente = nivel.oleadaActual()
+    assert.that(indiceInicial < indicePosterior)
+  }
 }

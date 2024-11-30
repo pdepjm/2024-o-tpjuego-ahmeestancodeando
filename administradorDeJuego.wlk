@@ -126,14 +126,13 @@ object pantalla {
     method nuevoEstado(estadoNuevo) {
         estado=estadoNuevo
         
-        self.reproducirSonido()
-        
+        self.reproducirSonido()  
     }
     method frenarEnemigo()= true
 }
 
 object fondo{
-    var imagen = "fondo2.jpg"
+    var imagen = "fondo1.jpg"
     method position() = new MutablePosition(x = 0, y = 0)
     method image() = imagen
 
@@ -146,7 +145,7 @@ object fondo{
     }
 
     method reset(){
-        imagen = "fondo2.jpg"
+        imagen = "fondo1.jpg"
     }
     method frenarEnemigo() = false
 }
@@ -398,7 +397,7 @@ object botonMutearMusica{
     }
     method ponerMarcoDeSeleccion(){
         if(muteada){
-        imagen="botonMuteoSeleccionado.png"
+        imagen="botonMuteo.png"
         }
         else imagen="botonDesmuteoSeleccionado.png"
     }
@@ -446,13 +445,13 @@ class BotonDeNivel{
     }
 }
 
-const botonNivel1 = new BotonDeNivel(imagenSinSeleccionar="botonNivel1.png", imagenDeSeleccion="botonNivelSeleccionado.png",
+const botonNivel1 = new BotonDeNivel(imagenSinSeleccionar="botonNivel1.jpg", imagenDeSeleccion="botonNivel1Seleccionado.jpg",
 posicion= new MutablePosition(x=5,y=4), numNivel=1,nivel=nivel1)
-const botonNivel2 = new BotonDeNivel(imagenSinSeleccionar="botonNivel2.png", imagenDeSeleccion="botonNive2Seleccionado.png",
+const botonNivel2 = new BotonDeNivel(imagenSinSeleccionar="botonNivel2.jpg", imagenDeSeleccion="botonNive2Seleccionado.jpg",
 posicion= new MutablePosition(x=7,y=4), numNivel=2,nivel=nivel2)
-const botonNivel3 = new BotonDeNivel(imagenSinSeleccionar="botonNivel3.png", imagenDeSeleccion="botonNivel3Seleccionado.png",
-posicion= new MutablePosition(x=9,y=4), numNivel=3,nivel=nivel2)
-const botonNivel4 = new BotonDeNivel(imagenSinSeleccionar="botonNivel4.png", imagenDeSeleccion="botonNive4Seleccionado.png",
-posicion= new MutablePosition(x=6,y=2), numNivel=4,nivel=nivel2)
-const botonNivel5 = new BotonDeNivel(imagenSinSeleccionar="botonNivelFINAL.png", imagenDeSeleccion="botonNivelFINALSeleccionado.png",
+const botonNivel3 = new BotonDeNivel(imagenSinSeleccionar="botonNivel3.jpg", imagenDeSeleccion="botonNivel3Seleccionado.jpg",
+posicion= new MutablePosition(x=9,y=4), numNivel=3,nivel=nivel3)
+const botonNivel4 = new BotonDeNivel(imagenSinSeleccionar="botonNivel4.jpg", imagenDeSeleccion="botonNive4Seleccionado.jpg",
+posicion= new MutablePosition(x=6,y=2), numNivel=4,nivel=nivel4)
+const botonNivel5 = new BotonDeNivel(imagenSinSeleccionar="botonNivelFINAL.jpg", imagenDeSeleccion="botonNivelFINALSeleccionado.jpg",
 posicion= new MutablePosition(x=8,y=2), numNivel=5,nivel=nivelFinal)
