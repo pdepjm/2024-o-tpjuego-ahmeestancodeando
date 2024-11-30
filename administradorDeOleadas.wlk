@@ -54,13 +54,16 @@ object administradorDeOleadas {
             oleadaInicial.start()
         }
         else{
-            nivelActual.reset()
+
             numNivel+=1
             if(numNivel>niveles.size()){
+                numNivel = 1
                 pantalla.nuevoEstado(victoria)
                 administradorDeJuego.terminarJuego() 
             }
             else{
+            nivelActual.reset()
+
             pantalla.nuevoEstado(finDeNivel)
             game.addVisual(pantalla)
             game.schedule(2500, {
@@ -128,7 +131,7 @@ class Nivel{
     method inicioOleada() = game.sound("m.iOleada.mp3")
     method finOleada() = game.sound("m.fOleada.mp3")
     // Verifica si la oleada final está en ejecución
-    method ejecutando() = cantidadEnemigos > enemigosGenerados && enemigosRestantes > 0
+    method ejecutando() = cantidadEnemigos >= enemigosGenerados && enemigosRestantes > 0
 
     method seGeneroEnemigo() {enemigosGenerados+=1}
 
@@ -179,7 +182,10 @@ override method siguienteOleada(){
     }
     self.reset()
     }
-
+    override method reset() {
+      super()
+      cantidadEnemigos = 10
+    }
 
 }
 

@@ -90,7 +90,7 @@ object derrota {
 }
 object victoria {
     method position() = new MutablePosition(x = 0, y = 0)
-    method imagen() = "Victoria2.png"
+    method imagen() = "victoria.jpg"
     method sonido() = game.sound("m.deathScreen.mp3")
 }
 object portada {
@@ -377,7 +377,7 @@ object botonNiveles{
 }
 
 object botonMutearMusica{
-    var imagen="botonMuteo.png"
+var imagen="botonMuteo.png"
     method image()=imagen
     method position()= new MutablePosition(x=13,y=1)
     var muteada=true
@@ -385,15 +385,14 @@ object botonMutearMusica{
         if (muteada){
             configuracion.iniciarMusica()
             imagen="botonDesmuteoSeleccionado.png"
-            muteada = false
+            muteada=false
         }
         else {
             configuracion.detenerMusica()
-            imagen="botonMuteo.png"
+            imagen="botonMuteoSeleccionado.png"
             muteada=true
             }
     }
-
     method cambiarEstadoDeSeleccion(estado){
         if(estado){
             self.ponerMarcoDeSeleccion()
@@ -413,6 +412,7 @@ object botonMutearMusica{
         else imagen="botonDesmuteo.png"
         
     }
+  
   
 }
 
@@ -458,5 +458,5 @@ const botonNivel3 = new BotonDeNivel(imagenSinSeleccionar="botonNivel3.png", ima
 posicion= new MutablePosition(x=9,y=4), numNivel=3,nivel=nivel3)
 const botonNivel4 = new BotonDeNivel(imagenSinSeleccionar="botonNivel4.png", imagenDeSeleccion="botonNivel4Seleccionado.png",
 posicion= new MutablePosition(x=6,y=2), numNivel=4,nivel=nivel4)
-const botonNivel5 = new BotonDeNivel(imagenSinSeleccionar="botonFINAL.png", imagenDeSeleccion="botonFINALSeleccionado.png",
+const botonNivel5 = new BotonDeNivel(imagenSinSeleccionar="botonNivel4.png", imagenDeSeleccion="botonNivel4Seleccionado.png",
 posicion= new MutablePosition(x=8,y=2), numNivel=5,nivel=nivelFinal)
