@@ -90,7 +90,7 @@ object derrota {
 }
 object victoria {
     method position() = new MutablePosition(x = 0, y = 0)
-    method imagen() = "victoria.jpg"
+    method imagen() = "Victoria2.png"
     method sonido() = game.sound("m.deathScreen.mp3")
 }
 object portada {
@@ -458,5 +458,5 @@ const botonNivel3 = new BotonDeNivel(imagenSinSeleccionar="botonNivel3.png", ima
 posicion= new MutablePosition(x=9,y=4), numNivel=3,nivel=nivel3)
 const botonNivel4 = new BotonDeNivel(imagenSinSeleccionar="botonNivel4.png", imagenDeSeleccion="botonNivel4Seleccionado.png",
 posicion= new MutablePosition(x=6,y=2), numNivel=4,nivel=nivel4)
-const botonNivel5 = new BotonDeNivel(imagenSinSeleccionar="botonNivel4.png", imagenDeSeleccion="botonNivel4Seleccionado.png",
+const botonNivel5 = new BotonDeNivel(imagenSinSeleccionar="botonFINAL.png", imagenDeSeleccion="botonFINALSeleccionado.png",
 posicion= new MutablePosition(x=8,y=2), numNivel=5,nivel=nivelFinal)

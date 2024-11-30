@@ -163,14 +163,14 @@ class Nivel{
 } 
 
 object nivelFinal inherits Nivel(oleadas=[[slimeBasico,slimeBasico,slimeGuerrero,slimeDorado],
-                                          [slimeBasico,slimeGuerrero, slimeBomba,slimeGuerrero],
+                                          [slimeBasico,slimeGuerrero, slimeBomba,slimeGuerrero]/*,
                                           [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja],
                                           [slimeBomba, slimeBomba, slimeBomba, slimeBomba, slimeBomba, slimeDorado],
                                           [slimeBomba, slimeBomba, slimeNinja, slimeLadron],
                                           [slimeBomba, slimeBomba, slimeNinja, slimeNinja, slimeNinja, slimeNinja, slimeNinja, slimeLadron],
                                           [slimeBomba, slimeBomba, slimeNinja,slimeNinja, slimeLadron, slimeBlessed],
                                           [slimeNinja, slimeNinja, slimeNinja, slimeBlessed,slimeBlessed, slimeBomba],
-                                          [slimeBasico, slimeDorado],[slimeBlessed,slimeNinja,slimeBomba]],tiempoSpawn=4000, cantidadEnemigos=10,nombre="Final"){
+                                          [slimeBasico, slimeDorado],[slimeBlessed,slimeNinja,slimeBomba]*/],tiempoSpawn=1000, cantidadEnemigos=10,nombre="Final"){
 override method siguienteOleada(){
     indiceOleada +=1
     if (indiceOleada == oleadas.size()-1){
@@ -179,6 +179,8 @@ override method siguienteOleada(){
     }
     self.reset()
     }
+
+
 }
 
 const nivel1 = new Nivel(oleadas=[[slimeBasico],[slimeBasico,slimeBasico,slimeGuerrero,slimeDorado],[slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBasico]],tiempoSpawn=4000, cantidadEnemigos=5,nombre="1")
@@ -193,7 +195,7 @@ const nivel3 = new Nivel(oleadas=[[slimeBasico, slimeBasico, slimeGuerrero,slime
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja,slimeBomba],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja,slimeBomba],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja,slimeBomba]],
-                                  tiempoSpawn=4000, cantidadEnemigos=7,nombre="3")
+                                  tiempoSpawn=3000, cantidadEnemigos=7,nombre="3")
 const nivel4 = new Nivel(oleadas=[[slimeBasico, slimeBasico, slimeGuerrero,slimeLadron],
                                   [slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBasico],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja],

@@ -99,7 +99,7 @@ class Proyectil {
 object proyectilNormal {
     // Métodos públicos
     const property imagenes = ["p.proyectilFuego - frame1.png", "p.proyectilFuego - frame2.png", "p.proyectilFuego - frame3.png"]
-    method danio() = 50
+    method danio() = 40
     method destruirse() = true
     method combinar() = proyectilPenetrante
     method puedeCombinarse() = true
@@ -127,7 +127,7 @@ object proyectilNormal {
 object proyectilPenetrante {
     // Métodos públicos
     const property imagenes = ["p.proyectilHielo-frame1.png", "p.proyectilHielo-frame2.png", "p.proyectilHielo-frame3.png"]
-    method danio() = 50
+    method danio() = 45
     method destruirse() = false
     
     method combinar() = superProyectil
@@ -143,7 +143,7 @@ object proyectilPenetrante {
 object superProyectil {
     // Métodos públicos
     const property imagenes = ["p.superProyectil-1.png", "p.superProyectil-2.png", "p.superProyectil-3.png"]
-    method danio() = 75
+    method danio() = 100
     method destruirse() = false
     method combinar() = self
     method puedeCombinarse() = false
@@ -155,7 +155,7 @@ object superProyectil {
 
 object proyectilDeStop{
     const property imagenes = ["p.proyectilDeStop-frame1.png", "p.proyectilDeStop-frame2.png", "p.proyectilDeStop-frame3.png"]
-    method danio() = 30
+    method danio() = 20
     method destruirse() = true
     method combinar() = self
     method puedeCombinarse() = false
