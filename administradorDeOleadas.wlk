@@ -61,11 +61,17 @@ object administradorDeOleadas {
                 administradorDeJuego.terminarJuego() 
             }
             else{
+            pantalla.nuevoEstado(finDeNivel)
+            game.addVisual(pantalla)
+            game.schedule(2500, {
+            game.removeVisual(pantalla)
             puntaje.reset()
             numeroOleada = 1
             administradorDeMagos.reset()
             nivelActual = self.nivel()
-            oleadaInicial.start()}
+            oleadaInicial.start()
+            })
+          }
         }
     }
     // Gestión de contadores de enemigos

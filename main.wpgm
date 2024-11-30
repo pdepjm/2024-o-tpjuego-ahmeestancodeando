@@ -5,7 +5,7 @@ import menu.*
 
 program juego {
 
-	game.title("cursor")
+	game.title("Magos VS Slimes")
 	game.height(6)
 	game.width(15)
 	game.cellSize(100)
