@@ -383,11 +383,15 @@ var imagen="botonMuteo.png"
     var muteada=true
     method accion(){
         if (muteada){
+            administradorDeJuego.usuarioEnMenu(false)
+            game.schedule(1500, {administradorDeJuego.usuarioEnMenu(true)})
             configuracion.iniciarMusica()
             imagen="botonDesmuteoSeleccionado.png"
             muteada=false
         }
         else {
+            administradorDeJuego.usuarioEnMenu(false)
+            game.schedule(1500, {administradorDeJuego.usuarioEnMenu(true)})
             configuracion.detenerMusica()
             imagen="botonMuteoSeleccionado.png"
             muteada=true
