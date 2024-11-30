@@ -28,8 +28,6 @@ class Proyectil {
     method mover() {
         imagen=tipoProyectil.imagenes().get(0)
         frame=1
-        //game.onTick(190, "frame", {self.cambiarFrame()})
-        //game.schedule(600, {game.removeTickEvent("frame")}) ESTOS POR SI QUEREMOS QUE CREEN SUS PROPIOS TICK PARA LAS ANIMACIONES
         position.goRight(1)
         if (self.llegueAlFinal() || self.verificarEnemigosEnfrente()) { self.eliminar() }
         
@@ -37,17 +35,7 @@ class Proyectil {
     // Método que revisa si llego al final
     method llegueAlFinal() = position.x() >= 14
     // Método de colisión
-    method colisionar() {tipoProyectil.colisionar().apply(self)
-        /* const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
-
-        const objetosEnPosicion = game.getObjectsIn(self.position()) + game.getObjectsIn(posicionEnFrente)
-        
-        const hayColision =  objetosEnPosicion.any({objeto => objeto.recibeDanioEnemigo(danio) })
-       
-        if (hayColision) {
-            self.destruirse()
-        } */
-    }
+    method colisionar() {tipoProyectil.colisionar().apply(self)}
 
     method combinar(){
         const posicionEnFrente = new MutablePosition(x = position.x(), y = position.y())

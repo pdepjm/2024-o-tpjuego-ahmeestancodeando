@@ -77,7 +77,7 @@ class Tipo{
     const property imagenesNormales
     const property imagenesRecibeDanio
     const property imagen
-    method moverse()={slime=> slime.estaMuerto()
+    method moverse()={slime => slime.estaMuerto()
         if (slime.enMovimiento()) 
             slime.position().goLeft(slime.tipo().desplazamiento())
         else 

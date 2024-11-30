@@ -15,8 +15,6 @@ class Mago {
   const position
   var property vida
   var property imagen
- /*  const imagenBase=imagen
-  const imagenDisparo */
 
   // Métodos
   method frenarEnemigo() = true
@@ -40,7 +38,7 @@ class Mago {
 
   method sePuedeSuperponer() = false
 
-  method valorAgregado() = 0 // cambiar a cantidadDePlataGenerada()
+  method valorAgregado() = 0
 
 // agregar metodo
   method estaMuerto() {
@@ -57,11 +55,6 @@ class Mago {
   }
 
   method matarSlime(){}
-
-  method reiniciarVisual(){
-    game.removeVisual(self)
-    game.addVisual(self)
-  }
 }
 
 class MagoQueDispara inherits Mago{
