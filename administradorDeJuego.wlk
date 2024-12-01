@@ -414,7 +414,7 @@ var imagen="botonMuteo.png"
             administradorDeJuego.usuarioEnMenu(false)
             game.schedule(1500, {administradorDeJuego.usuarioEnMenu(true)})
             configuracion.detenerMusica()
-            imagen="botonMuteoSeleccionado.png"
+            imagen="botonDesmuteoSeleccionado.png"
             muteada=true
             }
     }
