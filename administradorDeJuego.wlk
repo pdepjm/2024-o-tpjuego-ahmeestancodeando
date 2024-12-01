@@ -89,7 +89,7 @@ object derrota {
 object victoria {
     method position() = new MutablePosition(x = 0, y = 0)
     method imagen() = "victoria.png"
-    method sonido() = game.sound("m.deathScreen.mp3")
+    method sonido() = game.sound("victory.mp3")
 }
 object portada {
     method position() = new MutablePosition(x = 0, y = 0)
@@ -120,11 +120,11 @@ object pantalla {
     method estado()=estado
 
     method reproducirSonido(){
-        estado.sonido().volume(0.1)
-        estado.sonido().play()
+        if(!botonMutearMusica.muteada()){estado.sonido().volume(0.7)
+        estado.sonido().play()}
     }
     method detenerSonido(){
-        estado.sonido().stop()
+        if(!botonMutearMusica.muteada()){estado.sonido().stop()}
     }
     method nuevoEstado(estadoNuevo) {
         estado=estadoNuevo
@@ -172,7 +172,7 @@ object sonidoPartida{
         if(!botonMutearMusica.muteada()){
         self.detenerMusica()
         if (!musicaEsDelFinal){
-            
+            musicaActual.volume(0.5)
             musicaActual=musica2
             musicaEsDelFinal=true
         }

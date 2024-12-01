@@ -31,7 +31,6 @@ object casa {
     if (vida <= 0) {
       pantalla.nuevoEstado(derrota)
       administradorDeJuego.terminarJuego()
-      sonidoPartida.detenerMusica()
     }
   }
   

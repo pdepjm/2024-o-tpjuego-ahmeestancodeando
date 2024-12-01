@@ -10,7 +10,7 @@ program juego {
 	game.width(15)
 	game.cellSize(100)
 	game.start()
-
+	
 	game.addVisual(menuInicial)
 	menuInicial.iniciarMenu()
 	menuInicial.moverseEntreBotones()

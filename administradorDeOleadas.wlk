@@ -118,9 +118,6 @@ class Nivel{
     method oleadaActual()= oleadas.get(indiceOleada)
     method noTerminoNivel()= indiceOleada < oleadas.size()-1
     method siguienteOleada(){indiceOleada +=1 
-   
-    
-    
     self.reset()}
     method resetearOleadas(){
         indiceOleada=0
