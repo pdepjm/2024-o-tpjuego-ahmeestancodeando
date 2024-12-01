@@ -426,15 +426,15 @@ var imagen="botonMuteo.png"
     }
     method ponerMarcoDeSeleccion(){
         if(muteada){
-        imagen="botonMuteoSeleccionado.png"
+        imagen="botonDesmuteoSeleccionado.png"
         }
-        else imagen="botonDesmuteoSeleccionado.png"
+        else imagen="botonMuteoSeleccionado.png"
     }
     method quitarMarcoDeSeleccion(){
         if(muteada){
-        imagen="botonMuteo.png"
+        imagen="botonDesmuteo.png"
         }
-        else imagen="botonDesmuteo.png"
+        else imagen="botonMuteo.png"
         
     }
   
