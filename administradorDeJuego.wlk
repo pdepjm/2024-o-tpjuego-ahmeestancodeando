@@ -157,14 +157,41 @@ object fondo{
 
 object sonidoPartida{
     var property sonido = "pvz8bit.mp3"
-    const musica = game.sound(sonido)
+    var sonidoFinal="TEARS.mp3"
+    var musicaActual=musica1
+    const musica1 = game.sound(sonido)
+    const musica2 = game.sound(sonidoFinal)
+    var musicaEsDelFinal=false
+    method ponerMusicaNormal(){
+         if(!botonMutearMusica.muteada()){
+        self.detenerMusica()
+        musicaActual=musica1
+        musicaEsDelFinal=false 
+        self.iniciarMusica()
+        }
+    }
+    method switchearMusica(){
+        if(!botonMutearMusica.muteada()){
+        self.detenerMusica()
+        if (!musicaEsDelFinal){
+            
+            musicaActual=musica2
+            musicaEsDelFinal=true
+        }
+        else {
+            musicaActual=musica1
+            musicaEsDelFinal=false
+        }
+        self.iniciarMusica()
+        }
+        }
     method iniciarMusica() {
-        musica.shouldLoop(true)
-        game.schedule(1500, { musica.play() })
-        musica.volume(1)
+        musicaActual.shouldLoop(true)
+        game.schedule(1500, { musicaActual.play() })
+        musicaActual.volume(1)
     }
     method detenerMusica(){
-        musica.stop()
+        musicaActual.stop()
     }
 }
 object configuracion {
@@ -184,7 +211,7 @@ object configuracion {
 
 
     var property sonido = "pvz8bit.mp3"
-    const musica = game.sound(self.sonido()) // El reproductor de música es constante; solo cambia el archivo de sonido
+    var musica = game.sound(self.sonido()) // El reproductor de música es constante; solo cambia el archivo de sonido
     method iniciarMusica() {sonidoPartida.iniciarMusica()} 
     // Método para detener la música de fondo
     method detenerMusica() {
@@ -205,7 +232,8 @@ object configuracion {
             self.crearTicks()
             puntaje.reset()
             administradorDeOleadas.oleadaInicial().start()
-            self.agregarVisuals() 
+            self.agregarVisuals()
+            sonidoPartida.ponerMusicaNormal() 
             }})
 
         // Tecla "I" para detener el juego
@@ -376,7 +404,7 @@ object botonMutearMusica{
 var imagen="botonMuteo.png"
     method image()=imagen
     method position()= new MutablePosition(x=13,y=1)
-    var muteada=true
+    var property muteada=true
     method accion(){
         if (muteada){
             administradorDeJuego.usuarioEnMenu(false)

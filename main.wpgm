@@ -16,7 +16,7 @@ program juego {
 	menuInicial.moverseEntreBotones()
 	menuInicial.activarBoton()
 	configuracion.iniciarConfig()
-	keyboard.x().onPressDo({administradorDeJuego.mostrarMenuInicial()})
+	keyboard.x().onPressDo({administradorDeJuego.mostrarMenuInicial() sonidoPartida.ponerMusicaNormal()})
 
 }
 

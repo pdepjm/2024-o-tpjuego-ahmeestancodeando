@@ -123,7 +123,11 @@ class Nivel{
     var property indiceOleada=0
     method oleadaActual()= oleadas.get(indiceOleada)
     method noTerminoNivel()= indiceOleada < oleadas.size()-1
-    method siguienteOleada(){indiceOleada +=1 self.reset()}
+    method siguienteOleada(){indiceOleada +=1 
+   
+    
+    
+    self.reset()}
     method resetearOleadas(){
         indiceOleada=0
     }
@@ -176,6 +180,10 @@ object nivelFinal inherits Nivel(oleadas=[[slimeBasico,slimeBasico,slimeGuerrero
                                           [slimeBasico, slimeDorado],[slimeBlessed,slimeNinja,slimeBomba]],tiempoSpawn=1000, cantidadEnemigos=10,nombre="Final"){
 override method siguienteOleada(){
     indiceOleada +=1
+    
+    if(indiceOleada == oleadas.size()-2){
+    sonidoPartida.switchearMusica()
+    }
     if (indiceOleada == oleadas.size()-1){
         fondo.cambiarFondo("fondo3.jpg")
         cantidadEnemigos += 5
