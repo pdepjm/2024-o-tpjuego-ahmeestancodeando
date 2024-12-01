@@ -44,8 +44,6 @@ object administradorDeJuego {
     puntaje.reset()
     administradorDeOleadas.reset()
     configuracion.quitarVisuals()
-    //pantalla.reproducirSonido()
-   // configuracion.iniciarMusica() // Iniciar música (opcional)
   }
 
     method pausar(){
@@ -72,7 +70,7 @@ object administradorDeJuego {
         catch e "no hay ticks"
         game.schedule(1000, {usuarioEnMenu=true})
         menuInicial.quitarBotones()
-        menuInicial.imagen("MenuInicial2.png")
+        menuInicial.imagen("MenuInicial.png")
         menuInicial.botones(menuInicial.botonesIniciales())
         try game.addVisual(menuInicial) catch e "ya se esta mostrando el menu"
         menuInicial.iniciarMenu()
@@ -84,18 +82,18 @@ object administradorDeJuego {
 // =======================================
 object derrota {
     method position() = new MutablePosition(x = 0, y = 0)
-    method imagen() = "fin3.jpg"
+    method imagen() = "fin.jpg"
     method sonido() = game.sound("m.deathScreen.mp3")
     
 }
 object victoria {
     method position() = new MutablePosition(x = 0, y = 0)
-    method imagen() = "Victoria3.png"
+    method imagen() = "victoria.png"
     method sonido() = game.sound("m.deathScreen.mp3")
 }
 object portada {
     method position() = new MutablePosition(x = 0, y = 0)
-    method imagen() = "portada3.png"
+    method imagen() = "portada.png"
     method sonido() = game.sound("m.inicio.mp3")
 }
 object finDeNivel {
@@ -271,7 +269,6 @@ object configuracion {
 
     // Método para programar eventos de actualización periódicos (ticks)
     method crearTicks() {
-        //game.schedule(4000, { administradorDeOleadas.iniciarOleada() }) // Inicia la primera oleada tras 4 segundos
        tickParaAumentarDinero.start()
         tickParaCambiarFrames.start()
         tickParaDisparar.start()
@@ -301,7 +298,7 @@ object configuracion {
 
 
 object menuInicial{
-    var property imagen="MenuInicial2.png"
+    var property imagen="MenuInicial.png"
     method position()=new MutablePosition(x=0,y=0)
     method image() = imagen
     var botonSeleccionado = 0
@@ -352,7 +349,7 @@ object botonDeInicio{
     method accion(){
     configuracion.agregarVisuals()
     configuracion.crearTicks()
-    administradorDeOleadas.modoNiveles(false)
+    administradorDeOleadas.modoInfinito(false)
     administradorDeOleadas.actualizarOleada()
 	administradorDeOleadas.iniciarOleada()
     
@@ -457,7 +454,7 @@ class BotonDeNivel{
     configuracion.agregarVisuals()
 	configuracion.crearTicks()
     administradorDeOleadas.numNivel(numNivel)
-    administradorDeOleadas.modoNiveles(true)
+    administradorDeOleadas.modoInfinito(true)
     administradorDeOleadas.actualizarOleada()
     administradorDeOleadas.iniciarOleada()
     

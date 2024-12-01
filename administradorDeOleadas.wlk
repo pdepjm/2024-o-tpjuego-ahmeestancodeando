@@ -11,22 +11,26 @@ import puntaje.puntaje
 object administradorDeOleadas {
     var nivelActual = nivelInfinito
     var property numeroOleada = 1
+    var property modoInfinito = false
+    
     const property oleadaInicial = game.tick(5000, {self.frenarTickInicial() self.iniciarOleada()},false)
+   
     method frenarTickInicial()=oleadaInicial.stop()
-    var property modoNiveles = false
+
 
     //cosas para funcionamiento con niveles
-    const niveles = botonNiveles.niveles()
     var property numNivel = 1
+    const niveles = botonNiveles.niveles()
+
     method nivel() = niveles.get(numNivel-1).nivel()
     method actualizarOleada(){
-        if(modoNiveles) nivelActual = self.nivel()
+        if(modoInfinito) nivelActual = self.nivel()
         else nivelActual = nivelInfinito
         }
 
     // Métodos de visualización y sonido
     method position() = new MutablePosition(x = 9, y = 5)
-    method text() = "Oleada: " +  numeroOleada.toString() +"     Nivel: " + nivelActual.nombre().toString()  + "     " + "Slimes Restantes: " + nivelActual.enemigosRestantes().toString()
+    method text() = "Oleada: " +  numeroOleada.toString() + "     Nivel: " + nivelActual.nombre().toString()  + "     " + "Slimes Restantes: " + nivelActual.enemigosRestantes().toString()
     method textColor() = "#FA0770"
     method enemigosVivos() = nivelActual.enemigosVivos()
     
@@ -37,17 +41,18 @@ object administradorDeOleadas {
                     if (nivelActual.ejecutando()) {
                         if(!nivelActual.seGeneraronSuficientes())administradorDeEnemigos.generarEnemigo(nivelActual.enemigos().anyOne())
                     } else if(nivelActual.finalizo()){
-                        self.siguienteOleadaNivel()
+                        self.siguienteOleada()
                         tickParaGenerarEnemigos.stop()
                     }
                 } }
+
     // Inicia la oleada y gestiona enemigos
     method iniciarOleada() {
         nivelActual.iniciarOleada()
         tickParaGenerarEnemigos.start()
     }
 
-    method siguienteOleadaNivel(){
+    method siguienteOleada(){
         if(nivelActual.noTerminoNivel()){
             nivelActual.siguienteOleada()
             numeroOleada += 1
@@ -82,8 +87,7 @@ object administradorDeOleadas {
     method sumarEnemigo() { nivelActual.seGeneroEnemigo() }
 
     // Selecciona un tipo de slime aleatorio en función de la oleada
-    //method agregarTipo(numero) { return posiblesTipos.get(0.randomUpTo(numero + 4).round())}
-
+    
     // Resetea el administrador de oleadas
     method reset() {
         self.frenarTickInicial()
@@ -94,15 +98,9 @@ object administradorDeOleadas {
         niveles.forEach({botonNivel=>botonNivel.nivel().resetearOleadas()})
         numeroOleada = 1
         self.actualizarOleada()
-        //game.schedule(4000, { self.iniciarOleada() })
     }
     method recibeDanioMago(danio){}
     method frenarEnemigo()= true
-
-    method reiniciarVisual(){
-        game.removeVisual(self)
-        game.addVisual(self)
-    }
 }
 
 
@@ -111,16 +109,12 @@ class Nivel{
     var property cantidadEnemigos // var para modificar en nivel Infinito
     var property enemigosRestantes = cantidadEnemigos 
     var property enemigosGenerados = 0
-    const property tiempoSpawn
-    const nombre
-    /*method numeroOleada(){
-        if (indiceOleada+1<oleadas.size()) return (indiceOleada + 1).toString()
-        else return "oleada final"
-    } 
-    */
-    method nombre()=nombre
-    method enemigos()=oleadas.get(indiceOleada)
     var property indiceOleada=0
+    const property tiempoSpawn
+    const property nombre
+
+    method enemigos()=oleadas.get(indiceOleada)
+    
     method oleadaActual()= oleadas.get(indiceOleada)
     method noTerminoNivel()= indiceOleada < oleadas.size()-1
     method siguienteOleada(){indiceOleada +=1 
@@ -134,6 +128,7 @@ class Nivel{
     
     method inicioOleada() = game.sound("m.iOleada.mp3")
     method finOleada() = game.sound("m.fOleada.mp3")
+
     // Verifica si la oleada final está en ejecución
     method ejecutando() = cantidadEnemigos >= enemigosGenerados && enemigosRestantes > 0
 
@@ -147,19 +142,17 @@ class Nivel{
     method terminarOleada() {
         self.finOleada().volume(0.1)
         self.finOleada().play()
-
     }
 
         method iniciarOleada(){
         self.inicioOleada().volume(0)
-        //self.inicioOleada().play()
         enemigosRestantes = cantidadEnemigos
     }
-
 
     method cargarSlimesRestantes () {enemigosRestantes = cantidadEnemigos }
     // Verifica si la oleada final ha finalizado
     method finalizo() = enemigosRestantes <= 0 || enemigosGenerados >= cantidadEnemigos
+    
     method seGeneraronSuficientes() = cantidadEnemigos == self.enemigosVivos() || self.enemigosVivos() == enemigosRestantes
     // Resetea la oleada final
     method reset() {
@@ -245,15 +238,15 @@ object nivelInfinito inherits Nivel(oleadas = [slimeBasico],tiempoSpawn=4000,can
     }
 
     method cambiarTipoOleada(nuevoTipo){ posiblesEnemigos = nuevoTipo }
-    //override method oleada() = (indiceOleada+1).toString()
+
     override method siguienteOleada(){
-        if (administradorDeOleadas.numeroOleada() == 2) self.cambiarTipoOleada(enemigosMolestos) {cantidadAgregarALaLista += 1}
-        if (administradorDeOleadas.numeroOleada() == 3){
+        if (administradorDeOleadas.numeroOleada() == 3) self.cambiarTipoOleada(enemigosMolestos) {cantidadAgregarALaLista += 1}
+        if (administradorDeOleadas.numeroOleada() == 9){
             self.cambiarTipoOleada(enemigosJodidos)
             cantidadAgregarALaLista += 1
             fondo.cambiarFondo("fondo2.jpg")
             }
-        if (administradorDeOleadas.numeroOleada() == 4){
+        if (administradorDeOleadas.numeroOleada() == 19){
             self.cambiarTipoOleada(enemigosAyuda)
             cantidadAgregarALaLista += 1
             fondo.cambiarFondo("fondo3.jpg")
@@ -275,5 +268,3 @@ object nivelInfinito inherits Nivel(oleadas = [slimeBasico],tiempoSpawn=4000,can
     }
 
 }
-//algo asi deberia ser nive Infinito
-// nivel = new Nivel(enemigos=[[basico, basico, gerrero], [guerrero, ladron]])
