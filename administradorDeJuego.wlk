@@ -400,7 +400,7 @@ object botonNiveles{
 }
 
 object botonMutearMusica{
-var imagen="botonMuteo.png"
+var imagen="botonDesmuteo.png"
     method image()=imagen
     method position()= new MutablePosition(x=13,y=1)
     var property muteada=true
@@ -409,7 +409,7 @@ var imagen="botonMuteo.png"
             administradorDeJuego.usuarioEnMenu(false)
             game.schedule(1500, {administradorDeJuego.usuarioEnMenu(true)})
             configuracion.iniciarMusica()
-            imagen="botonDesmuteoSeleccionado.png"
+            imagen="botonMuteoSeleccionado.png"
             muteada=false
         }
         else {
