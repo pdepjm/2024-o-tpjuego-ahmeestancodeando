@@ -35,8 +35,13 @@ object cursor {
     // Interacciones con enemigos
     method frenarEnemigo() = false
     method recibeDanioMago(_danio,enemigo) { return false }
-    method recibeDanioMago(_danio) { return false }
+    method recibeDanioEnemigo(_danio,proyectil){}
     method combinarProyectil(_tipo){return false}
     method matarSlime(){return false}
     method tipoProyectil()=false
+    method cambiarAccion(accionNueva){}
+    method tipo()=descartable
+}
+object descartable{
+    method esperar(){}
 }

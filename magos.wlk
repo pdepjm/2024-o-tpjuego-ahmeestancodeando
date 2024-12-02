@@ -26,7 +26,7 @@ class Mago {
 
   method disparar() {}
 
-  method recibeDanioEnemigo(_danio) { return false }
+  method recibeDanioEnemigo(_danio,proyectil) { return false }
 
   method combinarProyectil(_tipo){return false}
 
@@ -56,7 +56,11 @@ class Mago {
   }
 
   method matarSlime(){}
+  method cambiarAccion(accionNueva){}
+  method tipo()=descartable
 }
+
+
 
 class MagoQueDispara inherits Mago{
   const proyectilBase

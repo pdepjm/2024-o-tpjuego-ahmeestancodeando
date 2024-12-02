@@ -57,7 +57,7 @@ class Proyectil {
     }
 
     // Métodos para recibir daño
-    method recibeDanioEnemigo(_danio) {return false}
+    method recibeDanioEnemigo(_danio,proyectil){}
     method recibeDanioMago(_danio,enemigo) {tipoProyectil.recibeDanioMago(_danio, enemigo)}
 
     // Método para destruir el proyectil
@@ -78,8 +78,13 @@ class Proyectil {
         if(frame<2) {frame+=1}
     }
     method matarSlime(){}
-}
 
+    method cambiarAccion(accionNueva){}
+    method tipo()=descartable
+}
+object descartable{
+    method esperar(){}
+}
 
 // ===============================
 // Proyectil Normal: Implementación específica de un proyectil normal
@@ -97,14 +102,8 @@ object proyectilNormal {
     method condicionParaCombinarse(otroTipo) = otroTipo.puedeCombinarseConNormal()
     method colisionar() ={proyectil=>
         const posicionEnFrente = new MutablePosition(x = proyectil.position().x() + 1, y = proyectil.position().y())
-
         const objetosEnPosicion = game.getObjectsIn(proyectil.position()) + game.getObjectsIn(posicionEnFrente)
-
-        const hayColision =  objetosEnPosicion.any({objeto => try objeto.recibeDanioEnemigo(proyectil.danio()) catch e false})
-
-        if (hayColision) {
-            proyectil.destruirse()
-        }
+        objetosEnPosicion.forEach({objeto =>objeto.recibeDanioEnemigo(proyectil.danio(),proyectil)})
     }
     method recibeDanioMago(danio,enemigo) ={enemigo=>}
 }
@@ -155,12 +154,8 @@ object proyectilDeStop{
     method condicionParaCombinarse(otroTipo)=false
     method colisionar() ={proyectil=>
         const posicionEnFrente = new MutablePosition(x = proyectil.position().x() + 1, y = proyectil.position().y())
-
         const objetosEnPosicion = game.getObjectsIn(proyectil.position()) + game.getObjectsIn(posicionEnFrente)
-        const hayColision =  objetosEnPosicion.any({objeto => objeto.recibeDanioEnemigo(proyectil.danio()) && objeto.meFreno(false)})
-        if (hayColision) {
-            proyectil.destruirse()
-        }
+        objetosEnPosicion.forEach({objeto => objeto.recibeDanioEnemigo(proyectil.danio(),proyectil) objeto.cambiarAccion(objeto.tipo().esperar())})
     }
     method recibeDanioMago(_danio,enemigo)={
         enemigo=> enemigo.cambiarAccion(enemigo.tipo().esperar())

@@ -34,6 +34,7 @@ class Slime {
     }
     // Movimiento del Slime
     method movete() {imagen=tipo.imagenesNormales().get(0)
+        self.estaMuerto()
         frame=1
         accion.apply(self)}
     // Lógica para frenar el movimiento
@@ -48,10 +49,11 @@ class Slime {
     // Métodos para recibir daño
     method recibeDanioMago(_danio,enemigo){enemigo.cambiarAccion(enemigo.tipo().esperar()) return false}
 
-    method recibeDanioEnemigo(_danio) {
+    method recibeDanioEnemigo(_danio,proyectil) {
         imagen=tipo.imagenesRecibeDanio().get(frame)
         self.vida(self.vida() - _danio)
         tipo.accionAlRecibirDanio().apply(self)
+        proyectil.destruirse()
         return true
     }
 
@@ -89,7 +91,7 @@ class Tipo{
         const objetoEnCeldaSiguiente2 = game.getObjectsIn(posicionEnFrente)
         if(!objetoEnCeldaSiguiente2.any({objeto=>objeto.frenarEnemigo()})) slime.cambiarAccion(self.moverse())
     }
-    method moverse()={slime => slime.estaMuerto()
+    method moverse()={slime =>
         slime.position().goLeft(slime.tipo().desplazamiento())
         slime.meFreno()
         }
@@ -152,7 +154,7 @@ object slimeDorado inherits Tipo(danio=0, vida=175, imagen="s.slimeDorado_01.png
     override method desplazamiento() = 2
     /* override method meFreno()={slime=>slime.enMovimiento(true)} */
     override method moverse()={
-        slime => slime.estaMuerto()
+        slime =>
         slime.position().goLeft(slime.tipo().desplazamiento())
     }
     override method estaMuerto()={slime=>
