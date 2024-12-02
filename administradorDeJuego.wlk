@@ -21,9 +21,9 @@ class MyException inherits wollok.lang.Exception {}
 object administradorDeJuego {
     var property pausado = false
     var property usuarioEnMenu = true
-   
-  
-  
+
+
+
   // Método para finalizar el juego y resetear el estado
   method terminarJuego() {
     usuarioEnMenu = true
@@ -57,8 +57,8 @@ object administradorDeJuego {
             } else {
                 configuracion.crearTicks()
                 game.removeVisual(pantalla)
-                
-        
+
+
                 pausado = false
                 return pausado
             }
@@ -84,7 +84,7 @@ object derrota {
     method position() = new MutablePosition(x = 0, y = 0)
     method imagen() = "fin.jpg"
     method sonido() = game.sound("m.deathScreen.mp3")
-    
+
 }
 object victoria {
     method position() = new MutablePosition(x = 0, y = 0)
@@ -114,7 +114,7 @@ object pausa{
 object pantalla {
     method position() = new MutablePosition(x = 0, y = 0)
     method image() = estado.imagen()
-    
+
     var  property estado = portada
     var sonido = estado.sonido()
     method estado()=estado
@@ -128,10 +128,11 @@ object pantalla {
     }
     method nuevoEstado(estadoNuevo) {
         estado=estadoNuevo
-        
-        self.reproducirSonido()  
+
+        self.reproducirSonido()
     }
     method frenarEnemigo()= true
+    method recibeDanioMago(_danio,enemigo){}
 }
 
 object fondo{
@@ -147,6 +148,7 @@ object fondo{
         imagen = "fondo1.jpg"
     }
     method frenarEnemigo() = false
+    method recibeDanioMago(_danio,enemigo){}
 }
 
 // =======================================
@@ -164,7 +166,7 @@ object sonidoPartida{
          if(!botonMutearMusica.muteada()){
         self.detenerMusica()
         musicaActual=musica1
-        musicaEsDelFinal=false 
+        musicaEsDelFinal=false
         self.iniciarMusica()
         }
     }
@@ -210,14 +212,14 @@ object configuracion {
 
     var property sonido = "pvz8bit.mp3"
     var musica = game.sound(self.sonido()) // El reproductor de música es constante; solo cambia el archivo de sonido
-    method iniciarMusica() {sonidoPartida.iniciarMusica()} 
+    method iniciarMusica() {sonidoPartida.iniciarMusica()}
     // Método para detener la música de fondo
     method detenerMusica() {
         try sonidoPartida.detenerMusica() catch e return
     }
 
     method iniciarConfig(){
-        menu.accion() 
+        menu.accion()
         cursor.accion()
         // Tecla "P" para reiniciar el juego
         keyboard.p().onPressDo({
@@ -231,7 +233,7 @@ object configuracion {
             puntaje.reset()
             administradorDeOleadas.oleadaInicial().start()
             self.agregarVisuals()
-            sonidoPartida.ponerMusicaNormal() 
+            sonidoPartida.ponerMusicaNormal()
             }})
 
         // Tecla "I" para detener el juego
@@ -247,11 +249,11 @@ object configuracion {
         game.removeVisual(casa)
         game.removeVisual(administradorDeOleadas)
         game.removeVisual(fondo)
-       
+
         menu.finalizarTienda()
 
     }
-    method agregarVisuals() {  
+    method agregarVisuals() {
         game.addVisual(fondo)
 
         game.addVisual(menu)
@@ -265,7 +267,7 @@ object configuracion {
         game.addVisual(administradorDeOleadas)
 
         menu.iniciarTienda()
-    }   
+    }
 
     // Método para programar eventos de actualización periódicos (ticks)
     method crearTicks() {
@@ -276,7 +278,7 @@ object configuracion {
         tickParaMoverEnemigos.start()
         tickParaCambiarFramesEnemigos.start()
     }
-    
+
     method frenarTicks() {
             tickParaAumentarDinero.stop()
             tickParaCambiarFrames.stop()
@@ -308,7 +310,7 @@ object menuInicial{
         botonSeleccionado=0
         self.seleccionarBoton()
         botones.forEach({boton=>game.addVisual(boton)})
-        
+
     }
     method finalizarMenu(){
         self.quitarBotones()
@@ -324,10 +326,10 @@ object menuInicial{
                                             self.seleccionarBoton() }})
         keyboard.left().onPressDo({  if(administradorDeJuego.usuarioEnMenu()  && botonSeleccionado>0 &&!game.hasVisual(pantalla))
                                         {   self.deseleccionarBoton()
-                                            botonSeleccionado-=1 
-                                            self.seleccionarBoton()}})    
-                
-        
+                                            botonSeleccionado-=1
+                                            self.seleccionarBoton()}})
+
+
     }
 
     method seleccionarBoton(){
@@ -352,7 +354,7 @@ object botonDeInicio{
     administradorDeOleadas.modoInfinito(false)
     administradorDeOleadas.actualizarOleada()
 	administradorDeOleadas.iniciarOleada()
-    
+
     menuInicial.finalizarMenu()
     }
 
@@ -435,10 +437,10 @@ var imagen="botonMuteo.png"
         imagen="botonDesmuteo.png"
         }
         else imagen="botonMuteo.png"
-        
+
     }
-  
-  
+
+
 }
 
 class BotonDeNivel{
@@ -457,7 +459,7 @@ class BotonDeNivel{
     administradorDeOleadas.modoInfinito(true)
     administradorDeOleadas.actualizarOleada()
     administradorDeOleadas.iniciarOleada()
-    
+
     menuInicial.finalizarMenu()
     }
 

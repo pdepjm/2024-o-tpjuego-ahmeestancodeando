@@ -11,7 +11,7 @@ import wollok.game.*
 // ===============================
 object pala {
     const position = new MutablePosition(x=6, y=5)
-    
+
     method image() = "pala.png"
 
     method position() = position
@@ -19,7 +19,7 @@ object pala {
     method eliminarMago(magoSeleccionado){
         magoSeleccionado.eliminar()
     }
-    method recibeDanioMago(danio){}
+    method recibeDanioMago(danio,enemigo){}
     method frenarEnemigo()= true
 }
 // Me da ansiedad la pala
@@ -40,7 +40,7 @@ object pala {
 //⠀⠀⠀⠀⠈⠙⠛⠉⠀⠀⠀⠀⣨⣷⣤⠚⢉⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞⠫⣡⢣⣴⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣶⣾⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-// 
+//
 //     ^
-//     | 
+//     |
 // es shinji en una silla, no malpienses

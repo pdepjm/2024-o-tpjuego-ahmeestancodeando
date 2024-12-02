@@ -23,7 +23,7 @@ object puntaje {
 
 	// Método de reset
 	method reset() {
-		puntos = puntajeInicial 
+		puntos = puntajeInicial
 	}
-	method recibeDanioMago(danio){}
+	method recibeDanioMago(danio,enemigo){}
 }

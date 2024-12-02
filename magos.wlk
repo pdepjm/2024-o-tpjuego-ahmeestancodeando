@@ -27,11 +27,12 @@ class Mago {
   method disparar() {}
 
   method recibeDanioEnemigo(_danio) { return false }
-  
+
   method combinarProyectil(_tipo){return false}
-  
-  method recibeDanioMago(_danio) {
+
+  method recibeDanioMago(_danio,enemigo) {
     self.vida(self.vida() - _danio)
+    enemigo.cambiarAccion(enemigo.tipo().atacar())
     self.matar()
     return true
   }
@@ -68,7 +69,7 @@ class MagoQueDispara inherits Mago{
     tipoProyectil = proyectilBase
   }
   override method combinarProyectil(otroTipo){
-        if (tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()){ 
+        if (tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()){
             tipoProyectil = tipoProyectil.combinar()
             return true
             }
@@ -121,7 +122,7 @@ class MagoExplosivo inherits Mago(vida = 10, imagen = "magoExplosivo.png") {
 class MagoTienda{
   const position
   const costo
-  
+
   method position() = position
 
   method image() = ""
@@ -135,23 +136,23 @@ class MagoTienda{
      throw new DomainException(message="No hay suficiente dinero para comprar esta Mago")
     }
   }
-  
-  method magoQueGenera(posicionMago){return} 
 
-  method generarMago(posicionMago){ 
+  method magoQueGenera(posicionMago){return}
+
+  method generarMago(posicionMago){
     self.puedeGenerarMago()//Idem en todo mago
     puntaje.restarPuntos(costo)//Idem en todo mago
     const mago = self.magoQueGenera(posicionMago)
     return mago
     }
-  method recibeDanioMago(danio){}
+  method recibeDanioMago(danio,enemigo){}
   method frenarEnemigo()= true
   // method efectoDeInvocacion(){} //esto estaba porque antes los magos irlandeses interactuaban directamente con el contador de puntos
 }
 
 // Mago de Piedra en Tienda
 object magoPiedraTienda inherits MagoTienda(position = new MutablePosition(x = 0, y = 5), costo = 100) {
-  
+
   override method magoQueGenera(posicionMago){return new MagoPiedra(position = posicionMago)}
 
   override method image() = "magoPiedra.png"
@@ -167,7 +168,7 @@ object magoFuegoTienda inherits MagoTienda(position = new MutablePosition(x = 1,
 object magoIrlandesTienda inherits MagoTienda(position = new MutablePosition(x = 2, y = 5), costo = 75) {
 
 override method magoQueGenera(posicionMago){return new MagoIrlandes(position = posicionMago)}
-  
+
   override method image() = "magoHealer.png"
 }
 
@@ -175,7 +176,7 @@ override method magoQueGenera(posicionMago){return new MagoIrlandes(position = p
 object magoHieloTienda inherits MagoTienda(position = new MutablePosition(x = 3, y = 5), costo = 250) { //Nico: ver si 250 es una banda o no
 
   override method magoQueGenera(posicionMago){return new MagoHielo(position = posicionMago)}
-  
+
   override method image() = "magoHielo.png"
 }
 
@@ -189,6 +190,6 @@ override method magoQueGenera(posicionMago){return new MagoExplosivo(position = 
 object magoStopTienda inherits MagoTienda(position = new MutablePosition(x = 5, y = 5), costo = 300) { //Nico: ver si 250 es una banda o no
 
   override method magoQueGenera(posicionMago){return new MagoStop(position = posicionMago)}
-  
+
   override method image() = "magoStop.png"
 }

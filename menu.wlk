@@ -32,7 +32,7 @@ object menu {
         keyboard.enter().onPressDo({  if(!game.hasVisual(pantalla) && !administradorDeJuego.usuarioEnMenu()){self.seleccionarMenu()}})
         // cambiar aca para cambiar forma de generar enemigos
     }
-    
+
     // Movimiento del menú
     method moverseDerecha() = if (self.position().x() < 6) position.goRight(1)
     method moverseIzquierda() = if (self.position().x() > 0) position.goLeft(1)
@@ -48,8 +48,8 @@ object menu {
 
         if (!magoAGenerar.isEmpty() && objetoCelda.all({ objeto => objeto.sePuedeSuperponer() }) && !self.seleccionandoPala()) {
             self.generarMago(magoAGenerar.first(), posicionCelda)
-      
-        } 
+
+        }
         else if (self.seleccionandoPala()) {
             self.eliminarMago( objetoCelda.find({ objeto => not objeto.sePuedeSuperponer() }))
         }
@@ -66,7 +66,7 @@ object menu {
         self.pff().volume(0.2)
         self.pff().play()
     }
-
+    method recibeDanioMago(danio,enemigo){}
     // Tienda: Inicialización de los magos
     method iniciarTienda() {
         position= new MutablePosition(x = 0, y = 5)

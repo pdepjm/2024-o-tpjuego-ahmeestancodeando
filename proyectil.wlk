@@ -17,7 +17,7 @@ class Proyectil {
     const property danio = tipoProyectil.danio()
     var frame = 0
     var imagen = tipoProyectil.imagenes().get(0)
-   
+
     // Métodos públicos
     method position() = position
     method image() = imagen
@@ -30,7 +30,7 @@ class Proyectil {
         frame=1
         position.goRight(1)
         if (self.llegueAlFinal() || self.verificarEnemigosEnfrente()) { self.eliminar() }
-        
+
     }
     // Método que revisa si llego al final
     method llegueAlFinal() = position.x() >= 14
@@ -49,7 +49,7 @@ class Proyectil {
     }
 
     method combinarProyectil(otroTipo){
-        if (tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()){ 
+        if (tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()){
             tipoProyectil = tipoProyectil.combinar()
             return true
             }
@@ -58,7 +58,7 @@ class Proyectil {
 
     // Métodos para recibir daño
     method recibeDanioEnemigo(_danio) {return false}
-    method recibeDanioMago(_danio) { return false}
+    method recibeDanioMago(_danio,enemigo) { return false}
 
     // Método para destruir el proyectil
     method destruirse() {
@@ -72,7 +72,7 @@ class Proyectil {
     }
 
     method verificarEnemigosEnfrente() = !administradorDeEnemigos.enemigos().any({enemigo => enemigo.position().y() == self.position().y() && enemigo.position().x() >= self.position().x()-2})
-    
+
     method cambiarFrame() {
         imagen=tipoProyectil.imagenes().get(frame)
         if(frame<2) {frame+=1}
@@ -91,17 +91,17 @@ object proyectilNormal {
     method destruirse() = true
     method combinar() = proyectilPenetrante
     method puedeCombinarse() = true
-    
+
     method puedeCombinarseConNormal() = true
     method puedeCombinarseConPenetrante() = false
-    method condicionParaCombinarse(otroTipo) = otroTipo.puedeCombinarseConNormal() 
+    method condicionParaCombinarse(otroTipo) = otroTipo.puedeCombinarseConNormal()
     method colisionar() ={proyectil=>
         const posicionEnFrente = new MutablePosition(x = proyectil.position().x() + 1, y = proyectil.position().y())
 
         const objetosEnPosicion = game.getObjectsIn(proyectil.position()) + game.getObjectsIn(posicionEnFrente)
 
         const hayColision =  objetosEnPosicion.any({objeto => try objeto.recibeDanioEnemigo(proyectil.danio()) catch e false})
-       
+
         if (hayColision) {
             proyectil.destruirse()
         }
@@ -117,12 +117,12 @@ object proyectilPenetrante {
     const property imagenes = ["p.proyectilHielo-frame1.png", "p.proyectilHielo-frame2.png", "p.proyectilHielo-frame3.png"]
     method danio() = 45
     method destruirse() = false
-    
+
     method combinar() = superProyectil
     method puedeCombinarse() = true
     method puedeCombinarseConNormal() = false
     method puedeCombinarseConPenetrante() = true
-    method condicionParaCombinarse(otroTipo) = otroTipo.puedeCombinarseConPenetrante() 
+    method condicionParaCombinarse(otroTipo) = otroTipo.puedeCombinarseConPenetrante()
     method colisionar() = proyectilNormal.colisionar()
 }
 // ===============================

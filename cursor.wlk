@@ -34,7 +34,7 @@ object cursor {
 
     // Interacciones con enemigos
     method frenarEnemigo() = false
-    method recibeDanioEnemigo(_danio) { return false }
+    method recibeDanioMago(_danio,enemigo) { return false }
     method recibeDanioMago(_danio) { return false }
     method combinarProyectil(_tipo){return false}
     method matarSlime(){return false}
