@@ -116,7 +116,6 @@ object pantalla {
     method image() = estado.imagen()
 
     var  property estado = portada
-    var sonido = estado.sonido()
     method estado()=estado
 
     method reproducirSonido(){
@@ -156,8 +155,8 @@ object fondo{
 // =======================================
 
 object sonidoPartida{
-    var property sonido = "pvz8bit.mp3"
-    var sonidoFinal="TEARS.mp3"
+    const sonido = "pvz8bit.mp3"
+    const sonidoFinal="TEARS.mp3"
     var musicaActual=musica1
     const musica1 = game.sound(sonido)
     const musica2 = game.sound(sonidoFinal)
@@ -198,20 +197,18 @@ object configuracion {
     const tiemposProyectiles = 600
     const tiempoDisparo = 3000
     const tiempoDinero = 750
-    const tiempoMuerte = 1000
     const tiempoMoverEnemigo = 1000
 
     //ticks que usa el juego
     const tickParaMoverEnemigos = game.tick(tiempoMoverEnemigo,{administradorDeEnemigos.moverEnemigos()},false)
     const tickParaAumentarDinero = game.tick(tiempoDinero, { puntaje.sumarPuntos() },false)
     const tickParaDisparar= game.tick(tiempoDisparo,  { administradorDeMagos.disparar()},false)
-    const tickParaMoverYColisionarDisparos= game.tick(tiemposProyectiles,  { administradorDeProyectiles.moverProyectiles() administradorDeProyectiles.impactarProyectiles() },false)
+    const tickParaMoverYColisionarDisparos= game.tick(tiemposProyectiles,  { administradorDeProyectiles.moverProyectiles()
+                                                                             administradorDeProyectiles.impactarProyectiles() },false)
     const tickParaCambiarFrames= game.tick((tiemposProyectiles/3)-5, {administradorDeProyectiles.cambiarFrame()},false)
     const tickParaCambiarFramesEnemigos= game.tick((tiempoMoverEnemigo/3)-5, {administradorDeEnemigos.cambiarFrame()},false)
 
-
-    var property sonido = "pvz8bit.mp3"
-    var musica = game.sound(self.sonido()) // El reproductor de música es constante; solo cambia el archivo de sonido
+    // El reproductor de música es constante; solo cambia el archivo de sonido
     method iniciarMusica() {sonidoPartida.iniciarMusica()}
     // Método para detener la música de fondo
     method detenerMusica() {
