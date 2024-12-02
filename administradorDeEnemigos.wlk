@@ -1,3 +1,4 @@
+import IdeaparaColisiones.*
 import game.*
 import slime.*
 import administradorDeOleadas.*
@@ -25,7 +26,7 @@ object administradorDeEnemigos {
     // Genera un nuevo enemigo del tipo especificado, si hay espacio en la columna
     method generarEnemigo(tipo) {
         if (/* not self.columnaOcupada() && */ self.pocosEnemigosEnPantalla()) {
-            const posicionTemporal = new MutablePosition(x = 14, y = 0.randomUpTo(5).truncate(0))
+            const posicionTemporal = new MutablePosition(x = 14, y = 0.randomUpTo(4).truncate(0))
             var nombreParaEnemigo = self.nombre()
 
             /* Solo genera el enemigo si la posición temporal está vacía */
@@ -36,7 +37,9 @@ object administradorDeEnemigos {
 
                 self.sumarEnemigo() /* Incrementa el contador de enemigos en el administrador */
                 administradorDeOleadas.sumarEnemigo() /* Notifica al administrador de oleadas */
-
+                //* añadir al mago a la matriz de posiciones
+                    adminVisuales.asignarposicion(nombreParaEnemigo)
+                //*
                 return game.addVisual(nombreParaEnemigo) /* Muestra al enemigo en el juego */
             } else {
                 return /* No genera el enemigo si la posición está ocupada */
@@ -47,6 +50,7 @@ object administradorDeEnemigos {
     // Elimina un enemigo específico de la colección de enemigos activos
     method eliminarEnemigo(enemigo) {
         administradorDeOleadas.reducirEnemigo()
+       
         enemigos.remove(enemigo)
     }
 

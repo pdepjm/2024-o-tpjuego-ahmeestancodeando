@@ -161,7 +161,7 @@ class Nivel{
 
 object nivelFinal inherits Nivel(oleadas=[[slimeBasico,slimeBasico,slimeGuerrero,slimeDorado],
                                           [slimeBasico,slimeGuerrero, slimeBomba,slimeGuerrero],
-                                          [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja],
+                                          [/* slimeAgil, */slimeGuerrero,slimeLadron,slimeNinja],
                                           [slimeBomba, slimeBomba, slimeBomba, slimeBomba, slimeBomba, slimeDorado],
                                           [slimeBomba, slimeBomba, slimeNinja, slimeLadron],
                                           [slimeBomba, slimeBomba, slimeNinja, slimeNinja, slimeNinja, slimeNinja, slimeNinja, slimeLadron],

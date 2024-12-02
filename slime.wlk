@@ -1,3 +1,4 @@
+import IdeaparaColisiones.*
 // ===============================
 // Revisado
 // ===============================
@@ -34,13 +35,13 @@ class Slime {
     }
     // Movimiento del Slime
     method movete() {imagen=tipo.imagenesNormales().get(0)
-        self.estaMuerto()
         frame=1
+        self.estaMuerto()
         accion.apply(self)}
     // Lógica para frenar el movimiento
     method meFreno(){
         const posicionEnFrente = new MutablePosition(x = self.position().x() - 1, y = self.position().y())
-        const objetoEnCeldaEnFrente = game.getObjectsIn(posicionEnFrente)
+        const objetoEnCeldaEnFrente = adminVisuales.objetosEnPosicion(self.position().x()-1,self.position().y())//game.getObjectsIn(posicionEnFrente)
         objetoEnCeldaEnFrente.forEach({objeto => objeto.recibeDanioMago(danio,self)})
     }
 
@@ -92,21 +93,25 @@ class Tipo{
         if(!objetoEnCeldaSiguiente2.any({objeto=>objeto.frenarEnemigo()})) slime.cambiarAccion(self.moverse())
     }
     method moverse()={slime =>
+        adminVisuales.sacarObjeto(slime)//*eliminar posicion en matriz de posicion
         slime.position().goLeft(slime.tipo().desplazamiento())
+        adminVisuales.asignarposicion(slime)//*asignar posicion en matriz de posicion
         slime.meFreno()
         }
     method atacar()={slime=>
         const posicionEnFrente = new MutablePosition(x = slime.position().x()-1, y = slime.position().y())
-        const objetoEnCeldaSiguiente = game.getObjectsIn(posicionEnFrente)
+        const objetoEnCeldaSiguiente = adminVisuales.objetosEnPosicion(slime.position().x()-1,slime.position().y())//game.getObjectsIn(posicionEnFrente)
         objetoEnCeldaSiguiente.forEach({objeto=>objeto.recibeDanioMago(danio,slime)})
-        const objetoEnCeldaSiguiente2 = game.getObjectsIn(posicionEnFrente)
+        const objetoEnCeldaSiguiente2 = adminVisuales.objetosEnPosicion(slime.position().x()-1,slime.position().y())//game.getObjectsIn(posicionEnFrente)
         if(!objetoEnCeldaSiguiente2.any({objeto=>objeto.frenarEnemigo()})) slime.cambiarAccion(self.moverse())
     }
     method estaMuerto()= {slime=>
         if (slime.llegoACasa()||slime.position().y()>4||slime.position().y()<0) {
+            adminVisuales.eliminarSlime(slime)
             casa.recibirDanio(slime.position().y())
             slime.eliminar()
         } else if (slime.sinVida()) {
+            adminVisuales.sacarObjeto(slime)
             slime.eliminar()
         }
         return slime.sinVida() || slime.llegoACasa()
@@ -159,10 +164,11 @@ object slimeDorado inherits Tipo(danio=0, vida=175, imagen="s.slimeDorado_01.png
     }
     override method estaMuerto()={slime=>
          if (slime.sinVida()) {
+            adminVisuales.sacarObjeto(slime)
             puntaje.puntos(puntaje.puntos()+1000)
             slime.eliminar()
         }
-        if(slime.llegoACasa()){slime.eliminar()}
+        if(slime.llegoACasa()){adminVisuales.eliminarSlime(slime) slime.eliminar()}
         return slime.sinVida() || slime.llegoACasa()
     }
 }
@@ -174,6 +180,7 @@ object slimeBomba inherits Tipo(danio=250, vida=180, imagen="s.slimeMedioOriente
         const posicionAbajo = new MutablePosition(x = slime.position().x()-1, y = slime.position().y()-1)
         const objetosAmatar= game.getObjectsIn(posicionArriba)+game.getObjectsIn(posicionAbajo)+objetoEnCeldaSiguiente
         objetosAmatar.forEach({ objeto => objeto.recibeDanioMago(danio,slime) })
+        adminVisuales.sacarObjeto(slime)
         slime.eliminar()
         }
 
