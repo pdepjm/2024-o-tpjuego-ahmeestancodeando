@@ -58,7 +58,7 @@ class Proyectil {
 
     // Métodos para recibir daño
     method recibeDanioEnemigo(_danio) {return false}
-    method recibeDanioMago(_danio,enemigo) { return false}
+    method recibeDanioMago(_danio,enemigo) {tipoProyectil.recibeDanioMago(_danio, enemigo)}
 
     // Método para destruir el proyectil
     method destruirse() {
@@ -106,6 +106,7 @@ object proyectilNormal {
             proyectil.destruirse()
         }
     }
+    method recibeDanioMago(danio,enemigo) ={enemigo=>}
 }
 
 
@@ -124,6 +125,7 @@ object proyectilPenetrante {
     method puedeCombinarseConPenetrante() = true
     method condicionParaCombinarse(otroTipo) = otroTipo.puedeCombinarseConPenetrante()
     method colisionar() = proyectilNormal.colisionar()
+    method recibeDanioMago(_danio,enemigo)=proyectilNormal.recibeDanioMago(_danio, enemigo)
 }
 // ===============================
 // Super Proyectil: Implementación específica de un super proyectil
@@ -139,6 +141,7 @@ object superProyectil {
     method puedeCombinarseConPenetrante() = false
     method condicionParaCombinarse(otroTipo)=false
     method colisionar() = proyectilNormal.colisionar()
+    method recibeDanioMago(_danio,enemigo)=proyectilNormal.recibeDanioMago(_danio, enemigo)
 }
 
 object proyectilDeStop{
@@ -158,5 +161,8 @@ object proyectilDeStop{
         if (hayColision) {
             proyectil.destruirse()
         }
+    }
+    method recibeDanioMago(_danio,enemigo)={
+        enemigo=> enemigo.cambiarAccion(enemigo.tipo().esperar())
     }
 }
