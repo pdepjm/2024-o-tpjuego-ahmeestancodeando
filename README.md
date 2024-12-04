@@ -1,8 +1,9 @@
 #  Magos Vs. Slimes
-UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
+### UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 
 ![portada](Cosas_juego/portada/title1.jpg)
-Link al Trailer: https://youtu.be/0D9ru_qJyPM?si=un1xRSzEtPHEvkAe
+### Trailer
+[![Trailer](https://img.youtube.com/vi/un1xRSzEtPHEvkAe/0.jpg)]( https://youtu.be/0D9ru_qJyPM?si=un1xRSzEtPHEvkAe)
 
 Magos Vs Slimes es un videojuego de estrategia y defensa. El juego consiste en defender su la Base (Utopía de las Tierras de Nortfernand) de oleadas de diversos Slimes utilizando una variedad de Magos con poderes y funcionalidades únicas. Estos Magos deberán evitar que los Slimes lleguen a la base, en caso de que tres o más lo logren el juego finalizará y la humanidad perecerá. 
 
