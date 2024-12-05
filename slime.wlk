@@ -199,8 +199,7 @@ object slimeAgil inherits Tipo(danio=50, vida=200, imagen="s.slimeAgil_01.png",i
     override method accionAlRecibirDanio() = {slime=>self.cambiarDeCarril().apply(slime)}
     method cambiarDeCarril()={slime=>
         const newPosicion= new MutablePosition(x = slime.position().x(), y = (slime.position().y()+((-1).randomUpTo(2))).max(0).min(4)) //
-        const celdavacia=game.getObjectsIn(newPosicion).isEmpty()
-        if(celdavacia){
+        if(game.getObjectsIn(newPosicion).isEmpty()){
             administradorDeEnemigos.decrementarLinea(slime.position().y())  
             slime.position(newPosicion)
             administradorDeEnemigos.aumentarLinea(newPosicion.y())  
