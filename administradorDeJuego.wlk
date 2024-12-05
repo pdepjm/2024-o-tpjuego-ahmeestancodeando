@@ -264,6 +264,8 @@ object configuracion {
         game.addVisual(administradorDeOleadas)
 
         menu.iniciarTienda()
+
+
     }
 
     // Método para programar eventos de actualización periódicos (ticks)

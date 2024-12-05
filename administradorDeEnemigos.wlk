@@ -73,10 +73,15 @@ object administradorDeEnemigos {
     method cambiarFrame(){
         enemigos.forEach({ enemigo => enemigo.cambiarFrame()})
     }
+
+
+    method hayEnemigoFila(numeroFila) = cantDeEnemigosPorLinea.get(numeroFila).cantEnemigos() > 0
+
 }
 
 class Linea{
     var property cantEnemigos =0
+
     method aumentarCant() {
         cantEnemigos+=1
     }

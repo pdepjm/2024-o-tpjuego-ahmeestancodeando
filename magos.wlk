@@ -19,7 +19,7 @@ class Mago {
   // Métodos
   method frenarEnemigo() = true
 
-  method enemigoEnSuFila() = administradorDeEnemigos.cantDeEnemigosPorLinea().get(position.y()).cantEnemigos()>0
+  method enemigoEnSuFila() = administradorDeEnemigos.hayEnemigoFila(position.y())
 
   method position() = position
   method image() = imagen
