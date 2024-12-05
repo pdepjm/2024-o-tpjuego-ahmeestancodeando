@@ -16,26 +16,26 @@ object administradorDeEnemigos {
     const property cantDeEnemigosPorLinea= [linea1,linea2,linea3,linea4,linea5]
     // Métodos de Consulta
     method enemigos() = enemigos
-//    method columnaOcupada() = enemigos.filter({ enemigo => enemigo.position().x() == 14 }).size() == 5 // Verifica si la columna de posición x=14 está ocupada por 5 enemigos
     method nombre() = nombreEnemigo
-    method pocosEnemigosEnPantalla() = administradorDeOleadas.enemigosVivos() < maxEnemigosEnPantalla
+    method pocosEnemigosEnPantalla() = cantDeEnemigosPorLinea.sum({linea => linea.cantEnemigos()}) < maxEnemigosEnPantalla
 
     // Genera un nuevo nombre para los enemigos
     method sumarEnemigo() { nombreEnemigo += 1 }
 
     // Genera un nuevo enemigo del tipo especificado, si hay espacio en la columna
     method generarEnemigo(tipo) {
-        if (/* not self.columnaOcupada() && */ self.pocosEnemigosEnPantalla()) {
-            const y = 0.randomUpTo(5).truncate(0)
+        if (self.pocosEnemigosEnPantalla()) {
+
+            const y = 0.randomUpTo(4.9999).truncate(0)
+
             const posicionTemporal = new MutablePosition(x = 14, y=y)
+
             var nombreParaEnemigo = self.nombre()
 
             /* Solo genera el enemigo si la posición temporal está vacía */
             if (game.getObjectsIn(posicionTemporal).isEmpty()) {
-
                 nombreParaEnemigo = new Slime(position = posicionTemporal, tipo = tipo)
                 enemigos.add(nombreParaEnemigo) /* Añade el nuevo enemigo a la colección de enemigos activos */
-                y.toString().printString()
                 self.sumarEnemigo() /* Incrementa el contador de enemigos en el administrador */
                 administradorDeOleadas.sumarEnemigo() /* Notifica al administrador de oleadas */
                 self.aumentarLinea(y)  

@@ -197,7 +197,7 @@ object configuracion {
     const tiemposProyectiles = 600
     const tiempoDisparo = 3000
     const tiempoDinero = 750
-    const tiempoMoverEnemigo = 1000
+    const tiempoMoverEnemigo = 960
 
     //ticks que usa el juego
     const tickParaMoverEnemigos = game.tick(tiempoMoverEnemigo,{administradorDeEnemigos.moverEnemigos()},false)
@@ -205,8 +205,8 @@ object configuracion {
     const tickParaDisparar= game.tick(tiempoDisparo,  { administradorDeMagos.disparar()},false)
     const tickParaMoverYColisionarDisparos= game.tick(tiemposProyectiles,  { administradorDeProyectiles.moverProyectiles()
                                                                              administradorDeProyectiles.impactarProyectiles() },false)
-    const tickParaCambiarFrames= game.tick((tiemposProyectiles/3)-5, {administradorDeProyectiles.cambiarFrame()},false)
-    const tickParaCambiarFramesEnemigos= game.tick((tiempoMoverEnemigo/3)-5, {administradorDeEnemigos.cambiarFrame()},false)
+    const tickParaCambiarFrames= game.tick((tiemposProyectiles/3), {administradorDeProyectiles.cambiarFrame()},false)
+    const tickParaCambiarFramesEnemigos= game.tick((tiempoMoverEnemigo/3), {administradorDeEnemigos.cambiarFrame()},false)
 
     // El reproductor de música es constante; solo cambia el archivo de sonido
     method iniciarMusica() {sonidoPartida.iniciarMusica()}
