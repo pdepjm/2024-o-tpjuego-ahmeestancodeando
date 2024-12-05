@@ -19,7 +19,7 @@ class Mago {
   // Métodos
   method frenarEnemigo() = true
 
-  method enemigoEnSuFila() = administradorDeEnemigos.enemigos().any({enemigo => enemigo.position().y() == self.position().y()})
+  method enemigoEnSuFila() = administradorDeEnemigos.cantDeEnemigosPorLinea().get(position.y()).cantEnemigos()>0
 
   method position() = position
   method image() = imagen
@@ -134,7 +134,7 @@ class MagoTienda{
   method text() = costo.toString() + "$"
 
   method textColor() = "ffec00ff"
-  
+
   method puedeGenerarMago(){
     if(puntaje.puntos() < costo){
      throw new DomainException(message="No hay suficiente dinero para comprar esta Mago")

@@ -13,6 +13,7 @@ object administradorDeEnemigos {
     var nombreEnemigo = 10000
     var enemigos = #{}
 
+    const property cantDeEnemigosPorLinea= [linea1,linea2,linea3,linea4,linea5]
     // Métodos de Consulta
     method enemigos() = enemigos
 //    method columnaOcupada() = enemigos.filter({ enemigo => enemigo.position().x() == 14 }).size() == 5 // Verifica si la columna de posición x=14 está ocupada por 5 enemigos
@@ -25,7 +26,8 @@ object administradorDeEnemigos {
     // Genera un nuevo enemigo del tipo especificado, si hay espacio en la columna
     method generarEnemigo(tipo) {
         if (/* not self.columnaOcupada() && */ self.pocosEnemigosEnPantalla()) {
-            const posicionTemporal = new MutablePosition(x = 14, y = 0.randomUpTo(5).truncate(0))
+            const y = 0.randomUpTo(5).truncate(0)
+            const posicionTemporal = new MutablePosition(x = 14, y=y)
             var nombreParaEnemigo = self.nombre()
 
             /* Solo genera el enemigo si la posición temporal está vacía */
@@ -36,7 +38,7 @@ object administradorDeEnemigos {
 
                 self.sumarEnemigo() /* Incrementa el contador de enemigos en el administrador */
                 administradorDeOleadas.sumarEnemigo() /* Notifica al administrador de oleadas */
-
+                cantDeEnemigosPorLinea.get(y).aumentarCant()
                 return game.addVisual(nombreParaEnemigo) /* Muestra al enemigo en el juego */
             } else {
                 return /* No genera el enemigo si la posición está ocupada */
@@ -46,6 +48,8 @@ object administradorDeEnemigos {
 
     // Elimina un enemigo específico de la colección de enemigos activos
     method eliminarEnemigo(enemigo) {
+        const y= enemigo.position().y()
+        cantDeEnemigosPorLinea.get(y).restarCantidad()
         administradorDeOleadas.reducirEnemigo()
         enemigos.remove(enemigo)
     }
@@ -70,3 +74,19 @@ object administradorDeEnemigos {
         enemigos.forEach({ enemigo => enemigo.cambiarFrame()})
     }
 }
+
+class Linea{
+    var property cantEnemigos =0
+    method aumentarCant() {
+        cantEnemigos+=1
+    }
+    method restarCantidad(){
+        cantEnemigos-=1
+    }
+}
+
+const linea1 = new Linea()
+const linea2 = new Linea()
+const linea3 = new Linea()
+const linea4 = new Linea()
+const linea5 = new Linea()
