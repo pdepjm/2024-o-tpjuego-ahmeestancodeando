@@ -101,18 +101,17 @@ class MagoStop inherits MagoQueDispara(vida = 100, imagen = "magoStop.png", proy
 class MagoPiedra inherits Mago(vida = 400, imagen = "magoPiedra.png") {}
 
 // Mago Explosivo
-class MagoExplosivo inherits Mago(vida = 10, imagen = "magoExplosivo.png") {
+class MagoExplosivo inherits Mago(vida = 1000, imagen = "magoExplosivo.png") {
   const explosion = game.sound("m.explosion.mp3")
 
   override method matar() {
-    if (self.estaMuerto()) {
+      self.vida(0)
       const posicionEnFrente = new MutablePosition(x = position.x() + 1, y = position.y())
       const enemigoEnFrente = game.getObjectsIn(posicionEnFrente)
       explosion.volume(0.1)
       explosion.play()
       enemigoEnFrente.forEach({ objeto => objeto.matarSlime() }) //Map devuelve lista, usar forEach
       self.eliminar()
-    }
   }
 }
 
@@ -148,7 +147,8 @@ class MagoTienda{
     puntaje.restarPuntos(costo)//Idem en todo mago
     const mago = self.magoQueGenera(posicionMago)
     return mago
-    }
+  }
+
   method recibeDanioMago(danio,enemigo){}
   method frenarEnemigo()= true
   // method efectoDeInvocacion(){} //esto estaba porque antes los magos irlandeses interactuaban directamente con el contador de puntos

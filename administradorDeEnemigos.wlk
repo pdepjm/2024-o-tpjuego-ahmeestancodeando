@@ -35,10 +35,10 @@ object administradorDeEnemigos {
 
                 nombreParaEnemigo = new Slime(position = posicionTemporal, tipo = tipo)
                 enemigos.add(nombreParaEnemigo) /* Añade el nuevo enemigo a la colección de enemigos activos */
-
+                y.toString().printString()
                 self.sumarEnemigo() /* Incrementa el contador de enemigos en el administrador */
                 administradorDeOleadas.sumarEnemigo() /* Notifica al administrador de oleadas */
-                cantDeEnemigosPorLinea.get(y).aumentarCant()
+                self.aumentarLinea(y)  
                 return game.addVisual(nombreParaEnemigo) /* Muestra al enemigo en el juego */
             } else {
                 return /* No genera el enemigo si la posición está ocupada */
@@ -49,7 +49,7 @@ object administradorDeEnemigos {
     // Elimina un enemigo específico de la colección de enemigos activos
     method eliminarEnemigo(enemigo) {
         const y= enemigo.position().y()
-        cantDeEnemigosPorLinea.get(y).restarCantidad()
+        self.decrementarLinea(y)  
         administradorDeOleadas.reducirEnemigo()
         enemigos.remove(enemigo)
     }
@@ -59,6 +59,7 @@ object administradorDeEnemigos {
         enemigos.forEach({ enemigo => enemigo.eliminar() })
         nombreEnemigo = 0
         enemigos = []
+        cantDeEnemigosPorLinea.forEach({linea => linea.cantEnemigos(0)})
     }
 
     // Verifica si los enemigos están muertos
@@ -74,6 +75,13 @@ object administradorDeEnemigos {
         enemigos.forEach({ enemigo => enemigo.cambiarFrame()})
     }
 
+    method aumentarLinea(linea){
+        cantDeEnemigosPorLinea.get(linea).aumentarCant()
+    }
+
+    method decrementarLinea(linea){
+        cantDeEnemigosPorLinea.get(linea).restarCantidad()
+    }
 
     method hayEnemigoFila(numeroFila) = cantDeEnemigosPorLinea.get(numeroFila).cantEnemigos() > 0
 
@@ -81,6 +89,10 @@ object administradorDeEnemigos {
 
 class Linea{
     var property cantEnemigos =0
+
+    method reset(){
+        cantEnemigos = 0
+    }
 
     method aumentarCant() {
         cantEnemigos+=1

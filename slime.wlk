@@ -196,24 +196,14 @@ object slimeBomba inherits Tipo(danio=250, vida=180, imagen="s.slimeMedioOriente
 
 object slimeAgil inherits Tipo(danio=50, vida=200, imagen="s.slimeAgil_01.png",imagenesNormales=["s.slimeAgil_01.png","s.slimeAgil_02.png","s.slimeAgil_03.png"],imagenesRecibeDanio=["s.slimeAgilDanio_01.png","s.slimeAgilDanio_02.png","s.slimeAgilDanio_03.png"]){
 
-    override method accionAlRecibirDanio() = {slime=>
-       if(slime.vida()<=self.vida()*0.5){
-        self.cambiarDeCarril().apply(slime)
-        }
-    }
+    override method accionAlRecibirDanio() = {slime=>self.cambiarDeCarril().apply(slime)}
     method cambiarDeCarril()={slime=>
-        const posicionArriba= new MutablePosition(x = slime.position().x(), y = slime.position().y()+1)
-        const posicionAbajo= new MutablePosition(x = slime.position().x(), y = slime.position().y()-1)
-        const celA=game.getObjectsIn(posicionArriba)
-        const celAB=game.getObjectsIn(posicionAbajo)
-        const celdaArriba= [celA,posicionArriba]
-        const celdaAbajo= [celAB,posicionAbajo]
-        const posiciones = [celdaArriba,celdaAbajo]
-        posiciones.any({ celda => celda.get(0).all({objeto=>!objeto.frenarEnemigo()})    &&  self.moverAcarrilAledanio(slime, celda.get(1))})
-    }
-    method moverAcarrilAledanio(slime,carril){
-        if(carril.y()<5 && carril.y()>=0 ){
-        slime.position(carril)
+        const newPosicion= new MutablePosition(x = slime.position().x(), y = (slime.position().y()+((-1).randomUpTo(2))).max(0).min(4)) //
+        const celdavacia=game.getObjectsIn(newPosicion).isEmpty()
+        if(celdavacia){
+            administradorDeEnemigos.decrementarLinea(slime.position().y())  
+            slime.position(newPosicion)
+            administradorDeEnemigos.aumentarLinea(newPosicion.y())  
         }
     }
 }

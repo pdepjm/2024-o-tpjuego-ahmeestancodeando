@@ -158,7 +158,6 @@ class Nivel{
     }
     method resetearCantEnemigosComoAlInicio(){}
 }
-
 object nivelFinal inherits Nivel(oleadas=[[slimeBasico,slimeBasico,slimeGuerrero,slimeDorado],
                                           [slimeBasico,slimeGuerrero, slimeBomba,slimeGuerrero],
                                           [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja],
