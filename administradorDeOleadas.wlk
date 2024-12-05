@@ -123,8 +123,11 @@ class Nivel{
         indiceOleada=0
     }
 
-    method inicioOleada() = game.sound("m.iOleada.mp3")
-    method finOleada() = game.sound("m.fOleada.mp3")
+    const sonidoInicio = "m.iOleada.mp3"
+    const sonidoFin = "m.fOleada.mp3"
+
+    method inicioOleada() = game.sound(sonidoInicio)
+    method finOleada() = game.sound(sonidoFin)
 
     // Verifica si la oleada final está en ejecución
     method ejecutando() = cantidadEnemigos >= enemigosGenerados && enemigosRestantes > 0
@@ -137,12 +140,17 @@ class Nivel{
 
     // Termina la oleada final y concluye el juego
     method terminarOleada() {
-        self.finOleada().volume(0.1)
-        self.finOleada().play()
+        if(!botonMutearMusica.muteada()) {
+            self.finOleada().volume(0.1)
+            self.finOleada().play()
+            }
     }
 
         method iniciarOleada(){
+        if(!botonMutearMusica.muteada()) {
         self.inicioOleada().volume(0)
+        self.finOleada().play()
+        }
         enemigosRestantes = cantidadEnemigos
     }
 
