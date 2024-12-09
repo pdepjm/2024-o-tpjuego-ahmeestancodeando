@@ -13,7 +13,7 @@ object administradorDeOleadas {
     var property numeroOleada = 1
     var property modoInfinito = false
 
-    const property oleadaInicial = game.tick(5000, {self.frenarTickInicial() self.iniciarOleada()},false)
+    const property oleadaInicial = game.tick(5000, {self.iniciarOleada() self.frenarTickInicial() },false)
 
     method frenarTickInicial()=oleadaInicial.stop()
 
@@ -54,6 +54,7 @@ object administradorDeOleadas {
 
     method siguienteOleada(){
         if(nivelActual.noTerminoNivel()){
+            nivelActual.terminarOleada()
             nivelActual.siguienteOleada()
             numeroOleada += 1
             oleadaInicial.start()
@@ -144,12 +145,16 @@ class Nivel{
             self.finOleada().volume(0.1)
             self.finOleada().play()
             }
+        administradorDeEnemigos.matarEnemigos()
+        administradorDeEnemigos.resetLineas()  
     }
 
         method iniciarOleada(){
+        administradorDeEnemigos.matarEnemigos()
+        administradorDeEnemigos.resetLineas()  
         if(!botonMutearMusica.muteada()) {
         self.inicioOleada().volume(0)
-        self.finOleada().play()
+        self.inicioOleada().play()
         }
         enemigosRestantes = cantidadEnemigos
     }
@@ -177,9 +182,9 @@ object nivelFinal inherits Nivel(oleadas=[[slimeBasico,slimeBasico,slimeGuerrero
                                           [slimeBasico, slimeDorado],[slimeBlessed,slimeNinja,slimeBomba]],tiempoSpawn=1000, cantidadEnemigos=10,nombre="Final"){
 override method siguienteOleada(){
     indiceOleada +=1
-
+    const musica2 = game.sound("TEARS.mp3")
     if(indiceOleada == oleadas.size()-2){
-    sonidoPartida.switchearMusica()
+    sonidoPartida.switchearMusica(musica2)
     }
     if (indiceOleada == oleadas.size()-1){
         fondo.cambiarFondo("fondo3.jpg")

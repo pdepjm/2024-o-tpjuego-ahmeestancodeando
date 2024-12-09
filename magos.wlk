@@ -70,11 +70,11 @@ class MagoQueDispara inherits Mago{
 
   override method disparar(){
     const hayEnemigo = self.enemigoEnSuFila()
+    imagen = imagenBase
     if (hayEnemigo) {
       const posicionProyectil = new MutablePosition(x = self.position().x(), y = self.position().y())
       administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilBase)
       imagen = imagenQueDispara
-      game.schedule(750, {imagen = imagenBase})
     }
   }
 

@@ -59,7 +59,15 @@ object administradorDeEnemigos {
         enemigos.forEach({ enemigo => enemigo.eliminar() })
         nombreEnemigo = 0
         enemigos = []
+        self.resetLineas()
+    }
+
+    method resetLineas(){
         cantDeEnemigosPorLinea.forEach({linea => linea.cantEnemigos(0)})
+    }
+
+      method matarEnemigos(){
+        enemigos.forEach({enemigo => enemigo.eliminar()})
     }
 
     // Verifica si los enemigos están muertos
