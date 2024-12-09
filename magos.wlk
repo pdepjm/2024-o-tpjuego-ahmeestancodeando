@@ -90,7 +90,7 @@ class MagoQueDispara inherits Mago{
 class MagoFuego inherits MagoQueDispara(vida = 100, imagenBase = "magoFuego.png", imagenQueDispara = "magoFuegoDispara.png", proyectilBase = proyectilNormal){}
 
 // Mago Irlandés (sanador)
-class MagoIrlandes inherits Mago(vida = 100, imagen = "magoHealer.png") {
+class MagoIrlandes inherits Mago(vida = 100, imagenBase = "magoHealer.png") {
   override method valorAgregado() = 10
 }
 
@@ -173,7 +173,7 @@ object magoIrlandesTienda inherits MagoTienda(position = new MutablePosition(x =
 
 override method magoQueGenera(posicionMago){return new MagoIrlandes(position = posicionMago)}
 
-  override method image() = "magoHealer.png"
+override method image() = "magoHealer.png"
 }
 
 // Mago de Hielo en Tienda

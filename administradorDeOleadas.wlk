@@ -199,8 +199,8 @@ const nivel2 = new Nivel(oleadas=[[slimeBasico,slimeBasico,slimeGuerrero,slimeDo
                                   [slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBasico],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeBasico],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeBasico],
-                                  [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja]],tiempoSpawn=4000, cantidadEnemigos=6,nombre="2") // [slimeBasico, slimeBasico, slimeGuerrero,slimeLadron]
-const nivel3 = new Nivel(oleadas=[[slimeAgil, slimeAgil, slimeAgil,slimeAgil],
+                                  [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja]],tiempoSpawn=4000, cantidadEnemigos=6,nombre="2") //
+const nivel3 = new Nivel(oleadas=[[slimeBasico, slimeBasico, slimeGuerrero,slimeLadron],
                                   [slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBasico],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja,slimeBomba],
