@@ -96,13 +96,13 @@ class Linea{
     method text() = cantEnemigos.toString()
 
 
-    var property cantEnemigos =0
+    var property cantEnemigos = 0
 
     method reset(){
         cantEnemigos = 0
     }
 
-    method tieneEnemigos()= cantEnemigos > 0
+    method tieneEnemigos() = (cantEnemigos > 0)
 
     method aumentarCant() {
         cantEnemigos+=1

@@ -28,8 +28,6 @@ class Mago {
 
   method recibeDanioEnemigo(_danio,proyectil) { return false }
 
-  method combinarProyectil(_tipo){return false}
-
   method recibeDanioMago(_danio,enemigo) {
     self.vida(self.vida() - _danio)
     enemigo.cambiarAccion(enemigo.tipo().atacar())
@@ -58,30 +56,22 @@ class Mago {
   method matarSlime(){}
   method cambiarAccion(accionNueva){}
   method tipo()=descartable
+  method proyectil() = false
+  method mejorar(){}
 }
 
 
 
 class MagoQueDispara inherits Mago{
   const proyectilBase
-  var property tipoProyectil=proyectilBase
 
   override method disparar(){
-    if (self.enemigoEnSuFila()) {
-      const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
-      administradorDeProyectiles.generarProyectil(posicionProyectil, tipoProyectil)
-      tipoProyectil=proyectilBase
+    const hayEnemigo = self.enemigoEnSuFila()
+    if (hayEnemigo) {
+      const posicionProyectil = new MutablePosition(x = self.position().x(), y = self.position().y())
+      administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilBase)
     }
-
   }
-
-  override method combinarProyectil(otroTipo){
-        if (tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()){
-            tipoProyectil = tipoProyectil.combinar()
-            return true
-            }
-        return tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()
-    }
 
    method enemigoEnSuFila() = administradorDeEnemigos.hayEnemigoFila(self.position().y())
 }

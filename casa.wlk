@@ -23,14 +23,15 @@ object casa {
   
   method recibirDanio(fila) {
     vida -= 1
-    if (administradorDeEnemigos.hayEnemigoFila(fila)){
-    administradorDeEnemigos.enemigos().filter( { enemigo => enemigo.position().y() == fila } ).forEach({ enemigo => enemigo.matarSlime() })
-    }
     // elimina enemigos de la misma fila
     self.sonidoDanio().volume(0.3)
     if (vida <= 0) {
-      pantalla.nuevoEstado(derrota)
-      administradorDeJuego.terminarJuego()
+        pantalla.nuevoEstado(derrota)
+        administradorDeJuego.terminarJuego()
+    }
+    else if (administradorDeEnemigos.hayEnemigoFila(fila)){
+        const enemigosEnFila = administradorDeEnemigos.enemigos().filter({ enemigo => enemigo.position().y() == fila })
+        enemigosEnFila.forEach({ enemigo => enemigo.matarSlime() })
     }
   }
   

@@ -38,7 +38,7 @@ object cursor {
     method recibeDanioEnemigo(_danio,proyectil){}
     method combinarProyectil(_tipo){return false}
     method matarSlime(){return false}
-    method tipoProyectil()=false
+    method proyectil()=false
     method cambiarAccion(accionNueva){}
     method tipo()=descartable
 }

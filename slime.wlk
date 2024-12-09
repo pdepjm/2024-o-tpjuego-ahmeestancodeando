@@ -82,7 +82,8 @@ class Slime {
         administradorDeEnemigos.eliminarEnemigo(self)
     }
 
-    method tipoProyectil() = false
+    method proyectil() = false
+    method mejorar(){}
 }
 // ===============================
 // Tipos de Slime: Variantes
@@ -124,7 +125,8 @@ class Tipo{
 
             if (slime.sinVida() || slime.llegoACasa()) {
                 if (slime.llegoACasa()) {
-                    casa.recibirDanio(slime.position().y())
+                    const fila =  slime.position().y()
+                    casa.recibirDanio(fila)
                 } 
                 slime.eliminar()
             }
@@ -208,10 +210,12 @@ object slimeAgil inherits Tipo(danio=50, vida=200, imagen="s.slimeAgil_01.png",i
     method cambiarDeCarril()={
         slime=>
             const newPosicionY = (slime.position().y()+((-1).randomUpTo(2))).max(0).min(4)
-            const newPosicion= new MutablePosition(x = slime.position().x(), y = newPosicionY )//
-            if(game.getObjectsIn(newPosicion).isEmpty()){
+            const newPosicion = new MutablePosition(x = slime.position().x(), y = newPosicionY )//
+            const oldPoscionY = slime.position().y()
+            const objetos = game.getObjectsIn(newPosicion)
+            if(objetos.all({objeto => objeto.sePuedeSuperponer()})){
                 administradorDeEnemigos.aumentarLinea(newPosicionY)  
-                administradorDeEnemigos.decrementarLinea(slime.position().y())  
+                administradorDeEnemigos.decrementarLinea(oldPoscionY)  
                 slime.position(newPosicion)
             }
     }

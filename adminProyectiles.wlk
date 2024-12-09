@@ -21,12 +21,13 @@ object administradorDeProyectiles {
     // Genera un nuevo proyectil en la posición y tipo especificado
     method generarProyectil(posicion, tipoProyectil) {
         var nombreParaProyectil = self.nombre()
-        nombreParaProyectil = new Proyectil(position = posicion, tipoProyectil = tipoProyectil)
+        nombreParaProyectil = new Proyectil(position = posicion, proyectil = tipoProyectil)
         proyectiles.add(nombreParaProyectil)
         self.sumarProyectil()
         game.addVisual(nombreParaProyectil)
-        nombreParaProyectil.combinar()
+        game.schedule(50, {nombreParaProyectil.combinar()})
         try nombreParaProyectil.colisionar() catch e "YA NO EXISTE PROYECTIL"
+        
     }
 
     // Mueve cada proyectil en la lista
@@ -37,10 +38,6 @@ object administradorDeProyectiles {
     // Activa la colisión para cada proyectil en la lista
     method impactarProyectiles() {
         proyectiles.forEach({ proyectil => proyectil.colisionar() })
-    }
-
-    method combinarProyectiles() {
-        proyectiles.forEach({ proyectil => proyectil.combinar() })
     }
 
     // Elimina un proyectil de la lista
