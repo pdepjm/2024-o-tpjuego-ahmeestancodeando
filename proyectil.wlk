@@ -86,69 +86,63 @@ object descartable{
 }
 
 // ===============================
-// Proyectil Normal: Implementación específica de un proyectil normal
+// Tipo Proyectil: Clase base para los tipos de proyectiles
 // ===============================
-object proyectilNormal {
-    // Métodos públicos
-    const property imagenes = ["p.proyectilFuego - frame1.png", "p.proyectilFuego - frame2.png", "p.proyectilFuego - frame3.png"]
-    method danio() = 40
-    method destruirse() = true
-    method puedeCombinarse() = true
-    method mejora() = proyectilPenetrante
 
-    method colisionar() ={proyectil=>
+class TipoProyectil{
+    const property imagenes = []
+    const danio
+    const destruirse
+    const puedeCombinarse
+    const evolucionaA
+    method danio() = danio
+    method destruirse() = destruirse
+    method puedeCombinarse() = puedeCombinarse
+    method mejora() = evolucionaA
+    
+    method colisionar() = {proyectil=>
         const posicionEnFrente = new MutablePosition(x = proyectil.position().x() + 1, y = proyectil.position().y())
         const objetosEnPosicion = game.getObjectsIn(proyectil.position()) + game.getObjectsIn(posicionEnFrente)
         objetosEnPosicion.forEach({objeto =>objeto.recibeDanioEnemigo(proyectil.danio(),proyectil)})
     }
 
+    method recibeDanioMago(_danio,enemigo) ={enemigo=>}
 
-
-    method recibeDanioMago(danio,enemigo) ={enemigo=>}
 }
 
+// ===============================
+// Proyectil Normal: Implementación específica de un proyectil normal
+// ===============================
+
+object proyectilNormal inherits TipoProyectil(imagenes = ["p.proyectilFuego - frame1.png", "p.proyectilFuego - frame2.png", "p.proyectilFuego - frame3.png"], 
+danio= 40, destruirse= true, puedeCombinarse = true, evolucionaA = proyectilPenetrante){}
 
 // ===============================
 // Proyectil Penetrante: Implementación específica de un proyectil penetrante
 // ===============================
-object proyectilPenetrante {
-    // Métodos públicos
-    const property imagenes = ["p.proyectilHielo-frame1.png", "p.proyectilHielo-frame2.png", "p.proyectilHielo-frame3.png"]
-    method danio() = 45
-    method destruirse() = false
 
-    method puedeCombinarse() = true
-    method mejora() = superProyectil
+object proyectilPenetrante inherits TipoProyectil(imagenes = ["p.proyectilHielo-frame1.png", "p.proyectilHielo-frame2.png", "p.proyectilHielo-frame3.png"], danio = 45,
+destruirse=false, puedeCombinarse=true, evolucionaA = superProyectil){}
 
-    method colisionar() = proyectilNormal.colisionar()
-    method recibeDanioMago(_danio,enemigo)=proyectilNormal.recibeDanioMago(_danio, enemigo)
-}
 // ===============================
 // Super Proyectil: Implementación específica de un super proyectil
 // ===============================
-object superProyectil {
-    // Métodos públicos
-    const property imagenes = ["p.superProyectil-1.png", "p.superProyectil-2.png", "p.superProyectil-3.png"]
-    method danio() = 100
-    method destruirse() = false
-    method puedeCombinarse() = false
-    method mejora() = self
-    method colisionar() = proyectilNormal.colisionar()
-    method recibeDanioMago(_danio,enemigo)=proyectilNormal.recibeDanioMago(_danio, enemigo)
-}
 
-object proyectilDeStop{
-    const property imagenes = ["p.proyectilDeStop-frame1.png", "p.proyectilDeStop-frame2.png", "p.proyectilDeStop-frame3.png"]
-    method danio() = 20
-    method destruirse() = true
-    method puedeCombinarse() = false
-    method mejora() = self
-    method colisionar() ={proyectil=>
+object superProyectil inherits TipoProyectil(imagenes = ["p.superProyectil-1.png", "p.superProyectil-2.png", "p.superProyectil-3.png"], danio = 100,
+destruirse=false, puedeCombinarse=false, evolucionaA = self){}
+
+// ===============================
+// Proyectil de Stop: Implementación específica de un proyectil de stop
+// ===============================
+
+object proyectilDeStop inherits TipoProyectil(imagenes = ["p.proyectilDeStop-frame1.png", "p.proyectilDeStop-frame2.png", "p.proyectilDeStop-frame3.png"], danio = 20,
+destruirse=true, puedeCombinarse=false, evolucionaA = self){
+  override method colisionar() ={proyectil=>
         const posicionEnFrente = new MutablePosition(x = proyectil.position().x() + 1, y = proyectil.position().y())
         const objetosEnPosicion = game.getObjectsIn(proyectil.position()) + game.getObjectsIn(posicionEnFrente)
         objetosEnPosicion.forEach({objeto => objeto.recibeDanioEnemigo(proyectil.danio(),proyectil) objeto.cambiarAccion(objeto.tipo().esperar())})
     }
-    method recibeDanioMago(_danio,enemigo)={
+   override method recibeDanioMago(_danio,enemigo)={
         enemigo=> enemigo.cambiarAccion(enemigo.tipo().esperar())
     }
 }
