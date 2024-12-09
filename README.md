@@ -83,5 +83,5 @@ Link al Lore: https://docs.google.com/document/d/1lBfEKnoyl5uwRfzc_BIOiNtRY3-iJx
 Link al Trailer: https://youtu.be/0D9ru_qJyPM?si=un1xRSzEtPHEvkAe
 
 
-##### Updates
-- 09-12-24 1.01: Animaciones disparo, mejoras rendimiento, mejoras sonido, balanceo
+#### Updates
+- 09-12-24 1.01v: Animaciones disparo, mejoras rendimiento, mejoras sonido, balanceo general
