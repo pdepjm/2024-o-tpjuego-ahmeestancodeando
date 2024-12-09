@@ -172,18 +172,13 @@ class Nivel{
 }
 object nivelFinal inherits Nivel(oleadas=[[slimeBasico,slimeBasico,slimeGuerrero,slimeDorado],
                                           [slimeBasico,slimeGuerrero, slimeBomba,slimeGuerrero],
-                                          [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja],
-                                          [slimeBomba, slimeBomba, slimeBomba, slimeBomba, slimeBomba, slimeDorado],
-                                          [slimeBomba, slimeBomba, slimeNinja, slimeLadron],
-                                          [slimeBomba, slimeBomba, slimeNinja, slimeNinja, slimeNinja, slimeNinja, slimeNinja, slimeLadron],
-                                          [slimeBomba, slimeBomba, slimeNinja,slimeNinja, slimeLadron, slimeBlessed],
-                                          [slimeNinja, slimeNinja, slimeNinja, slimeBlessed,slimeBlessed, slimeBomba],
-                                          [slimeBasico, slimeDorado],[slimeBlessed,slimeNinja,slimeBomba]],tiempoSpawn=1000, cantidadEnemigos=10,nombre="Final"){
+                                          [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja]
+                                          ],tiempoSpawn=1000, cantidadEnemigos=10,nombre="Final"){
 override method siguienteOleada(){
     indiceOleada +=1
-
+    const musica2 = game.sound("TEARS.mp3")
     if(indiceOleada == oleadas.size()-2){
-    sonidoPartida.switchearMusica()
+    sonidoPartida.switchearMusica(musica2)
     }
     if (indiceOleada == oleadas.size()-1){
         fondo.cambiarFondo("fondo3.jpg")
@@ -197,6 +192,15 @@ override method siguienteOleada(){
     }
 
 }
+
+/*
+,[slimeBomba, slimeBomba, slimeBomba, slimeBomba, slimeBomba, slimeDorado],
+                                          [slimeBomba, slimeBomba, slimeNinja, slimeLadron],
+                                          [slimeBomba, slimeBomba, slimeNinja, slimeNinja, slimeNinja, slimeNinja, slimeNinja, slimeLadron],
+                                          [slimeBomba, slimeBomba, slimeNinja,slimeNinja, slimeLadron, slimeBlessed],
+                                          [slimeNinja, slimeNinja, slimeNinja, slimeBlessed,slimeBlessed, slimeBomba],
+                                          [slimeBasico, slimeDorado],[slimeBlessed,slimeNinja,slimeBomba]
+*/
 
 const nivel1 = new Nivel(oleadas=[[slimeBasico],[slimeBasico,slimeBasico,slimeGuerrero,slimeDorado],[slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBasico]],tiempoSpawn=4000, cantidadEnemigos=5,nombre="1")
 const nivel2 = new Nivel(oleadas=[[slimeBasico,slimeBasico,slimeGuerrero,slimeDorado],

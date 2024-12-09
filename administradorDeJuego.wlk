@@ -29,6 +29,8 @@ object administradorDeJuego {
     usuarioEnMenu = true
     puntaje.reset()
     game.addVisual(pantalla)
+    const musica = game.sound("pvz8bit.mp3")
+    sonidoPartida.switchearMusica(musica)
     self.resetGame()
   }
 
@@ -156,10 +158,8 @@ object fondo{
 
 object sonidoPartida{
     const sonido = "pvz8bit.mp3"
-    const sonidoFinal="TEARS.mp3"
     var musicaActual=musica1
     const musica1 = game.sound(sonido)
-    const musica2 = game.sound(sonidoFinal)
     var musicaEsDelFinal=false
     method ponerMusicaNormal(){
          if(!botonMutearMusica.muteada()){
@@ -169,18 +169,12 @@ object sonidoPartida{
         self.iniciarMusica()
         }
     }
-    method switchearMusica(){
+    method switchearMusica(musicaNueva){
         if(!botonMutearMusica.muteada()){
         self.detenerMusica()
-        if (!musicaEsDelFinal){
-            musicaActual.volume(0.5)
-            musicaActual=musica2
-            musicaEsDelFinal=true
-        }
-        else {
-            musicaActual=musica1
-            musicaEsDelFinal=false
-        }
+        musicaActual.volume(0.5)
+        musicaActual=musicaNueva
+        musicaEsDelFinal=true
         self.iniciarMusica()
         }
         }
