@@ -144,10 +144,12 @@ class Nivel{
             self.finOleada().volume(0.1)
             self.finOleada().play()
             }
+        administradorDeEnemigos.matarEnemigos()
         administradorDeEnemigos.resetLineas()  
     }
 
         method iniciarOleada(){
+        administradorDeEnemigos.matarEnemigos()
         administradorDeEnemigos.resetLineas()  
         if(!botonMutearMusica.muteada()) {
         self.inicioOleada().volume(0)
