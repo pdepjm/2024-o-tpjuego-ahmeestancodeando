@@ -41,6 +41,8 @@ object cursor {
     method proyectil()=false
     method cambiarAccion(accionNueva){}
     method tipo()=descartable
+    method sePuedeSuperponer() = true
+    method mejorar(){}
 }
 object descartable{
     method esperar(){}

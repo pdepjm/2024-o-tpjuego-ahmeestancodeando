@@ -85,6 +85,8 @@ object administradorDeEnemigos {
 
     method hayEnemigoFila(numeroFila) = cantDeEnemigosPorLinea.get(numeroFila).tieneEnemigos()
 
+    method noHayEnemigoFila(numeroFila) = cantDeEnemigosPorLinea.get(numeroFila).noTieneEnemigos()
+
 }
 
 class Linea{
@@ -102,7 +104,9 @@ class Linea{
         cantEnemigos = 0
     }
 
-    method tieneEnemigos() = (cantEnemigos > 0)
+    method tieneEnemigos() = cantEnemigos > 0
+
+    method noTieneEnemigos() = cantEnemigos == 0 //nadie tiene enemigos
 
     method aumentarCant() {
         cantEnemigos+=1

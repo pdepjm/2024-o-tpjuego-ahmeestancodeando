@@ -14,7 +14,9 @@ class Mago {
   // Propiedades
   const position
   var property vida
-  var property imagen
+  var property imagen = imagenBase
+
+  const imagenBase
 
   // Métodos
   method frenarEnemigo() = true
@@ -64,12 +66,15 @@ class Mago {
 
 class MagoQueDispara inherits Mago{
   const proyectilBase
+  const imagenQueDispara
 
   override method disparar(){
     const hayEnemigo = self.enemigoEnSuFila()
     if (hayEnemigo) {
       const posicionProyectil = new MutablePosition(x = self.position().x(), y = self.position().y())
       administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilBase)
+      imagen = imagenQueDispara
+      game.schedule(200, {imagen = imagenBase})
     }
   }
 
@@ -82,7 +87,7 @@ class MagoQueDispara inherits Mago{
 // ===============================
 
 // Mago de Fuego
-class MagoFuego inherits MagoQueDispara(vida = 100, imagen = "magoFuego.png", proyectilBase = proyectilNormal){}
+class MagoFuego inherits MagoQueDispara(vida = 100, imagenBase = "magoFuego.png", imagenQueDispara = "magoFuegoDispara.png", proyectilBase = proyectilNormal){}
 
 // Mago Irlandés (sanador)
 class MagoIrlandes inherits Mago(vida = 100, imagen = "magoHealer.png") {
@@ -90,13 +95,13 @@ class MagoIrlandes inherits Mago(vida = 100, imagen = "magoHealer.png") {
 }
 
 // Mago de Hielo
-class MagoHielo inherits MagoQueDispara(vida = 100, imagen = "magoHielo.png", proyectilBase = proyectilPenetrante){}
-class MagoStop inherits MagoQueDispara(vida = 100, imagen = "magoStop.png", proyectilBase = proyectilDeStop){}
+class MagoHielo inherits MagoQueDispara(vida = 100, imagenBase = "magoHielo.png", imagenQueDispara = "magoHieloDispara.png",, proyectilBase = proyectilPenetrante){}
+class MagoStop inherits MagoQueDispara(vida = 100, imagenBase = "magoStop.png",, imagenQueDispara = "magoStopDispara.png", proyectilBase = proyectilDeStop){}
 // Mago de Piedra
-class MagoPiedra inherits Mago(vida = 400, imagen = "magoPiedra.png") {}
+class MagoPiedra inherits Mago(vida = 400, imagenBase = "magoPiedra.png") {}
 
 // Mago Explosivo
-class MagoExplosivo inherits Mago(vida = 1000, imagen = "magoExplosivo.png") {
+class MagoExplosivo inherits Mago(vida = 1000, imagenBase = "magoExplosivo.png") {
   const explosion = game.sound("m.explosion.mp3")
 
   override method matar() {

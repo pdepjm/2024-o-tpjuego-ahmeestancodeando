@@ -14,6 +14,7 @@ class Proyectil {
     // Propiedades
     var property proyectil
     var position
+    const y = position.y()
     const property danio = proyectil.danio()
     var frame = 0
     var imagen = proyectil.imagenes().get(0)
@@ -29,7 +30,7 @@ class Proyectil {
         imagen=proyectil.imagenes().get(0)
         frame=1
         position.goRight(1)
-        if (self.llegueAlFinal() || self.verificarEnemigosEnfrente()) { self.eliminar() }
+        if (administradorDeEnemigos.noHayEnemigoFila(y) || self.llegueAlFinal()) { self.eliminar() }
 
     }
     // Método que revisa si llego al final

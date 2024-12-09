@@ -25,7 +25,7 @@ object administradorDeProyectiles {
         proyectiles.add(nombreParaProyectil)
         self.sumarProyectil()
         game.addVisual(nombreParaProyectil)
-        game.schedule(50, {nombreParaProyectil.combinar()})
+        game.schedule(10, {nombreParaProyectil.combinar()})
         try nombreParaProyectil.colisionar() catch e "YA NO EXISTE PROYECTIL"
         
     }
