@@ -59,6 +59,10 @@ object administradorDeEnemigos {
         enemigos.forEach({ enemigo => enemigo.eliminar() })
         nombreEnemigo = 0
         enemigos = []
+        self.resetLineas()
+    }
+
+    method resetLineas(){
         cantDeEnemigosPorLinea.forEach({linea => linea.cantEnemigos(0)})
     }
 
