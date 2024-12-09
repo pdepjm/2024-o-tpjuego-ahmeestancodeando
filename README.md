@@ -39,7 +39,7 @@ Los Distintos Slimes tienen características propias, más vida, más daño, mov
 <pre>
  Daño:🟢   |  Daño:🟢 | Daño:🥷🥷🥷| Daño:🛐🛐🛐| Daño: -    |  Daño:🟢 |   Daño:💣💣💣| Daño:🟢  
  Vida:💚💚| Vida:💚💚💚| Vida:💚💚|  Vida:🛐🛐🛐| Vida:💚💚💚| Vida:💚💚| Vida:💚💚💚| Vida:💚💚💚  
- Ataque Melee|Ataque Melee|Salta Magos| Ataque Melee| Da Dinero | Quita Dinero| Daño en Area| Salta entre Lineas
+ Ataque Melee|Ataque Melee|Salta Magos| Ataque Melee| Da Dinero | Quita Dinero| Explota | Salta entre Lineas
 </pre>  
 
 ## Modos de Juego
