@@ -207,11 +207,12 @@ object slimeAgil inherits Tipo(danio=50, vida=200, imagen="s.slimeAgil_01.png",i
 
     method cambiarDeCarril()={
         slime=>
-            const newPosicion= new MutablePosition(x = slime.position().x(), y = (slime.position().y()+((-1).randomUpTo(11.999999))).max(0).min(4)) //
+            const newPosicionY = (slime.position().y()+((-1).randomUpTo(2))).max(0).min(4)
+            const newPosicion= new MutablePosition(x = slime.position().x(), y = newPosicionY )//
             if(game.getObjectsIn(newPosicion).isEmpty()){
+                administradorDeEnemigos.aumentarLinea(newPosicionY)  
                 administradorDeEnemigos.decrementarLinea(slime.position().y())  
                 slime.position(newPosicion)
-                administradorDeEnemigos.aumentarLinea(newPosicion.y())  
             }
     }
 }

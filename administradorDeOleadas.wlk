@@ -199,14 +199,14 @@ const nivel2 = new Nivel(oleadas=[[slimeBasico,slimeBasico,slimeGuerrero,slimeDo
                                   [slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBasico],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeBasico],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeBasico],
-                                  [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja]],tiempoSpawn=4000, cantidadEnemigos=6,nombre="2")
-const nivel3 = new Nivel(oleadas=[[slimeBasico, slimeBasico, slimeGuerrero,slimeLadron],
+                                  [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja]],tiempoSpawn=4000, cantidadEnemigos=6,nombre="2") // [slimeBasico, slimeBasico, slimeGuerrero,slimeLadron]
+const nivel3 = new Nivel(oleadas=[[slimeAgil, slimeAgil, slimeAgil,slimeAgil],
                                   [slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBasico],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja,slimeBomba],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja,slimeBomba],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja,slimeBomba]],
-                                  tiempoSpawn=3000, cantidadEnemigos=7,nombre="3")
+                                  tiempoSpawn=5000, cantidadEnemigos=7,nombre="3")
 const nivel4 = new Nivel(oleadas=[[slimeBasico, slimeBasico, slimeGuerrero,slimeLadron],
                                   [slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBasico],
                                   [slimeAgil,slimeGuerrero,slimeLadron,slimeNinja],
@@ -215,7 +215,7 @@ const nivel4 = new Nivel(oleadas=[[slimeBasico, slimeBasico, slimeGuerrero,slime
                                   [slimeBomba, slimeNinja,slimeLadron,slimeAgil],
                                   [slimeGuerrero,slimeLadron,slimeGuerrero,slimeLadron,slimeBlessed],
                                   [slimeBlessed, slimeNinja, slimeBomba]],
-                                  tiempoSpawn=4000, cantidadEnemigos=8,nombre="4")
+                                  tiempoSpawn=2000, cantidadEnemigos=8,nombre="4")
 
 //algo asi deberia ser nivefinal
 object nivelInfinito inherits Nivel(oleadas = [slimeBasico],tiempoSpawn=4000,cantidadEnemigos=3,nombre="infinito"){

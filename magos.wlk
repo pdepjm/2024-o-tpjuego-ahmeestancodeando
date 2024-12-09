@@ -19,7 +19,7 @@ class Mago {
   // Métodos
   method frenarEnemigo() = true
 
-  method enemigoEnSuFila() = administradorDeEnemigos.hayEnemigoFila(position.y())
+
 
   method position() = position
   method image() = imagen
@@ -65,13 +65,16 @@ class Mago {
 class MagoQueDispara inherits Mago{
   const proyectilBase
   var property tipoProyectil=proyectilBase
+
   override method disparar(){
-    const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
     if (self.enemigoEnSuFila()) {
+      const posicionProyectil = new MutablePosition(x = self.position().x() + 1, y = self.position().y())
       administradorDeProyectiles.generarProyectil(posicionProyectil, tipoProyectil)
+      tipoProyectil=proyectilBase
     }
-    tipoProyectil = proyectilBase
+
   }
+
   override method combinarProyectil(otroTipo){
         if (tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()){
             tipoProyectil = tipoProyectil.combinar()
@@ -79,6 +82,8 @@ class MagoQueDispara inherits Mago{
             }
         return tipoProyectil.condicionParaCombinarse(otroTipo) && tipoProyectil.puedeCombinarse()
     }
+
+   method enemigoEnSuFila() = administradorDeEnemigos.hayEnemigoFila(self.position().y())
 }
 
 

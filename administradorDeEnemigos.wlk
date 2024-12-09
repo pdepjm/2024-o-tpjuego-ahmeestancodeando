@@ -83,16 +83,26 @@ object administradorDeEnemigos {
         cantDeEnemigosPorLinea.get(linea).restarCantidad()
     }
 
-    method hayEnemigoFila(numeroFila) = cantDeEnemigosPorLinea.get(numeroFila).cantEnemigos() > 0
+    method hayEnemigoFila(numeroFila) = cantDeEnemigosPorLinea.get(numeroFila).tieneEnemigos()
 
 }
 
 class Linea{
+
+
+    const linea = 0
+
+    method position() = new MutablePosition(x = 13, y = linea)
+    method text() = cantEnemigos.toString()
+
+
     var property cantEnemigos =0
 
     method reset(){
         cantEnemigos = 0
     }
+
+    method tieneEnemigos()= cantEnemigos > 0
 
     method aumentarCant() {
         cantEnemigos+=1
@@ -102,8 +112,8 @@ class Linea{
     }
 }
 
-const linea1 = new Linea()
-const linea2 = new Linea()
-const linea3 = new Linea()
-const linea4 = new Linea()
-const linea5 = new Linea()
+const linea1 = new Linea(linea=0)
+const linea2 = new Linea(linea=1)
+const linea3 = new Linea(linea=2)
+const linea4 = new Linea(linea=3)
+const linea5 = new Linea(linea=4)

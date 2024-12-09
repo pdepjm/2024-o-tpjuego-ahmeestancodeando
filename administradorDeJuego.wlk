@@ -265,7 +265,11 @@ object configuracion {
 
         menu.iniciarTienda()
 
-
+        //game.addVisual(linea1)
+        //game.addVisual(linea2)
+        //game.addVisual(linea3)
+        //game.addVisual(linea4)
+        //game.addVisual(linea5)
     }
 
     // Método para programar eventos de actualización periódicos (ticks)
