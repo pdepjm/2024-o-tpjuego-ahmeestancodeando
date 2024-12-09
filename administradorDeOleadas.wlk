@@ -13,7 +13,7 @@ object administradorDeOleadas {
     var property numeroOleada = 1
     var property modoInfinito = false
 
-    const property oleadaInicial = game.tick(5000, {self.frenarTickInicial() self.iniciarOleada()},false)
+    const property oleadaInicial = game.tick(5000, {self.iniciarOleada() self.frenarTickInicial() },false)
 
     method frenarTickInicial()=oleadaInicial.stop()
 
@@ -54,6 +54,7 @@ object administradorDeOleadas {
 
     method siguienteOleada(){
         if(nivelActual.noTerminoNivel()){
+            nivelActual.terminarOleada()
             nivelActual.siguienteOleada()
             numeroOleada += 1
             oleadaInicial.start()
@@ -153,7 +154,7 @@ class Nivel{
         administradorDeEnemigos.resetLineas()  
         if(!botonMutearMusica.muteada()) {
         self.inicioOleada().volume(0)
-        self.finOleada().play()
+        self.inicioOleada().play()
         }
         enemigosRestantes = cantidadEnemigos
     }
