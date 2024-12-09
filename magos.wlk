@@ -74,7 +74,7 @@ class MagoQueDispara inherits Mago{
       const posicionProyectil = new MutablePosition(x = self.position().x(), y = self.position().y())
       administradorDeProyectiles.generarProyectil(posicionProyectil, proyectilBase)
       imagen = imagenQueDispara
-      game.schedule(200, {imagen = imagenBase})
+      game.schedule(750, {imagen = imagenBase})
     }
   }
 
@@ -95,8 +95,8 @@ class MagoIrlandes inherits Mago(vida = 100, imagen = "magoHealer.png") {
 }
 
 // Mago de Hielo
-class MagoHielo inherits MagoQueDispara(vida = 100, imagenBase = "magoHielo.png", imagenQueDispara = "magoHieloDispara.png",, proyectilBase = proyectilPenetrante){}
-class MagoStop inherits MagoQueDispara(vida = 100, imagenBase = "magoStop.png",, imagenQueDispara = "magoStopDispara.png", proyectilBase = proyectilDeStop){}
+class MagoHielo inherits MagoQueDispara(vida = 100, imagenBase = "magoHielo.png", imagenQueDispara = "magoHieloDispara.png", proyectilBase = proyectilPenetrante){}
+class MagoStop inherits MagoQueDispara(vida = 100, imagenBase = "magoStop.png", imagenQueDispara = "magoStopDispara.png", proyectilBase = proyectilDeStop){}
 // Mago de Piedra
 class MagoPiedra inherits Mago(vida = 400, imagenBase = "magoPiedra.png") {}
 
