@@ -7,7 +7,8 @@
 
 [Probar sin descargar (desactualizado)](https://www.wollok.org/concurso/2024-o-tpjuego-ahmeestancodeando/)
 
-Magos Vs Slimes es un videojuego de estrategia y defensa. El juego consiste en defender su la Base (Utopía de las Tierras de Nortfernand) de oleadas de diversos Slimes utilizando una variedad de Magos con poderes y funcionalidades únicas. Estos Magos deberán evitar que los Slimes lleguen a la base, en caso de que tres o más lo logren el juego finalizará y la humanidad perecerá. 
+Magos vs Slimes es un emocionante videojuego de estrategia y defensa en el que los jugadores deben proteger la última ciudad de la humanidad, Utopía de las Tierras de Nortfernand (UTN), de interminables oleadas de Slimes. Con una variada selección de Magos, cada uno con habilidades y poderes únicos, tendrás que impedir que los Slimes alcancen las puertas de la ciudad. Si tres o más logran atravesar tus defensas, el juego llegará a su fin y la humanidad perecerá... 
+¡Prepárate para la batalla y salva a la UTN del caos!
 
 ## Magos
 
@@ -46,6 +47,7 @@ Los Distintos Slimes tienen características propias, más vida, más daño, mov
 
 ## Modos de Juego
 <h3>Historia:</h3> Enfrentar diversos niveles con cambios en tipos y dificultad de Oleadas.
+
 <h3>Eterno:</h3> Modo desafiante en el que se enfrentan oleadas interminables y aleatorias de Slimes, con dificultad Creciente.
 
 
