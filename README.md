@@ -22,7 +22,7 @@ Cada Mago tiene una función específica, como disparar proyectiles, bloquear el
       <td align="center"><img src="assets/magoHielo.png" alt="Mago de Hielo" width="100"><br>Daño: ❄️❄️❄️<br>Vida: 💙<br>Dispara</td>
       <td align="center"><img src="assets/magoHealer.png" alt="Mago Irlandés" width="100"><br>Daño: 🤑<br>Vida: 💚<br>Genera Dinero</td>
       <td align="center"><img src="assets/magoPiedra.png" alt="Mago de Piedra" width="100"><br>Daño: ☮️<br>Vida: 🗿🗿🗿<br>Protección</td>
-      <td align="center"><img src="assets/magoExplosivo.png" alt="Papa John" width="100"><br>Daño: 💣💣💣<br>Vida: ☠️☠️☠️<br>Inmola</td>
+      <td align="center"><img src="assets/magoExplosivo.png" alt="Papa John" width="100"><br>Daño: 💣💣💣<br>Vida: ☠️☠️☠️<br>Explota</td>
       <td align="center"><img src="assets/magoStop.png" alt="Mago Stop" width="100"><br>Daño: 🤚<br>Vida: ❤️<br>Dispara</td>
     </tr>
   </table>
@@ -53,10 +53,10 @@ Los distintos Slimes tienen características propias: más vida, más daño, mov
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="Cosas_juego/slime_base.png" alt="Slime Básico" width="150"><br>Daño: 🟢<br>Vida: 💚💚<br> - </td>
-      <td align="center"><img src="assets/s.slimeGuerrero.png" alt="Slime Guerrero" width="150"><br>Daño: 🟢<br>Vida: 💚💚💚<br> Tiene mas vida</td>
-      <td align="center"><img src="assets/s.slimeNinja.png" alt="Slime Ninja" width="150"><br>Daño: 🥷🥷🥷<br>Vida: 💚💚<br> Se mueve de a dos celdas </td>
-      <td align="center"><img src="assets/s.slimeBlessed.png" alt="Slime Bendito" width="150"><br>Daño: 🛐🛐🛐<br>Vida: 🛐🛐🛐<br> Mucha vida y daño </td>
+      <td align="center"><img src="assets/s.slimeBase_02.png" alt="Slime Básico" width="150"><br>Daño: 🟢<br>Vida: 💚💚<br> - </td>
+      <td align="center"><img src="assets/s.slimeGuerrero_02.png" alt="Slime Guerrero" width="150"><br>Daño: 🟢<br>Vida: 💚💚💚<br> Tiene mas vida</td>
+      <td align="center"><img src="assets/s.slimeNinja_02.png" alt="Slime Ninja" width="150"><br>Daño: 🥷🥷🥷<br>Vida: 💚💚<br> Se mueve de a dos celdas </td>
+      <td align="center"><img src="assets/s.slimeBlessed_02.png" alt="Slime Bendito" width="150"><br>Daño: 🛐🛐🛐<br>Vida: 🛐🛐🛐<br> Mucha vida y daño </td>
     </tr>
     <tr>
       <td align="center"><img src="assets/s.slimeDorado_02.png" alt="Slime Dorado" width="150"><br>Daño: -<br>Vida: 💚💚💚<br> Da dinero al morir </td>
