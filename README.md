@@ -34,11 +34,11 @@ Cada tipo de Proyectil tiene daño o efecto propio. Los proyectiles se pueden fu
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="assets/p.proyectilFuego.png" alt="Proyectil Fuego" width="100"><br>Daño: 🔥🔥</td>
+      <td align="center"><img src="assets/p.proyectilFuego - frame2.png" alt="Proyectil Fuego" width="100"><br>Daño: 🔥🔥</td>
       <td align="center">➡️</td>
-      <td align="center"><img src="assets/p.proyectilHielo.png" alt="Proyectil Hielo" width="100"><br>Daño: ❄️❄️❄️</td>
+      <td align="center"><img src="assets/p.proyectilHielo-frame2.png" alt="Proyectil Hielo" width="100"><br>Daño: ❄️❄️❄️</td>
       <td align="center">➡️</td>
-      <td align="center"><img src="assets/p.superProyectil-1.png" alt="Super Proyectil" width="100"><br>Daño: 🟣🟣🟣🟣</td>
+      <td align="center"><img src="assets/p.superProyectil-2.png" alt="Super Proyectil" width="100"><br>Daño: 🟣🟣🟣🟣</td>
     </tr>
     <tr> Al juntarse dos proyectiles identicos se convierte en uno mejor </tr>
     <tr>
