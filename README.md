@@ -1,55 +1,77 @@
-#  Magos Vs. Slimes
+# Magos Vs. Slimes
 ### UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 
 ![portada](Cosas_juego/portada/title1.jpg)
+
 ### Trailer
 [![Trailer](https://i.ibb.co/Dp3vzNH/TRAILER-12-4-2024.png)](https://youtu.be/0D9ru_qJyPM?si=un1xRSzEtPHEvkAe)
 
-[Probar sin descargar (desactualizado)](https://www.wollok.org/concurso/2024-o-tpjuego-ahmeestancodeando/)
+[Probar sin descargar (Version desactualizada)](https://www.wollok.org/concurso/2024-o-tpjuego-ahmeestancodeando/)
 
-Magos vs Slimes es un emocionante videojuego de estrategia y defensa en el que los jugadores deben proteger la última ciudad de la humanidad, Utopía de las Tierras de Nortfernand (UTN), de interminables oleadas de Slimes. Con una variada selección de Magos, cada uno con habilidades y poderes únicos, tendrás que impedir que los Slimes alcancen las puertas de la ciudad. Si tres o más logran atravesar tus defensas, el juego llegará a su fin y la humanidad perecerá... 
+Magos vs Slimes es un emocionante videojuego de estrategia y defensa en el que los jugadores deben proteger la última ciudad de la humanidad, Utopía de las Tierras de Nortfernand (UTN), de interminables oleadas de Slimes. Con una variada selección de Magos, cada uno con habilidades y poderes únicos, tendrás que impedir que los Slimes alcancen las puertas de la ciudad. Si tres o más logran atravesar tus defensas, el juego llegará a su fin y la humanidad perecerá...
+
 ¡Prepárate para la batalla y salva a la UTN del caos!
 
 ## Magos
+Cada Mago tiene una función específica, como disparar proyectiles, bloquear el avance de los zombis, explotar causando daño, entre otros. Los Magos requieren Dinero para poder ser contratados, este dinero se genera automáticamente a lo largo de la partida.
 
- Cada Mago tiene una función específica, como disparar proyectiles, bloquear el avance de los zombis, explotar causando daño, entre otros. Los Magos requieren Dinero para poder ser contratados, este dinero se genera automaticamente a lo largo de la partida.
-
-![mago fuego](assets/magoFuego.png)    ![mago hielo](assets/magoHielo.png)    ![mago irlandes](assets/magoHealer.png)    ![mago piedra](assets/magoPiedra.png)    ![papajhon](assets/magoExplosivo.png)    ![magoStop](https://github.com/user-attachments/assets/34b94b1a-0d7a-4699-b59f-6ffa31435b26)
-
-  
- <pre>Daño:🔥🔥   Daño:❄️❄️❄️   Daño:🤑      Daño:☮️     Daño:💣💣💣  Daño:🤚 </pre>  
-
- <pre>Vida:❤️     Vida:💙       Vida:💚   Vida:🗿🗿🗿   Vida:☠️☠️☠️    Vida:❤️</pre>  
-<pre>Dispara      Dispara    Genera Dinero    Proteccion    Inmola      Dispara </pre>  
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="assets/magoFuego.png" alt="Mago de Fuego" width="100"><br>Daño: 🔥🔥<br>Vida: ❤️<br>Dispara</td>
+      <td align="center"><img src="assets/magoHielo.png" alt="Mago de Hielo" width="100"><br>Daño: ❄️❄️❄️<br>Vida: 💙<br>Dispara</td>
+      <td align="center"><img src="assets/magoHealer.png" alt="Mago Irlandés" width="100"><br>Daño: 🤑<br>Vida: 💚<br>Genera Dinero</td>
+      <td align="center"><img src="assets/magoPiedra.png" alt="Mago de Piedra" width="100"><br>Daño: ☮️<br>Vida: 🗿🗿🗿<br>Protección</td>
+      <td align="center"><img src="assets/magoExplosivo.png" alt="Papa John" width="100"><br>Daño: 💣💣💣<br>Vida: ☠️☠️☠️<br>Inmola</td>
+      <td align="center"><img src="assets/magoStop.png" alt="Mago Stop" width="100"><br>Daño: 🤚<br>Vida: ❤️<br>Dispara</td>
+    </tr>
+  </table>
+</div>
 
 ## Proyectiles
- Cada Tipo de Proyectil tiene daño o efecto propio. Los proyectiles se pueden fusionar dando lugar a mas poderosos.
- 
-![proyectil Normal](assets/p.proyectilFuego.png)  ![New Project](https://github.com/user-attachments/assets/a2b4ae40-e0c8-4044-80df-21fa467d5997)  ![proyectil Penetrante](assets/p.proyectilHielo.png) ![New Project](https://github.com/user-attachments/assets/a2b4ae40-e0c8-4044-80df-21fa467d5997)    ![superProyectil](assets/p.superProyectil-1.png) 
-<pre>Daño:🔥🔥          Daño:❄️❄️❄️       Daño:🟣🟣🟣🟣      </pre>  
+Cada tipo de Proyectil tiene daño o efecto propio. Los proyectiles se pueden fusionar dando lugar a versiones más poderosas.
 
-![p proyectilDeStop-frame2](https://github.com/user-attachments/assets/38334d9e-e0ff-4882-8ff3-f81947c6a376)
-<pre>Daño:🤚 Relentiza Enemigos</pre>
-
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="assets/p.proyectilFuego.png" alt="Proyectil Fuego" width="100"><br>Daño: 🔥🔥</td>
+      <td align="center">➡️</td>
+      <td align="center"><img src="assets/p.proyectilHielo.png" alt="Proyectil Hielo" width="100"><br>Daño: ❄️❄️❄️</td>
+      <td align="center">➡️</td>
+      <td align="center"><img src="assets/p.superProyectil-1.png" alt="Super Proyectil" width="100"><br>Daño: 🟣🟣🟣🟣</td>
+    </tr>
+    <tr> Al juntarse dos proyectiles identicos se convierte en uno mejor </tr>
+    <tr>
+      <td align="center" colspan="5"><img src="assets/p.proyectilDeStop-frame2.png" alt="Proyectil Stop" width="100"><br>Daño: 🤚<br>Ralentiza enemigos</td>
+    </tr>
+  </table>
+</div>
 
 ## Slimes
-Los Distintos Slimes tienen características propias, más vida, más daño, movimientos especiales, entre otras cosas. Estos atacarán en oleadas (desde el extremo derecho del tablero), e intentarán llegar a la base de los magos(extremo izquierdo del tablero).
+Los distintos Slimes tienen características propias: más vida, más daño, movimientos especiales, entre otras cosas. Atacan en oleadas desde el extremo derecho del tablero e intentan llegar a la base de los magos (extremo izquierdo del tablero).
 
-![slimeBasico](Cosas_juego/slime_base.png)  ![slimeGuerrero](assets/s.slimeGuerrero.png)   ![slimeNinja](assets/s.slimeNinja.png)    ![slimeBlessed](assets/s.slimeBlessed.png)  ![s slimeDorado_02](https://github.com/user-attachments/assets/65e5c8fd-9dc5-4521-91e0-4547c03e1083) ![s slimeLadron_02](https://github.com/user-attachments/assets/dae18dc6-c56f-421f-8046-fc2dc5907276) ![s slimeMedioOriente_02](https://github.com/user-attachments/assets/ef79d131-4a1d-4cab-96e6-e77b6ae8272d)![s slimeAgil_02](https://github.com/user-attachments/assets/1c587d66-a342-4dd7-bf61-71f2ed4d2fd1)
-
-
-
-<pre>
- Daño:🟢   |  Daño:🟢 | Daño:🥷🥷🥷| Daño:🛐🛐🛐| Daño: -    |  Daño:🟢 |   Daño:💣💣💣| Daño:🟢  
- Vida:💚💚| Vida:💚💚💚| Vida:💚💚|  Vida:🛐🛐🛐| Vida:💚💚💚| Vida:💚💚| Vida:💚💚💚| Vida:💚💚💚  
- Ataque Melee|Ataque Melee|Salta Magos| Ataque Melee| Da Dinero | Quita Dinero| Explota | Salta entre Lineas
-</pre>  
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="Cosas_juego/slime_base.png" alt="Slime Básico" width="150"><br>Daño: 🟢<br>Vida: 💚💚<br> - </td>
+      <td align="center"><img src="assets/s.slimeGuerrero.png" alt="Slime Guerrero" width="150"><br>Daño: 🟢<br>Vida: 💚💚💚<br> Tiene mas vida</td>
+      <td align="center"><img src="assets/s.slimeNinja.png" alt="Slime Ninja" width="150"><br>Daño: 🥷🥷🥷<br>Vida: 💚💚<br> Se mueve de a dos celdas </td>
+      <td align="center"><img src="assets/s.slimeBlessed.png" alt="Slime Bendito" width="150"><br>Daño: 🛐🛐🛐<br>Vida: 🛐🛐🛐<br> Mucha vida y daño </td>
+    </tr>
+    <tr>
+      <td align="center"><img src="assets/s.slimeDorado_02.png" alt="Slime Dorado" width="150"><br>Daño: -<br>Vida: 💚💚💚<br> Da dinero al morir </td>
+      <td align="center"><img src="assets/s.slimeLadron_02.png" alt="Slime Ladrón" width="150"><br>Daño: 🟢<br>Vida: 💚💚<br> Roba dinero </td>
+      <td align="center"><img src="assets/s.slimeMedioOriente_02.png" alt="Slime Bomba" width="150"><br>Daño: 💣💣💣<br>Vida: 💚💚💚<br> Explota </td>
+      <td align="center"><img src="assets/s.slimeAgil_02.png" alt="Slime Ágil" width="150"><br>Daño: 🟢<br>Vida: 💚💚💚<br> Se mueve de fila </td>
+    </tr>
+  </table>
+</div>
 
 ## Modos de Juego
-<h3>Historia:</h3> Enfrentar diversos niveles con cambios en tipos y dificultad de Oleadas.
 
-<h3>Eterno:</h3> Modo desafiante en el que se enfrentan oleadas interminables y aleatorias de Slimes, con dificultad Creciente.
+**Historia:** Enfrentar diversos niveles con cambios en tipos y dificultad de oleadas.
 
+**Eterno:** Modo desafiante en el que se enfrentan oleadas interminables y aleatorias de Slimes, con dificultad creciente.
 
 ## Controles:
 
@@ -65,32 +87,30 @@ Los Distintos Slimes tienen características propias, más vida, más daño, mov
 - `O` para pausar juego
 - `X` Ir al Menú Principal
 
-  
-## Equipo de desarrollo: 
+## Equipo de desarrollo:
 
 - Echeverría, Manuel
 - Marek, Nahuel
 - Marzocca, Damián
-- Schkurko, Nicolas
+- Schkurko, Nicolás
 - Vallone, Matías
- 
 
-## Capturas 
+## Capturas
+
 ![1](https://github.com/user-attachments/assets/1297f5c8-e4a1-44d0-8f46-1c002f1cb82f)
-
 
 ![3](https://github.com/user-attachments/assets/78192b7f-5ce0-4f2e-b012-98eb4f4dc90a)
 
 ## Como está hecho
-[Acceso a teorica](https://github.com/pdepjm/2024-o-tpjuego-ahmeestancodeando/blob/concurso/Teorica.md)
 
+[Acceso a teórica](https://github.com/pdepjm/2024-o-tpjuego-ahmeestancodeando/blob/concurso/Teorica.md)
 
 ## Links relevantes
-Probar sin descargar (desactualizado): https://www.wollok.org/concurso/2024-o-tpjuego-ahmeestancodeando/
 
-Link al Lore: https://docs.google.com/document/d/1lBfEKnoyl5uwRfzc_BIOiNtRY3-iJxHwnHqUtpygSzU/edit?tab=t.0
-
-Link al Trailer: https://youtu.be/0D9ru_qJyPM?si=un1xRSzEtPHEvkAe
+- [Probar sin descargar (Version desactualizada))](https://www.wollok.org/concurso/2024-o-tpjuego-ahmeestancodeando/)
+- [Link al Lore](https://docs.google.com/document/d/1lBfEKnoyl5uwRfzc_BIOiNtRY3-iJxHwnHqUtpygSzU/edit?tab=t.0)
+- [Link al Trailer](https://youtu.be/0D9ru_qJyPM?si=un1xRSzEtPHEvkAe)
 
 ## Updates
-- 09-12-24 1.01v: Animaciones disparo, mejoras rendimiento, mejoras sonido, balanceo general
+> 09-12-24 1.01v: Animaciones disparo, mejoras rendimiento, mejoras sonido, balanceo general
+
