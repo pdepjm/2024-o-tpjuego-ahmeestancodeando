@@ -1,39 +1,66 @@
-Magos Vs Slime
-    El juego consiste en defender la base de slimes Atacantes, a partir de una variedad de Magos. 
+# Magos Vs Slime
 
-Elementos:
+El juego consiste en defender la base de los ataques de slimes, utilizando una variedad de magos con habilidades únicas.
 
-Slimes: Atacantes
-    -Slime básico, movimiento uniforme en dirección a la Base, 100 puntos de vida y 50 puntos de daño.
-    -Slime ninja: Se mueve de a 2 casillas (puede saltar unidades) y tiene un daño considerable, pero Vida baja.
-    -Slime Guerrero: Movimiento uniforme en direccion a la Base, Vida alta, daño bajo.
-    -Slime Blessed: Movimiento Uniforme hacia la base. Vida y Daño alto.
+---
 
-Magos: Encargadas de defender la base, su vida, daño y atributos varían según el mago:
-    -Mago de Fuego: Lanza proyectiles con 75 puntos de daño que se destruyen al alcanzar a los enemigos o alcanzar el final del mapa.100 puntos de vida.
-    -Mago irlandes: Aumenta la generación de dinero, $10 por mago. 100 puntos de vida, no realiza daño a enemigos.
-    -Mago de Hielo: Lanza proyectiles penetrantes con 30 puntos de daño que continúa dañando enemigos hasta alcanzar el final del mapa.
-    -Mago Piedra: Unida con 300 puntos de vida, no realiza daño a enemigos.
-    -Mago Explosivo: Al entrar en contacto con un slime, explota.
+## Elementos del Juego
 
-Puntos: Utilizado para comprar magos, su generación es automática y la cantidad dependerá de la cantidad de magos irlandeses que haya en el campo. La producción base es de $10 por segundo.
+### Slimes (Atacantes)
+- **Slime Básico**: Movimiento uniforme hacia la base, 100 puntos de vida y 50 puntos de daño.
+- **Slime Ninja**: Se mueve 2 casillas por turno (puede saltar unidades), tiene daño considerable pero vida baja.
+- **Slime Guerrero**: Movimiento uniforme hacia la base, vida alta y daño bajo.
+- **Slime Blessed**: Movimiento uniforme hacia la base, con vida y daño altos.
+- **Slime Agil**: Se mueve a la casilla superior o inferior de manera aleatoria cuando recibe un disparo
+- **Slime Ladron**: Quita dinero disponible
+- **Slime dorado**: Otorga plata al matarlo, se mueve de a dos casillas y no genera daño al llegar a la "casa"
+- **Slime Explosivo**: Explota al chocarse con un mago eliminandose el junto al mago.
 
-Pala: Elimina Magos del juego.
+### Magos (Defensores)
+- **Mago de Fuego**: Lanza proyectiles con 75 puntos de daño que se destruyen al impactar enemigos o alcanzar el final del mapa. Vida: 100 puntos.
+- **Mago Irlandés**: Incrementa la generación de dinero en $10 por mago. Vida: 100 puntos. No realiza daño a enemigos.
+- **Mago de Hielo**: Lanza proyectiles penetrantes con 30 puntos de daño, que continúan dañando enemigos hasta alcanzar el final del mapa.
+- **Mago de Piedra**: Unidad con 300 puntos de vida. No realiza daño a enemigos.
+- **Mago Explosivo**: Explota al entrar en contacto con un slime.
+- **Mago Stop**: Lanza un proyectil capaz de detener al slime durante un tick
 
-Tienda: Permite comprar a los magos o seleccionar la pala para eliminarlos.
+### Recursos del Juego
+- **Puntos**: Utilizados para comprar magos. La generación es automática y depende de la cantidad de magos irlandeses en el campo. Producción base: $10 por segundo.
+- **Pala**: Permite eliminar magos del juego.
+- **Tienda**: Sirve para comprar magos o seleccionar la pala para eliminarlos.
+- **Base**: Ubicada en el extremo izquierdo de la pantalla. No se debe permitir que más de 3 slimes lleguen a ella. Si un slime alcanza la base, se eliminan todos los enemigos en su fila.
 
-Base: Se encuentra en el extremo izquierdo de la pantalla, no hay que permitir que los slimes (más de 3) lleguen a la misma. En caso de que uno llegue se eliminan todos de su Fila.
+### Objetivo del Juego
+Evitar que los slimes lleguen a la base mediante la compra y ubicación estratégica de los magos.
 
-El objetivo del juego es evitar que los slimes lleguen a la base, a partir de la compra y ubicación estratégica de los magos.
+---
 
-Se utiliza polimorfismo para por ejemplo, cuando los slimes reciben daño. Todos los objetos que pueden aparecer en los carriles(plantas, el cursor,slimes) tienen el método recibeDanioEnemigo(_danio), pero solo tiene efecto en los slimes, los cuales van a recibir el daño, mientras que los demas retornan false.
-Otro ejemplo es el método disparar() que utilizan los magos. Todos los magos tienen este método, sin importar si disparan o no.
+## Conceptos de Programación
 
-Además, se utiliza ampliamente la comunicación entre los distintos objetos, como es por ejemplo el caso del menú, el cual en base a los inputs que realice el jugador, enviará al objeto generadorDeMagos que clase de enemigo deberá generar y en qué posición.
+### Polimorfismo
+Se utiliza polimorfismo para definir comportamientos comunes entre los objetos del juego. Ejemplos:
+- **Método `recibeDanioEnemigo(_danio)`**: Todos los objetos en los carriles (magos, slimes, cursor) tienen este método. Sin embargo, solo los slimes son afectados por el daño, mientras que los demás retornan `false`.
+- **Método `recibeDanioMago(_danio)`**: Idem enemigo. Sin embargo, solo los magos son afectados por el daño, mientras que los demás retornan `false` (los slimes aprovechan esta llamada para efectuar la accion detenerse).
+- **Método `disparar()`**: Implementado en todos los magos, incluso aquellos que no disparan.
+- **Método `sePuedeSuperponer()`**: Indica cuales objetos se pueden superponer con el cursor, tambien es utilizado por el slime agil para saber donde ubicarse
 
-Se utilizan clases para, por ejemplo, instanciar slimes, ya que tendremos varios objetos slime similares, variando su tipo, que serán generados en el transcurso del juego. El generadorDeEnemigos los instanciará cada cierto tiempo asignandoles que tipo son a los slime.
 
-Diagrama de clases:
-![diagrama](https://github.com/user-attachments/assets/f98b45cf-0f3e-408f-a662-3a588bf05337)
+
+### Comunicación entre Objetos
+- El la tienda envía instrucciones al objeto `generadorDeMagos` para determinar qué tipo de mago generar y en qué posición.
+
+### Uso de Clases
+- Los slimes se instancian a partir de una clase base. El `administradorDeEnemigos` crea slimes periódicamente, asignando su tipo según lo que le envie el adminsitrador de oleadas.
+
+---
+
+## Diagrama de Clases
+![Diagrama](https://github.com/user-attachments/assets/f98b45cf-0f3e-408f-a662-3a588bf05337)
+
+
+> **Aclaracion**: Este diagrama está desactualizado debido a la complejidad del proyecto y la cercanía de la presentación con las fechas de parciales y finales. No tuvimos tiempo de rearmar el diagrama de clases pero ejemplifica lo mas esencial del proyecto, mostrando a los administradoes y como interactuan entre si para generar objetos.
+
+
+
 
 
