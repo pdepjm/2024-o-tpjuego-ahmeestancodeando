@@ -1,11 +1,7 @@
 # Magos Vs. Slimes
 ### UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
-
-![portada](Cosas_juego/portada/title1.jpg)
-
-### Trailer
 [![Trailer](https://i.ibb.co/Dp3vzNH/TRAILER-12-4-2024.png)](https://youtu.be/0D9ru_qJyPM?si=un1xRSzEtPHEvkAe)
-
+![portada](Cosas_juego/portada/PortadaJuego.jpg)
 [Probar sin descargar (Version desactualizada)](https://www.wollok.org/concurso/2024-o-tpjuego-ahmeestancodeando/)
 
 Magos vs Slimes es un emocionante videojuego de estrategia y defensa en el que los jugadores deben proteger la última ciudad de la humanidad, Utopía de las Tierras de Nortfernand (UTN), de interminables oleadas de Slimes. Con una variada selección de Magos, cada uno con habilidades y poderes únicos, tendrás que impedir que los Slimes alcancen las puertas de la ciudad. Si tres o más logran atravesar tus defensas, el juego llegará a su fin y la humanidad perecerá...
