@@ -189,16 +189,17 @@ object slimeDorado inherits Tipo(danio=0, vida=175, imagen="s.slimeDorado_01.png
     }
 
 }
-object slimeBomba inherits Tipo(danio=250, vida=180, imagen="s.slimeMedioOriente_01.png",imagenesNormales=["s.slimeMedioOriente_01.png","s.slimeMedioOriente_02.png","s.slimeMedioOriente_03.png"],imagenesRecibeDanio=["s.slimeMedioOrienteDanio_01.png","s.slimeMedioOrienteDanio_02.png","s.slimeMedioOrienteDanio_03.png"]){
-    
+object slimeBomba inherits Tipo(danio=1000, vida=180, imagen="s.slimeMedioOriente_01.png",imagenesNormales=["s.slimeMedioOriente_01.png","s.slimeMedioOriente_02.png","s.slimeMedioOriente_03.png"],imagenesRecibeDanio=["s.slimeMedioOrienteDanio_01.png","s.slimeMedioOrienteDanio_02.png","s.slimeMedioOrienteDanio_03.png"]){
+    const explosion = game.sound("m.explosion.mp3")
+
     override method atacar()={
         slime=>
             const posicionEnFrente = new MutablePosition(x = slime.position().x()-1, y = slime.position().y())
-            const posicionArriba = new MutablePosition(x = slime.position().x()-1, y = slime.position().y()+1)
-            const posicionAbajo = new MutablePosition(x = slime.position().x()-1, y = slime.position().y()-1)
-            const objetosAmatar= game.getObjectsIn(posicionArriba)+game.getObjectsIn(posicionAbajo)+game.getObjectsIn(posicionEnFrente)  
-            objetosAmatar.forEach({ objeto => objeto.recibeDanioMago(danio,slime) })
+            const objetoEnCeldaSiguiente = game.getObjectsIn(posicionEnFrente)
+            objetoEnCeldaSiguiente.forEach({objeto=>objeto.recibeDanioMago(danio,slime)})  
             slime.eliminar()
+            explosion.volume(0.1)
+            explosion.play()
         }
 
   }
