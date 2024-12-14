@@ -46,12 +46,11 @@ object menu {
         const objetoCelda = game.colliders(cursor)
         const posicionCelda = new MutablePosition(x = cursor.position().x(), y = cursor.position().y())
 
-        if (!magoAGenerar.isEmpty() && objetoCelda.all({ objeto => objeto.sePuedeSuperponer() }) && !self.seleccionandoPala()) {
-            self.generarMago(magoAGenerar.first(), posicionCelda)
-
-        }
-        else if (self.seleccionandoPala()) {
+    
+        if (self.seleccionandoPala()) {
             self.eliminarMago( objetoCelda.find({ objeto => not objeto.sePuedeSuperponer() }))
+        }else if (objetoCelda.all({ objeto => objeto.sePuedeSuperponer() })) {
+            self.generarMago(magoAGenerar.first(), posicionCelda)
         }
     }
 
